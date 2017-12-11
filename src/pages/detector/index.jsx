@@ -32,7 +32,7 @@ class Detector extends React.Component {
             },
             {
               property: 'og:image',
-              content: `${get(siteMetadata, 'siteUrl')}/img/profile.jpg`,
+              content: `${get(siteMetadata, 'siteUrl')}/img/detector.jpg`,
             },
           ]}
         />
