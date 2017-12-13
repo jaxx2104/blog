@@ -1,11 +1,41 @@
+import get from 'lodash/get'
+import Helmet from 'react-helmet'
+import Link from 'gatsby-link'
 import React from 'react'
+import { siteMetadata } from '../../../gatsby-config'
 
 class Profile extends React.Component {
   render() {
     const pathPrefix =
       process.env.NODE_ENV === 'development' ? '' : __PATH_PREFIX__
+    const title = 'Profile'
+
     return (
       <div>
+        <Helmet
+          title={`${title} | ${get(siteMetadata, 'title')}`}
+          meta={[
+            { name: 'twitter:card', content: 'summary' },
+            {
+              name: 'twitter:site',
+              content: `@${get(siteMetadata, 'twitter')}`,
+            },
+            { property: 'og:title', content: title },
+            { property: 'og:type', content: 'website' },
+            {
+              property: 'og:description',
+              content: get(siteMetadata, 'description'),
+            },
+            {
+              property: 'og:url',
+              content: `${get(siteMetadata, 'siteUrl')}/profile`,
+            },
+            {
+              property: 'og:image',
+              content: `${get(siteMetadata, 'siteUrl')}/img/profile.jpg`,
+            },
+          ]}
+        />
         <section className="text-center">
           <div className="container">
             <img
@@ -178,19 +208,23 @@ class Profile extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6 slide-left" data-emergence="hidden">
-                <img
-                  src={pathPrefix + '/img/work1.png'}
-                  alt="work1"
-                  className="rounded-circle mx-auto"
-                />
+                <Link to="yomu">
+                  <img
+                    src={`${pathPrefix}/img/work1.png`}
+                    alt="work1"
+                    className="rounded-circle mx-auto"
+                  />
+                </Link>
                 <p>Yomu</p>
               </div>
               <div className="col-md-6 slide-right" data-emergence="hidden">
-                <img
-                  src={pathPrefix + '/img/work2.png'}
-                  alt="work2"
-                  className="rounded-circle mx-auto"
-                />
+                <Link to="detector">
+                  <img
+                    src={`${pathPrefix}/img/work2.png`}
+                    alt="work2"
+                    className="rounded-circle mx-auto"
+                  />
+                </Link>
                 <p>Detector</p>
               </div>
             </div>

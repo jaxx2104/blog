@@ -5,6 +5,7 @@ module.exports = {
     siteUrl: 'https://jaxx2104.info',
     author: 'jaxx2104',
     twitter: 'jaxx2104',
+    adsense: 'ca-pub-3858517603539412',
   },
   pathPrefix: '/',
   plugins: [

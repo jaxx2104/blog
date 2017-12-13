@@ -33,6 +33,8 @@ iPad 向けエディタは 1Writer、Bear、Byword などなど、
 
 インストールした後は Dropbox 連携を済ませておきます。
 
+<!--more-->
+
 ## Frontmatter を自動生成するように設定する
 Editorial には Workflow という簡易スクリプトの実行機能があるので、これを使ってタイトルを入力すれば Frontmatter が自動生成されるようにしたいと思います。
 
