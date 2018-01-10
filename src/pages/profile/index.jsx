@@ -208,7 +208,7 @@ class Profile extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6 slide-left" data-emergence="hidden">
-                <Link to="yomu">
+                <Link to="./yomu">
                   <img
                     src={`${pathPrefix}/img/work1.png`}
                     alt="work1"
@@ -218,7 +218,7 @@ class Profile extends React.Component {
                 <p>Yomu</p>
               </div>
               <div className="col-md-6 slide-right" data-emergence="hidden">
-                <Link to="detector">
+                <Link to="./detector">
                   <img
                     src={`${pathPrefix}/img/work2.png`}
                     alt="work2"
