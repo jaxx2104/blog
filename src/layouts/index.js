@@ -4,10 +4,10 @@ import { siteMetadata } from '../../gatsby-config'
 import SiteNavi from '../components/SiteNavi'
 import emergence from 'emergence.js'
 
-import './gatsrap.scss'
+import './gatstrap.scss'
 import 'animate.css/animate.css'
 import 'prismjs/themes/prism-okaidia.css'
-import 'devicon/devicon.min.css'
+import 'devicon-2.2/devicon.min.css'
 import 'font-awesome/css/font-awesome.css'
 
 class Template extends React.Component {

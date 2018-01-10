@@ -69,8 +69,15 @@ module.exports = {
         trackingId: 'UA-24867215-2',
       },
     },
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        mergeSecurityHeaders: true,
+        mergeLinkHeaders: true,
+        mergeCachingHeaders: true,
+      },
+    },
     'gatsby-plugin-catch-links',
-    'gatsby-plugin-netlify',
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-react-next',
