@@ -3,11 +3,15 @@ import './style.css'
 
 class Adsense extends React.Component {
   componentDidMount() {
-    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+    const { clientId } = this.props
+    if (clientId) {
+      ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+    }
   }
 
   render() {
     const { clientId, slotId, format } = this.props
+
     return clientId ? (
       <div className="ad">
         <ins
