@@ -43,12 +43,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Gatstrap',
-        short_name: 'Gatstrap',
+        name: 'jaxx2104.info',
+        short_name: 'jaxx2104',
+        description: 'プログラムとバグが好き',
+        homepage_url: 'https://jaxx2104.info',
         start_url: '/',
         background_color: '#fff',
         theme_color: '#673ab7',
-        display: 'minimal-ui',
+        display: 'standalone',
         icons: [
           {
             src: '/img/android-chrome-192x192.png',
