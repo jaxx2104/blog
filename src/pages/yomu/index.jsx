@@ -51,7 +51,8 @@ class Yomu extends React.Component {
               <div className="col-lg-9">
                 <p className="text-muted text-left">
                   Yomuは「キュレーション無く、好きな記事を読む」をコンセプトに、日本で作られたRSSリーダーです。
-                  <br />
+                </p>
+                <p className="text-muted text-left">
                   格子状の画面でサイトを横断して記事を読むことが出来ます。切り替え機能により2種類のグループに分けることも可能です。
                   お気に入りのサイトやブログを登録してあなただけのリーダーを作成してください。
                   詳細画面では上下のスワイプで読む閉じるができ大画面の端末でも片手で操作出来るように設計しています。
