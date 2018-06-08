@@ -1,12 +1,11 @@
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
 import React from 'react'
 
-import SitePost from '../components/SitePost'
-import SitePage from '../components/SitePage'
+import SitePost from 'components/templates/SitePost'
+import SitePage from 'components/templates/SitePage'
 
-class BlogPostTemplate extends React.Component {
+class Blog extends React.Component {
   render() {
     const post = get(this, 'props.data.post')
     const site = get(this, 'props.data.site')
@@ -47,7 +46,7 @@ class BlogPostTemplate extends React.Component {
   }
 }
 
-export default BlogPostTemplate
+export default Blog
 
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {

@@ -9,6 +9,7 @@ path: /preg_not_match
 categories:
   - 正規表現
 ---
+
 正規表現を使って以下の対象 URL をマッチさせる。
 
 対象文字列
@@ -19,7 +20,7 @@ categories:
 
 パターン文字列
 
-> [^¥/]*
+> [^¥/]\*
 
 <!--more-->
 

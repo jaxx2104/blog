@@ -17,12 +17,12 @@ tags:
   - Titanium
   - Twitter API
 ---
+
 アプリケーションを作った際に、参考にしたサイトについて初心者目線ですが紹介したいと思います。
 
 <img src="./b0edb59d97976fb1c698b9997460f6e3.jpg" /></a>
 
 Titanium は以前に少しだけ触ったことがあって、その時は「Resources/app.js」に書く Classic なものでした。
-
 
 個人的にアプリケーションを作りたい衝動にかられて開発環境も不十分なくせに、
 iOS Developer Program に 7,800 円払ってしまったこと。
@@ -34,14 +34,11 @@ iOS Developer Program に 7,800 円払ってしまったこと。
 
 公式ドキュメントを読んで開発環境と Alloy の基本構成は理解できました。
 
-> **Titanium 3.X - Appcelerator Docs**
-> http://docs.appcelerator.com/titanium/3.0/#!/guide
-
+> **Titanium 3.X - Appcelerator Docs** > http://docs.appcelerator.com/titanium/3.0/#!/guide
 
 ただ Titanium の各要素については調べる頻度が多いので、開発環境が Mac の場合は Dash に追加すると便利です。
 
-> **Dash**
-> http://kapeli.com/dash
+> **Dash** > http://kapeli.com/dash
 
 <img src="./d9cdc0c81a52b1a3f646be6d5ebd04e1.png" />
 
@@ -51,8 +48,7 @@ iOS Developer Program に 7,800 円払ってしまったこと。
 
 ListView を使うときには非常にお世話になりました。
 
-> **appcelerator/alloy**
-> https://github.com/appcelerator/alloy/tree/master/test/apps/ui
+> **appcelerator/alloy** > https://github.com/appcelerator/alloy/tree/master/test/apps/ui
 
 ## パフォーマンス
 
@@ -64,8 +60,7 @@ ListView を使うときには非常にお世話になりました。
 
 同じ画像を複数回呼ぶ場合にはやったほうがよいなと思いました。
 
-> **Image Best Practices**
-> http://docs.appcelerator.com/titanium/latest/#!/guide/Image_Best_Practices-section-30082525_ImageBestPractices-Cachingremoteimages
+> **Image Best Practices** > http://docs.appcelerator.com/titanium/latest/#!/guide/Image_Best_Practices-section-30082525_ImageBestPractices-Cachingremoteimages
 
 **2.メモリを管理する。**
 
@@ -73,15 +68,13 @@ ListView を使うときには非常にお世話になりました。
 
 なんでもかんでもグローバルにしちゃダメだよって内容です。
 
-> **Memory Management | TiDev**
-> http://www.tidev.io/2014/03/27/memory-management/
+> **Memory Management | TiDev** > http://www.tidev.io/2014/03/27/memory-management/
 
 ## アイコンやスプラッシュスクリーン
 
 iOS、Android ともに画像周りは必要なものが多いのですが、以下のサイトでアイコンやスプラッシュスクリーンを一式そろえることができます。
 
-> **TiCons**
-> http://ticons.fokkezb.nl/
+> **TiCons** > http://ticons.fokkezb.nl/
 
 以上です。
 

@@ -12,6 +12,7 @@ tags:
   - PHP
   - Twitter API
 ---
+
 Twitter API を使って画像付きで投稿する場合、
 
 ライブラリの tmhOAuth で簡単に認証とリクエスト行うことができます。
@@ -21,18 +22,16 @@ Twitter API を使って画像付きで投稿する場合、
 
 <!--more-->
 
-## OAuth認証
+## OAuth 認証
 
 Twitter への認証の際に使う、認証鍵は Twitter Developers にて取得します。
 
 > Twitter Developers
 > https://dev.twitter.com/
 
-
-
 認証の際に「Problem with the SSL CA cert」と言われたので、
 
-curl\_ssl\_verifypeer を一時的に false にしました。
+curl_ssl_verifypeer を一時的に false にしました。
 
 ```php
 $twConf = array(
@@ -70,4 +69,3 @@ if ($tmhOAuth->response["code"] == 200){ // $codeにもステータスは返っ�
 ```
 
 ツイートが投稿できました。
-

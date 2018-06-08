@@ -12,12 +12,13 @@ categories:
 tags:
   - ES
 ---
+
 これまでイベント関数でバインドした要素を取得する場合。
 
 ```js
-$(".button").on("click", function(e) {
-    $(this).addClass("clicked");
-});
+$('.button').on('click', function(e) {
+  $(this).addClass('clicked')
+})
 ```
 
 こんなコードを書いてました。
@@ -27,15 +28,15 @@ $(".button").on("click", function(e) {
 `e.target`だとクリックした要素を取得するので`.button`の子要素の場合があります。
 
 ```js
-$(".button").on("click", (e) => {
-    $(e.target).addClass("clicked");
-});
+$('.button').on('click', e => {
+  $(e.target).addClass('clicked')
+})
 ```
 
 `e.currentTarget`だとバインドした要素を取得します。
 
 ```js
-$(".button").on("click", (e) => {
-    $(e.currentTarget).addClass("clicked");
-});
+$('.button').on('click', e => {
+  $(e.currentTarget).addClass('clicked')
+})
 ```

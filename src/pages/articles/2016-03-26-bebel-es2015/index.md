@@ -11,6 +11,7 @@ categories:
   - JavaScript
   - node.js
 ---
+
 <img src="./babel.png" alt="babel" />
 
 ## ES2015(ES6)について
@@ -26,7 +27,7 @@ categories:
 
 <!--more-->
 
-## BabelとBrowserifyについて
+## Babel と Browserify について
 
 ただ現在 ES2015 はブラウザによって対応がまちまちで、すべての機能が使えるわけではありません。
 
@@ -48,7 +49,7 @@ categories:
 
 事前に Node.js と npm をインストールしている必要があります。
 
-> node.jsとnpmインストールとアップデート
+> node.js と npm インストールとアップデート
 > <http://jaxx2104.info/node-js-install-update>
 
 Browserify と Babelify をインストールします。
@@ -64,7 +65,8 @@ $ npm install babel-preset-es2015 --save-dev
 test.js というファイル名で ES2015 っぽいコードを書きます。
 
 ```js
-var name = "Bob", time = "today";
+var name = 'Bob',
+  time = 'today'
 var test = `Hello ${name}, how are you ${time}?`
 console.log(test)
 ```

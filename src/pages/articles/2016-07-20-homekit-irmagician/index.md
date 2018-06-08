@@ -15,6 +15,7 @@ categories:
 tags:
   - Mac
 ---
+
 <img src="./001.gif" alt="001" />
 
 暑い季節になってきました。夏の自由研究ということで電子工作と IoT に挑戦したいと思います。
@@ -42,7 +43,7 @@ iOS の Homekit というものを使えば iPhone から Homekit 対応した�
 
 <img src="./002.jpg" alt="002" />
 
-<small>左が irMagcian、右が Raspberry Pi３のモデル B</small>
+<small>左が irMagcian、右が Raspberry Pi ３のモデル B</small>
 
 いつでも家電を操作できるよう homebridge を常に起動しておきたいので、サーバを用意する必要があります。なので以前から気になっていた Raspberry Pi を買いました。4000 円で安くてびっくり。
 
@@ -67,7 +68,7 @@ Raspberry Pi はスマートホーム用サーバにする予定ですので、�
 - Raspberry Pi の公式サイトで「NOOBS」をダウンロード
 - マイクロ SD にフォーマットして「NOOBS」を書き込む
 - Raspberry Pi にマイクロ SD とマウス、キーボード、HDMI を接続する
--  microUSB ケーブルをつなぎ電源を入れる
+- microUSB ケーブルをつなぎ電源を入れる
 
 <img src="./004.jpg" alt="004" />
 
@@ -129,45 +130,45 @@ $ sudo npm install -g homebridge-cmd
 
 ```json
 {
-    "bridge": {
-        "name": "Homebridge",
-        "username": "CC:22:3D:E3:CE:30",
-        "port": 51826,
-        "pin": "031-45-154"
+  "bridge": {
+    "name": "Homebridge",
+    "username": "CC:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
+  "description": "test",
+  "accessories": [
+    {
+      "accessory": "CMD",
+      "name": "テレビ",
+      "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/tv/on.json",
+      "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/tv/off.json"
     },
-    "description": "test",
-    "accessories": [
-        {
-            "accessory": "CMD",
-            "name": "テレビ",
-            "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/tv/on.json",
-            "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/tv/off.json"
-        },
-        {
-            "accessory": "CMD",
-            "name": "ライト",
-            "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/light/on.json",
-            "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/light/off.json"
-        },
-        {
-            "accessory": "CMD",
-            "name": "寝室のエアコン",
-            "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan/on.json",
-            "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan/off.json"
-        },
-        {
-            "accessory": "CMD",
-            "name": "リビングのエアコン",
-            "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan2/on.json",
-            "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan2/off.json"
-        }
-    ]
+    {
+      "accessory": "CMD",
+      "name": "ライト",
+      "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/light/on.json",
+      "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/light/off.json"
+    },
+    {
+      "accessory": "CMD",
+      "name": "寝室のエアコン",
+      "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan/on.json",
+      "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan/off.json"
+    },
+    {
+      "accessory": "CMD",
+      "name": "リビングのエアコン",
+      "on_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan2/on.json",
+      "off_cmd": "sudo python irm.py -p -f ~/.homebridge/data/fan2/off.json"
+    }
+  ]
 }
 ```
 
 `sudo service homebridge restart` で設定ファイルを反映します。
 
-## iPhoneから使ってみる
+## iPhone から使ってみる
 
 HomeKit 対応アプリケーションから設定します。Insteon とういうアプリケーションが有名みたいですが、自分は iOS 10 ベータにアップデートして Home アプリケーションを使っています。
 Siri もしくは Home アプリケーションから登録した家電のコントロールができるようになりました。
@@ -175,9 +176,9 @@ Siri もしくは Home アプリケーションから登録した家電のコン
 また AppleTV か iPad を持っている人は外からのコントロールやオートメーション機能が使えます。
 オートメーション機能では、時間や場所を起点として家電のオンオフを自動化できます。以下のようなことができます。
 
-  * 家から離れた時にエアコンとライトをオフ
-  * 家から近付いた時にライトをオン
-  * AM2:00 にエアコンをオフ
+- 家から離れた時にエアコンとライトをオフ
+- 家から近付いた時にライトをオン
+- AM2:00 にエアコンをオフ
 
 以上でスマートホームの完成です。
 今後やりたいことはこいつを BOT 化して Slack からコントロールできるようにしたり、Arduino も買ったので連携させたりしたいです。

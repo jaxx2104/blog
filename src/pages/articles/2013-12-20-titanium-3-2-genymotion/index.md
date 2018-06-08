@@ -16,7 +16,8 @@ tags:
   - Genymotion
   - Titanium
 ---
-## Androidエミュレータ = 重い
+
+## Android エミュレータ = 重い
 
 立ち上がりまでが重いですよね。
 

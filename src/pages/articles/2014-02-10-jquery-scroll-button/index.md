@@ -9,6 +9,7 @@ path: /jquery-scroll-button
 categories:
   - JavaScript
 ---
+
 ご飯が炊けるまで時間があるので、
 
 ちょっとだけメモします。
@@ -24,8 +25,6 @@ categories:
 書き方はどうあれ、こんなボタンがあったとしましょう。
 
 ## jQuery
-
-
 
 こんな感じ。
 

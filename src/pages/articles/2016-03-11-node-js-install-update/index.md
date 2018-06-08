@@ -12,6 +12,7 @@ categories:
   - JavaScript
   - node.js
 ---
+
 <img src="./nodejs-image-processing.png" alt="nodejs-image-processing" />
 
 Node.js と npm インストール
@@ -24,11 +25,13 @@ $ sudo yum install gcc gcc-c++
 <!--more-->
 
 n のインストール
+
 ```s
 $ sudo npm install -g n
 ```
 
 n を使って Node.js のアップデート
+
 ```s
 $ n -stable
 $ sudo n -stable
@@ -37,6 +40,7 @@ $ sudo n latest
 ```
 
 nam のアップデート
+
 ```s
 $ sudo npm update -g npm
 $ sudo npm update -g

@@ -13,6 +13,7 @@ categories:
   - Swift
   - Xcode
 ---
+
 iOS の新プログラミング言語 Swift をゲームアプリケーションを作りながら触りたいと思います。
 
 フレームワークは SpriteKit を使います。

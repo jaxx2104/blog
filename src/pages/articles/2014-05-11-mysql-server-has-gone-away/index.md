@@ -24,17 +24,15 @@ Warning: mysql_query(): Error reading result set's header
 
 <!--more-->
 
-## max\_allowed\_packetが原因ではなった
+## max_allowed_packet が原因ではなった
 
 調べてみるとメモリ不足とのことで、
 
-max\_allowed\_packet の値を 32Mb などにしたが、
+max_allowed_packet の値を 32Mb などにしたが、
 
 解決せず。原因は別にあるようだ。
 
-
-
-## mysqli::pingによる確認
+## mysqli::ping による確認
 
 とりあえず接続を行っている箇所の手前で、
 

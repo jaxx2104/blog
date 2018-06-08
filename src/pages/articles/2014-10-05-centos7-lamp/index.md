@@ -20,8 +20,8 @@ tags:
   - PHP
   - WordPress
 ---
-<img src="./centos.png" />
 
+<img src="./centos.png" />
 
 さくら VPS を CentOS7 へアップデートしました。
 
@@ -37,10 +37,8 @@ OS のインストールとネットワーク周りはさくらの管理画面�
 
 以下参照
 
-
-> CentOS 7 カスタムOSインストールガイド
+> CentOS 7 カスタム OS インストールガイド
 > http://support.sakura.ad.jp/manual/vps/cpanel/custom_centos7.html
-
 
 ## yum アップデート
 
@@ -97,7 +95,7 @@ PermitRootLogin No;
 
 `$ systemctl restart sshd.service`
 
-## LAMP環境構築
+## LAMP 環境構築
 
 php,MySQL,Apache,Emacs,wget を yum でインストール
 
@@ -153,7 +151,7 @@ grant all on データベース名.* to 'ユーザー名'@'ホスト名' identif
 
 > $ systemctl enable mariadb
 
-> $ mysql\_secure\_installation
+> $ mysql_secure_installation
 
 ```conf
 既存password（デフォルトは空）

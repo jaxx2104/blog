@@ -11,22 +11,23 @@ categories:
 tags:
   - PHP
 ---
+
 URL パラメータの書き換えることってそんなになにけど、
 プログラムのアップデートやら改修やらで仕様変更などで旧仕様のパラメータを新仕様へと書き換える必要があったので備忘録としてメモります。
 
-## URLパラメータの変更例
+## URL パラメータの変更例
 
 以下を例にしてみます。
 
 変更前
+
 > /test/index.php?page=1&mode=entry
 
 変更後
+
 > /test/index.php?type=entry&page=1
 
-
-
-## mod_rewriteを使って書き換える
+## mod_rewrite を使って書き換える
 
 .htaccess を以下のように設定する。
 

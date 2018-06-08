@@ -16,6 +16,7 @@ tags:
   - iOS7
   - Mac
 ---
+
 ## WebView での User Agent ってどうなるんだろう？
 
 WebView で構成されたハイブリッドアプリケーションを開発しようと思った。

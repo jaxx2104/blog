@@ -15,6 +15,7 @@ tags:
   - PHP
   - WordPress
 ---
+
 こんにちは、今日から三連休ということで、ワークスペースを利用してブログ書きます。
 
 では WordPress で Bootstrap の Pagination を実装方法について、
@@ -22,7 +23,6 @@ tags:
 メモしていきたいと思います。
 
 <img src="./pagenation-01.png" />
-
 
 > bootstarap の Pagenation
 > http://getbootstrap.com/components/#pagination
@@ -36,8 +36,6 @@ php で動的に生成すればよいわけです。以下が functions.php
 Pagenation の動作って人によって微妙に違いがあるかと思うのですが、
 
 自分は常に 9 個の Pagenation を出します。
-
-
 
 Pagenation を出力したい任意の箇所で以下のコードを書けば OK です。
 

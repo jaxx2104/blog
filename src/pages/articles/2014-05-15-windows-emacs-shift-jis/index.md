@@ -13,6 +13,7 @@ tags:
   - init.el
   - Mac
 ---
+
 Window マシンに Emacs を入れた際に、
 日本語ディレクトリ内のファイルを開くと中身が空の状態になってしまいます。
 
@@ -23,4 +24,5 @@ init.el もしくは.Emacs に以下の一文を追加してください。
 ```conf
 (setq default-file-name-coding-system 'japanese-shift-jis)
 ```
+
 これで問題なくファイルが開けるはずです。

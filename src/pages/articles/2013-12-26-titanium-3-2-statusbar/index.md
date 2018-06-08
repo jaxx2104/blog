@@ -16,6 +16,7 @@ tags:
   - tiapp.xml
   - Titanium
 ---
+
 ナビゲーションや背景を暗くした時に statusbar の文字色を白にしたかったんだけど、書き方が変わっていたのでメモ。
 
 ## Titanium 3.2
@@ -32,6 +33,7 @@ tiapp.xml
     </plist>
 </ios>
 ```
+
 <!--more-->
 
 ## Titanium 3.1.3 以前
@@ -41,6 +43,5 @@ tiapp.xml
 ```xml
 <statusbar-style>opaque_black</statusbar-style>
 ```
-
 
 これで白になるかと思います。

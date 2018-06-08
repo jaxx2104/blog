@@ -13,11 +13,12 @@ categories:
 tags:
   - Twitter API
 ---
+
 AWS での死活監視とアラートメールの送信方法がいくつかあり、
 
 そのメリット、デメリットについて調べものをしたのでメモ。
 
-## AWS Clowd Watch (AWS備え付けの監視ツール) を使う
+## AWS Clowd Watch (AWS 備え付けの監視ツール) を使う
 
 監視からアラートメールまで AWS Console の設定で済む
 
@@ -26,7 +27,7 @@ AWS での死活監視とアラートメールの送信方法がいくつかあ�
 > [CloudWatch]グラフの確認方法と確認できるグラフ一覧(EC2/ELB/RDS)
 > http://dev.classmethod.jp/cloud/aws/cloudwatch-can-be-seen-graph/
 
-> Amazon EC2編～EC2インスタンスを監視するには～
+> Amazon EC2 編～ EC2 インスタンスを監視するには～
 > http://recipe.kc-cloud.jp/archives/258
 
 <!--more-->
@@ -37,7 +38,7 @@ AWS での死活監視とアラートメールの送信方法がいくつかあ�
 
 AWS には ELB や RDS など Zabbix で監視できない項目も多い。
 
-> ZabbixのアラートメールをSESから送信してみた
+> Zabbix のアラートメールを SES から送信してみた
 > http://blog.youyo.info/blog/2013/01/31/sendmail-ses-on-zabbix/
 
 ## Zabbix + AWS Clowd Watch + AWS SES を使う
@@ -46,5 +47,5 @@ Zabbix サーバ内に AWS SDK を入れて CloudWatch API を利用する方法
 
 ELB など Zabbix から監視できないような ClowdWatch のデータを Zabbix に集積できる。
 
-> ZabbixでAWS/CloudWatchの値を取得してみた。
+> Zabbix で AWS/CloudWatch の値を取得してみた。
 > http://dev.classmethod.jp/cloud/aws/zabbix-with-cloudwatch/

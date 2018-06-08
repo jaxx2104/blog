@@ -13,6 +13,7 @@ categories:
 tags:
   -
 ---
+
 いままでコードを書くとき Emacs か Atom で書いてました。
 ローカルではもっぱら Atom を使っていたのですが自分の環境だとちょっと立ち上がりが重い。
 さすがに耐えられなくなって少し前から Visual Studio Code にエディタを移行してみています。
@@ -22,17 +23,21 @@ tags:
 追加した拡張機能などメモしておきます。
 
 ## 拡張機能
+
 Git や Lint 関連の機能は初期状態で動作していて、とても始めやすい設定になっていました。
 
 ### テーマ
+
 - Material-theme
 - vscode-icons: サイドバーにファイルアイコンが付く
 
 ### 言語
+
 - vue
 - Sass
 
 ### 整形/スニペット系
+
 - ESlint: JS 構文チェック
 - Beautify: 自動整形ツール
 - Document This: コメント挿入ツール
@@ -41,6 +46,7 @@ Git や Lint 関連の機能は初期状態で動作していて、とても始�
 - vutur
 
 ### その他
+
 - Setting Sync: エディタ環境同期
 - Project Manager: プロジェクト管理
 - REST Client: REST API を実行するツール
@@ -49,6 +55,7 @@ Git や Lint 関連の機能は初期状態で動作していて、とても始�
 <!--more-->
 
 ## 設定
+
 カラーテーマは`Monokai`。
 フォントは`SourceCodePro-Light`にしています。
 

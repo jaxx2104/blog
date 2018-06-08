@@ -1,15 +1,13 @@
 const _ = require('lodash')
 const Promise = require('bluebird')
 const path = require('path')
-const select = require('unist-util-select')
-const fs = require('fs-extra')
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
   return new Promise((resolve, reject) => {
     const pages = []
-    const blogPost = path.resolve('./src/templates/blog-post.js')
+    const Blog = path.resolve('./src/templates/Blog.js')
     resolve(
       graphql(
         `
@@ -35,7 +33,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         _.each(result.data.allMarkdownRemark.edges, edge => {
           createPage({
             path: edge.node.frontmatter.path,
-            component: blogPost,
+            component: Blog,
             context: {
               path: edge.node.frontmatter.path,
             },
@@ -43,5 +41,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         })
       })
     )
+  })
+}
+
+exports.modifyWebpackConfig = ({ config, _stage }) => {
+  return config.merge({
+    resolve: {
+      alias: {
+        components: path.resolve(config._config.context, 'src/components'),
+      },
+    },
   })
 }

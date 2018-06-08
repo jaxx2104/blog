@@ -11,13 +11,14 @@ categories:
   - Google
   - JavaScript
 ---
+
 GoogleAnalytics で離脱率や平均セッションを見ていて、
 
 ユーザーがページのどこまで目を通しているのか気になりました。
 
 <img src="./Google-Tag-Manager-1.png" />
 
-海外の技術ブログや GitHub でも評価のある、
+海外の技術ブログや GitHub でも評価のある、
 
 「Scroll Depth」というライブラリを使用します。要件として jQuery1.7 以上です。
 
@@ -28,9 +29,7 @@ GoogleAnalytics で離脱率や平均セッションを見ていて、
 
 これとタグマネージャーを連携してスクロール計測を行いたい思います。
 
-
-
-## Dom Event の設定
+## Dom Event の設定
 
 まずは「Triggers」（旧:ルール）からイベントを登録します。
 
@@ -40,14 +39,13 @@ GoogleAnalytics で離脱率や平均セッションを見ていて、
 
 <img src="./Google-Tag-Manager1.png" />
 
-## Scroll Listener の設定
+## Scroll Listener の設定
 
 次に「Tags」（旧:タグ）からライブラリを「Scroll Listener」として登録します。
 
 以下 GitHub の「jQuery.scrolldepth.js」を script タグで挟んで貼り付けてください。
 
-> robflaherty/jquery-scrolldepth**
-> https://github.com/robflaherty/jquery-scrolldepth
+> robflaherty/jquery-scrolldepth\*\* > https://github.com/robflaherty/jquery-scrolldepth
 
 <img src="./Google-Tag-Manager2.png" />
 
@@ -67,7 +65,7 @@ $.scrollDepth({
 
 「Scroll Listener」を発行するタイミングは先ほど用意した「Dom Event」を使います。
 
-## Scroll Event の条件設定
+## Scroll Event の条件設定
 
 次に「Triggers」（旧:ルール）から「Scroll Listener」のイベント登録します。
 
@@ -75,7 +73,7 @@ $.scrollDepth({
 
 <img src="./Google-Tag-Manager3.png" />
 
-## dataLayer の設定
+## dataLayer の設定
 
 次に「Variables」（旧:マクロ）から「Scroll Listener」の 4 つのデータレイヤ変数を登録します。
 
@@ -95,7 +93,7 @@ $.scrollDepth({
 
 <img src="./Google-Tag-Manager7.png" />
 
-## Scroll Event の設定
+## Scroll Event の設定
 
 最後に「Tags」（旧:タグ）から Analytics のプロファイルを選択して、
 

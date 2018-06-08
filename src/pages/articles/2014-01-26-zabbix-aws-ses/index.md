@@ -17,6 +17,7 @@ tags:
   - Mac
   - PHP
 ---
+
 ## Zabbix のメールスクリプトを設置
 
 参考 : http://www.zabbix.jp/node/1441
@@ -45,11 +46,11 @@ AWS コンソールから各項目の値を取得できます。HOST のポー�
 # emacs /var/lib/zabbix/sendmessage-smtp-php/sendmessage_smtp_php.sh
 ```
 
-> $MAIL\_SMTP\_HOST = &#8216;email-smtp.us-east-1.amazonaws.com:465&#8217;;
+> $MAIL_SMTP_HOST = &#8216;email-smtp.us-east-1.amazonaws.com:465&#8217;;
 
-> $MAIL\_SMTP\_USER = &#8216;SMTP-USERNAME&#8217;;
+> $MAIL_SMTP_USER = &#8216;SMTP-USERNAME&#8217;;
 
-> $MAIL\_SMTP\_PASS = &#8216;SMTP-USERPASS&#8217;;
+> $MAIL_SMTP_PASS = &#8216;SMTP-USERPASS&#8217;;
 
 > $mailer->SMTPDebug = 1;
 
@@ -79,8 +80,8 @@ php の OpenSSL が有効になっていないと怒られたので、
 
 管理 -> メディアタイプ -> メディアタイプの作成をクリックし、
 
-  * 説明 : sendmessage\_smtp\_php.sh
-  * タイプ : スクリプト
-  * 名前 : sendmessage\_smtp\_php/sendmessage\_smtp\_php.sh
+- 説明 : sendmessage_smtp_php.sh
+- タイプ : スクリプト
+- 名前 : sendmessage_smtp_php/sendmessage_smtp_php.sh
 
 と入力し登録。ユーザーとアクションを設定すれば完了です。
