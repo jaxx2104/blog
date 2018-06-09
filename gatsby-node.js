@@ -1,42 +1,60 @@
-const _ = require('lodash')
+const each = require('lodash/each')
 const Promise = require('bluebird')
 const path = require('path')
+const PostTemplate = path.resolve('./src/components/templates/PostTemplate.js')
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
   return new Promise((resolve, reject) => {
-    const pages = []
-    const Blog = path.resolve('./src/templates/Blog.js')
     resolve(
       graphql(
         `
           {
-            allMarkdownRemark(limit: 1000) {
+            allFile(filter: { extension: { regex: "/md|js/" } }, limit: 1000) {
               edges {
                 node {
-                  frontmatter {
-                    path
+                  id
+                  name: sourceInstanceName
+                  path: absolutePath
+                  remark: childMarkdownRemark {
+                    id
+                    frontmatter {
+                      layout
+                      path
+                    }
                   }
                 }
               }
             }
           }
         `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
+      ).then(({ errors, data }) => {
+        if (errors) {
+          console.log(errors)
+          reject(errors)
         }
 
-        // Create blog posts pages.
-        _.each(result.data.allMarkdownRemark.edges, edge => {
+        // Create blog posts & pages.
+        const items = data.allFile.edges
+        const posts = items.filter(({ node }) => /posts/.test(node.name))
+        each(posts, ({ node }) => {
+          const { path } = node.remark.frontmatter
           createPage({
-            path: edge.node.frontmatter.path,
-            component: Blog,
-            context: {
-              path: edge.node.frontmatter.path,
-            },
+            path,
+            component: PostTemplate,
+            context: { path },
+          })
+        })
+
+        const pages = items.filter(({ node }) => /page/.test(node.name))
+        each(pages, ({ node }) => {
+          const { name } = path.parse(node.path)
+          const PageTemplate = path.resolve(node.path)
+          createPage({
+            path: name,
+            component: PageTemplate,
+            context: { path: name },
           })
         })
       })

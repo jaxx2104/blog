@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import NaviLogo from 'components/atoms/Logo'
+import Container from 'components/molecules/Container'
+import Flex from 'components/molecules/Flex'
+import NaviLogo from 'components/molecules/Logo'
 import NaviMenu from 'components/molecules/Menu'
 
 const Header = styled.header`
@@ -12,19 +14,13 @@ const Header = styled.header`
   z-index: 1;
 `
 
-const Container = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-  max-width: 960px;
-`
-
 const Navi = ({ location, title }) => (
   <Header>
     <Container>
-      <NaviLogo title={title} />
-      <NaviMenu />
+      <Flex>
+        <NaviLogo title={title} />
+        <NaviMenu />
+      </Flex>
     </Container>
   </Header>
 )

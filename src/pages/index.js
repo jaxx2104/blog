@@ -1,10 +1,10 @@
 import React from 'react'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
-import Helmet from 'react-helmet'
 import LazyLoad from 'react-lazyload'
 
-import SitePost from 'components/templates/SitePost'
+import Meta from 'components/atoms/Meta'
+import Article from 'components/organisms/Article'
 
 class BlogIndex extends React.Component {
   render() {
@@ -22,7 +22,7 @@ class BlogIndex extends React.Component {
       if (layout === 'post' && path !== '/404/') {
         pageLinks.push(
           <LazyLoad height={500} offset={500} once={true} key={i}>
-            <SitePost data={data.post} site={site} isIndex={true} key={i} />
+            <Article data={data.post} site={site} isIndex={true} key={i} />
           </LazyLoad>
         )
       }
@@ -30,21 +30,7 @@ class BlogIndex extends React.Component {
 
     return (
       <div>
-        <Helmet
-          title={get(site, 'title')}
-          meta={[
-            { name: 'twitter:card', content: 'summary' },
-            { name: 'twitter:site', content: `@${get(site, 'twitter')}` },
-            { property: 'og:title', content: get(site, 'title') },
-            { property: 'og:type', content: 'website' },
-            { property: 'og:description', content: get(site, 'description') },
-            { property: 'og:url', content: get(site, 'url') },
-            {
-              property: 'og:image',
-              content: `${get(site, 'url')}/img/profile.jpg`,
-            },
-          ]}
-        />
+        <Meta site={site} />
         {pageLinks}
       </div>
     )

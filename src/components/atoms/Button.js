@@ -2,14 +2,15 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 
-const Button = styled.button`
-  border: 1px solid rebeccapurple;
+const Btn = styled.button`
   border-radius: 0.25rem;
+  border: 1px solid rebeccapurple;
   color: rebeccapurple;
   display: block;
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.5;
+  margin: 1rem;
   padding: 0.375rem 0.75rem;
   text-align: center;
   user-select: none;
@@ -17,10 +18,10 @@ const Button = styled.button`
   width: 100%;
 `
 
-const More = ({ path }) => (
+const Button = ({ label, path }) => (
   <Link className="readmore" to={path} style={{ textDecoration: 'none' }}>
-    <Button>MORE</Button>
+    <Btn>{label}</Btn>
   </Link>
 )
 
-export default More
+export default Button

@@ -15,11 +15,13 @@ const GlobalStyles = injectGlobal`
     color: #333;
     font-weight: 700;
   }
+
   .content {
     color: #495057;
-    line-height: 1.8;
+    line-height: 2;
+    margin: 1rem;
+    padding: 0;
     font-size: 1rem;
-    padding: 1rem 2rem;
 
     h1,
     h2,
@@ -33,9 +35,8 @@ const GlobalStyles = injectGlobal`
     }
 
     p {
-      font-size: 1rem;
       font-weight: 100;
-      margin: 1rem 0;
+      margin: 1.5rem 0;
       line-height: 2;
     }
 

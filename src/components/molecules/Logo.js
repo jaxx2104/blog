@@ -1,21 +1,18 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import Heading from 'components/atoms/Heading'
 import styled from 'styled-components'
 
-const Heading = styled.h1`
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: white;
-  text-decoration: none;
-  padding: 0 2rem;
+const Wrap = styled.div`
+  padding: 0 1rem;
 `
 
 const Logo = ({ title }) => (
-  <div style={{}}>
+  <Wrap>
     <Link to="/" style={{ textDecoration: 'none' }}>
-      <Heading>{title}</Heading>
+      <Heading white>{title}</Heading>
     </Link>
-  </div>
+  </Wrap>
 )
 
 export default Logo
