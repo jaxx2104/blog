@@ -10,8 +10,8 @@ const I = styled.i`
 `
 
 const Icon = ({ name }) => (
-  <Animate animation="fadeIn" data-emergence="hidden">
-    <I className={`devicon-${name}`} data-emergence="hidden" />
+  <Animate animation="fadeIn" data-emergence="visible">
+    <I className={`devicon-${name}`} />
   </Animate>
 )
 

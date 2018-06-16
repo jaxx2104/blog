@@ -1,10 +1,12 @@
-import { siteMetadata } from '../../gatsby-config'
 import emergence from 'emergence.js'
 import React from 'react'
+
+import './Style'
+import Theme from './Theme'
+import { siteMetadata } from '../../../gatsby-config'
+import { ThemeProvider } from 'styled-components'
 import Navi from 'components/organisms/Navi'
 import Footer from 'components/organisms/Footer'
-import './style'
-import { ThemeProvider } from 'styled-components'
 
 class Layout extends React.Component {
   componentDidMount() {
@@ -17,15 +19,11 @@ class Layout extends React.Component {
 
   render() {
     const { children } = this.props
-    const theme = {
-      main: 'mediumseagreen',
-    }
-
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={Theme}>
         <div>
           <Navi title={siteMetadata.title} {...this.props} />
-          {children()}
+          {children}
           <Footer title={siteMetadata.title} author={siteMetadata.author} />
         </div>
       </ThemeProvider>

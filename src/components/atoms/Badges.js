@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Badge = styled.div`
-  background-color: rebeccapurple;
+  background-color: ${props => props.theme.main};
   border-radius: 0.25rem;
   color: white;
   display: inline-block;

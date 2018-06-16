@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Heading = styled.h1`
-  color: ${props => (props.white ? 'white' : '#868e96')};
+  color: ${props => (props.white ? 'white' : props.theme.sub)};
   font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.4;

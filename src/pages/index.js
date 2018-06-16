@@ -5,6 +5,7 @@ import LazyLoad from 'react-lazyload'
 
 import Meta from 'components/atoms/Meta'
 import Article from 'components/organisms/Article'
+import Layout from 'components/templates/Layout'
 
 class BlogIndex extends React.Component {
   render() {
@@ -30,8 +31,10 @@ class BlogIndex extends React.Component {
 
     return (
       <div>
-        <Meta site={site} />
-        {pageLinks}
+        <Layout>
+          <Meta site={site} />
+          {pageLinks}
+        </Layout>
       </div>
     )
   }

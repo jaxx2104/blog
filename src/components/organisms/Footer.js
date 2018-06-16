@@ -1,22 +1,24 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
-import Hr from '../atoms/Hr'
 
-const Container = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
+import Hr from 'components/atoms/Hr'
+import Container from 'components/molecules/Container'
+
+const Wrap = styled.div`
   padding: 2rem;
 `
 
 const Footer = ({ title, author }) => (
   <Container>
-    <Hr />
-    <Link to="/profile/">
-      <p>
-        <strong>{author}</strong> on Profile
-      </p>
-    </Link>
+    <Wrap>
+      <Hr />
+      <Link to="/profile/">
+        <p>
+          <strong>{author}</strong> on Profile
+        </p>
+      </Link>
+    </Wrap>
   </Container>
 )
 

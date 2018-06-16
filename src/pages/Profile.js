@@ -11,12 +11,15 @@ import Flex from 'components/molecules/Flex'
 import Section from 'components/molecules/Section'
 import SlideImage from 'components/molecules/SlideImage'
 import Twitter from 'components/molecules/Twitter'
+import Layout from 'components/templates/Layout'
+import Hr from 'components/atoms/Hr'
 
 const UserSection = () => (
   <Section center>
     <Container>
       <Tumbnail src="/img/profile.jpg" title="jaxx2104" circle size={140} />
       <Display small>jaxx2104</Display>
+      <Hr />
       <p>Front-end engineer.</p>
       <Twitter />
     </Container>
@@ -118,7 +121,7 @@ const DegreeSection = () => (
 )
 
 const Profile = () => (
-  <div>
+  <Layout>
     <Meta />
     <UserSection />
     <SkillSection />
@@ -127,7 +130,7 @@ const Profile = () => (
     <WorkSpSection />
     <RepoSection />
     <DegreeSection />
-  </div>
+  </Layout>
 )
 
 export default Profile

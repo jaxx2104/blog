@@ -3,8 +3,8 @@ const Promise = require('bluebird')
 const path = require('path')
 const PostTemplate = path.resolve('./src/components/templates/PostTemplate.js')
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
   return new Promise((resolve, reject) => {
     resolve(
@@ -39,6 +39,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         const items = data.allFile.edges
         const posts = items.filter(({ node }) => /posts/.test(node.name))
         each(posts, ({ node }) => {
+          if (!node.remark) return
           const { path } = node.remark.frontmatter
           createPage({
             path,
@@ -49,6 +50,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
         const pages = items.filter(({ node }) => /page/.test(node.name))
         each(pages, ({ node }) => {
+          if (!node.remark) return
           const { name } = path.parse(node.path)
           const PageTemplate = path.resolve(node.path)
           createPage({
@@ -62,11 +64,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   })
 }
 
-exports.modifyWebpackConfig = ({ config, _stage }) => {
-  return config.merge({
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
     resolve: {
       alias: {
-        components: path.resolve(config._config.context, 'src/components'),
+        components: path.resolve(__dirname, 'src/components'),
       },
     },
   })

@@ -5,12 +5,12 @@ const Section = styled.section`
   margin: 0 auto;
   text-align: ${props => (props.center ? 'center' : 'left')};
   background-color: ${props =>
-    props.image ? `none` : props.primary ? 'rebeccapurple' : 'none'};
+    props.image ? `none` : props.primary ? props.theme.main : 'none'};
   background-image: ${props =>
     props.image
       ? `url(${
           props.image
-        }), linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4))`
+        }), linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5))`
       : 'none'};
   background-blend-mode: overlay;
   background-repeat: no-repeat;

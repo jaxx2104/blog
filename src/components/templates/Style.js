@@ -43,7 +43,7 @@ const GlobalStyles = injectGlobal`
     blockquote {
       background-color: #f8f9fa;
       border-left: 5px solid #e9ecef;
-      color: #868e96;
+      color: ${props => props.theme.sub};
       padding: 0.25em 1.5em;
       margin: 0;
 

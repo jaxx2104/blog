@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 const Btn = styled.button`
   border-radius: 0.25rem;
-  border: 1px solid rebeccapurple;
-  color: rebeccapurple;
+  border: 1px solid ${props => props.theme.main};
+  color: ${props => props.theme.main};
   display: block;
   font-size: 1rem;
   font-weight: 600;

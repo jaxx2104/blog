@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+
+/* global __PATH_PREFIX__ */
 const pathPrefix = process.env.NODE_ENV === 'development' ? '' : __PATH_PREFIX__
 
 const Tumb = styled.img`
