@@ -1,16 +1,10 @@
 ---
-id: 814
 title: Titanium 3.2 で Genymotion を使って 遅いAndroid エミュレータから解放される
 date: "2013-12-20T00:51:34+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=814
 path: /titanium-3-2-genymotion
-dsq_thread_id:
-  - "2061105363"
-categories:
-  - Android
-  - Titanium
+category: JavaScript
 tags:
   - Android
   - Genymotion

@@ -1,16 +1,11 @@
 ---
-id: 655
 title: Titaniumで作ったAndroidアプリ起動時に"application restart is required"が出る
 date: "2013-10-11T00:24:18+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=655
 path: /titanium-android-application-restart-is-required
-dsq_thread_id:
-  - "1843307779"
-image: /wp/images/2013/10/TitaniumSDK-500x5001.png
-categories:
-  - Titanium
+image:
+category: JavaScript
 tags:
   - 3.1.3
   - Android
@@ -85,9 +80,7 @@ finishfalseroot の 1 行のみでエラーは回避できてた。
 > https://code.google.com/p/android/issues/detail?id=2373
 
 Titanium SDK 2.0 のころからこのエラーはあったようで、
-
 いろんな策が講じられて`ti.Android.bug2373`とかで検索すると
 
-エラーの回避方法みたいな内容がブログなどにも書かれているけど
-
+エラーの回避方法みたいな内容がブログなどにも書かれているけど、
 人によって書き方が微妙に違うのと、ちょっと古い情報もあったりして迷った。

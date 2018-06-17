@@ -1,5 +1,4 @@
 ---
-id: 1407
 title: 3ヶ月前に転職しました。
 date: "2017-09-03T10:46:43+00:00"
 author: jaxx2104
@@ -7,10 +6,9 @@ layout: post
 path: /leave-jobs
 image:
 description:
-categories:
-  - 雑記
+category: 仕事
 tags:
-  -
+  - 転職
 ---
 
 よいタイミングかなと思い書き記すことにします。

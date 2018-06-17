@@ -1,15 +1,10 @@
 ---
-id: 866
 title: AWS での死活監視とアラートメールの送信方法
 date: "2014-01-24T00:01:44+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=866
 path: /aws-alertmail
-dsq_thread_id:
-  - "2163783293"
-categories:
-  - Amazon AWS
+category: AWS
 tags:
   - Twitter API
 ---

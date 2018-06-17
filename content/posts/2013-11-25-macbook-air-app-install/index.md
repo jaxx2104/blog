@@ -1,16 +1,12 @@
 ---
-id: 735
 title: Macbook Air 買ったので環境構築します
 date: "2013-11-25T01:14:59+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=735
 path: /macbook-air-app-install
-dsq_thread_id:
-  - "1995259545"
-image: /wp/images/2013/11/IMG_1593-500x5001-e1385313381165.jpg
-categories:
-  - Mac
+image: ./IMG_1593.jpg
+description: 今週末 Macbook Air 13 インチの梅買いました。 メモリ ４GB でも Xcode サクサクです。
+category: 開発環境
 tags:
   - Android
   - Emacs
@@ -18,12 +14,6 @@ tags:
   - Mac
   - Titanium
 ---
-
-今週末 Macbook Air 13 インチの梅買いました。
-
-メモリ４ GB でも Xcode サクサクです。
-
-<img src="./IMG_1593.jpg" />
 
 ## 経緯
 

@@ -1,15 +1,10 @@
 ---
-id: 705
 title: MacのターミナルのプロンプトをLinuxっぽく変える
 date: "2013-11-11T00:13:03+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=705
 path: /mac-terminal-prompt-linux-like
-dsq_thread_id:
-  - "1953492079"
-categories:
-  - Mac
+category: Terminal
 tags:
   - .bash_profile
   - Emacs

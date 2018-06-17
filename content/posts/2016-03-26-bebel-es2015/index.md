@@ -1,23 +1,19 @@
 ---
-id: 1348
 title: Bebelを使ってJavaScriptをES2015で書く
 date: "2016-03-26T19:53:32+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1348
 path: /bebel-es2015
-image: /wp/images/2016/03/babel.png
-categories:
-  - JavaScript
-  - node.js
+image: ./babel.png
+category: JavaScript
+tags:
+  - Node.js
+  - ES2015
 ---
-
-<img src="./babel.png" alt="babel" />
 
 ## ES2015(ES6)について
 
 去年 2015 年 6 月に JavaScript の標準仕様の ES2015 が正式にリリースされ、
-
 自分も最近 ES2015 で書くことが多くなってきました。クラス定義やアロー関数、定数など非常に便利です。
 
 詳細は以下の URL が分かりやすいです。
@@ -49,7 +45,7 @@ categories:
 
 事前に Node.js と npm をインストールしている必要があります。
 
-> node.js と npm インストールとアップデート
+> Node.js と npm インストールとアップデート
 > <http://jaxx2104.info/node-js-install-update>
 
 Browserify と Babelify をインストールします。

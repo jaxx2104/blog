@@ -6,23 +6,18 @@ author: jaxx2104
 layout: post
 guid: http://jaxx2104.info/?p=915
 path: /bootstrap_pagination_wordpress
-image: /wp/images/2014/03/pagenation-01-500x3751.png
-categories:
-  - PHP
-  - Wordpress
+image: ./pagenation-01.png
+description: こんにちは、今日から三連休ということで、ワークスペースを利用してブログ書きます。
+category: PHP
 tags:
   - bootstrap
   - PHP
   - WordPress
 ---
 
-こんにちは、今日から三連休ということで、ワークスペースを利用してブログ書きます。
-
 では WordPress で Bootstrap の Pagination を実装方法について、
 
 メモしていきたいと思います。
-
-<img src="./pagenation-01.png" />
 
 > bootstarap の Pagenation
 > http://getbootstrap.com/components/#pagination

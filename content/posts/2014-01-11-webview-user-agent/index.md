@@ -1,16 +1,10 @@
 ---
-id: 850
 title: iOS , Androidアプリ内WebView での User Agent について
 date: "2014-01-11T23:21:37+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=850
 path: /webview-user-agent
-dsq_thread_id:
-  - "2108496253"
-categories:
-  - Android
-  - iOS
+category: iOS
 tags:
   - Android
   - iOS7

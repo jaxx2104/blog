@@ -1,5 +1,4 @@
 ---
-id: 1404
 title: JavaScript で Arrow 関数を使った時の this の代わり
 date: "2016-12-11T17:15:00+00:00"
 author: jaxx2104
@@ -7,10 +6,9 @@ layout: post
 guid: http://jaxx2104.info/?p=1404
 path: /arrow-function
 image:
-categories:
-  - JavaScript
+category: JavaScript
 tags:
-  - ES
+  - ES2015
 ---
 
 これまでイベント関数でバインドした要素を取得する場合。

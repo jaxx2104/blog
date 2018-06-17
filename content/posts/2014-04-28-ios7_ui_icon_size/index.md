@@ -1,21 +1,13 @@
 ---
-id: 933
 title: アプリ開発時にiOS7のUI・アイコンなどで参考になったサイト
 date: "2014-04-28T01:36:33+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=933
 path: /ios7_ui_icon_size
-categories:
-  - iOS
+category: iOS
 tags:
   - Android
-  - iOS7
-  - アイコン
-  - サイズ
-  - ペーパープロトタイピング
-  - ベクター
-  - 色
+  - Mock
 ---
 
 仕事終わりと休日を使ってアプリケーションを作り始めました、
@@ -30,9 +22,7 @@ tags:
 
 ## ペーパープロトタイピング
 
-印刷するとペーパープロトタイピングのテンプレートになる。
-
-紙に書くと要素の大きさとか位置とかが検討しやすい。
+印刷するとペーパープロトタイピングのテンプレートになる。紙に書くと要素の大きさとか位置とかが検討しやすい。
 
 > Free Printable iPhone 5, iPhone 5s, and iPhone 5c Templates
 > https://dribbble.com/shots/728257-Free-Printable-iPhone-5-Templates?list=popular

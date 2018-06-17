@@ -1,19 +1,15 @@
 ---
-id: 1299
-title: node.jsとnpmインストールとアップデート
+title: Node.jsとnpmインストールとアップデート
 date: "2016-03-11T00:41:12+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1299
 path: /node-js-install-update
-image: /wp/images/2016/03/nodejs-image-processing-600x300-1.png
-categories:
-  - CentOS
-  - JavaScript
-  - node.js
+image: ./nodejs-image-processing.png
+category: JavaScript
+tags:
+  - Node.js
+  - npm
 ---
-
-<img src="./nodejs-image-processing.png" alt="nodejs-image-processing" />
 
 Node.js と npm インストール
 
@@ -21,8 +17,6 @@ Node.js と npm インストール
 $ sudo yum install nodejs npm -enablerepo=epel
 $ sudo yum install gcc gcc-c++
 ```
-
-<!--more-->
 
 n のインストール
 

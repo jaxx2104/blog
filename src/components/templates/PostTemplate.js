@@ -41,8 +41,17 @@ export const pageQuery = graphql`
         layout
         title
         path
-        categories
+        category
+        tags
+        description
         date(formatString: "YYYY/MM/DD")
+        image {
+          childImageSharp {
+            sizes(quality: 100) {
+              ...GatsbyImageSharpSizes_withWebp
+            }
+          }
+        }
       }
     }
   }

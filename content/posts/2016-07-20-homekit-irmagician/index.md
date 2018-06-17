@@ -1,22 +1,17 @@
 ---
-id: 1402
 title: Raspberry Pi と irMagician を使って家をスマートホーム化する
 date: "2016-07-20T09:02:29+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1402
 path: /homekit-irmagician
-image: /wp/images/2016/07/e434d04ea420ba5f36d8a21409577ea2.gif
-categories:
+image: ./001.jpg
+category: iOS
+tags:
   - iOS
   - JavaScript
-  - Linux
-  - node.js
-tags:
-  - Mac
+  - HomeKit
+  - Node.js
 ---
-
-<img src="./001.gif" alt="001" />
 
 暑い季節になってきました。夏の自由研究ということで電子工作と IoT に挑戦したいと思います。
 
@@ -169,6 +164,8 @@ $ sudo npm install -g homebridge-cmd
 `sudo service homebridge restart` で設定ファイルを反映します。
 
 ## iPhone から使ってみる
+
+<img src="./001.gif" alt="001" />
 
 HomeKit 対応アプリケーションから設定します。Insteon とういうアプリケーションが有名みたいですが、自分は iOS 10 ベータにアップデートして Home アプリケーションを使っています。
 Siri もしくは Home アプリケーションから登録した家電のコントロールができるようになりました。

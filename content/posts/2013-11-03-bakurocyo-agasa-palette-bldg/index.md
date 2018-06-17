@@ -1,27 +1,18 @@
 ---
-id: 683
 title: 馬喰町のアガタ竹澤ビルとPalette bldgに行ってきた
 date: "2013-11-03T01:16:24+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=683
 path: /bakurocyo-agasa-palette-bldg
-dsq_thread_id:
-  - "1930066224"
-image: /wp/images/2013/11/IMG_1531-500x5001.jpg
-categories:
-  - 雑記
+image: ./IMG_1532.jpg
+descripton: 馬喰町になかなかナイスな場所があると知って行ってきた。
+category: 旅行
 tags:
   - Palette bldg
-  - PHP
   - アガタ竹澤ビル
   - カフェ
   - 馬喰町
 ---
-
-<img src="./IMG_1532.jpg" />
-
-馬喰町になかなかナイスな場所があると知って行ってきた。
 
 > 辛酸なめ子のギャラリー探訪記 「アガタ竹澤ビル」
 > http://www.artgene.net/labo/theme/cat243/post_45.php

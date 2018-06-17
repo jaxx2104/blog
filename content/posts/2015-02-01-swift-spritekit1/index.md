@@ -1,14 +1,12 @@
 ---
-id: 1168
 title: SwiftとSpriteKitでアプリ開発1:プロジェクト作成からシミュレータ実行まで
 date: "2015-02-01T15:10:50+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1168
 path: /swift-spritekit1
 image: /wp/images/2015/01/swift-logo-hero-1.jpg
-categories:
-  - iOS
+category: iOS
+tags:
   - SpriteKit
   - Swift
   - Xcode
@@ -24,9 +22,9 @@ iOS の新プログラミング言語 Swift をゲームアプリケーション
 
 まず Xcode を App Store からインストールし立ち上げ、[File] -> [New] -> [Project] -> [Game] と選択します。Language は Swift で、GameTechnology は SpriteKit にします。
 
-<!--more-->
-
 next を押すとプロジェクトの保存場所を聞かれます。
+
+<!--more-->
 
 <img src="./861597b59102c894571b612d973661ad.png" />
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
-import LazyLoad from 'react-lazyload'
 
 import Meta from 'components/atoms/Meta'
 import Article from 'components/organisms/Article'
@@ -22,9 +21,7 @@ class BlogIndex extends React.Component {
       const path = get(data, 'post.path')
       if (layout === 'post' && path !== '/404/') {
         pageLinks.push(
-          <LazyLoad height={500} offset={500} once={true} key={i}>
-            <Article data={data.post} site={site} isIndex={true} key={i} />
-          </LazyLoad>
+          <Article data={data.post} site={site} isIndex={true} key={i} />
         )
       }
     })
@@ -62,8 +59,17 @@ export const pageQuery = graphql`
             layout
             title
             path
-            categories
+            category
+            tags
+            description
             date(formatString: "YYYY/MM/DD")
+            image {
+              childImageSharp {
+                sizes(quality: 100) {
+                  ...GatsbyImageSharpSizes_withWebp
+                }
+              }
+            }
           }
         }
       }

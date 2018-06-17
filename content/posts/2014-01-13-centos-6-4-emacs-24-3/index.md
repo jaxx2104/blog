@@ -1,17 +1,10 @@
 ---
-id: 863
 title: CentOS 6.4 に emacs 24.3 をインストールする
 date: "2014-01-13T15:52:50+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=863
 path: /centos-6-4-emacs-24-3
-dsq_thread_id:
-  - "2116590108"
-categories:
-  - CentOS
-  - Emacs
-  - Linux
+category: Terminal
 tags:
   - CentOS
   - Emacs

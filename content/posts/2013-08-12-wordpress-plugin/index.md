@@ -1,18 +1,11 @@
 ---
-id: 561
 title: WordPressのウィジェットプラグインを自作する
 date: "2013-08-12T23:34:37+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=561
 path: /wordpress-plugin
-dsq_thread_id:
-  - "1600636335"
-categories:
-  - PHP
-  - Wordpress
+category: PHP
 tags:
-  - PHP
   - Twitter API
   - WordPress
   - ウィジェット
@@ -21,13 +14,9 @@ tags:
 
 右カラムのつぶやきを 1 件表示するプラグインを作った時のメモ
 
-このままだと[外観]->[ウィジェット]の欄に「Get Twitter」が追加され、
+このままだと[外観]->[ウィジェット]の欄に「Get Twitter」が追加され、サイト上に「サンプルです」と表示されるので、この部分を置き換える。
 
-サイト上に「サンプルです」と表示されるので、この部分を置き換える。
-
-`/wp/wp-contents/plugin/test/test.php`
-
-<!--more-->
+_/wp/wp-contents/plugin/test/test.php_
 
 ```php
 <?php

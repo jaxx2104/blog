@@ -6,23 +6,15 @@ author: jaxx2104
 layout: post
 guid: http://jaxx2104.info/?p=831
 path: /evernote-market-macbook-case
-dsq_thread_id:
-  - "2080052304"
-image: /wp/images/2013/12/IMG_0007-500x3331.jpg
-categories:
-  - Mac
+image: ./image.jpg
+description: Evernote がネットでセレクトショップ始めたようですので、おしゃれだった MacBook ケースを買ってみました。
+category: 買い物
 tags:
   - Evernote
   - Mac
 ---
 
-Evernote がネットでセレクトショップ始めたようですので、おしゃれだった MacBook ケースを買ってみました。
-
-<img src="./image.jpg" />
-
-お値段は商品 ¥4410 + 送料 ¥600 でした。
-
-商品は注文してから 2,3 日で届きました。
+お値段は商品 ¥4410 + 送料 ¥600 でした。商品は注文してから 2, 3 日で届きました。
 
 <!--more-->
 

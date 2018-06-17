@@ -1,38 +1,26 @@
 ---
-id: 647
 title: WordCamp Tokyo 2013 に行ってステッカーたくさんもらった。
 date: "2013-09-14T20:34:28+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=647
 path: /wordcamp-tokyo-2013-sticker
-dsq_thread_id:
-  - "1758953914"
-image: /wp/images/2013/09/jpeg-1-500x5001.jpeg
-categories:
-  - Wordpress
+image: ./002.jpg
+description: 去年に続き、今年も参加してきました。楽しかったぞ！
+category: 勉強会
 tags:
   - WordCamp Tokyo 2013
   - WordPress
 ---
 
-去年に続き、今年も参加してきました。楽しかったぞ！
-
-<img src="./002.jpg" />
-
 ## 12：30 会場に到着
 
-電車に揺られうとうとしながら着きました。
-
-会場は大田区産業プラザ PIO です。
+電車に揺られうとうとしながら着きました。会場は大田区産業プラザ PIO です。
 
 <!--more-->
 
 ## 13：00 テクニカルセッション
 
-WordPress のメリット・デメリットや、プラグイン利用の際の注意点、
-
-プラグインをどんどん公開していこーよ的な話がありました。
+WordPress のメリット・デメリットや、プラグイン利用の際の注意点、プラグインをどんどん公開していこーよ的な話がありました。
 
 ノウハウやコードとどう向き合っていくか、勉強になりました。
 

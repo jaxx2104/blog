@@ -13,12 +13,13 @@ const InfoWrap = styled.div`
   word-break: break-word;
 `
 
-const Info = ({ path, title, date, categories }) => (
+const Info = ({ path, title, date, categories, tags }) => (
   <InfoWrap>
     <Link style={{ textDecoration: 'none' }} to={path}>
       <Heading>{title}</Heading>
       <Time date={date} />
-      <Badges items={categories} />
+      <Badges items={categories} primary />
+      <Badges items={tags} />
     </Link>
   </InfoWrap>
 )

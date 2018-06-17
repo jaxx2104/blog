@@ -1,15 +1,12 @@
 ---
-id: 730
 title: Ti.Filesystemを使ってiOSとAndroidでローカル保存
 date: "2013-11-22T01:46:33+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=730
 path: /ti-filesystem-ios-android
 dsq_thread_id:
   - "1986276865"
-categories:
-  - Titanium
+category: JavaScript
 tags:
   - Android
   - applicationDataDirectory

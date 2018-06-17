@@ -1,33 +1,24 @@
 ---
-id: 1068
 title: Googleタグマネージャーを使ってスクロール計測
 date: "2014-12-05T02:58:08+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1068
 path: /google-tagmanager
-image: /wp/images/2014/12/Google-Tag-Manager-1.png
-categories:
-  - Google
-  - JavaScript
+image: ./Google-Tag-Manager-1.png
+description: GoogleAnalytics で離脱率や平均セッションを見ていて、ユーザーがページのどこまで目を通しているのか気になりました。
+category: JavaScript
+tags:
+  - Google Tag Manager
 ---
 
-GoogleAnalytics で離脱率や平均セッションを見ていて、
-
-ユーザーがページのどこまで目を通しているのか気になりました。
-
-<img src="./Google-Tag-Manager-1.png" />
-
-海外の技術ブログや GitHub でも評価のある、
-
-「Scroll Depth」というライブラリを使用します。要件として jQuery1.7 以上です。
-
-<!--more-->
+海外の技術ブログや GitHub でも評価のある、「Scroll Depth」というライブラリを使用します。要件として jQuery1.7 以上です。
 
 > Scroll Depth
 > http://scrolldepth.parsnip.io/
 
 これとタグマネージャーを連携してスクロール計測を行いたい思います。
+
+<!--more-->
 
 ## Dom Event の設定
 

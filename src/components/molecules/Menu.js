@@ -9,8 +9,12 @@ const MenuWrap = styled.div`
 
 const MenuItem = styled.p`
   font-size: 1.25rem;
-  color: white;
+  color: pink;
   padding: 0 0.5rem;
+  :hover {
+    color: white;
+    animation: 1s;
+  }
 `
 
 const Menu = () => {

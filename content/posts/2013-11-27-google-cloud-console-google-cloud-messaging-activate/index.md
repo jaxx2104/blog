@@ -1,15 +1,10 @@
 ---
-id: 758
 title: Google Cloud Console から Google Cloud Messaging を有効にする
 date: "2013-11-27T01:40:45+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=758
 path: /google-cloud-console-google-cloud-messaging-activate
-dsq_thread_id:
-  - "2001604140"
-categories:
-  - Google
+category: サービス
 tags:
   - Android
   - GCM

@@ -1,26 +1,16 @@
 ---
-id: 1067
 title: Titaniumで初アプリを作った際に参考にしたサイト
 date: "2014-12-13T03:59:22+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1067
 path: /titanium-app-ref
-image: /wp/images/2014/12/b0edb59d97976fb1c698b9997460f6e3-e1458137465824.jpg
-categories:
-  - Alloy
-  - iOS
-  - Titanium
+image: ./b0edb59d97976fb1c698b9997460f6e3.jpg
+description: アプリケーションを作った際に、参考にしたサイトについて初心者目線ですが紹介したいと思います。
+category: iOS
 tags:
-  - Android
-  - Mac
   - Titanium
-  - Twitter API
+  - Android
 ---
-
-アプリケーションを作った際に、参考にしたサイトについて初心者目線ですが紹介したいと思います。
-
-<img src="./b0edb59d97976fb1c698b9997460f6e3.jpg" /></a>
 
 Titanium は以前に少しだけ触ったことがあって、その時は「Resources/app.js」に書く Classic なものでした。
 
@@ -28,13 +18,14 @@ Titanium は以前に少しだけ触ったことがあって、その時は「Re
 iOS Developer Program に 7,800 円払ってしまったこと。
 また数年さわっていない間に MVC フレームワーク「Alloy」が出ていておもしろそうだったので Titanium を使って初アプリケーションを作ることにしました。
 
-<!--more-->
-
 ## ドキュメント
 
 公式ドキュメントを読んで開発環境と Alloy の基本構成は理解できました。
 
-> **Titanium 3.X - Appcelerator Docs** > http://docs.appcelerator.com/titanium/3.0/#!/guide
+> Titanium 3.X - Appcelerator Docs
+> http://docs.appcelerator.com/titanium/3.0/#!/guide
+
+<!--more-->ｓ
 
 ただ Titanium の各要素については調べる頻度が多いので、開発環境が Mac の場合は Dash に追加すると便利です。
 

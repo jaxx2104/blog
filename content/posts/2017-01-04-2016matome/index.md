@@ -1,21 +1,17 @@
 ---
-id: 1405
 title: いまさらですが2016年を振り返る
 date: "2017-01-05T23:15:00+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1405
 path: /2016matome
-image:
-categories:
-  - 雑記
+image: ./00.jpg
+description: かなり遅いけれど最後の正月休みなので区切りのため去年を振り返ってみました。
+category: メモ
 tags:
-  -
+  - IoT
+  - 人喰いの大鷲トリコ
+  - Apple Watch
 ---
-
-かなり遅いけれど最後の正月休みなので区切りのため去年を振り返ってみました。
-
-<img src="./torico.jpeg" />
 
 ## IoT 関連
 

@@ -1,17 +1,10 @@
 ---
-id: 876
 title: Zabbix と AWS SES による死活監視とアラートメールの送信方法
 date: "2014-01-26T14:50:56+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=876
 path: /zabbix-aws-ses
-dsq_thread_id:
-  - "2176475586"
-dsq_needs_sync:
-  - "1"
-categories:
-  - Amazon AWS
+category: AWS
 tags:
   - Emacs
   - Mac

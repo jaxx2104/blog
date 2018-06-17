@@ -1,15 +1,12 @@
 ---
-id: 1030
 title: htaccess によるURLパラメータの書き換え
 date: "2014-10-23T01:42:18+00:00"
 author: jaxx2104
 layout: post
 guid: http://jaxx2104.info/?p=1030
 path: /htaccess-rewrite
-categories:
-  - Apache
+category: PHP
 tags:
-  - PHP
 ---
 
 URL パラメータの書き換えることってそんなになにけど、

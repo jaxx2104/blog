@@ -1,26 +1,18 @@
 ---
-id: 1043
 title: tmhOAuthを使ってTwitterに画像付きで投稿する
 date: "2014-10-30T23:06:40+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1043
 path: /tmhoauth-twitter
-categories:
-  - PHP
+category: PHP
 tags:
-  - PHP
   - Twitter API
 ---
 
-Twitter API を使って画像付きで投稿する場合、
-
-ライブラリの tmhOAuth で簡単に認証とリクエスト行うことができます。
+Twitter API を使って画像付きで投稿する場合、ライブラリの tmhOAuth で簡単に認証とリクエスト行うことができます。
 
 > themattharris/tmhOAuth
 > https://github.com/themattharris/tmhOAuth
-
-<!--more-->
 
 ## OAuth 認証
 
@@ -28,6 +20,8 @@ Twitter への認証の際に使う、認証鍵は Twitter Developers にて取�
 
 > Twitter Developers
 > https://dev.twitter.com/
+
+<!--more-->
 
 認証の際に「Problem with the SSL CA cert」と言われたので、
 

@@ -1,19 +1,14 @@
 ---
-id: 988
 title: 'CentOS7にLAMP環境とWordPress構築[さくらVPS]'
 date: "2014-10-05T15:23:17+00:00"
 author: jaxx2104
 layout: post
 guid: http://jaxx2104.info/?p=988
 path: /centos7-lamp
-image: /wp/images/2014/10/centos-500x1341.png
-categories:
-  - Apache
-  - CentOS
-  - MySQL
-  - PHP
+image: ./centos.png
+description: さくら VPS を CentOS7 へアップデートしました。いろいろ変更点あったので備忘録としてメモしました。
+category: 開発環境
 tags:
-  - apache
   - CentOS
   - Emacs
   - Mac
@@ -21,17 +16,9 @@ tags:
   - WordPress
 ---
 
-<img src="./centos.png" />
-
-さくら VPS を CentOS7 へアップデートしました。
-
-いろいろ変更点あったので備忘録としてメモしました。
-
 ## CentOS7 アップデート
 
-OS のインストールとネットワーク周りはさくらの管理画面から。
-
-「OS 再インストール」->「カスタム OS インストール」
+OS のインストールとネットワーク周りはさくらの管理画面から。「OS 再インストール」->「カスタム OS インストール」
 
 <!--more-->
 
@@ -76,9 +63,7 @@ $ firewall-cmd -add-service=http
 
 ## SSH
 
-設定。SSH のポート番号は標準だと 22 ですが、
-
-セキュリティ上任意の番号に変更します。
+設定。SSH のポート番号は標準だと 22 ですが、セキュリティ上任意の番号に変更します。
 
 `$ emacs /etc/ssh/sshd_config`
 
@@ -147,11 +132,11 @@ grant all on データベース名.* to 'ユーザー名'@'ホスト名' identif
 
 サービス開始と初期設定
 
-> $ systemctl start mariadb
-
-> $ systemctl enable mariadb
-
-> $ mysql_secure_installation
+```
+$ systemctl start mariadb
+$ systemctl enable mariadb
+$ mysql_secure_installation
+```
 
 ```conf
 既存password（デフォルトは空）
@@ -165,18 +150,15 @@ grant all on データベース名.* to 'ユーザー名'@'ホスト名' identif
 
 <a href="https://ja.wordpress.org/" title="https://ja.wordpress.org/" target="_blank">https://ja.WordPress.org/</a>
 
-> $ cd /var/www/html/
-
-> $ wget http://ja.wordpress.org/wordpress-4.0-ja.zip
-
-> $ unzip wordpress-4.0-ja.zip
-
-> $ mv -rf wordpress wp
+```
+$ cd /var/www/html/
+$ wget http://ja.wordpress.org/wordpress-4.0-ja.zip
+$ unzip wordpress-4.0-ja.zip
+$ mv -rf wordpress wp
+```
 
 あとは Web ルートの wp 配下からインストール作業。
 
-以上駆け足で書いていきましたが、
-
-CentOS7 でファイアウォールやサービスの開始・終了など変更点ありました。
+以上駆け足で書いていきましたが、CentOS7 でファイアウォールやサービスの開始・終了など変更点ありました。
 
 conf ファイルなどの細かな設定は使用状況に合わせて検討してください。

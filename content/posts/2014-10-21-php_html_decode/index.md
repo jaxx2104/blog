@@ -1,15 +1,11 @@
 ---
-id: 1019
 title: PHPで特殊文字をデコードする
 date: "2014-10-21T00:38:26+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=1019
 path: /php_html_decode
-categories:
-  - PHP
+category: PHP
 tags:
-  - PHP
 ---
 
 Twitter などでは絵文字が使えます。

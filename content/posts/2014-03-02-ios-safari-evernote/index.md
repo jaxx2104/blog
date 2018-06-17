@@ -1,22 +1,16 @@
 ---
-id: 899
 title: iOS Safari用 Evernoteのブックマークレットの作成
 date: "2014-03-02T17:14:05+00:00"
 author: jaxx2104
 layout: post
-guid: http://jaxx2104.info/?p=899
 path: /ios-safari-evernote
-image: /wp/images/2014/03/60008d9b64bb36ff4a6fd973c45bfcea-500x3871.png
-categories:
-  - iOS
-  - JavaScript
+image: ./60008d9b64bb36ff4a6fd973c45bfcea.png
+description: iPad や iPhone でも Web のクリップを手軽にしたいので、ブックマークレットを用意した、快適な Evernote Life を。
+category: JavaScript
+tags:
+  - iPad
+  - Evernote
 ---
-
-<img src="./60008d9b64bb36ff4a6fd973c45bfcea.png" />
-
-iPad や iPhone でも Web のクリップを手軽にしたいので、
-
-ブックマークレットを用意した、快適な Evernote Life を。
 
 ## 使い方
 
