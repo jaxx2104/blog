@@ -2,13 +2,9 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
 
-import { siteMetadata } from '../../../gatsby-config'
-
-const Meta = ({ site, data }) => {
-  const postTitle = get(data, 'frontmatter.title')
+const Meta = ({ site, title }) => {
   const siteTitle = get(site, 'title')
-  const title = data ? `${postTitle} | ${siteTitle}` : siteTitle
-
+  title = title ? `${title} | ${siteTitle}` : siteTitle
   return (
     <Helmet
       title={title}
@@ -16,21 +12,21 @@ const Meta = ({ site, data }) => {
         { name: 'twitter:card', content: 'summary' },
         {
           name: 'twitter:site',
-          content: `@${get(siteMetadata, 'twitter')}`,
+          content: `@${get(site, 'twitter')}`,
         },
         { property: 'og:title', content: title },
         { property: 'og:type', content: 'website' },
         {
           property: 'og:description',
-          content: get(siteMetadata, 'description'),
+          content: get(site, 'description'),
         },
         {
           property: 'og:url',
-          content: `${get(siteMetadata, 'siteUrl')}/profile`,
+          content: `${get(site, 'siteUrl')}/profile`,
         },
         {
           property: 'og:image',
-          content: `${get(siteMetadata, 'siteUrl')}/img/profile.jpg`,
+          content: `${get(site, 'siteUrl')}/img/profile.jpg`,
         },
       ]}
     />

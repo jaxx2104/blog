@@ -9,10 +9,11 @@ const Wrap = styled.div`
   padding: 2rem;
 `
 
-const Footer = ({ title, author }) => (
+const Footer = ({ author }) => (
   <Container>
     <Wrap>
       <Hr />
+      <p>コーラとバグが好き</p>
       <Link to="/profile/">
         <p>
           <strong>{author}</strong> on Profile

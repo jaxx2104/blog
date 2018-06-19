@@ -5,20 +5,23 @@ import Meta from 'components/atoms/Meta'
 import Article from 'components/organisms/Article'
 import Layout from 'components/templates/Layout'
 
-const PostTemplate = ({ data }) => {
-  return (
-    <div>
-      <Layout>
-        <Meta data={get(data, 'post')} site={get(data, 'site')} />
-        <Article
-          data={get(data, 'post')}
-          site={get(data, 'site')}
-          isIndex={false}
-        />
-      </Layout>
-    </div>
-  )
-}
+const PostTemplate = ({ data }) => (
+  <div>
+    <Layout>
+      <Meta
+        title={get(data, 'post.frontmatter.title')}
+        site={get(data, 'site.meta')}
+      />
+      <Article
+        data={get(data, 'post')}
+        options={{
+          isIndex: false,
+          adsense: get(data, 'site.meta.adsense'),
+        }}
+      />
+    </Layout>
+  </div>
+)
 
 export default PostTemplate
 

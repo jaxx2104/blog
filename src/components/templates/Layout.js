@@ -2,11 +2,11 @@ import emergence from 'emergence.js'
 import React from 'react'
 
 import './Style'
-import Theme from './Theme'
 import { siteMetadata } from '../../../gatsby-config'
 import { ThemeProvider } from 'styled-components'
-import Navi from 'components/organisms/Navi'
 import Footer from 'components/organisms/Footer'
+import Navi from 'components/organisms/Navi'
+import Theme from './Theme'
 
 class Layout extends React.Component {
   componentDidMount() {

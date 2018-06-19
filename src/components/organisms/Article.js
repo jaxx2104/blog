@@ -7,7 +7,7 @@ import Adsense from 'components/molecules/Adsense'
 import Container from 'components/molecules/Container'
 import PostInfo from 'components/organisms/Info'
 
-const Article = ({ site, data, isIndex }) => {
+const Article = ({ data, options }) => {
   const {
     category,
     tags,
@@ -17,6 +17,7 @@ const Article = ({ site, data, isIndex }) => {
     date,
     image,
   } = data.frontmatter
+  const { isIndex, adsense } = options
   const html = data.html
   const isMore = isIndex && !!html.match('<!--more-->')
   const sizes = get(image, 'childImageSharp.sizes')
@@ -29,7 +30,7 @@ const Article = ({ site, data, isIndex }) => {
         categories={[category]}
         tags={tags}
       />
-      {getAd(isIndex, site)}
+      {getAd(isIndex, adsense)}
       <div className="content">
         <p>{description}</p>
         {sizes ? <Img sizes={sizes} /> : ''}
@@ -40,20 +41,18 @@ const Article = ({ site, data, isIndex }) => {
           __html: isMore ? getDescription(html) : html,
         }}
       />
-      {isMore ? <Button path={path} label="MORE" primary /> : ''}
-      {getAd(isIndex, site)}
+      <div className="content">
+        {isMore ? <Button path={path} label="MORE" primary /> : ''}
+      </div>
+      {getAd(isIndex, adsense)}
     </Container>
   )
 }
 
 export default Article
 
-const getAd = (isIndex, site) => {
-  return !isIndex ? (
-    <Adsense clientId={site.meta.adsense} slotId="" format="auto" />
-  ) : (
-    ''
-  )
+const getAd = (isIndex, adsense) => {
+  return !isIndex ? <Adsense clientId={adsense} slotId="" format="auto" /> : ''
 }
 
 const getDescription = body => {

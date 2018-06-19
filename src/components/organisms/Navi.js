@@ -14,7 +14,7 @@ const Header = styled.header`
   z-index: 1;
 `
 
-const Navi = ({ location, title }) => (
+const Navi = ({ title }) => (
   <Header>
     <Container>
       <Flex>

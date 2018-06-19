@@ -1,7 +1,6 @@
 import 'modern-normalize/modern-normalize.css'
 import 'animate.css/animate.css'
 import 'prismjs/themes/prism-okaidia.css'
-import 'devicon-2.2/devicon.min.css'
 import 'font-awesome/css/font-awesome.css'
 
 import { injectGlobal } from 'styled-components'

@@ -55,7 +55,6 @@ exports.createPages = ({ graphql, actions }) => {
           createPage({
             path: name,
             component: PageTemplate,
-            context: { path: name },
           })
         })
       })
