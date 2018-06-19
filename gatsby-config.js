@@ -12,8 +12,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
+        path: `${__dirname}/content/posts/`,
+        name: 'posts',
       },
     },
     {
@@ -23,15 +23,15 @@ module.exports = {
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 750,
+              maxWidth: 780,
               linkImagesToOriginal: false,
-              wrapperStyle: 'margin-bottom: 1.0725rem;',
+              wrapperStyle: 'margin: 2rem 0',
             },
           },
           {
             resolve: 'gatsby-remark-responsive-iframe',
             options: {
-              wrapperStyle: 'margin-bottom: 1.0725rem',
+              wrapperStyle: 'margin: 2rem 0',
             },
           },
           'gatsby-remark-prismjs',
@@ -83,9 +83,9 @@ module.exports = {
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-react-next',
-    'gatsby-plugin-sass',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-styled-components',
     'gatsby-plugin-twitter',
     'gatsby-transformer-sharp',
   ],
