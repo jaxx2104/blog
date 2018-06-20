@@ -652,7 +652,7 @@
     core-js "^2.5.3"
     regenerator-runtime "^0.11.1"
 
-"@babel/runtime@7.0.0-beta.51":
+"@babel/runtime@7.0.0-beta.51", "@babel/runtime@^7.0.0-beta.38":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.51.tgz#48b8ed18307034c6620f643514650ca2ccc0165a"
   dependencies:
@@ -4879,11 +4879,11 @@ gatsby-link@^2.0.0-beta.1:
     react-lifecycles-compat "^3.0.2"
     ric "^1.3.0"
 
-gatsby-plugin-catch-links@^2.0.2-beta.1:
-  version "2.0.2-beta.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-2.0.2-beta.1.tgz#8c35a52060e34b10f721898d3637fe6f9a0eab6a"
+gatsby-plugin-catch-links@^2.1.0-alpha.f98688ee:
+  version "2.1.0-alpha.f98688ee"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-2.1.0-alpha.f98688ee.tgz#fba61072f125492448f323558e831ab6250364dc"
   dependencies:
-    "@babel/runtime" "7.0.0-beta.51"
+    "@babel/runtime" "^7.0.0-beta.38"
 
 gatsby-plugin-feed@^2.0.0-beta.1:
   version "2.0.0-beta.1"
@@ -4901,13 +4901,12 @@ gatsby-plugin-google-analytics@^2.0.0-beta.1:
   dependencies:
     "@babel/runtime" "7.0.0-beta.51"
 
-gatsby-plugin-manifest@^2.0.2-beta.1:
-  version "2.0.2-beta.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.0.2-beta.1.tgz#74cf95c243023e2ad2b8bc744f6f990359ace446"
+gatsby-plugin-manifest@^2.1.0-alpha.f98688ee:
+  version "2.1.0-alpha.f98688ee"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.1.0-alpha.f98688ee.tgz#aa6fc68386f67501335060d2f9092a6bcc2eaba7"
   dependencies:
-    "@babel/runtime" "7.0.0-beta.51"
+    "@babel/runtime" "^7.0.0-beta.38"
     bluebird "^3.5.0"
-    sharp "^0.20.2"
 
 gatsby-plugin-netlify@^2.0.0-beta.1:
   version "2.0.0-beta.1"
@@ -4965,9 +4964,9 @@ gatsby-plugin-react-next@^2.0.1-13:
     core-js "^2.5.1"
     resolve "^1.5.0"
 
-gatsby-plugin-sharp@2.0.0-beta.1:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.0.0-beta.1.tgz#b62701119cbfa51dc96c1d09d1111c2ba5702f56"
+gatsby-plugin-sharp@2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.0.0-beta.2.tgz#ea7e42d1ba7adbeebeeffe3ddafc675d6eb2fc33"
   dependencies:
     "@babel/runtime" "7.0.0-beta.51"
     async "^2.1.2"
@@ -5041,9 +5040,9 @@ gatsby-remark-copy-linked-files@^2.0.0-beta.1:
     probe-image-size "^4.0.0"
     unist-util-visit "^1.3.0"
 
-gatsby-remark-images@^2.0.1-beta.1:
-  version "2.0.1-beta.1"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-2.0.1-beta.1.tgz#ba17b27ec000ba7c303d95c08bf7d26e90d1a19d"
+gatsby-remark-images@^2.1.0-alpha.e328d33f:
+  version "2.1.0-alpha.e328d33f"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-2.1.0-alpha.e328d33f.tgz#2fcce0de67e48123b763ca06309c9581e9a2ade8"
   dependencies:
     "@babel/runtime" "7.0.0-beta.51"
     cheerio "^1.0.0-rc.2"
@@ -5080,9 +5079,9 @@ gatsby-remark-smartypants@^2.0.0-beta.1:
     retext-smartypants "^3.0.0"
     unist-util-visit "^1.3.0"
 
-gatsby-source-filesystem@^2.0.1-beta.1:
-  version "2.0.1-beta.1"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.0.1-beta.1.tgz#5f26dbfea4902023c6f8048d5aaa59fe7d21f08d"
+gatsby-source-filesystem@^2.1.0-alpha.e328d33f:
+  version "2.1.0-alpha.e328d33f"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.0-alpha.e328d33f.tgz#cb832365caeb00c6f157aaafba960abbbd200f30"
   dependencies:
     "@babel/runtime" "7.0.0-beta.51"
     better-queue "^3.8.7"
@@ -5097,9 +5096,9 @@ gatsby-source-filesystem@^2.0.1-beta.1:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-transformer-remark@^2.1.1-beta.1:
-  version "2.1.1-beta.1"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.1.1-beta.1.tgz#a07392dfd6269965cecc2ce026fcb04337b732d4"
+gatsby-transformer-remark@^2.2.0-alpha.80a21f04:
+  version "2.2.0-alpha.80a21f04"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.2.0-alpha.80a21f04.tgz#ebc4bca964e504df9b212d2301afa7c9f2ffd59e"
   dependencies:
     "@babel/runtime" "7.0.0-beta.51"
     bluebird "^3.5.0"
@@ -5121,9 +5120,9 @@ gatsby-transformer-remark@^2.1.1-beta.1:
     unist-util-select "^1.5.0"
     unist-util-visit "^1.3.0"
 
-gatsby-transformer-sharp@^2.1.1-beta.1:
-  version "2.1.1-beta.1"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.1.1-beta.1.tgz#6c9c7c68c624b17a6a23553cfcd3ffc63dccf97e"
+gatsby-transformer-sharp@^2.2.0-alpha.80a21f04:
+  version "2.2.0-alpha.80a21f04"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.2.0-alpha.80a21f04.tgz#db06cb75c0f69dcf69fe17b6ba70ab964b5d3703"
   dependencies:
     "@babel/runtime" "7.0.0-beta.51"
     bluebird "^3.5.0"
