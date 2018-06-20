@@ -1,21 +1,39 @@
+import get from 'lodash/get'
+import Img from 'gatsby-image'
 import React from 'react'
 import styled from 'styled-components'
 
 /* global __PATH_PREFIX__ */
 const pathPrefix = process.env.NODE_ENV === 'development' ? '' : __PATH_PREFIX__
 
-const Tumb = styled.img`
-  max-width: ${props => props.size || 120}px;
+const Image = styled(Img)`
   border-radius: ${props => (props.circle ? 50 : 0)}%;
+  margin: auto;
+  width: ${props => props.size || 120}px;
 `
 
-const Tumbnail = ({ src, title, circle, size }) => (
-  <Tumb
-    src={`${pathPrefix}${src}`}
-    alt={title}
-    circle={circle}
-    size={size}
-    title={title}
-  />
-)
+const Tumb = styled.img`
+  border-radius: ${props => (props.circle ? 50 : 0)}%;
+  width: ${props => props.size || 120}px;
+`
+
+const Tumbnail = ({ src, title, circle, size, sizes }) => {
+  return sizes ? (
+    <Image
+      alt={title}
+      circle={circle}
+      size={size}
+      sizes={sizes}
+      title={title}
+    />
+  ) : (
+    <Tumb
+      alt={title}
+      circle={circle}
+      size={size}
+      src={`${pathPrefix}${src}`}
+      title={title}
+    />
+  )
+}
 export default Tumbnail
