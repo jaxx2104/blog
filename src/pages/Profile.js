@@ -1,6 +1,7 @@
 import get from 'lodash/get'
 import React from 'react'
 import styled from 'styled-components'
+import Img from 'gatsby-image'
 
 import { siteMetadata } from '../../gatsby-config'
 import Meta from 'components/atoms/Meta'
@@ -20,10 +21,32 @@ const Anchor = styled.a`
   text-decoration: none;
 `
 
-const UserSection = () => (
+const Wrap = styled.div`
+  max-width: 780px;
+  position: absolute;
+  top: 2rem;
+  line-height: 150%;
+`
+
+const Cover = styled(Img)`
+  height: 50vh;
+  width: 100%;
+  opacity: 0.6;
+  & > img {
+    object-fit: cover !important;
+    object-position: 0% 50% !important;
+  }
+`
+
+const UserSection = ({ profile }) => (
   <Section center>
     <Container>
-      <Tumbnail src="/img/profile.jpg" title="jaxx2104" circle size={140} />
+      <Tumbnail
+        sizes={get(profile, 'childImageSharp.sizes')}
+        title="jaxx2104"
+        circle
+        size={140}
+      />
       <Display size="2">jaxx2104</Display>
       <p>Front-end engineer.</p>
       <Hr />
@@ -60,41 +83,44 @@ const SkillSection = () => (
   </Section>
 )
 
-const FeatureSection = () => (
-  <Section image="/img/detector.jpg" primary>
+const FeatureSection = ({ detector }) => (
+  <Section dark nospan>
+    <Cover sizes={get(detector, 'childImageSharp.sizes')} />
     <Container>
-      <Display uppercase>Features</Display>
-      <Lead>
-        学生時代バイトをきっかけにWEBエンジニアになりました。
-        主にフロントエンドを仕事にしていますが、バックエンドの開発もやってます。
-        事業を成長させながら技術も誇れるサービスを作れるよう日々精進しています。
-      </Lead>
+      <Wrap>
+        <Display uppercase>Features</Display>
+        <Lead>
+          学生時代バイトをきっかけにWEBエンジニアになりました。
+          主にフロントエンドを仕事にしていますが、バックエンドの開発もやってます。
+          事業を成長させながら技術も誇れるサービスを作れるよう日々精進しています。
+        </Lead>
+      </Wrap>
     </Container>
   </Section>
 )
 
-const WorkSection = () => (
+const WorkSection = ({ mockup1, mockup2, mockup3 }) => (
   <Section>
     <Container>
       <Display uppercase>Work</Display>
       <Flex center>
         <Anchor href="https://yomu.jaxx2104.info/">
           <SlideImage
-            src="/img/mockup1.png"
+            sizes={get(mockup1, 'childImageSharp.sizes')}
             title="Yomu(PWA)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://gatstrap.netlify.com/">
           <SlideImage
-            src="/img/mockup3.png"
+            sizes={get(mockup3, 'childImageSharp.sizes')}
             title="Gatstrap(Web)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://nikuman.jaxx2104.info/">
           <SlideImage
-            src="/img/mockup2.png"
+            sizes={get(mockup2, 'childImageSharp.sizes')}
             title="Nikuman(Web)"
             animation="fadeIn"
           />
@@ -104,20 +130,20 @@ const WorkSection = () => (
   </Section>
 )
 
-const WorkSpSection = () => (
+const WorkSpSection = ({ work1, work2 }) => (
   <Section>
     <Container>
       <Flex center>
         <Anchor href="https://itunes.apple.com/jp/app/yomu-rss-reader/id924321598">
           <SlideImage
-            src="/img/work1.png"
+            sizes={get(work1, 'childImageSharp.sizes')}
             title="Yomu(iOS)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://itunes.apple.com/jp/app/detector-live-filter-camera/id1079950455">
           <SlideImage
-            src="/img/work2.png"
+            sizes={get(work2, 'childImageSharp.sizes')}
             title="Detector(iOS)"
             animation="fadeIn"
           />
@@ -139,28 +165,103 @@ const RepoSection = () => (
   </Section>
 )
 
-const DegreeSection = () => (
-  <Section image="/img/back.jpeg" primary>
+const DegreeSection = ({ back }) => (
+  <Section dark nospan>
+    <Cover sizes={get(back, 'childImageSharp.sizes')} />
     <Container>
-      <Display>Degree Works</Display>
-      <Lead>
-        過去のデザイン制作は<a href="https://old.jaxx2104.info/">こちら</a>
-      </Lead>
+      <Wrap>
+        <Display>Degree Works</Display>
+        <Lead>
+          過去のデザイン制作は<a href="https://old.jaxx2104.info/">こちら</a>
+        </Lead>
+      </Wrap>
     </Container>
   </Section>
 )
 
-const Profile = () => (
+const Profile = ({ data }) => (
   <Layout>
     <Meta site={siteMetadata} title="Profile" />
-    <UserSection />
+    <UserSection profile={get(data, 'profile')} />
     <SkillSection />
-    <FeatureSection />
-    <WorkSection />
-    <WorkSpSection />
+    <FeatureSection detector={get(data, 'detector')} />
+    <WorkSection
+      mockup1={get(data, 'mockup1')}
+      mockup2={get(data, 'mockup2')}
+      mockup3={get(data, 'mockup3')}
+    />
+    <WorkSpSection work1={get(data, 'work1')} work2={get(data, 'work2')} />
     <RepoSection />
-    <DegreeSection />
+    <DegreeSection back={get(data, 'back')} />
   </Layout>
 )
 
 export default Profile
+
+export const query = graphql`
+  query ProfilePageQuery {
+    yomu: file(name: { eq: "yomu" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    detector: file(name: { eq: "detector" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    profile: file(name: { eq: "profile" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    mockup1: file(name: { eq: "mockup1" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    mockup2: file(name: { eq: "mockup2" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    mockup3: file(name: { eq: "mockup3" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    work1: file(name: { eq: "work1" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    work2: file(name: { eq: "work2" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+    back: file(name: { eq: "back" }) {
+      childImageSharp {
+        sizes(quality: 100) {
+          ...GatsbyImageSharpSizes_withWebp
+        }
+      }
+    }
+  }
+`
