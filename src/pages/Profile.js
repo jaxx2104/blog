@@ -91,9 +91,10 @@ const FeatureSection = ({ detector }) => (
       <Wrap>
         <Display uppercase>Features</Display>
         <Lead>
-          学生時代バイトをきっかけにWEBエンジニアになりました。
-          主にフロントエンドを仕事にしていますが、バックエンドの開発もやってます。
-          事業を成長させながら技術も誇れるサービスを作れるよう日々精進しています。
+          I'm a front-end engineer in Japan 🗼<br />
+          Used to be a designer of furniture and architecture.
+          <li>2013 ~ 2017: J-CAST News</li>
+          <li>2017 ~ : Recruit Lifestyle</li>
         </Lead>
       </Wrap>
     </Container>

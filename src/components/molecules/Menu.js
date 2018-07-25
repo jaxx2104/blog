@@ -8,7 +8,6 @@ const MenuWrap = styled.div`
 `
 
 const MenuItem = styled.p`
-  font-size: 1.25rem;
   color: pink;
   padding: 0 0.5rem;
   :hover {
