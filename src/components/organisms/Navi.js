@@ -8,9 +8,7 @@ import NaviMenu from 'components/molecules/Menu'
 
 const Header = styled.header`
   background-color: ${props => props.theme.main};
-  padding: 1rem;
-  position: sticky;
-  top: 0;
+  padding: 0.5rem 0;
   z-index: 1;
 `
 
