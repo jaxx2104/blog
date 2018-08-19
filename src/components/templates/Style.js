@@ -34,7 +34,7 @@ const GlobalStyles = injectGlobal`
     }
 
     p {
-      font-weight: 100;
+      font-weight: 400;
       margin: 1.5rem 0;
       line-height: 2;
     }
