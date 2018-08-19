@@ -30,7 +30,6 @@ const Article = ({ data, options }) => {
         categories={[category]}
         tags={tags}
       />
-      {getAd(isIndex, adsense)}
       <div className="content">
         <p>{description}</p>
         {sizes ? <Img sizes={sizes} /> : ''}

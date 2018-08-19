@@ -1,23 +1,24 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import Animate from 'components/molecules/Animate'
 import React from 'react'
 import styled from 'styled-components'
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import fontawesome from '@fortawesome/fontawesome'
 
-import faHtml5 from '@fortawesome/fontawesome-free-brands/faHtml5'
-import faNode from '@fortawesome/fontawesome-free-brands/faNode'
-import faPhp from '@fortawesome/fontawesome-free-brands/faPhp'
-import faJs from '@fortawesome/fontawesome-free-brands/faJs'
-import faAws from '@fortawesome/fontawesome-free-brands/faAws'
-import faVuejs from '@fortawesome/fontawesome-free-brands/faVuejs'
-import faReact from '@fortawesome/fontawesome-free-brands/faReact'
-import faTwitter from '@fortawesome/fontawesome-free-brands/faTwitter'
-import faFacebook from '@fortawesome/fontawesome-free-brands/faFacebook'
-import faGithub from '@fortawesome/fontawesome-free-brands/faGithub'
-import faApple from '@fortawesome/fontawesome-free-brands/faApple'
+import {
+  faApple,
+  faAws,
+  faFacebook,
+  faGithub,
+  faHtml5,
+  faJs,
+  faNode,
+  faPhp,
+  faReact,
+  faTwitter,
+  faVuejs,
+} from '@fortawesome/free-brands-svg-icons'
 
-import Animate from 'components/molecules/Animate'
-
-fontawesome.library.add(
+library.add(
   faAws,
   faApple,
   faPhp,
