@@ -11,6 +11,7 @@ const PostTemplate = ({ data }) => (
     <Layout>
       <Meta
         title={get(data, 'post.frontmatter.title')}
+        image={get(data, 'post.frontmatter.image.childImageSharp.sizes.src')}
         site={get(data, 'site.meta')}
       />
       <Article
@@ -49,9 +50,12 @@ export const pageQuery = graphql`
         tags
         description
         date(formatString: "YYYY/MM/DD")
+        test: image {
+          relativePath
+        }
         image {
           childImageSharp {
-            sizes(quality: 100) {
+            sizes(quality: 70) {
               ...GatsbyImageSharpSizes_withWebp
             }
           }
