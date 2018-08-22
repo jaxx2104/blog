@@ -2,11 +2,11 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
 
-const Meta = ({ site, title, image }) => {
-  console.log(image)
+const Meta = ({ site, title, image, path = '' }) => {
+  const siteUrl = get(site, 'url')
   const siteTitle = get(site, 'title')
   title = title ? `${title} | ${siteTitle}` : siteTitle
-  image = image || `${get(site, 'siteUrl')}/img/profile.jpg`
+  image = image || `${siteUrl}/img/back.jpeg`
   return (
     <Helmet
       title={title}
@@ -24,7 +24,7 @@ const Meta = ({ site, title, image }) => {
         },
         {
           property: 'og:url',
-          content: `${get(site, 'siteUrl')}/profile`,
+          content: `${siteUrl}${path}`,
         },
         {
           property: 'og:image',
