@@ -91,7 +91,8 @@ const FeatureSection = ({ detector }) => (
       <Wrap>
         <Display uppercase>Features</Display>
         <Lead>
-          I'm a front-end engineer in Japan 🗼<br />
+          I'm a front-end engineer in Japan 🗼
+          <br />
           Used to be a designer of furniture and architecture.
           <li>2013 ~ 2017: J-CAST News</li>
           <li>2017 ~ : Recruit Lifestyle</li>
@@ -174,7 +175,8 @@ const DegreeSection = ({ back }) => (
       <Wrap>
         <Display>Degree Works</Display>
         <Lead>
-          過去のデザイン制作は<a href="https://old.jaxx2104.info/">こちら</a>
+          過去のデザイン制作は
+          <a href="https://old.jaxx2104.info/">こちら</a>
         </Lead>
       </Wrap>
     </Container>
@@ -204,63 +206,63 @@ export const query = graphql`
   query ProfilePageQuery {
     yomu: file(name: { eq: "yomu" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     detector: file(name: { eq: "detector" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     profile: file(name: { eq: "profile" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     mockup1: file(name: { eq: "mockup1" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     mockup2: file(name: { eq: "mockup2" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     mockup3: file(name: { eq: "mockup3" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     work1: file(name: { eq: "work1" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     work2: file(name: { eq: "work2" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
     }
     back: file(name: { eq: "back" }) {
       childImageSharp {
-        sizes(quality: 100) {
+        sizes(quality: 70) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
