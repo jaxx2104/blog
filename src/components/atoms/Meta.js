@@ -2,11 +2,11 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
 
-const Meta = ({ site, title, image, path = '' }) => {
+const Meta = ({ image, path = '', site, title }) => {
   const siteUrl = get(site, 'url')
   const siteTitle = get(site, 'title')
   title = title ? `${title} | ${siteTitle}` : siteTitle
-  image = image || `${siteUrl}/img/back.jpeg`
+  image = image ? `${siteUrl}${image}` : `${siteUrl}/img/back.jpeg`
   return (
     <Helmet
       title={title}
