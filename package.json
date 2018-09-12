@@ -37,7 +37,7 @@
     "@fortawesome/react-fontawesome": "0.1.2",
     "animate.css": "3.7.0",
     "babel-eslint": "8.2.6",
-    "babel-plugin-styled-components": "1.5.1",
+    "babel-plugin-styled-components": "1.7.1",
     "emergence.js": "1.1.2",
     "eslint": "5.4.0",
     "eslint-config-prettier": "3.0.1",
