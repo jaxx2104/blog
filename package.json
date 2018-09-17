@@ -17,7 +17,7 @@
     "gatsby-plugin-preact": "next",
     "gatsby-plugin-react-helmet": "^3.0.0-beta.1",
     "gatsby-plugin-react-next": "^2.0.1-13",
-    "gatsby-plugin-sharp": "2.0.0-beta.1",
+    "gatsby-plugin-sharp": "2.0.5",
     "gatsby-plugin-sitemap": "^2.0.0-beta.1",
     "gatsby-plugin-styled-components": "^3.0.0-beta.1",
     "gatsby-plugin-twitter": "^2.0.0-beta.1",
