@@ -1,21 +1,12 @@
 import styled from 'styled-components'
 
 const Heading = styled.h1`
-  color: ${props =>
-    props.white ? 'white' : props.primary ? props.theme.main : props.theme.sub};
-  font-size: 1.2rem;
-  font-weight: 800;
-  line-height: 1.4;
+  color: ${props => props.theme.main};
   padding: 0;
-  text-decoration: none;
-  text-transform: ${props => (props.uppercase ? 'uppercase' : 'none')};
+  font-size: 1.5rem;
+
   :hover {
-    color: ${props =>
-      props.white
-        ? 'white'
-        : props.primary
-          ? props.theme.sub
-          : props.theme.main};
+    color: ${props => props.theme.sub};
     transition: all 0.4s;
   }
 `

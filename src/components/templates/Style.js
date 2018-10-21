@@ -6,7 +6,10 @@ import 'font-awesome/css/font-awesome.css'
 import { injectGlobal } from 'styled-components'
 
 const GlobalStyles = injectGlobal`
+  @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+
   body {
+    font-family: 'Noto Sans JP', 'M PLUS Rounded 1c', sans-serif !important;
     -webkit-font-smoothing: antialiased;
   }
 
