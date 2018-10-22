@@ -7,9 +7,8 @@ import Badges from 'components/atoms/Badges'
 import Time from 'components/atoms/Time'
 
 const InfoWrap = styled.div`
-  border-bottom: 1px solid #e9ecef;
   margin: 2rem 0;
-  padding: 1rem;
+  padding: 0 1rem;
   word-break: break-word;
 `
 

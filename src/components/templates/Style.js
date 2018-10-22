@@ -3,27 +3,30 @@ import 'animate.css/animate.css'
 import 'prismjs/themes/prism-okaidia.css'
 import 'font-awesome/css/font-awesome.css'
 
-import { injectGlobal } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
-const GlobalStyles = injectGlobal`
-  @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+const GlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900');
 
   body {
-    font-family: 'Noto Sans JP', 'M PLUS Rounded 1c', sans-serif !important;
     -webkit-font-smoothing: antialiased;
+    color: #4a5960;
+    font-family: 'Noto Sans JP', sans-serif!important;
+    font-weight: 400;
+    text-size-adjust: 100%;
   }
 
   a {
-    color: #333;
-    font-weight: 700;
+    color: ${props => props.theme.main};
+    font-weight: 100;
   }
 
   .content {
     color: #495057;
-    line-height: 2;
     margin: 1rem;
     padding: 0;
     font-size: 1rem;
+    line-height: 2;
 
     h1,
     h2,
@@ -34,12 +37,14 @@ const GlobalStyles = injectGlobal`
       font-size: 1.4rem;
       font-weight: 700;
       margin: 2rem 0 1rem;
+      line-height: 1;
+      letter-spacing: -0.025rem;
+      font-feature-settings: 'liga' 1;
     }
 
     p {
       font-weight: 400;
       margin: 1.5rem 0;
-      line-height: 2;
     }
 
     blockquote {
