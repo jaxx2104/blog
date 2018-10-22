@@ -8,10 +8,11 @@ const MenuWrap = styled.div`
 `
 
 const MenuItem = styled.p`
-  color: pink;
+  color: ${props => props.theme.sub};
   padding: 0 0.5rem;
+
   :hover {
-    color: white;
+    color: ${props => props.theme.main};
     animation: 1s;
   }
 `
