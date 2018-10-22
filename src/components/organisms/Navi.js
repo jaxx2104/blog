@@ -9,8 +9,7 @@ import NaviMenu from 'components/molecules/Menu'
 const Header = styled.header`
   padding: 0.5rem 0;
   z-index: 1;
-  border-bottom: 1px solid #e9ecef;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(216, 27, 96, 0.9);
   position: sticky;
   top: 0;
 `
