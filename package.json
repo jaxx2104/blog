@@ -55,7 +55,7 @@
     "react-dom": "16.5.2",
     "react-helmet": "5.2.0",
     "react-lazyload": "2.3.0",
-    "styled-components": "4.0.2",
+    "styled-components": "4.0.3",
     "textlint": "11.0.1",
     "textlint-rule-preset-ja-spacing": "2.0.1",
     "textlint-rule-preset-japanese": "4.0.0"
