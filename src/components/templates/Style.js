@@ -44,7 +44,7 @@ const GlobalStyles = createGlobalStyle`
 
     p {
       font-weight: 400;
-      margin: 1.5rem 0;
+      margin: 2rem 0;
     }
 
     blockquote {
@@ -58,6 +58,10 @@ const GlobalStyles = createGlobalStyle`
         display: block;
         word-break: break-word;
       }
+    }
+
+    img {
+      width: 100%;
     }
   }
 `

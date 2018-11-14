@@ -186,7 +186,7 @@ Backbone.js SPA をリプレイスした話
 
 - Backbone.js に Vue コンポーネントを渡す
 - Backbone.js のモデルを Vuex に渡す
-- jQuery ライブラリと Vue の連携（$ref）
+- jQuery ライブラリと Vue の連携（\$ref）
 
 **_「リプレイスというよりは使える資産はそのまま追加スタックによる移行」_**
 
