@@ -6,14 +6,6 @@ import Flex from 'components/molecules/Flex'
 import NaviLogo from 'components/molecules/Logo'
 import NaviMenu from 'components/molecules/Menu'
 
-const Header = styled.header`
-  padding: 0.5rem 0;
-  z-index: 1;
-  background-color: rgba(216, 27, 96, 0.9);
-  position: sticky;
-  top: 0;
-`
-
 const Navi = ({ title }) => (
   <Header>
     <Container>
@@ -26,3 +18,11 @@ const Navi = ({ title }) => (
 )
 
 export default Navi
+
+const Header = styled.header`
+  background-color: rgba(216, 27, 96, 0.9);
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+`

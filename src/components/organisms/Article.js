@@ -20,7 +20,7 @@ const Article = ({ data, options }) => {
   const { isIndex, adsense } = options
   const html = data.html
   const isMore = isIndex && !!html.match('<!--more-->')
-  const sizes = get(image, 'childImageSharp.sizes')
+  const fluid = get(image, 'childImageSharp.fluid')
   return (
     <Container>
       <PostInfo
@@ -32,7 +32,7 @@ const Article = ({ data, options }) => {
       />
       <div className="content">
         <p>{description}</p>
-        {sizes ? <Img sizes={sizes} /> : ''}
+        {fluid ? <Img fluid={fluid} /> : ''}
       </div>
       <div
         className="content"

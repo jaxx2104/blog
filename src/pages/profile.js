@@ -43,7 +43,7 @@ const UserSection = ({ profile }) => (
   <Section center>
     <Container>
       <Tumbnail
-        sizes={get(profile, 'childImageSharp.sizes')}
+        fluid={get(profile, 'childImageSharp.fluid')}
         title="jaxx2104"
         circle
         size={140}
@@ -86,7 +86,7 @@ const SkillSection = () => (
 
 const FeatureSection = ({ detector }) => (
   <Section dark nospan>
-    <Cover sizes={get(detector, 'childImageSharp.sizes')} />
+    <Cover fluid={get(detector, 'childImageSharp.fluid')} />
     <Container>
       <Wrap>
         <Display uppercase>Features</Display>
@@ -109,21 +109,21 @@ const WorkSection = ({ mockup1, mockup2, mockup3 }) => (
       <Flex center>
         <Anchor href="https://yomu.jaxx2104.info/">
           <SlideImage
-            sizes={get(mockup1, 'childImageSharp.sizes')}
+            fluid={get(mockup1, 'childImageSharp.fluid')}
             title="Yomu(PWA)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://gatstrap.netlify.com/">
           <SlideImage
-            sizes={get(mockup3, 'childImageSharp.sizes')}
+            fluid={get(mockup3, 'childImageSharp.fluid')}
             title="Gatstrap(Web)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://nikuman.jaxx2104.info/">
           <SlideImage
-            sizes={get(mockup2, 'childImageSharp.sizes')}
+            fluid={get(mockup2, 'childImageSharp.fluid')}
             title="Nikuman(Web)"
             animation="fadeIn"
           />
@@ -139,14 +139,14 @@ const WorkSpSection = ({ work1, work2 }) => (
       <Flex center>
         <Anchor href="https://itunes.apple.com/jp/app/yomu-rss-reader/id924321598">
           <SlideImage
-            sizes={get(work1, 'childImageSharp.sizes')}
+            fluid={get(work1, 'childImageSharp.fluid')}
             title="Yomu(iOS)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://itunes.apple.com/jp/app/detector-live-filter-camera/id1079950455">
           <SlideImage
-            sizes={get(work2, 'childImageSharp.sizes')}
+            fluid={get(work2, 'childImageSharp.fluid')}
             title="Detector(iOS)"
             animation="fadeIn"
           />
@@ -170,7 +170,7 @@ const RepoSection = () => (
 
 const DegreeSection = ({ back }) => (
   <Section dark nospan>
-    <Cover sizes={get(back, 'childImageSharp.sizes')} />
+    <Cover fluid={get(back, 'childImageSharp.fluid')} />
     <Container>
       <Wrap>
         <Display>Degree Works</Display>
@@ -206,64 +206,64 @@ export const query = graphql`
   query ProfilePageQuery {
     yomu: file(name: { eq: "yomu" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     detector: file(name: { eq: "detector" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     profile: file(name: { eq: "profile" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     mockup1: file(name: { eq: "mockup1" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     mockup2: file(name: { eq: "mockup2" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     mockup3: file(name: { eq: "mockup3" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     work1: file(name: { eq: "work1" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     work2: file(name: { eq: "work2" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     back: file(name: { eq: "back" }) {
       childImageSharp {
-        sizes(quality: 70) {
-          ...GatsbyImageSharpSizes_withWebp
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

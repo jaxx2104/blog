@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const DateTime = styled.time`
+const Time = ({ date }) => <TimeWrap dateTime={date}>{date}</TimeWrap>
+
+export default Time
+
+const TimeWrap = styled.time`
   color: #adb5bd;
   display: inline;
   font-size: 0.75rem;
@@ -11,7 +15,3 @@ const DateTime = styled.time`
   text-align: center;
   vertical-align: baseline;
 `
-
-const Time = ({ date }) => <DateTime dateTime={date}>{date}</DateTime>
-
-export default Time

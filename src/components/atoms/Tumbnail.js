@@ -6,24 +6,13 @@ import styled from 'styled-components'
 /* global __PATH_PREFIX__ */
 const pathPrefix = process.env.NODE_ENV === 'development' ? '' : __PATH_PREFIX__
 
-const Image = styled(Img)`
-  border-radius: ${props => (props.circle ? 50 : 0)}%;
-  margin: auto;
-  width: ${props => props.size || 120}px;
-`
-
-const Tumb = styled.img`
-  border-radius: ${props => (props.circle ? 50 : 0)}%;
-  width: ${props => props.size || 120}px;
-`
-
-const Tumbnail = ({ src, title, circle, size, sizes }) => {
-  return sizes ? (
+const Tumbnail = ({ src, title, circle, size, fluid }) =>
+  fluid ? (
     <Image
       alt={title}
       circle={circle}
       size={size}
-      sizes={sizes}
+      fluid={fluid}
       title={title}
     />
   ) : (
@@ -35,5 +24,16 @@ const Tumbnail = ({ src, title, circle, size, sizes }) => {
       title={title}
     />
   )
-}
+
 export default Tumbnail
+
+const Image = styled(Img)`
+  border-radius: ${props => (props.circle ? 50 : 0)}%;
+  margin: auto;
+  width: ${props => props.size || 120}px;
+`
+
+const Tumb = styled.img`
+  border-radius: ${props => (props.circle ? 50 : 0)}%;
+  width: ${props => props.size || 120}px;
+`

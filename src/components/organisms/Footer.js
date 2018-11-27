@@ -5,10 +5,6 @@ import styled from 'styled-components'
 import Hr from 'components/atoms/Hr'
 import Container from 'components/molecules/Container'
 
-const Wrap = styled.div`
-  padding: 2rem;
-`
-
 const Footer = ({ author }) => (
   <Container>
     <Wrap>
@@ -24,3 +20,7 @@ const Footer = ({ author }) => (
 )
 
 export default Footer
+
+const Wrap = styled.div`
+  padding: 2rem;
+`

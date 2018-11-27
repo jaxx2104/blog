@@ -3,6 +3,13 @@ import styled, { keyframes } from 'styled-components'
 
 import Icon from 'components/atoms/Icon'
 
+const Box = ({ label, icon }) => (
+  <BoxWrap title={label}>
+    <Icon name={icon} />
+  </BoxWrap>
+)
+export default Box
+
 const move = keyframes`
   0% {
     transform: translateY(0);
@@ -26,10 +33,3 @@ const BoxWrap = styled.div`
     animation: ${move} 0.3s linear;
   }
 `
-
-const Box = ({ label, icon }) => (
-  <BoxWrap title={label}>
-    <Icon name={icon} />
-  </BoxWrap>
-)
-export default Box

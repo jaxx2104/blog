@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: ${props => props.theme.main};
     font-weight: 100;
+    text-decoration: 'none'
   }
 
   .content {
