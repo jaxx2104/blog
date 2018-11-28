@@ -5,9 +5,10 @@ import get from 'lodash/get'
 import Button from 'components/atoms/Button'
 import Adsense from 'components/molecules/Adsense'
 import Container from 'components/molecules/Container'
+import Share from 'components/molecules/Share'
 import PostInfo from 'components/organisms/Info'
 
-const Article = ({ data, options }) => {
+const Article = ({ data, site, options }) => {
   const {
     category,
     tags,
@@ -43,15 +44,23 @@ const Article = ({ data, options }) => {
       <div className="content">
         {isMore ? <Button path={path} label="MORE" primary /> : ''}
       </div>
-      {getAd(isIndex, adsense)}
+      <ShareSection
+        isIndex={isIndex}
+        url={`${site.url}${path}`}
+        title={title}
+      />
+      <AdSection isIndex={isIndex} adsense={adsense} />
     </Container>
   )
 }
 
 export default Article
 
-const getAd = (isIndex, adsense) => {
+const AdSection = ({ isIndex, adsense }) => {
   return !isIndex ? <Adsense clientId={adsense} slotId="" format="auto" /> : ''
+}
+const ShareSection = ({ isIndex, url, title }) => {
+  return !isIndex ? <Share url={url} title={title} /> : ''
 }
 
 const getDescription = body => {

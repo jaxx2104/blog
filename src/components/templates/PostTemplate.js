@@ -17,6 +17,7 @@ const PostTemplate = ({ data }) => (
       />
       <Article
         data={get(data, 'post')}
+        site={get(data, 'site.meta')}
         options={{
           isIndex: false,
           adsense: get(data, 'site.meta.adsense'),
