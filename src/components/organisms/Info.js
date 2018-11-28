@@ -6,12 +6,6 @@ import Heading from 'components/atoms/Heading'
 import Badges from 'components/atoms/Badges'
 import Time from 'components/atoms/Time'
 
-const InfoWrap = styled.div`
-  margin: 2rem 0;
-  padding: 0 1rem;
-  word-break: break-word;
-`
-
 const Info = ({ path, title, date, categories, tags }) => (
   <InfoWrap>
     <Link style={{ textDecoration: 'none' }} to={path}>
@@ -24,3 +18,9 @@ const Info = ({ path, title, date, categories, tags }) => (
 )
 
 export default Info
+
+const InfoWrap = styled.div`
+  margin: 2rem 0;
+  padding: 0 1rem;
+  word-break: break-word;
+`

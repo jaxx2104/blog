@@ -32,13 +32,6 @@ library.add(
   faNode
 )
 
-const I = styled.i`
-  display: block;
-  font-size: ${props => props.size || 4.2}rem;
-  padding: 0.4rem;
-  text-align: center;
-`
-
 const Icon = ({ name, size }) => (
   <Animate animation="fadeIn" data-emergence="visible">
     <I size={size}>
@@ -48,3 +41,10 @@ const Icon = ({ name, size }) => (
 )
 
 export default Icon
+
+const I = styled.i`
+  display: block;
+  font-size: ${props => props.size || 4.2}rem;
+  padding: 0.4rem;
+  text-align: center;
+`

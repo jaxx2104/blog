@@ -8,17 +8,12 @@ import Layout from 'components/templates/Layout'
 
 const BlogIndex = ({ data }) => {
   const posts = get(data, 'remark.posts')
+  const site = get(data, 'site.meta')
   return (
     <Layout>
-      <Meta site={get(data, 'site.meta')} />
+      <Meta site={site} />
       {posts.map(({ post }, i) => (
-        <Article
-          data={post}
-          options={{
-            isIndex: true,
-          }}
-          key={i}
-        />
+        <Article data={post} site={site} options={{ isIndex: true }} key={i} />
       ))}
     </Layout>
   )
@@ -54,8 +49,8 @@ export const pageQuery = graphql`
             date(formatString: "YYYY/MM/DD")
             image {
               childImageSharp {
-                sizes(quality: 70) {
-                  ...GatsbyImageSharpSizes_withWebp
+                fluid(maxWidth: 700) {
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
             }
