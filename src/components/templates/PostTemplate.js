@@ -16,7 +16,8 @@ const PostTemplate = ({ data }) => (
         title={get(data, 'post.frontmatter.title')}
       />
       <Article
-        data={get(data, 'post')}
+        frontmatter={get(data, 'post.frontmatter')}
+        html={get(data, 'post.html')}
         site={get(data, 'site.meta')}
         options={{
           isIndex: false,
@@ -56,6 +57,9 @@ export const pageQuery = graphql`
           childImageSharp {
             fluid(maxWidth: 700) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+            sizes {
+              src
             }
           }
         }

@@ -45,7 +45,7 @@ const GlobalStyles = createGlobalStyle`
 
     p {
       font-weight: 400;
-      margin: 2rem 0;
+      margin: 1.75rem 0;
     }
 
     blockquote {
@@ -54,6 +54,10 @@ const GlobalStyles = createGlobalStyle`
       color: ${props => props.theme.sub};
       padding: 0.25em 1.5em;
       margin: 0;
+
+      p {
+        margin: 1rem 0;
+      }
 
       a {
         display: block;
