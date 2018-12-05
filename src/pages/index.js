@@ -13,7 +13,13 @@ const BlogIndex = ({ data }) => {
     <Layout>
       <Meta site={site} />
       {posts.map(({ post }, i) => (
-        <Article data={post} site={site} options={{ isIndex: true }} key={i} />
+        <Article
+          key={i}
+          frontmatter={get(post, 'frontmatter')}
+          html={get(post, 'html')}
+          site={site}
+          options={{ isIndex: true }}
+        />
       ))}
     </Layout>
   )

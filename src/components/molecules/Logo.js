@@ -14,7 +14,7 @@ const LogoWrap = styled.h1`
   @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
   color: white;
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Permanent Marker';
   font-feature-settings: 'liga' 1;
   font-size: 1.5rem;
   font-style: italic;

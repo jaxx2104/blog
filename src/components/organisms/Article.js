@@ -8,31 +8,21 @@ import Container from 'components/molecules/Container'
 import Share from 'components/molecules/Share'
 import PostInfo from 'components/organisms/Info'
 
-const Article = ({ data, site, options }) => {
-  const {
-    category,
-    tags,
-    description,
-    title,
-    path,
-    date,
-    image,
-  } = data.frontmatter
+const Article = ({ frontmatter, html, site, options }) => {
   const { isIndex, adsense } = options
-  const html = data.html
   const isMore = isIndex && !!html.match('<!--more-->')
-  const fluid = get(image, 'childImageSharp.fluid')
+  const fluid = get(frontmatter.image, 'childImageSharp.fluid')
   return (
     <Container>
       <PostInfo
-        path={path}
-        title={title}
-        date={date}
-        categories={[category]}
-        tags={tags}
+        path={frontmatter.path}
+        title={frontmatter.title}
+        date={frontmatter.date}
+        categories={[frontmatter.category]}
+        tags={frontmatter.tags}
       />
       <div className="content">
-        <p>{description}</p>
+        <p>{frontmatter.description}</p>
         {fluid ? <Img fluid={fluid} /> : ''}
       </div>
       <div
@@ -42,12 +32,12 @@ const Article = ({ data, site, options }) => {
         }}
       />
       <div className="content">
-        {isMore ? <Button path={path} label="MORE" primary /> : ''}
+        {isMore ? <Button path={frontmatter.path} label="MORE" primary /> : ''}
       </div>
       <ShareSection
         isIndex={isIndex}
-        url={`${site.url}${path}`}
-        title={title}
+        url={`${site.url}${frontmatter.path}`}
+        title={frontmatter.title}
       />
       <AdSection isIndex={isIndex} adsense={adsense} />
     </Container>
