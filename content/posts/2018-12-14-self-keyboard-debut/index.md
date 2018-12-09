@@ -13,25 +13,30 @@ tags:
   - keycaps
 ---
 
-## 対象となる人
+ここ 1,2 ヶ月で興味を持ち始めて自作キーボードデビューしました！
 
-- 自作キーボードに興味があり始めてみたい人
-- パーツがいろいろあってわからない人
-- 電子工作が苦手な人
+沼にハマってからは、会社にキーボードの Slack チャンネルを作り、テックブログにも記事を書きました。
+この短期間でかなり下調べしたつもりですが、誤りがあった場合は優しく指摘してもらえればと思います 🙏
+
+この手順書は自作キーボードに興味があるけど、自分と同じようにパーツや用語いろいろあってわからないという人向けに書いたものです。
 
 ## 概要
+
+まずは以下の手順でパーツを選ぶとスムーズです。
 
 - キーボードの基盤（PCB）を選ぼう
 - キーボードのプレートとケースを選ぼう
 - キースイッチを選ぼう
 - キーキャップを選ぼう
 
+<!--more-->
+
 ## キーボードの基盤（PCB）を選ぼう
 
 まずはキーボードのベースとなる基盤から決めましょう。
-選定基準はキー数と配列、はんだ付けの有無の観点から決めると良いと思います。
+選定基準はキー数と配列、はんだ付けの有無から決めると良いと思います。
 
-### キー数と配列
+**キー数と配列**
 
 - 100%: フルサイズキーボード
 - 87%, 80%: テンキーレスキーボード
@@ -39,15 +44,15 @@ tags:
 - 40%: ミニマムキーボード
 - 20%: テンキー
 
-以下の記事で実際の写真とあわせて解説してくれているので見るとわかりやすいです。
-https://www.keyboardco.com/blog/index.php/2017/08/full-size-tkl-60-and-more-a-guide-to-mechanical-keyboard-sizes/
-
 他にも格子配列や分離型などの変わった形をしたキーボードもカッコいいのでチェックすると良いと思います。
+以下の記事で実際の写真付きで解説してくれているので見るとわかりやすいです。
 
-個人的には 60% キーボードのパーツが多く出回っているので、
-強いこだわりがない場合は、こちらを購入するのが良いと思います。
+> Full-size, TKL, 60% and more: a guide to mechanical keyboard sizes
+> https://www.keyboardco.com/blog/index.php/2017/08/full-size-tkl-60-and-more-a-guide-to-mechanical-keyboard-sizes/
 
-### はんだ付けの有無
+自分はパーツが多く出回っている 60% キーボードを購入しました。
+
+**はんだ付けの有無**
 
 自分も初心者ではんだ付けが苦手なんですが **Hotswap** と記載あるものだと、
 キースイッチを PCB にはんだ付けせず使う事ができるのでおすすめです。
@@ -61,17 +66,8 @@ https://www.keyboardco.com/blog/index.php/2017/08/full-size-tkl-60-and-more-a-gu
 ## キーボードのプレートとケースを選ぼう
 
 次に PCB を覆うケースとプレートを決めます。PCB と互換性があるものを選ぶ必要があります。
-なので色と素材程度しか選択肢がないと思うので好みで決めましょう（互換性は Raddit などで言及されていたりします）
-
-ケース
-
-> Mechanical keyboard anode aluminum case 60%
-> https://kbdfans.cn/collections/60-layout-case/products/mechanical-keyboard-shell-anode-aluminum-shell-gh60-poker-60-mechanical-keyboard-shell?variant=36017578253
-
-プレート
-
-> DZ60 CNC (ALUMINUM/STEEL/BRASS) PLATE
-> https://kbdfans.cn/collections/keyboard-part/products/dz60-cnc-aluminum-plate
+なので色と素材程度しか選択肢がないと思うので好みで決めましょう。  
+（互換性は Raddit などでも話させれているので調べてみましょう）
 
 ## キースイッチを選ぼう
 
@@ -80,29 +76,40 @@ https://www.keyboardco.com/blog/index.php/2017/08/full-size-tkl-60-and-more-a-gu
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_N7adWvQDM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Cherry MX と互換性のあるキーキャップで代表的なものは以下 3 つです。
+Cherry MX と互換性のあるキーキャップで代表的なものは Cherry MX、Kailh、Gateron などがあります。
+最近はキーストロークの浅いロープロファイルなキースイッチもあるので、気になる人はそちらもチェックすると良いと思います。
 
-- Cherry MX
-- kailh
-- Gateron
+> Kailh ロープロファイルスイッチ、遂に触ったぞ！
+> http://romly.com/archives/2018/02/kailh_lowprofile_switch.html
 
-自分は Gateron の Red Silent を買いました。
+自分は Gateron の Red Silent と Cherry MX の Blue を買いました。
+次はロープロファイルスイッチも買ってみたいですね。
 
 ## キーキャップを選ぼう
 
+**素材**
+
+キーキャップに用いられる素材としては、木材、金属などもあるが、ほとんどは樹脂製で、多くは ABS 樹脂、または、 PBT (ポリブチレンテレフタレート) の何れかが用いられている。
+
+**プロファイル**
+
 ![keycaps](./keycaps.png)
 
-https://www.massdrop.com/talk/887/xda-keycaps-a-new-keycap-profile
+- CHERRY: 背は低め段差あり。ドイツの GMK 社製で値段は高いが高級感がある。
+- SA: 背は高く段差あり。アメリカの Signature Plastics 社製だが中国でクローンが出回っていてレトロ感がある。
+- DSA: 背は低く段差なし。アメリカの Signature Plastics 社製だが中国でクローンが出回っていて安い。
+- XDA: 背は低く段差なし。中国製の新しめのプロファイル。DSA を丸っこくしたかわいい形状。
+- MDA(MIX): 背は低く段差あり。中国製の新しめのプロファイル。XDA に段差を設けた形状。
 
-https://kbdfans.cn/collections/keyboard-part/products/pcb-stabilizers-black-color
+他にも無刻印、印字方法、バックライト透過などがあるので探してみてください。
+実際に組み立てるまで似合うものか分からないので、最初はクローン製品で安いものを試すのがおすすめです。
 
-## キー配列を変えよう
-
-http://www.keyboard-layout-editor.com
+個人的には XDA、MDA の形状が丸っこく自作キーボード感があって好みです。
 
 ## おわりに
 
-組み立て
+以上です。興味がある人は実際に自作キーボードを作ってみてはどうでしょうか。
+最後に自分のキーボードの写真を貼って終わりたいと思います 🙋
 
 ![](./DSC03715.jpg)
 
