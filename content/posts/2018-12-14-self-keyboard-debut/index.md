@@ -89,14 +89,15 @@ Cherry MX と互換性のあるキーキャップで代表的なものは Cherry
 
 **素材**
 
-キーキャップに用いられる素材としては、木材、金属などもあるが、ほとんどは樹脂製で、多くは ABS 樹脂、または、 PBT (ポリブチレンテレフタレート) の何れかが用いられている。
+キーキャップの素材についてはほとんどが樹脂製で、ABS、PBT のどちらかであることが多いです。
+個人的に素材よりは、後述のプロファイルで決めるがいいと思います。
 
 **プロファイル**
 
 ![keycaps](./keycaps.png)
 
 - CHERRY: 背は低め段差あり。ドイツの GMK 社製で値段は高いが高級感がある。
-- SA: 背は高く段差あり。アメリカの Signature Plastics 社製だが中国でクローンが出回っていてレトロ感がある。
+- SA: 背は高く段差あり。アメリカの Signature Plastics 社製だが中国でクローンが出回っている。レトロ感がある。
 - DSA: 背は低く段差なし。アメリカの Signature Plastics 社製だが中国でクローンが出回っていて安い。
 - XDA: 背は低く段差なし。中国製の新しめのプロファイル。DSA を丸っこくしたかわいい形状。
 - MDA(MIX): 背は低く段差あり。中国製の新しめのプロファイル。XDA に段差を設けた形状。
@@ -105,6 +106,13 @@ Cherry MX と互換性のあるキーキャップで代表的なものは Cherry
 実際に組み立てるまで似合うものか分からないので、最初はクローン製品で安いものを試すのがおすすめです。
 
 個人的には XDA、MDA の形状が丸っこく自作キーボード感があって好みです。
+
+## 組み立てよう
+
+YouTube にある動画を見ながら組み立てるとわかりやすい思います。
+自分はららぽんさんの動画を見て組みました。
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nk5DdSI1zNg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## おわりに
 
