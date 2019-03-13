@@ -26,9 +26,11 @@ const move = keyframes`
 const BoxWrap = styled.div`
   width: 25%;
   padding: 2rem 0;
+
   @media (max-width: 700px) {
     width: 50%;
   }
+
   :hover {
     animation: ${move} 0.3s linear;
   }

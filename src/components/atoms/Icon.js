@@ -44,7 +44,7 @@ export default Icon
 
 const I = styled.i`
   display: block;
-  font-size: ${props => props.size || 4.2}rem;
+  font-size: ${props => props.size || 3}rem;
   padding: 0.4rem;
   text-align: center;
 `

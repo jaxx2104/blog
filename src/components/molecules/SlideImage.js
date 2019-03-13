@@ -7,7 +7,7 @@ import Animate from 'components/molecules/Animate'
 const SlideImage = ({ fluid, src, title, animation }) => {
   return (
     <Animate animation={animation} data-emergence="hidden">
-      <Tumbnail fluid={fluid} src={src} title={title} size="320" />
+      <Tumbnail fluid={fluid} src={src} title={title} size="200" />
       <Capture>{title}</Capture>
     </Animate>
   )
@@ -15,7 +15,8 @@ const SlideImage = ({ fluid, src, title, animation }) => {
 export default SlideImage
 
 const Capture = styled.p`
-  font-size: 1rem;
+  font-size: 0.6rem;
   font-weight: 900;
   font-family: 'Courier New', Courier, monospace;
+  text-align: center;
 `

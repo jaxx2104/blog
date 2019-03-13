@@ -18,6 +18,7 @@ const LogoWrap = styled.h1`
   font-feature-settings: 'liga' 1;
   font-size: 1.5rem;
   font-style: italic;
+  font-weight: 800;
   letter-spacing: -0.05rem;
   line-height: 0.5;
   padding: 0 1rem;

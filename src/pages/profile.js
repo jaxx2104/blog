@@ -18,27 +18,6 @@ import Icon from 'components/atoms/Icon'
 import Layout from 'components/templates/Layout'
 import Hr from 'components/atoms/Hr'
 
-const Anchor = styled.a`
-  text-decoration: none;
-`
-
-const Wrap = styled.div`
-  max-width: 780px;
-  position: absolute;
-  top: 2rem;
-  line-height: 150%;
-`
-
-const Cover = styled(Img)`
-  height: 50vh;
-  width: 100%;
-  opacity: 0.6;
-  & > img {
-    object-fit: cover !important;
-    object-position: 0% 50% !important;
-  }
-`
-
 const UserSection = ({ profile }) => (
   <Section center>
     <Container>
@@ -49,7 +28,9 @@ const UserSection = ({ profile }) => (
         size={140}
       />
       <Display size="2">jaxx2104</Display>
-      <p>Front-end engineer.</p>
+      <p> I'm a front-end engineer in Japan 🗼</p>
+      <li>2013 ~ 2017: J-CAST News</li>
+      <li>2017 ~ : Recruit Lifestyle</li>
       <Hr />
       <Flex center>
         <Anchor href="https://www.facebook.com/futoshi.iwashita">
@@ -66,8 +47,9 @@ const UserSection = ({ profile }) => (
   </Section>
 )
 
-const SkillSection = () => (
-  <Section primary>
+const SkillSection = ({ detector }) => (
+  <Section dark>
+    <Cover fluid={get(detector, 'childImageSharp.fluid')} />
     <Container>
       <Display uppercase>Skill</Display>
       <Flex center>
@@ -84,25 +66,7 @@ const SkillSection = () => (
   </Section>
 )
 
-const FeatureSection = ({ detector }) => (
-  <Section dark nospan>
-    <Cover fluid={get(detector, 'childImageSharp.fluid')} />
-    <Container>
-      <Wrap>
-        <Display uppercase>Features</Display>
-        <Lead>
-          I'm a front-end engineer in Japan 🗼
-          <br />
-          Used to be a designer of furniture and architecture.
-          <li>2013 ~ 2017: J-CAST News</li>
-          <li>2017 ~ : Recruit Lifestyle</li>
-        </Lead>
-      </Wrap>
-    </Container>
-  </Section>
-)
-
-const WorkSection = ({ mockup1, mockup2, mockup3 }) => (
+const WorkSection = ({ mockup1, mockup2, mockup3, work1, work2 }) => (
   <Section>
     <Container>
       <Display uppercase>Work</Display>
@@ -128,15 +92,6 @@ const WorkSection = ({ mockup1, mockup2, mockup3 }) => (
             animation="fadeIn"
           />
         </Anchor>
-      </Flex>
-    </Container>
-  </Section>
-)
-
-const WorkSpSection = ({ work1, work2 }) => (
-  <Section>
-    <Container>
-      <Flex center>
         <Anchor href="https://itunes.apple.com/jp/app/yomu-rss-reader/id924321598">
           <SlideImage
             fluid={get(work1, 'childImageSharp.fluid')}
@@ -156,29 +111,20 @@ const WorkSpSection = ({ work1, work2 }) => (
   </Section>
 )
 
-const RepoSection = () => (
-  <Section primary>
-    <Container>
-      <Display>Repositories</Display>
-      <Lead>
-        リポジトリは
-        <a href="https://github.com/jaxx2104/">こちら</a>
-      </Lead>
-    </Container>
-  </Section>
-)
-
 const DegreeSection = ({ back }) => (
-  <Section dark nospan>
+  <Section dark>
     <Cover fluid={get(back, 'childImageSharp.fluid')} />
     <Container>
-      <Wrap>
-        <Display>Degree Works</Display>
-        <Lead>
+      <Display>Others</Display>
+      <Lead>
+        <li>
+          リポジトリは<a href="https://github.com/jaxx2104/">こちら</a>
+        </li>
+        <li>
           過去のデザイン制作は
           <a href="https://old.jaxx2104.info/">こちら</a>
-        </Lead>
-      </Wrap>
+        </li>
+      </Lead>
     </Container>
   </Section>
 )
@@ -187,16 +133,15 @@ const Profile = ({ data }) => (
   <Layout>
     <Meta site={siteMetadata} title="Profile" />
     <UserSection profile={get(data, 'profile')} />
-    <SkillSection />
-    <FeatureSection detector={get(data, 'detector')} />
+    <SkillSection detector={data.detector} />
     <WorkSection
       mockup1={get(data, 'mockup1')}
       mockup2={get(data, 'mockup2')}
       mockup3={get(data, 'mockup3')}
+      work1={get(data, 'work1')}
+      work2={get(data, 'work2')}
     />
-    <WorkSpSection work1={get(data, 'work1')} work2={get(data, 'work2')} />
-    <RepoSection />
-    <DegreeSection back={get(data, 'back')} />
+    <DegreeSection back={data.back} />
   </Layout>
 )
 
@@ -227,35 +172,35 @@ export const query = graphql`
     }
     mockup1: file(name: { eq: "mockup1" }) {
       childImageSharp {
-        fluid(maxWidth: 700) {
+        fluid(maxWidth: 200) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     mockup2: file(name: { eq: "mockup2" }) {
       childImageSharp {
-        fluid(maxWidth: 700) {
+        fluid(maxWidth: 200) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     mockup3: file(name: { eq: "mockup3" }) {
       childImageSharp {
-        fluid(maxWidth: 700) {
+        fluid(maxWidth: 200) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     work1: file(name: { eq: "work1" }) {
       childImageSharp {
-        fluid(maxWidth: 700) {
+        fluid(maxWidth: 200) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
     work2: file(name: { eq: "work2" }) {
       childImageSharp {
-        fluid(maxWidth: 700) {
+        fluid(maxWidth: 200) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
@@ -267,5 +212,24 @@ export const query = graphql`
         }
       }
     }
+  }
+`
+
+const Anchor = styled.a`
+  text-decoration: none;
+`
+
+const Cover = styled(Img)`
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+
+  & > img {
+    position: absolute !important;
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
   }
 `
