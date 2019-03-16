@@ -1,28 +1,54 @@
+import { ThemeProvider } from 'styled-components'
 import emergence from 'emergence.js'
+import Helmet from 'react-helmet'
 import React from 'react'
 
-import { siteMetadata } from '../../../gatsby-config'
-import { ThemeProvider } from 'styled-components'
+import { siteMetadata } from '~/gatsby-config'
+import storage from 'plugins/storage'
+
+import { light, dark } from 'components/templates/Theme'
 import Footer from 'components/organisms/Footer'
-import GlobalStyle from './Style'
+import GlobalStyle from 'components/templates/Style'
 import Navi from 'components/organisms/Navi'
-import Theme from './Theme'
 
 class Layout extends React.Component {
-  componentDidMount() {
-    emergence.init()
+  constructor() {
+    super()
+    this.toggleTheme = this.toggleTheme.bind(this)
   }
 
-  componentDidUpdate() {
+  state = {
+    theme: true,
+  }
+
+  async componentWillMount() {
     emergence.init()
+
+    const theme = await storage.getItem('theme')
+    this.setState({ theme })
+  }
+
+  toggleTheme() {
+    const theme = !this.state.theme
+    storage.setItem('theme', theme)
+    this.setState({ theme })
   }
 
   render() {
     const { children } = this.props
     return (
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider theme={this.state.theme ? dark : light}>
         <div>
-          <Navi title={siteMetadata.title} {...this.props} />
+          <Helmet
+            bodyAttributes={{
+              class: this.state.theme ? 'dark' : 'light',
+            }}
+          />
+          <Navi
+            title={siteMetadata.title}
+            isDarkMode={this.state.theme}
+            onDarkMode={this.toggleTheme}
+          />
           {children}
           <Footer title={siteMetadata.title} author={siteMetadata.author} />
           <GlobalStyle />

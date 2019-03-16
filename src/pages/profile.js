@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
-import { siteMetadata } from '../../gatsby-config'
+import { siteMetadata } from '~/gatsby-config'
 import Meta from 'components/atoms/Meta'
 import Lead from 'components/atoms/Lead'
 import Display from 'components/atoms/Display'
@@ -27,7 +27,8 @@ const UserSection = ({ profile }) => (
         circle
         size={140}
       />
-      <Display size="2">jaxx2104</Display>
+      <Display>Futoshi Iwashita</Display>
+      <p> jaxx2104</p>
       <p> I'm a front-end engineer in Japan 🗼</p>
       <li>2013 ~ 2017: J-CAST News</li>
       <li>2017 ~ : Recruit Lifestyle</li>

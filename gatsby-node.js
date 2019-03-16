@@ -66,7 +66,10 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
+        '~': __dirname,
         components: path.resolve(__dirname, 'src/components'),
+        plugins: path.resolve(__dirname, 'src/plugins'),
+        styles: path.resolve(__dirname, 'src/styles'),
       },
     },
   })
