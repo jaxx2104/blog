@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Tumbnail from 'components/atoms/Tumbnail'
-import Animate from 'components/molecules/Animate'
+import Tumbnail from 'components/atoms/tumbnail'
+import Animate from 'components/molecules/animate'
 
 const SlideImage = ({ fluid, src, title, animation }) => {
   return (

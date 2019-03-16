@@ -2,9 +2,9 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 
-import Heading from 'components/atoms/Heading'
-import Badges from 'components/atoms/Badges'
-import Time from 'components/atoms/Time'
+import Heading from 'components/atoms/heading'
+import Badges from 'components/atoms/badges'
+import Time from 'components/atoms/time'
 
 const Info = ({ path, title, date, categories, tags }) => (
   <InfoWrap>

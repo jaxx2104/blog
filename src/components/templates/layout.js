@@ -6,10 +6,10 @@ import React from 'react'
 import { siteMetadata } from '~/gatsby-config'
 import storage from 'plugins/storage'
 
-import { light, dark } from 'components/templates/Theme'
-import Footer from 'components/organisms/Footer'
-import GlobalStyle from 'components/templates/Style'
-import Navi from 'components/organisms/Navi'
+import { light, dark } from 'components/templates/theme'
+import Footer from 'components/organisms/footer'
+import GlobalStyle from 'components/templates/style'
+import Navi from 'components/organisms/navi'
 
 class Layout extends React.Component {
   constructor() {

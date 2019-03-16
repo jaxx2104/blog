@@ -2,11 +2,11 @@ import Img from 'gatsby-image'
 import React from 'react'
 import get from 'lodash/get'
 
-import Button from 'components/atoms/Button'
-import Adsense from 'components/molecules/Adsense'
-import Container from 'components/molecules/Container'
-import Share from 'components/molecules/Share'
-import PostInfo from 'components/organisms/Info'
+import Button from 'components/atoms/button'
+import Adsense from 'components/molecules/adsense'
+import Container from 'components/molecules/container'
+import Share from 'components/molecules/share'
+import PostInfo from 'components/organisms/info'
 
 const Article = ({ frontmatter, html, site, options }) => {
   const { isIndex, adsense } = options
