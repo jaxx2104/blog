@@ -6,9 +6,9 @@ import React from 'react'
 import { siteMetadata } from '~/gatsby-config'
 import storage from 'plugins/storage'
 
-import { light, dark } from 'components/templates/theme'
+import { light, dark } from 'styles/theme'
+import GlobalStyle from 'styles/style'
 import Footer from 'components/organisms/footer'
-import GlobalStyle from 'components/templates/style'
 import Navi from 'components/organisms/navi'
 
 class Layout extends React.Component {

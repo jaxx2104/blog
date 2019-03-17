@@ -9,6 +9,8 @@ const Section = styled.section`
   text-align: ${props => (props.center ? 'center' : 'left')};
   color: ${props =>
     props.primary || props.dark ? 'white' : props.theme.accent};
+  border-bottom: 1px solid ${props => props.theme.sub};
+
   background: ${props => {
     if (props.dark) return gradient
     if (props.primary) return props.theme.main

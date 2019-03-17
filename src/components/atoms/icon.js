@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import Animate from 'components/molecules/animate'
+import Animate from 'components/atoms/animate'
 import React from 'react'
 import styled from 'styled-components'
 

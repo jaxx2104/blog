@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Container from 'components/molecules/container'
-import Flex from 'components/molecules/flex'
-import NaviLogo from 'components/molecules/logo'
-import NaviMenu from 'components/molecules/menu'
+import Container from 'components/atoms/container'
+import Flex from 'components/atoms/flex'
+import NaviLogo from 'components/molecules/navi-logo'
+import NaviMenu from 'components/molecules/navi-menu'
 
 const Navi = ({ title, isDarkMode, onDarkMode }) => (
   <Header>
