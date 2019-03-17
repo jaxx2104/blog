@@ -2,8 +2,8 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 
-import Hr from 'components/atoms/Hr'
-import Container from 'components/molecules/Container'
+import Hr from 'components/atoms/hr'
+import Container from 'components/atoms/container'
 
 const Footer = ({ author }) => (
   <Container>

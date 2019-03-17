@@ -10,10 +10,12 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
-    color: #4a5960;
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.text};
     font-family: 'Noto Sans JP', sans-serif!important;
     font-weight: 400;
     text-size-adjust: 100%;
+    transition: color 0.2s ease-out, background 0.2s ease-out;
   }
 
   a {
@@ -23,7 +25,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .content {
-    color: #495057;
     margin: 1rem;
     padding: 0;
     font-size: 1rem;
@@ -49,8 +50,8 @@ const GlobalStyles = createGlobalStyle`
     }
 
     blockquote {
-      background-color: #f8f9fa;
-      border-left: 5px solid #e9ecef;
+      background-color: ${props => props.theme.background};
+      border-left: 5px solid ${props => props.theme.main};
       color: ${props => props.theme.sub};
       padding: 0.25em 1.5em;
       margin: 0;
@@ -68,6 +69,12 @@ const GlobalStyles = createGlobalStyle`
     img {
       width: 100%;
     }
+
+    .gatsby-image-wrapper {
+      border: 1px solid ${props => props.theme.sub};
+      border-radius: 3px;
+    }
+
   }
 `
 export default GlobalStyles

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
-import Icon from 'components/atoms/Icon'
+import Icon from 'components/atoms/icon'
 
 const Box = ({ label, icon }) => (
   <BoxWrap title={label}>
@@ -26,9 +26,11 @@ const move = keyframes`
 const BoxWrap = styled.div`
   width: 25%;
   padding: 2rem 0;
+
   @media (max-width: 700px) {
     width: 50%;
   }
+
   :hover {
     animation: ${move} 0.3s linear;
   }

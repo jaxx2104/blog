@@ -2,15 +2,16 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 
-const Menu = () => (
+const Menu = ({ items }) => (
   <MenuWrap>
-    {[{ text: 'Home', to: '/' }, { text: 'Profile', to: '/profile' }].map(
-      (item, index) => (
-        <Link key={index} to={item.to}>
-          <MenuItem>{item.text}</MenuItem>
-        </Link>
-      )
-    )}
+    {(items || []).map((item, index) => {
+      const { action, text, to } = item
+      let menuItem = <MenuItem onClick={action || null}>{text}</MenuItem>
+      if (to) {
+        menuItem = <Link to={to}>{menuItem}</Link>
+      }
+      return <span key={index}>{menuItem}</span>
+    })}
   </MenuWrap>
 )
 export default Menu
@@ -22,6 +23,7 @@ const MenuWrap = styled.div`
 
 const MenuItem = styled.p`
   color: white;
+  cursor: pointer;
   padding: 0 0.5rem;
 
   :hover {

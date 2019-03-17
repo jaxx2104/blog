@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import Animate from 'components/molecules/Animate'
+import Animate from 'components/atoms/animate'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -44,7 +44,7 @@ export default Icon
 
 const I = styled.i`
   display: block;
-  font-size: ${props => props.size || 4.2}rem;
+  font-size: ${props => props.size || 3}rem;
   padding: 0.4rem;
   text-align: center;
 `
