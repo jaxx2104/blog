@@ -29,7 +29,7 @@ const Btn = styled.button`
 
 const Button = ({ label, path, primary }) => (
   <Link className="readmore" to={path} style={{ textDecoration: 'none' }}>
-    <Btn primary>{label}</Btn>
+    <Btn primary={primary}>{label}</Btn>
   </Link>
 )
 
