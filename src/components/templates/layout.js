@@ -7,7 +7,7 @@ import { siteMetadata } from '~/gatsby-config'
 import storage from 'plugins/storage'
 
 import { light, dark } from 'styles/theme'
-import GlobalStyle from 'styles/style'
+import GlobalStyle from 'styles/global-style'
 import Footer from 'components/organisms/footer'
 import Navi from 'components/organisms/navi'
 

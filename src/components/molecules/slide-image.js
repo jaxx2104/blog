@@ -1,12 +1,18 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Tumbnail from 'components/atoms/tumbnail'
 import Animate from 'components/atoms/animate'
 
 const SlideImage = ({ fluid, src, title, animation }) => {
   return (
-    <Animate animation={animation} data-emergence="hidden">
+    <Animate
+      css={css`
+        display: inline-block;
+      `}
+      animation={animation}
+      data-emergence="hidden"
+    >
       <Tumbnail fluid={fluid} src={src} title={title} size="200" />
       <Capture>{title}</Capture>
     </Animate>
