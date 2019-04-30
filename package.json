@@ -61,7 +61,7 @@
     "react-lazyload": "2.5.0",
     "react-share": "2.4.0",
     "styled-components": "4.2.0",
-    "textlint": "11.2.3",
+    "textlint": "11.2.4",
     "textlint-rule-preset-ja-spacing": "2.0.1",
     "textlint-rule-preset-japanese": "4.0.2"
   },
