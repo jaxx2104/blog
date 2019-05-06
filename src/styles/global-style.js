@@ -46,7 +46,6 @@ const GlobalStyles = createGlobalStyle`
 
     p {
       font-weight: 400;
-      margin: 1.75rem 0;
     }
 
     blockquote {
