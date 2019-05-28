@@ -58,7 +58,7 @@
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-helmet": "5.2.1",
-    "react-lazyload": "2.6.0",
+    "react-lazyload": "2.6.1",
     "react-share": "2.4.0",
     "styled-components": "4.2.0",
     "textlint": "11.2.5",
