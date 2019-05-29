@@ -38,7 +38,7 @@
     "@storybook/addon-links": "5.0.11",
     "@storybook/addons": "5.0.11",
     "@storybook/react": "5.0.11",
-    "animate.css": "3.7.0",
+    "animate.css": "3.7.1",
     "babel-eslint": "10.0.1",
     "babel-plugin-styled-components": "1.10.0",
     "emergence.js": "1.1.2",
