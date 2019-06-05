@@ -59,7 +59,7 @@
     "react-dom": "16.8.6",
     "react-helmet": "5.2.1",
     "react-lazyload": "2.6.1",
-    "react-share": "2.4.0",
+    "react-share": "3.0.0",
     "styled-components": "4.2.1",
     "textlint": "11.2.5",
     "textlint-rule-preset-ja-spacing": "2.0.1",
