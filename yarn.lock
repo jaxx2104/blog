@@ -8125,10 +8125,10 @@ gatsby-plugin-page-creator@^2.0.13:
     micromatch "^3.1.10"
     slash "^1.0.0"
 
-gatsby-plugin-preact@2.0.11:
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.11.tgz#c4bdbeeb2231ff36e4d1c1724bcd9dd0ad1c293d"
-  integrity sha512-ArxnURrqLnPb3BTI1dsOuRNpl6kEVnUoYeg9l0kr8Y+Ywzy5DolwMs4q9qOETW3TP4BVaQG4MH38YIIyB1vk5A==
+gatsby-plugin-preact@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-3.0.0.tgz#974c6bc46fd4a2f79aed9a99c096e40ed4a57589"
+  integrity sha512-+KA8VcM1l+wnpB2Xp+uJfbAMGo1tIOWKXvMXxQbRhY7VGDDc13a7jd1HT8hVl0onVs7X1X//6UNM1sbCgpuiRw==
   dependencies:
     "@babel/runtime" "^7.0.0"
 
