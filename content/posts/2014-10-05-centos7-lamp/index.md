@@ -1,6 +1,6 @@
 ---
 title: 'CentOS7にLAMP環境とWordPress構築[さくらVPS]'
-date: "2014-10-05T15:23:17+00:00"
+date: '2014-10-05T15:23:17+00:00'
 author: jaxx2104
 layout: post
 guid: http://jaxx2104.info/?p=988
@@ -39,7 +39,7 @@ $ yum -y update
 $ emacs /etc/locale.conf
 ```
 
-```conf
+```
 #LANG="en_US.UTF-8"
 LANG="ja_JP.UTF-8"
 ```
@@ -67,7 +67,7 @@ $ firewall-cmd -add-service=http
 
 `$ emacs /etc/ssh/sshd_config`
 
-```conf
+```
 Port ポート番号;
 PermitRootLogin No;
 ```
@@ -90,9 +90,9 @@ php,MySQL,Apache,Emacs,wget を yum でインストール
 
 使用状況によって違うので、必要最低限の設定。
 
-> $ emacs /etc/httpd/conf/httpd.conf
+> \$ emacs /etc/httpd/conf/httpd.conf
 
-```conf
+```
 # サーバーの名前を設定
 # ServerName www.example.com:80
 ServerName XX.XX.XX.XX:80
@@ -107,17 +107,17 @@ AllowOverride ALL
 
 サービス開始
 
-> $ systemctl start httpd.service
+> \$ systemctl start httpd.service
 
-> $ systemctl enable httpd.service
+> \$ systemctl enable httpd.service
 
 ## MySQL
 
 MySQL は mariadb という名前になった様子。
 
-> $ emacs /etc/my.cnf.d/server.cnf
+> \$ emacs /etc/my.cnf.d/server.cnf
 
-```conf
+```
 [mysqld]
 character-set-server = utf8
 plugin-load = handlersocket.so
@@ -125,7 +125,7 @@ plugin-load = handlersocket.so
 
 WordPress 用のユーザーと権限設定
 
-```sql
+```
 create database データベース名;
 grant all on データベース名.* to 'ユーザー名'@'ホスト名' identified by 'パスワード'
 ```
@@ -138,7 +138,7 @@ $ systemctl enable mariadb
 $ mysql_secure_installation
 ```
 
-```conf
+```
 既存password（デフォルトは空）
 新規password
 あとは全てyes

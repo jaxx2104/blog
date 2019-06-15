@@ -3,7 +3,7 @@ import React from 'react'
 class Adsense extends React.Component {
   componentDidMount() {
     const { clientId } = this.props
-    if (clientId) {
+    if (clientId && typeof window !== 'undefined') {
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})
     }
   }

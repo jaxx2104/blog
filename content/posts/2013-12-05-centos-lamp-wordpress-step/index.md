@@ -1,6 +1,6 @@
 ---
 title: CentOSにLAMP環境構築からWordPressインストールまでの手順
-date: "2013-12-05T00:56:38+00:00"
+date: '2013-12-05T00:56:38+00:00'
 author: jaxx2104
 layout: post
 path: /centos-lamp-wordpress-step
@@ -22,11 +22,11 @@ WordPress のインストールは実際の作業ではやっていないので�
 
 サーバに CentOS をインストールしたらバージョンを確認します。
 
-> $ rpm -qa | grep centos-release
+> \$ rpm -qa | grep centos-release
 
 ## yum アップデート
 
-> $ yum -y update
+> \$ yum -y update
 
 ## 開発ツール一式
 
@@ -34,7 +34,7 @@ WordPress のインストールは実際の作業ではやっていないので�
 
 <!--more-->
 
-```sh
+```
 $ yum -y groupinstall “開発ツール　”
 $ yum groupinfo “開発ツール　”
 ```
@@ -43,7 +43,7 @@ $ yum groupinfo “開発ツール　”
 
 テキストエディタは Emacs を使用しているで、この段階で必要なものをインストールします。
 
-```sh
+```
 $ yum -y install emacs
 $ yum -y install get
 $ yum -y install tree
@@ -53,13 +53,13 @@ $ yum -y install tree
 
 SELINUX は無効にします。SELINUX とは、なぜ無効にするかは調べてください。
 
-```sh
+```
 $ getenforce
 $ setenforce 0
 $ emacs /etc/sysconfig/selinux
 ```
 
-```sh
+```
 SELINUX=disabled
 ```
 
@@ -67,11 +67,11 @@ SELINUX=disabled
 
 日本語環境にしますが、個人の気分だと思います
 
-```sh
+```
 $ emacs /etc/sysconfig/i18n
 ```
 
-```conf
+```
 LANG="ja_JP.UTF-8"
 SYSFONT="latarcyrheb-sun16"
 ```
@@ -80,12 +80,12 @@ SYSFONT="latarcyrheb-sun16"
 
 NTP を使ってサーバの時刻合わせを行います。
 
-```sh
+```
 $ yum -y install ntp
 $ emacs /etc/ntp.conf
 ```
 
-```conf
+```
 restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
 server ntp.nict.jp
 server ntp.jst.mfeed.ad.jp
@@ -93,7 +93,7 @@ server ntp.jst.mfeed.ad.jp
 
 サービスの開始・自動起動
 
-```sh
+```
 $ /etc/rc.d/init.d/ntpd start
 $ chkconfig ntpd on
 $ ntpq -p
@@ -101,18 +101,18 @@ $ ntpq -p
 
 ## ユーザーの作成
 
-```sh
+```
 $ useradd ユーザー名
 $ passwd ユーザー名
 ```
 
 ポート番号設定と root でのログインを禁止
 
-```sh
+```
 $ emacs /etc/ssh/sshd_config
 ```
 
-```conf
+```
 Port XXX.XXX.XXX.XXX;
 PermitRootLogin No;
 ```
@@ -121,11 +121,11 @@ PermitRootLogin No;
 
 SH、HTTP、HTTPS、POP3、SMTP、サブミッションポートのみ通す。ssh のポート番号は先ほど指定したもの
 
-```sh
+```
 $ emacs /etc/sysconfig/iptables
 ```
 
-```conf
+```
 *filter
 :INPUT ACCEPT [0:0]
 :FORWARD ACCEPT [0:0]
@@ -152,13 +152,13 @@ COMMIT
 
 再起動して有効化
 
-```sh
+```
 $ /etc/rc.d/init.d/iptables restart
 ```
 
 ## 不要なサービスの停止(ip6 テーブル s)
 
-```sh
+```
 $ /etc/rc.d/init.d/ip6tables stop
 $ chkconfig ip6tables off
 ```
@@ -167,7 +167,7 @@ $ chkconfig ip6tables off
 
 yum リポジトリダウンロード
 
-```sh
+```
 $ wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
 （無い場合：http://dl.fedoraproject.org/pub/epel/6/x86_64/ からepal検索）
@@ -183,18 +183,18 @@ $ wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.r
 
 yum リポジトリ追加
 
-```sh
+```
 $ rpm -Uvh epel-release-6-8.noarch.rpm remi-release-6.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 ```
 
 追加したリポジトリを明示的に指定した時のみ使用
 
-```sh
+```
 $ emacs /etc/yum.repos.d/epel.repo
 $ emacs /etc/yum.repos.d/rpmforge.repo
 ```
 
-```conf
+```
 enabled=0
 ```
 
@@ -202,17 +202,17 @@ enabled=0
 
 この一行で一式をインストールするので不要なものは削ってください。
 
-```sh
+```
 $ yum -y -enablerepo=remi,epel,rpmforge install httpd-devel php-cli php-fpm php-devel php-gd php-mbstring php-mysql php-pdo php-pear php mysql-server phpMyAdmin vsftpd
 ```
 
 ## Appache
 
-```sh
+```
 $ emacs /etc/httpd/conf/httpd.conf
 ```
 
-```conf
+```
 HTTPレスポンスヘッダのServerヘッダの情報を最小限にする
 #ServerTokens OS
 ServerTokens Prod
@@ -256,13 +256,13 @@ AddDefaultCharset UTF-8
 
 ドキュメントルートの所有者を変更
 
-```sh
+```
 $ chown user:group /var/www/html/
 ```
 
 サービス開始
 
-```sh
+```
 $ /sbin/chkconfig httpd on
 $ /etc/rc.d/init.d/httpd start
 $ /sbin/chkconfig -list httpd
@@ -270,20 +270,20 @@ $ /sbin/chkconfig -list httpd
 
 ## sftp
 
-```sh
+```
 $ emacs /etc/vsftpd/vsftpd.conf
 ```
 
 編集
 
-```conf
+```
 anonymous_enable=NO
 ascii_upload_enable=YES
 ```
 
 追加
 
-```conf
+```
 ascii_download_enable=YES
 text_userdb_names=YES
 use_localtime=YES
@@ -291,20 +291,20 @@ use_localtime=YES
 
 サービスの開始・自動起動
 
-```sh
+```
 $ /etc/rc.d/init.d/vsftpd start
 $ chkconfig vsftpd on
 ```
 
 ## MySQL
 
-```sh
+```
 $ emacs /etc/my.cnf
 ```
 
 追加
 
-```conf
+```
 [mysqld]
 datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
@@ -329,7 +329,7 @@ pid-file=/var/run/mysqld/mysqld.pid
 
 サービス開始
 
-```sh
+```
 $ /etc/rc.d/init.d/mysqld start
 $ mysql\_install\_db
 $ chkconfig mysqld on
@@ -338,7 +338,7 @@ $ mysql\_secure\_installation
 
 以下の質問に答える
 
-```sh
+```
 既存password（デフォルトは空）
 新規password
 yes
@@ -346,11 +346,11 @@ yes
 
 ## php
 
-```sh
+```
 $ emacs /etc/php.ini
 ```
 
-```sh
+```
 mbstring.language = Japanese
 ```
 
@@ -358,11 +358,11 @@ mbstring.language = Japanese
 
 BASIC 認証の場合
 
-```sh
+```
 $ emacs /etc/httpd/conf.d/phpMyAdmin.conf
 ```
 
-```conf
+```
 <Directory "/usr/share/phpmyadmin">
   Options FollowSymLinks
   AllowOverride All
@@ -375,7 +375,7 @@ $ emacs /etc/httpd/conf.d/phpMyAdmin.conf
 
 確認
 
-```sh
+```
 $ /etc/rc.d/init.d/httpd restart
 ```
 
@@ -385,12 +385,12 @@ basic 認証のパスワードは MySQL の root パスワード
 
 WordPress 用 MySQL ユーザーの作成
 
-```sh
+```
 $ mysql -uroot -p
 $ create database データベース名
 ```
 
-```sql
+```
 grant create,select,insert,update,delete on (作成したDB名).* to 'ユーザ名'@'ホスト名' identified by 'パスワード'
 flush privileges;
 ```

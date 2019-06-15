@@ -22,10 +22,11 @@ class Layout extends React.Component {
   }
 
   async componentWillMount() {
-    emergence.init()
-
-    const theme = await storage.getItem('theme')
-    this.setState({ theme })
+    if (typeof window !== 'undefined') {
+      emergence.init()
+      const theme = await storage.getItem('theme')
+      this.setState({ theme })
+    }
   }
 
   toggleTheme() {

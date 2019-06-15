@@ -1,6 +1,6 @@
 ---
 title: 正規表現で特定の文字を含まない方法
-date: "2014-08-02T11:44:09+00:00"
+date: '2014-08-02T11:44:09+00:00'
 author: jaxx2104
 layout: post
 path: /preg_not_match
@@ -27,7 +27,7 @@ _パターン文字列_
 
 _マッチした文字列_
 
-```conf
+```
 http:
 jaxx2104.tumblr.com
 post

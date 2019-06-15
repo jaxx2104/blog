@@ -88,7 +88,7 @@ OS「RASPBIAN」インストール後、言語や LAN など設定します。
 > 小型赤外線（IR）リモコン irMagician ファースト・インプレッション
 > <http://netbuffalo.doorblog.jp/archives/4872290.html>
 
-```sh
+```
 # sudo apt-get install python-pip
 # sudo pip install pyserial
 ```
@@ -97,7 +97,7 @@ OS「RASPBIAN」インストール後、言語や LAN など設定します。
 
 これでコマンドさえたたけば家電を操作できるようになりました。
 
-```sh
+```
 // エアコンの赤外線をirMagcianにキャプチャします。
 $ python irm.py -c
 
@@ -117,7 +117,7 @@ $ python irm.py -p -f ./data/fan/on.json
 
 Homebridge を使ってコマンドをたたけるようにプラグインをインストール。
 
-```sh
+```
 $ sudo npm install -g homebridge-cmd
 ```
 
