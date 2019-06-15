@@ -15,7 +15,7 @@ tags:
 
 .Emacs  と .Emacs.el が存在する場合は前者が優先的に読み込まれるので.Emacs を削除すればよい。
 
-```sh
+```
 ~/.emacs  <- こちらが優先的に読み込まれる
 ~/.emacs.d/init.el
 ```

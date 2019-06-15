@@ -16,7 +16,7 @@ tags:
 
 初期状態だとこんな感じ
 
-```sh
+```
 iMac:~ jaxx2104$
 ```
 
@@ -29,25 +29,25 @@ iMac:~ jaxx2104$
 
 出力結果を.bash_profile に書けばよいだけ
 
-```sh
+```
 emacs .bash_profile
 ```
 
 自分はこう書いてます。
 
-```sh
+```
 export PS1="[\u@\h \W]\\$ "
 ```
 
 ## 反映
 
-```sh
+```
 sourse .bash_profile
 ```
 
 するとこんな感じになる。
 
-```sh
+```
 [jaxx2104@iMac ~] $
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: React.js製の静的サイトジェネレーターGatsbyに移行した
-date: "2016-11-15T09:02:29+00:00"
+date: '2016-11-15T09:02:29+00:00'
 author: jaxx2104
 layout: post
 guid: http://jaxx2104.info/?p=1404
@@ -35,19 +35,19 @@ Node.js と npm を事前にインストールしておきます。
 
 インストール
 
-```sh
+```
 npm install -g gatsby
 ```
 
 プロジェクト作成
 
-```sh
+```
 gatsby new blog https://github.com/gatsbyjs/gatsby-starter-blog
 ```
 
 開発サーバ開始
 
-```sh
+```
 cd blog
 gatsby develop
 ```
@@ -91,13 +91,13 @@ jekyll の移行ツールを使えば記事データをマークダウンにし�
 パスをそろえるため config.toml の linkPrefix にプロジェクト名を入れ、
 GitHub にリモートリポジトリを設定し、
 
-```sh
+```
 npm run deploy
 ```
 
 すると`package.json`の
 
-```sh
+```
 gatsby build --prefix-links && gh-pages -d public
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: MySQL server has gone away エラーが出たときの対処方法
-date: "2014-05-11T23:27:36+00:00"
+date: '2014-05-11T23:27:36+00:00'
 author: jaxx2104
 layout: post
 path: /mysql-server-has-gone-away
@@ -12,7 +12,7 @@ tags:
 
 PHP から MySQL に接続していて以下のエラーが出た、原因がつかめなくて詰まったが。解決したのでメモ。
 
-```conf
+```
 Warning: mysql_query(): MySQL server has gone away
 Warning: mysql_query(): Error reading result set's header
 ```

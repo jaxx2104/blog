@@ -1,6 +1,6 @@
 ---
 title: Zabbix と AWS SES による死活監視とアラートメールの送信方法
-date: "2014-01-26T14:50:56+00:00"
+date: '2014-01-26T14:50:56+00:00'
 author: jaxx2104
 layout: post
 path: /zabbix-aws-ses
@@ -15,7 +15,7 @@ tags:
 
 参考 : http://www.zabbix.jp/node/1441
 
-```sh
+```
 # cd /usr/local/src/
 # git clone git://github.com/zabbix-jp/plugins.git
 # mv plugins zabbix-jp-plugins
@@ -31,25 +31,25 @@ tags:
 
 AWS コンソールから各項目の値を取得できます。HOST のポート番号は 465 です。
 
-また動作しない場合は $mailer->SMTPDebug = 1; と追加することで、
+また動作しない場合は \$mailer->SMTPDebug = 1; と追加することで、
 
 デバッグモードを有効にしてエラーを知ることもできます。
 
-```sh
+```
 # emacs /var/lib/zabbix/sendmessage-smtp-php/sendmessage_smtp_php.sh
 ```
 
-> $MAIL_SMTP_HOST = &#8216;email-smtp.us-east-1.amazonaws.com:465&#8217;;
+> \$MAIL_SMTP_HOST = &#8216;email-smtp.us-east-1.amazonaws.com:465&#8217;;
 
-> $MAIL_SMTP_USER = &#8216;SMTP-USERNAME&#8217;;
+> \$MAIL_SMTP_USER = &#8216;SMTP-USERNAME&#8217;;
 
-> $MAIL_SMTP_PASS = &#8216;SMTP-USERPASS&#8217;;
+> \$MAIL_SMTP_PASS = &#8216;SMTP-USERPASS&#8217;;
 
-> $mailer->SMTPDebug = 1;
+> \$mailer->SMTPDebug = 1;
 
 Zabbix の設定ファイルにメールスクリプトのパスを記します。
 
-```sh
+```
 # emacs /var/lib/zabbix/zabbix_server.conf
 ```
 
@@ -57,7 +57,7 @@ Zabbix の設定ファイルにメールスクリプトのパスを記します�
 
 ## コマンドで確認
 
-```sh
+```
 php sendmessage-smtp-php/sendmessage_smtp_php.sh mail@sample.com title body
 ```
 

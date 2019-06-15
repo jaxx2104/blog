@@ -1,6 +1,6 @@
 ---
 title: FuelPHP で「oops an unexpected error has occurred」の画面が出た場合
-date: "2015-03-05T21:50:23+00:00"
+date: '2015-03-05T21:50:23+00:00'
 author: jaxx2104
 layout: post
 path: /fuelphp-oops-an-unexpected-error-has-occurred
@@ -17,7 +17,7 @@ tags:
 
 **httpd.conf**
 
-```conf
+```
 # SetEnv FUEL_ENV PRODUCTION
 SetEnv FUEL_ENV DEVELOPMENT
 ```
@@ -26,7 +26,7 @@ SetEnv FUEL_ENV DEVELOPMENT
 
 **nginx.conf**
 
-```conf
+```
 # fastcgi_param FUEL_ENV "PRODUCTION";
 fastcgi_param FUEL_ENV "DEVELOPMENT";
 ```

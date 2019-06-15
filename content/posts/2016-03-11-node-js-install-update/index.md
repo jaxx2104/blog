@@ -1,6 +1,6 @@
 ---
 title: Node.jsとnpmインストールとアップデート
-date: "2016-03-11T00:41:12+00:00"
+date: '2016-03-11T00:41:12+00:00'
 author: jaxx2104
 layout: post
 path: /node-js-install-update
@@ -13,20 +13,20 @@ tags:
 
 Node.js と npm インストール
 
-```s
+```
 $ sudo yum install nodejs npm -enablerepo=epel
 $ sudo yum install gcc gcc-c++
 ```
 
 n のインストール
 
-```s
+```
 $ sudo npm install -g n
 ```
 
 n を使って Node.js のアップデート
 
-```s
+```
 $ n -stable
 $ sudo n -stable
 $ sudo n -latest
@@ -35,7 +35,7 @@ $ sudo n latest
 
 nam のアップデート
 
-```s
+```
 $ sudo npm update -g npm
 $ sudo npm update -g
 $ sudo npm outdated -g
@@ -43,7 +43,7 @@ $ sudo npm outdated -g
 
 こんな感じでサーバ上に JS を動かすことができる
 
-```s
+```
 $ node
 > console.log("hello world!")
 hello world

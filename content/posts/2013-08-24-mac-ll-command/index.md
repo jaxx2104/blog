@@ -14,10 +14,10 @@ Linux でよく使うんですが、Mac は初期状態だと使えない。
 
 なので.bahs_profile にエイリアスを設定します。
 
-```sh
+```
 emacs .bash_profile
 ```
 
-```sh
+```
 alias ll='ls -l'
 ```

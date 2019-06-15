@@ -40,7 +40,7 @@ APIs & auth > APIs で API の一覧画面が表示されます。
 
 SHA1 のフィンガープリントを求められるので以下のコマンドで調べます。
 
-```sh
+```
 keytool -list -keystore -v xxxxx.keystore
 ```
 

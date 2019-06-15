@@ -28,7 +28,7 @@ URL パラメータの書き換えることってそんなになにけど、
 
 .htaccess を以下のように設定する。
 
-```apache
+```
 RewriteBase /test/
 RewriteCond %{REQUEST_URI} index.php
 RewriteCond %{QUERY_STRING} ^page=(\d\d?)\&mode=(entry|comment).*?$
