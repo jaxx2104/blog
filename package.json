@@ -84,7 +84,7 @@
   "main": "n/a",
   "scripts": {
     "build-storybook": "build-storybook",
-    "build": "GATSBY_CPU_COUNT=2 gatsby build",
+    "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "env NODE_PATH=./src/components gatsby develop",
     "format": "prettier --write \"**/*.+(js|json|md)\"",
