@@ -13,7 +13,13 @@ jobs:
           paths:
             - node_modules
           key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          keys: always-
       - run: yarn build
+      - save_cache:
+          key: always-{{ epoch }}
+          paths:
+            - public
       - persist_to_workspace:
           root: .
           paths:
