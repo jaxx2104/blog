@@ -1,15 +1,15 @@
-import { ThemeProvider } from 'styled-components'
-import emergence from 'emergence.js'
-import Helmet from 'react-helmet'
-import React from 'react'
+import { ThemeProvider } from "styled-components"
+import emergence from "emergence.js"
+import Helmet from "react-helmet"
+import React from "react"
 
-import { siteMetadata } from '~/gatsby-config'
-import storage from 'plugins/storage'
+import { siteMetadata } from "~/gatsby-config"
+import storage from "plugins/storage"
 
-import { light, dark } from 'styles/theme'
-import GlobalStyle from 'styles/global-style'
-import Footer from 'components/organisms/footer'
-import Navi from 'components/organisms/navi'
+import { light, dark } from "styles/theme"
+import GlobalStyle from "styles/global-style"
+import Footer from "components/organisms/footer"
+import Navi from "components/organisms/navi"
 
 class Layout extends React.Component {
   constructor() {
@@ -18,20 +18,20 @@ class Layout extends React.Component {
   }
 
   state = {
-    theme: true,
+    theme: true
   }
 
   async componentWillMount() {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       emergence.init()
-      const theme = await storage.getItem('theme')
+      const theme = await storage.getItem("theme")
       this.setState({ theme })
     }
   }
 
   toggleTheme() {
     const theme = !this.state.theme
-    storage.setItem('theme', theme)
+    storage.setItem("theme", theme)
     this.setState({ theme })
   }
 
@@ -42,7 +42,7 @@ class Layout extends React.Component {
         <div>
           <Helmet
             bodyAttributes={{
-              class: this.state.theme ? 'dark' : 'light',
+              class: this.state.theme ? "dark" : "light"
             }}
           />
           <Navi

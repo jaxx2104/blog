@@ -1,28 +1,28 @@
-import { graphql } from 'gatsby'
-import get from 'lodash/get'
-import React from 'react'
-import styled from 'styled-components'
-import Img from 'gatsby-image'
+import { graphql } from "gatsby"
+import get from "lodash/get"
+import React from "react"
+import styled from "styled-components"
+import Img from "gatsby-image"
 
-import { siteMetadata } from '~/gatsby-config'
-import Meta from 'components/atoms/meta'
-import Lead from 'components/atoms/lead'
-import Display from 'components/atoms/display'
-import Tumbnail from 'components/atoms/tumbnail'
-import Box from 'components/molecules/icon-box'
-import Container from 'components/atoms/container'
-import Flex from 'components/atoms/flex'
-import Section from 'components/atoms/section'
-import SlideImage from 'components/molecules/slide-image'
-import Icon from 'components/atoms/icon'
-import Layout from 'components/templates/layout'
-import Hr from 'components/atoms/hr'
+import { siteMetadata } from "~/gatsby-config"
+import Meta from "components/atoms/meta"
+import Lead from "components/atoms/lead"
+import Display from "components/atoms/display"
+import Tumbnail from "components/atoms/tumbnail"
+import Box from "components/molecules/icon-box"
+import Container from "components/atoms/container"
+import Flex from "components/atoms/flex"
+import Section from "components/atoms/section"
+import SlideImage from "components/molecules/slide-image"
+import Icon from "components/atoms/icon"
+import Layout from "components/templates/layout"
+import Hr from "components/atoms/hr"
 
 const UserSection = ({ profile }) => (
   <Section center>
     <Container>
       <Tumbnail
-        fluid={get(profile, 'childImageSharp.fluid')}
+        fluid={get(profile, "childImageSharp.fluid")}
         title="jaxx2104"
         circle
         size={140}
@@ -50,7 +50,7 @@ const UserSection = ({ profile }) => (
 
 const SkillSection = ({ detector }) => (
   <Section dark>
-    <Cover fluid={get(detector, 'childImageSharp.fluid')} />
+    <Cover fluid={get(detector, "childImageSharp.fluid")} />
     <Container>
       <Display uppercase>Skill</Display>
       <Flex center>
@@ -74,35 +74,35 @@ const WorkSection = ({ mockup1, mockup2, mockup3, work1, work2 }) => (
       <Flex center>
         <Anchor href="https://yomu.jaxx2104.info/">
           <SlideImage
-            fluid={get(mockup1, 'childImageSharp.fluid')}
+            fluid={get(mockup1, "childImageSharp.fluid")}
             title="Yomu(PWA)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://gatstrap.netlify.com/">
           <SlideImage
-            fluid={get(mockup3, 'childImageSharp.fluid')}
+            fluid={get(mockup3, "childImageSharp.fluid")}
             title="Gatstrap(Web)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://nikuman.jaxx2104.info/">
           <SlideImage
-            fluid={get(mockup2, 'childImageSharp.fluid')}
+            fluid={get(mockup2, "childImageSharp.fluid")}
             title="Nikuman(Web)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://itunes.apple.com/jp/app/yomu-rss-reader/id924321598">
           <SlideImage
-            fluid={get(work1, 'childImageSharp.fluid')}
+            fluid={get(work1, "childImageSharp.fluid")}
             title="Yomu(iOS)"
             animation="fadeIn"
           />
         </Anchor>
         <Anchor href="https://itunes.apple.com/jp/app/detector-live-filter-camera/id1079950455">
           <SlideImage
-            fluid={get(work2, 'childImageSharp.fluid')}
+            fluid={get(work2, "childImageSharp.fluid")}
             title="Detector(iOS)"
             animation="fadeIn"
           />
@@ -114,7 +114,7 @@ const WorkSection = ({ mockup1, mockup2, mockup3, work1, work2 }) => (
 
 const DegreeSection = ({ back }) => (
   <Section dark>
-    <Cover fluid={get(back, 'childImageSharp.fluid')} />
+    <Cover fluid={get(back, "childImageSharp.fluid")} />
     <Container>
       <Display>Others</Display>
       <Lead>
@@ -133,14 +133,14 @@ const DegreeSection = ({ back }) => (
 const Profile = ({ data }) => (
   <Layout>
     <Meta site={siteMetadata} title="Profile" />
-    <UserSection profile={get(data, 'profile')} />
+    <UserSection profile={get(data, "profile")} />
     <SkillSection detector={data.detector} />
     <WorkSection
-      mockup1={get(data, 'mockup1')}
-      mockup2={get(data, 'mockup2')}
-      mockup3={get(data, 'mockup3')}
-      work1={get(data, 'work1')}
-      work2={get(data, 'work2')}
+      mockup1={get(data, "mockup1")}
+      mockup2={get(data, "mockup2")}
+      mockup3={get(data, "mockup3")}
+      work1={get(data, "work1")}
+      work2={get(data, "work2")}
     />
     <DegreeSection back={data.back} />
   </Layout>

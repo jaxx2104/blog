@@ -1,10 +1,10 @@
 ---
-title: '自作キーボード沼に最短でハマるまでの手順書'
-date: '2018-12-14T00:00:00+00:00'
+title: "自作キーボード沼に最短でハマるまでの手順書"
+date: "2018-12-14T00:00:00+00:00"
 author: jaxx2104
 layout: post
 path: /self-keyboard-debut
-image: 'DSC03710.jpg'
+image: "DSC03710.jpg"
 description: 自作キーボード沼に最短でハマるまでの手順書を書き記しておきます。
 category: 自作キーボード
 tags:

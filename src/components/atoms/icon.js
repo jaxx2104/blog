@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import Animate from 'components/atoms/animate'
-import React from 'react'
-import styled from 'styled-components'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { library } from "@fortawesome/fontawesome-svg-core"
+import Animate from "components/atoms/animate"
+import React from "react"
+import styled from "styled-components"
 
 import {
   faApple,
@@ -15,8 +15,8 @@ import {
   faPhp,
   faReact,
   faTwitter,
-  faVuejs,
-} from '@fortawesome/free-brands-svg-icons'
+  faVuejs
+} from "@fortawesome/free-brands-svg-icons"
 
 library.add(
   faAws,
@@ -35,7 +35,7 @@ library.add(
 const Icon = ({ name, size }) => (
   <Animate animation="fadeIn" data-emergence="visible">
     <I size={size}>
-      <FontAwesomeIcon icon={['fab', name]} width="20px" />
+      <FontAwesomeIcon icon={["fab", name]} width="20px" />
     </I>
   </Animate>
 )

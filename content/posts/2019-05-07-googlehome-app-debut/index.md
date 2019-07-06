@@ -1,10 +1,10 @@
 ---
-title: 'Dialogflow + Raspberry Pi でスマートな定点カメラを自作する'
-date: '2019-05-07T00:00:00+00:00'
+title: "Dialogflow + Raspberry Pi でスマートな定点カメラを自作する"
+date: "2019-05-07T00:00:00+00:00"
 author: jaxx2104
 layout: post
 path: /dialogflow-raspberrypi
-image: 'thumb.jpg'
+image: "thumb.jpg"
 description: 3月に1週間くらいかけて自作したので備忘録として書いておきます。
 category: メモ
 tags:
@@ -126,7 +126,7 @@ function node に Dialogflow の Responses を設定します。ここでは固�
 var newMsg = {}
 newMsg.req = msg.req
 newMsg.res = msg.res
-newMsg.payload = { fulfillmentText: '3, 2, 1 ハイチーズ' }
+newMsg.payload = { fulfillmentText: "3, 2, 1 ハイチーズ" }
 return newMsg
 ```
 

@@ -1,16 +1,16 @@
-import { storiesOf } from '@storybook/react'
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs'
-import React from 'react'
+import { storiesOf } from "@storybook/react"
+import { withKnobs, boolean, number, text } from "@storybook/addon-knobs"
+import React from "react"
 
-import IconBox from 'components/molecules/icon-box'
-import setStyle from '~/.storybook/setStyle'
+import IconBox from "components/molecules/icon-box"
+import setStyle from "~/.storybook/setStyle"
 
-const stories = storiesOf('molecules', module)
+const stories = storiesOf("molecules", module)
 
 stories.addDecorator(withKnobs)
 setStyle(stories)
 
-stories.add('IconBox', () => {
+stories.add("IconBox", () => {
   return (
     <React.Fragment>
       <IconBox label="HTML" icon="html5" />

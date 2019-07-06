@@ -1,10 +1,10 @@
-import get from 'lodash/get'
-import Img from 'gatsby-image'
-import React from 'react'
-import styled from 'styled-components'
+import get from "lodash/get"
+import Img from "gatsby-image"
+import React from "react"
+import styled from "styled-components"
 
 /* global __PATH_PREFIX__ */
-const pathPrefix = process.env.NODE_ENV === 'development' ? '' : __PATH_PREFIX__
+const pathPrefix = process.env.NODE_ENV === "development" ? "" : __PATH_PREFIX__
 
 const Tumbnail = ({ src, title, circle, size, fluid }) =>
   fluid ? (

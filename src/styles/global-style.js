@@ -1,9 +1,9 @@
-import 'modern-normalize/modern-normalize.css'
-import 'animate.css/animate.css'
-import 'prismjs/themes/prism-okaidia.css'
-import 'font-awesome/css/font-awesome.css'
+import "modern-normalize/modern-normalize.css"
+import "animate.css/animate.css"
+import "prismjs/themes/prism-okaidia.css"
+import "font-awesome/css/font-awesome.css"
 
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components"
 
 const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900');

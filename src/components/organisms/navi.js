@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
-import Container from 'components/atoms/container'
-import Flex from 'components/atoms/flex'
-import NaviLogo from 'components/molecules/navi-logo'
-import NaviMenu from 'components/molecules/navi-menu'
+import Container from "components/atoms/container"
+import Flex from "components/atoms/flex"
+import NaviLogo from "components/molecules/navi-logo"
+import NaviMenu from "components/molecules/navi-menu"
 
 const Navi = ({ title, isDarkMode, onDarkMode }) => (
   <Header>
@@ -13,12 +13,12 @@ const Navi = ({ title, isDarkMode, onDarkMode }) => (
         <NaviLogo title={title} />
         <NaviMenu
           items={[
-            { text: 'Home', to: '/' },
-            { text: 'Profile', to: '/profile' },
+            { text: "Home", to: "/" },
+            { text: "Profile", to: "/profile" }
           ]}
         />
         <NaviMenu
-          items={[{ text: isDarkMode ? '🌃' : '🌅', action: onDarkMode }]}
+          items={[{ text: isDarkMode ? "🌃" : "🌅", action: onDarkMode }]}
         />
       </Flex>
     </Container>

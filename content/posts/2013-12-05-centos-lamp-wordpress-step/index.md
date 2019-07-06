@@ -1,6 +1,6 @@
 ---
 title: CentOSにLAMP環境構築からWordPressインストールまでの手順
-date: '2013-12-05T00:56:38+00:00'
+date: "2013-12-05T00:56:38+00:00"
 author: jaxx2104
 layout: post
 path: /centos-lamp-wordpress-step

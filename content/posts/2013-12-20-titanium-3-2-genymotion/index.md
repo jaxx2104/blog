@@ -1,6 +1,6 @@
 ---
 title: Titanium 3.2 で Genymotion を使って 遅いAndroid エミュレータから解放される
-date: '2013-12-20T00:51:34+00:00'
+date: "2013-12-20T00:51:34+00:00"
 author: jaxx2104
 layout: post
 path: /titanium-3-2-genymotion

@@ -1,6 +1,6 @@
 ---
 title: FuelPHP で「oops an unexpected error has occurred」の画面が出た場合
-date: '2015-03-05T21:50:23+00:00'
+date: "2015-03-05T21:50:23+00:00"
 author: jaxx2104
 layout: post
 path: /fuelphp-oops-an-unexpected-error-has-occurred

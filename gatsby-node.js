@@ -1,7 +1,7 @@
-const each = require('lodash/each')
-const Promise = require('bluebird')
-const path = require('path')
-const PostTemplate = path.resolve('./src/components/templates/post-template.js')
+const each = require("lodash/each")
+const Promise = require("bluebird")
+const path = require("path")
+const PostTemplate = path.resolve("./src/components/templates/post-template.js")
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -43,7 +43,7 @@ exports.createPages = ({ graphql, actions }) => {
           const { path } = node.remark.frontmatter
           createPage({
             path,
-            component: PostTemplate,
+            component: PostTemplate
           })
         })
 
@@ -54,7 +54,7 @@ exports.createPages = ({ graphql, actions }) => {
           const PageTemplate = path.resolve(node.path)
           createPage({
             path: name,
-            component: PageTemplate,
+            component: PageTemplate
           })
         })
       })
@@ -66,11 +66,11 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '~': __dirname,
-        components: path.resolve(__dirname, 'src/components'),
-        plugins: path.resolve(__dirname, 'src/plugins'),
-        styles: path.resolve(__dirname, 'src/styles'),
-      },
-    },
+        "~": __dirname,
+        components: path.resolve(__dirname, "src/components"),
+        plugins: path.resolve(__dirname, "src/plugins"),
+        styles: path.resolve(__dirname, "src/styles")
+      }
+    }
   })
 }

@@ -1,6 +1,6 @@
 ---
 title: windows版 emacsで日本語ディレクトリ内のファイルがおかしくなった時の対処方法
-date: '2014-05-15T02:02:42+00:00'
+date: "2014-05-15T02:02:42+00:00"
 author: jaxx2104
 layout: post
 path: /windows-emacs-shift-jis

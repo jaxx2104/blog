@@ -1,6 +1,6 @@
 ---
 title: Bebelを使ってJavaScriptをES2015で書く
-date: '2016-03-26T19:53:32+00:00'
+date: "2016-03-26T19:53:32+00:00"
 author: jaxx2104
 layout: post
 path: /bebel-es2015
@@ -61,8 +61,8 @@ $ npm install babel-preset-es2015 --save-dev
 test.js というファイル名で ES2015 っぽいコードを書きます。
 
 ```js
-var name = 'Bob',
-  time = 'today'
+var name = "Bob",
+  time = "today"
 var test = `Hello ${name}, how are you ${time}?`
 console.log(test)
 ```

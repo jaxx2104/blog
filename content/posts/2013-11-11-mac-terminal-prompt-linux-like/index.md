@@ -24,7 +24,7 @@ iMac:~ jaxx2104$
 
 このサイトでどんな表示になるのかを確認しながら変更できる。
 
-> Bash $PS1 Generator
+> Bash \$PS1 Generator
 > http://www.kirsle.net/wizards/ps1.html
 
 出力結果を.bash_profile に書けばよいだけ

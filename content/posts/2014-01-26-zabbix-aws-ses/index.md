@@ -1,6 +1,6 @@
 ---
 title: Zabbix と AWS SES による死活監視とアラートメールの送信方法
-date: '2014-01-26T14:50:56+00:00'
+date: "2014-01-26T14:50:56+00:00"
 author: jaxx2104
 layout: post
 path: /zabbix-aws-ses

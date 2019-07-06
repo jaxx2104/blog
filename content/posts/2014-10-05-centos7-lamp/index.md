@@ -1,6 +1,6 @@
 ---
-title: 'CentOS7にLAMP環境とWordPress構築[さくらVPS]'
-date: '2014-10-05T15:23:17+00:00'
+title: "CentOS7にLAMP環境とWordPress構築[さくらVPS]"
+date: "2014-10-05T15:23:17+00:00"
 author: jaxx2104
 layout: post
 guid: http://jaxx2104.info/?p=988

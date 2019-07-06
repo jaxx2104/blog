@@ -1,8 +1,8 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
+import React from "react"
+import styled, { css } from "styled-components"
 
-import Tumbnail from 'components/atoms/tumbnail'
-import Animate from 'components/atoms/animate'
+import Tumbnail from "components/atoms/tumbnail"
+import Animate from "components/atoms/animate"
 
 const SlideImage = ({ fluid, src, title, animation }) => {
   return (
@@ -23,6 +23,6 @@ export default SlideImage
 const Capture = styled.p`
   font-size: 0.6rem;
   font-weight: 900;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   text-align: center;
 `

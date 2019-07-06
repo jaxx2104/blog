@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'gatsby-link'
-import styled from 'styled-components'
+import React from "react"
+import Link from "gatsby-link"
+import styled from "styled-components"
 
 const Btn = styled.button`
   background-color: transparent;
@@ -28,7 +28,7 @@ const Btn = styled.button`
 `
 
 const Button = ({ label, path, primary }) => (
-  <Link className="readmore" to={path} style={{ textDecoration: 'none' }}>
+  <Link className="readmore" to={path} style={{ textDecoration: "none" }}>
     <Btn primary={primary}>{label}</Btn>
   </Link>
 )
