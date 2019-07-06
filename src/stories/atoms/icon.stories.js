@@ -1,17 +1,17 @@
-import { storiesOf } from '@storybook/react'
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs'
-import React from 'react'
+import { storiesOf } from "@storybook/react"
+import { withKnobs, boolean, number, text } from "@storybook/addon-knobs"
+import React from "react"
 
-import Icon from 'components/atoms/icon'
-import setStyle from '~/.storybook/setStyle'
+import Icon from "components/atoms/icon"
+import setStyle from "~/.storybook/setStyle"
 
-const stories = storiesOf('atoms', module)
+const stories = storiesOf("atoms", module)
 
 stories.addDecorator(withKnobs)
 setStyle(stories)
 
-stories.add('Icon', () => {
-  const size = number('size', 3)
+stories.add("Icon", () => {
+  const size = number("size", 3)
 
   return (
     <React.Fragment>

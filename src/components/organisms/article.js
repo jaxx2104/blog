@@ -1,17 +1,17 @@
-import Img from 'gatsby-image'
-import React from 'react'
-import get from 'lodash/get'
+import Img from "gatsby-image"
+import React from "react"
+import get from "lodash/get"
 
-import Button from 'components/atoms/button'
-import Adsense from 'components/molecules/post-ad'
-import Container from 'components/atoms/container'
-import Share from 'components/molecules/icon-share'
-import PostInfo from 'components/molecules/post-info'
+import Button from "components/atoms/button"
+import Adsense from "components/molecules/post-ad"
+import Container from "components/atoms/container"
+import Share from "components/molecules/icon-share"
+import PostInfo from "components/molecules/post-info"
 
 const Article = ({ frontmatter, html, site, options }) => {
   const { isIndex, adsense } = options
-  const isMore = isIndex && !!html.match('<!--more-->')
-  const fluid = get(frontmatter.image, 'childImageSharp.fluid')
+  const isMore = isIndex && !!html.match("<!--more-->")
+  const fluid = get(frontmatter.image, "childImageSharp.fluid")
   return (
     <Container>
       <PostInfo
@@ -23,16 +23,16 @@ const Article = ({ frontmatter, html, site, options }) => {
       />
       <div className="content">
         <p>{frontmatter.description}</p>
-        {fluid ? <Img fluid={fluid} /> : ''}
+        {fluid ? <Img fluid={fluid} /> : ""}
       </div>
       <div
         className="content"
         dangerouslySetInnerHTML={{
-          __html: isMore ? getDescription(html) : html,
+          __html: isMore ? getDescription(html) : html
         }}
       />
       <div className="content">
-        {isMore ? <Button path={frontmatter.path} label="MORE" primary /> : ''}
+        {isMore ? <Button path={frontmatter.path} label="MORE" primary /> : ""}
       </div>
       <ShareSection
         isIndex={isIndex}
@@ -47,16 +47,16 @@ const Article = ({ frontmatter, html, site, options }) => {
 export default Article
 
 const AdSection = ({ isIndex, adsense }) => {
-  return !isIndex ? <Adsense clientId={adsense} slotId="" format="auto" /> : ''
+  return !isIndex ? <Adsense clientId={adsense} slotId="" format="auto" /> : ""
 }
 const ShareSection = ({ isIndex, url, title }) => {
-  return !isIndex ? <Share url={url} title={title} /> : ''
+  return !isIndex ? <Share url={url} title={title} /> : ""
 }
 
 const getDescription = body => {
-  if (body.match('<!--more-->')) {
-    body = body.split('<!--more-->')
-    if (typeof body[0] !== 'undefined') {
+  if (body.match("<!--more-->")) {
+    body = body.split("<!--more-->")
+    if (typeof body[0] !== "undefined") {
       return body[0]
     }
   }

@@ -1,6 +1,6 @@
 ---
 title: Node.jsとnpmインストールとアップデート
-date: '2016-03-11T00:41:12+00:00'
+date: "2016-03-11T00:41:12+00:00"
 author: jaxx2104
 layout: post
 path: /node-js-install-update

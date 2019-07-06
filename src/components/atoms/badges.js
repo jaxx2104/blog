@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import map from 'lodash/map'
+import React from "react"
+import styled from "styled-components"
+import map from "lodash/map"
 
 const Badge = styled.div`
   background-color: ${props =>
@@ -19,7 +19,7 @@ const Badge = styled.div`
 `
 
 const Badges = ({ items, primary }) => (
-  <div style={{ display: 'inline' }}>
+  <div style={{ display: "inline" }}>
     {map(items, (item, i) => {
       return (
         <Badge key={i} primary={primary}>

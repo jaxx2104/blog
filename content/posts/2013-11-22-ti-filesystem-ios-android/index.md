@@ -20,8 +20,8 @@ tags:
 
 ```js
 function doSaveFile(data) {
-  var cachefileName = 'test.txt'
-  var cacheFilePath = Ti.Filesystem.applicationDataDirectory + 'cache/'
+  var cachefileName = "test.txt"
+  var cacheFilePath = Ti.Filesystem.applicationDataDirectory + "cache/"
   var directory = Ti.Filesystem.getFile(cacheFilePath)
   //ディレクトリが存在しない場合
   if (!directory.exists()) {
@@ -31,10 +31,10 @@ function doSaveFile(data) {
   var cacheFileData = OS_IOS ? cacheFile.read() : cacheFile.read().text
   if (cacheFileData) {
     //append
-    cacheFile.write('add : ' + cacheFileData + data)
+    cacheFile.write("add : " + cacheFileData + data)
   } else {
     //new
-    cacheFile.write('new : ' + data)
+    cacheFile.write("new : " + data)
   }
 }
 ```

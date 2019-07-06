@@ -1,21 +1,21 @@
-import { storiesOf } from '@storybook/react'
-import { withKnobs, boolean, text } from '@storybook/addon-knobs'
-import React from 'react'
+import { storiesOf } from "@storybook/react"
+import { withKnobs, boolean, text } from "@storybook/addon-knobs"
+import React from "react"
 
-import Button from 'components/atoms/button'
-import setStyle from '~/.storybook/setStyle'
+import Button from "components/atoms/button"
+import setStyle from "~/.storybook/setStyle"
 
-const stories = storiesOf('atoms', module)
+const stories = storiesOf("atoms", module)
 
 stories.addDecorator(withKnobs)
 setStyle(stories)
 
-stories.add('Button', () => {
-  const label = text('label', 'label')
+stories.add("Button", () => {
+  const label = text("label", "label")
   return (
     <React.Fragment>
-      <Button path={''} label={label} />
-      <Button path={''} label={label} primary />
+      <Button path={""} label={label} />
+      <Button path={""} label={label} primary />
     </React.Fragment>
   )
 })

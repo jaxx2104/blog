@@ -2,10 +2,10 @@ import {
   FacebookShareButton,
   TwitterShareButton,
   FacebookIcon,
-  TwitterIcon,
-} from 'react-share'
-import React from 'react'
-import styled from 'styled-components'
+  TwitterIcon
+} from "react-share"
+import React from "react"
+import styled from "styled-components"
 
 const Share = ({ url, title }) => (
   <ShareWrap>

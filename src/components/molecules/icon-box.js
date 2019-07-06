@@ -1,7 +1,7 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import React from "react"
+import styled, { keyframes } from "styled-components"
 
-import Icon from 'components/atoms/icon'
+import Icon from "components/atoms/icon"
 
 const Box = ({ label, icon }) => (
   <BoxWrap title={label}>

@@ -1,11 +1,11 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 const Animate = styled.span`
-  &[data-emergence='visible'] {
+  &[data-emergence="visible"] {
     opacity: 1;
     animation: ${props => props.animation} 1s;
   }
-  &[data-emergence='hidden'] {
+  &[data-emergence="hidden"] {
     opacity: 0;
   }
 `

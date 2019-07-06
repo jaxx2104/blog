@@ -1,6 +1,6 @@
 ---
 title: CentOS 6.4 に emacs 24.3 をインストールする
-date: '2014-01-13T15:52:50+00:00'
+date: "2014-01-13T15:52:50+00:00"
 author: jaxx2104
 layout: post
 path: /centos-6-4-emacs-24-3

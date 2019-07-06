@@ -1,11 +1,11 @@
 ---
 title: 2018年の夏休みメモ
-date: '2018-08-20T00:00:00+00:00'
+date: "2018-08-20T00:00:00+00:00"
 author: jaxx2104
 layout: post
 path: /summer-2018
-image: 'image.jpg'
-? description
+image: "image.jpg"
+description:
 category: メモ
 tags:
   - styled-components

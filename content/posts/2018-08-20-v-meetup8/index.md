@@ -1,10 +1,10 @@
 ---
-title: 'Vue.js Tokyo v-meetup #8 に行ってきた'
-date: '2018-08-29T00:00:00+00:00'
+title: "Vue.js Tokyo v-meetup #8 に行ってきた"
+date: "2018-08-29T00:00:00+00:00"
 author: jaxx2104
 layout: post
 path: /v-meetup8
-image: 'image.jpg'
+image: "image.jpg"
 description: ブログ書く枠で参加させていただいたのでレポート👨‍💻
 category: メモ
 tags:

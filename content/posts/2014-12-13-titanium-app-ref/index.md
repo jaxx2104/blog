@@ -55,7 +55,7 @@ ListView を使うときには非常にお世話になりました。
 
 **2.メモリを管理する。**
 
-「Alloy.Globals.navgroup = $.navgroup;」とか便利ですが、
+「Alloy.Globals.navgroup = \$.navgroup;」とか便利ですが、
 
 なんでもかんでもグローバルにしちゃダメだよって内容です。
 

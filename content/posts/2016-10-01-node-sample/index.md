@@ -1,6 +1,6 @@
 ---
 title: Gulp タスクランナーを使ったフロントエンド開発環境
-date: '2016-10-01T09:02:29+00:00'
+date: "2016-10-01T09:02:29+00:00"
 author: jaxx2104
 layout: post
 path: /node-sample

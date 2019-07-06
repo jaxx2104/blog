@@ -1,6 +1,6 @@
 ---
 title: Raspberry Pi と irMagician を使って家をスマートホーム化する
-date: '2016-07-20T09:02:29+00:00'
+date: "2016-07-20T09:02:29+00:00"
 author: jaxx2104
 layout: post
 path: /homekit-irmagician

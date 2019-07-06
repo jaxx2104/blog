@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
 
 class Adsense extends React.Component {
   componentDidMount() {
     const { clientId } = this.props
-    if (clientId && typeof window !== 'undefined') {
+    if (clientId && typeof window !== "undefined") {
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})
     }
   }
@@ -15,14 +15,14 @@ class Adsense extends React.Component {
       <div className="ad">
         <ins
           className="adsbygoogle"
-          style={{ display: 'block' }}
+          style={{ display: "block" }}
           data-ad-client={clientId}
           data-ad-slot={slotId}
           data-ad-format={format}
         />
       </div>
     ) : (
-      ''
+      ""
     )
   }
 }
