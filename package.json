@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-starter-bootstrap",
+  "name": "blog",
   "description": "Simple starter for Gatsby",
   "version": "1.9.119",
   "author": "Futoshi Iwashita <jaxx2104@gmail.com>",
@@ -71,6 +71,24 @@
     "starter"
   ],
   "license": "MIT",
+  "main": "n/a",
+  "scripts": {
+    "build-storybook": "build-storybook",
+    "build": "gatsby build",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "develop": "env NODE_PATH=./src/components gatsby develop",
+    "format": "prettier --write \"**/*.+(js|json|md)\" --ignore-path .gitignore",
+    "lint:text": "textlint content/**/index.md",
+    "lint:textfix": "textlint --fix content/**/index.md",
+    "lint": "eslint --ext .js,.jsx --ignore-path .gitignore .",
+    "storybook": "start-storybook -p 6006",
+    "test": "prettier --write \"**/*.+(js|jsx|json|css|scss)\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "*.{js,json,md}": [
       "prettier --write",
@@ -80,23 +98,5 @@
       "npm run lint:textfix",
       "git add"
     ]
-  },
-  "main": "n/a",
-  "scripts": {
-    "build-storybook": "build-storybook",
-    "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
-    "develop": "env NODE_PATH=./src/components gatsby develop",
-    "format": "prettier --write \"**/*.+(js|json|md)\"",
-    "lint:text": "textlint content/**/index.md",
-    "lint:textfix": "textlint --fix content/**/index.md",
-    "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
-    "storybook": "start-storybook -p 6006",
-    "test": "prettier --write \"**/*.+(js|jsx|json|css|scss)\""
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
