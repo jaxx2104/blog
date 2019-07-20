@@ -9887,11 +9887,6 @@ internal-ip@^3.0.1:
     default-gateway "^2.6.0"
     ipaddr.js "^1.5.2"
 
-interop-require@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/interop-require/-/interop-require-1.0.0.tgz#e53103679944c88d7e6105b62a9f4475c783971e"
-  integrity sha1-5TEDZ5lEyI1+YQW2Kp9EdceDlx4=
-
 interpret@^1.0.0, interpret@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
@@ -16784,13 +16779,13 @@ textlint-rule-preset-ja-spacing@2.0.1:
     textlint-rule-ja-space-around-code "^2.0.1"
     textlint-rule-ja-space-between-half-and-full-width "^2.0.1"
 
-textlint-rule-preset-japanese@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/textlint-rule-preset-japanese/-/textlint-rule-preset-japanese-4.0.3.tgz#cd5759e75dadc316e534a291477bfccaaea3efe5"
-  integrity sha512-eQmKjLBRRTUbSg6YUDmLgmjLHBbcEizaPt06he1SFT83IIxRUIpr0jTDpcpNEynYzgS5RK4vmg0dV7+WA4ypMQ==
+textlint-rule-preset-japanese@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/textlint-rule-preset-japanese/-/textlint-rule-preset-japanese-4.0.4.tgz#51a23c30c1cb71dbe8cc662e0dccae9432bc7625"
+  integrity sha512-JTw3o65XccdlUV9KpPQXEOZTaoYm+vihLhrsbXkKkGWjpCEgdaAnnHueRJGx/vGlKb4v60Uef31xhHbat1w70Q==
   dependencies:
     "@textlint-rule/textlint-rule-no-invalid-control-character" "^1.2.0"
-    interop-require "^1.0.0"
+    "@textlint/module-interop" "^1.0.1"
     textlint-rule-max-ten "^2.0.2"
     textlint-rule-no-double-negative-ja "^1.0.3"
     textlint-rule-no-doubled-conjunction "^1.0.2"
