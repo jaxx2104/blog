@@ -13,13 +13,17 @@ jobs:
           paths:
             - node_modules
           key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      # - restore_cache:
-      #     keys: always-
-      # - run: yarn build
-      # - save_cache:
-      #     key: always-{{ epoch }}
-      #     paths:
-      #       - public
+      - restore_cache:
+            keys:
+              - always-
+      - run: yarn build
+      - save_cache:
+          key: always-{{ epoch }}
+          paths:
+            - public
+      - run:
+          name: Send build stats to Relative CI
+          command: node_modules/.bin/relative-ci-agent
       - persist_to_workspace:
           root: .
           paths:

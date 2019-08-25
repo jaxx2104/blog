@@ -2,6 +2,7 @@ const each = require("lodash/each")
 const Promise = require("bluebird")
 const path = require("path")
 const PostTemplate = path.resolve("./src/components/templates/post-template.js")
+const StatsPlugin = require("stats-webpack-plugin")
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -62,7 +63,20 @@ exports.createPages = ({ graphql, actions }) => {
   })
 }
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, stage }) => {
+  if (stage === "build-javascript") {
+    actions.setWebpackConfig({
+      plugins: [
+        new StatsPlugin("../artifacts/webpack-stats.json", {
+          all: false,
+          assets: true,
+          modules: true,
+          chunks: true
+        })
+      ]
+    })
+  }
+
   actions.setWebpackConfig({
     resolve: {
       alias: {
