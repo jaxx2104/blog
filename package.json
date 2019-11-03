@@ -60,8 +60,8 @@
     "react-helmet": "5.2.1",
     "react-lazyload": "2.6.2",
     "react-share": "3.0.1",
-    "styled-components": "4.4.0",
-    "textlint": "11.4.0",
+    "styled-components": "4.4.1",
+    "textlint": "11.5.0",
     "textlint-rule-preset-ja-spacing": "2.0.1",
     "textlint-rule-preset-japanese": "4.0.4"
   },
