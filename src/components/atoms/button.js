@@ -7,8 +7,8 @@ const Btn = styled.button`
   background-image: none;
   border-radius: 0.25rem;
   border: 2px solid
-    ${props => (props.primary ? props.theme.main : props.theme.sub)};
-  color: ${props => (props.primary ? props.theme.main : props.theme.sub)};
+    ${(props) => (props.primary ? props.theme.main : props.theme.sub)};
+  color: ${(props) => (props.primary ? props.theme.main : props.theme.sub)};
   display: block;
   font-size: 1rem;
   font-weight: 800;
@@ -21,7 +21,7 @@ const Btn = styled.button`
   width: 100%;
 
   :hover {
-    background-color: ${props =>
+    background-color: ${(props) =>
       props.primary ? props.theme.main : props.theme.sub};
     color: white;
   }

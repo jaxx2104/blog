@@ -43,7 +43,7 @@ exports.createPages = ({ graphql, actions }) => {
           const { path } = node.remark.frontmatter
           createPage({
             path,
-            component: PostTemplate
+            component: PostTemplate,
           })
         })
 
@@ -54,7 +54,7 @@ exports.createPages = ({ graphql, actions }) => {
           const PageTemplate = path.resolve(node.path)
           createPage({
             path: name,
-            component: PageTemplate
+            component: PageTemplate,
           })
         })
       })
@@ -69,8 +69,8 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         "~": __dirname,
         components: path.resolve(__dirname, "src/components"),
         plugins: path.resolve(__dirname, "src/plugins"),
-        styles: path.resolve(__dirname, "src/styles")
-      }
-    }
+        styles: path.resolve(__dirname, "src/styles"),
+      },
+    },
   })
 }

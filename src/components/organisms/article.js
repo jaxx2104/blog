@@ -28,7 +28,7 @@ const Article = ({ frontmatter, html, site, options }) => {
       <div
         className="content"
         dangerouslySetInnerHTML={{
-          __html: isMore ? getDescription(html) : html
+          __html: isMore ? getDescription(html) : html,
         }}
       />
       <div className="content">
@@ -53,7 +53,7 @@ const ShareSection = ({ isIndex, url, title }) => {
   return !isIndex ? <Share url={url} title={title} /> : ""
 }
 
-const getDescription = body => {
+const getDescription = (body) => {
   if (body.match("<!--more-->")) {
     body = body.split("<!--more-->")
     if (typeof body[0] !== "undefined") {

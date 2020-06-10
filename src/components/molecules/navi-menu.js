@@ -27,7 +27,7 @@ const MenuItem = styled.p`
   padding: 0 0.5rem;
 
   :hover {
-    color: ${props => props.theme.accent};
+    color: ${(props) => props.theme.accent};
     transition: all 0.4s;
   }
 `

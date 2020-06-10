@@ -18,7 +18,7 @@ class Layout extends React.Component {
   }
 
   state = {
-    theme: true
+    theme: true,
   }
 
   async componentWillMount() {
@@ -42,7 +42,7 @@ class Layout extends React.Component {
         <div>
           <Helmet
             bodyAttributes={{
-              class: this.state.theme ? "dark" : "light"
+              class: this.state.theme ? "dark" : "light",
             }}
           />
           <Navi

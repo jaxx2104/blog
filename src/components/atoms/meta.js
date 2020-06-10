@@ -14,22 +14,22 @@ const Meta = ({ image, path = "", site, title }) => {
         { name: "twitter:card", content: "summary" },
         {
           name: "twitter:site",
-          content: `@${get(site, "twitter")}`
+          content: `@${get(site, "twitter")}`,
         },
         { property: "og:title", content: title },
         { property: "og:type", content: "website" },
         {
           property: "og:description",
-          content: get(site, "description")
+          content: get(site, "description"),
         },
         {
           property: "og:url",
-          content: `${siteUrl}${path}`
+          content: `${siteUrl}${path}`,
         },
         {
           property: "og:image",
-          content: image
-        }
+          content: image,
+        },
       ]}
     />
   )

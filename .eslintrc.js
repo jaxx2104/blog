@@ -6,14 +6,14 @@ module.exports = {
     ecmaVersion: 2016,
     sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   env: {
     es6: true,
-    node: true
+    node: true,
   },
   rules: {
-    "prettier/prettier": "error"
-  }
+    "prettier/prettier": "error",
+  },
 }

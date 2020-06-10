@@ -5,7 +5,7 @@ export const light = {
   accent: "#495057",
   text: "#495057",
   background: "#fff",
-  contentWidth: 780
+  contentWidth: 780,
 }
 
 export const dark = {
@@ -14,5 +14,5 @@ export const dark = {
   accent: "#fff",
   text: "#fff",
   background: "#282c35",
-  contentWidth: 780
+  contentWidth: 780,
 }

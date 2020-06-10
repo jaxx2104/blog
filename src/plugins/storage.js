@@ -4,7 +4,7 @@ const storage = localforage.createInstance({
   driver: localforage.LOCALSTORAGE,
   name: "app",
   storeName: "context",
-  version: 1
+  version: 1,
 })
 
 export default storage

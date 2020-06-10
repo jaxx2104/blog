@@ -3,7 +3,7 @@ import styled from "styled-components"
 import map from "lodash/map"
 
 const Badge = styled.div`
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.primary ? props.theme.main : props.theme.sub};
   border-radius: 0.25rem;
   color: white;

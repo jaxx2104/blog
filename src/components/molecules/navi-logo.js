@@ -23,10 +23,10 @@ const LogoWrap = styled.h1`
   line-height: 0.5;
   padding: 0 1rem;
   text-rendering: optimizeLegibility;
-  text-transform: ${props => (props.uppercase ? "uppercase" : "none")};
+  text-transform: ${(props) => (props.uppercase ? "uppercase" : "none")};
 
   :hover {
-    color: ${props => props.theme.accent};
+    color: ${(props) => props.theme.accent};
     transition: all 0.4s;
   }
 `

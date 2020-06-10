@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const Heading = styled.h1`
-  color: ${props => props.theme.main};
+  color: ${(props) => props.theme.main};
   padding: 20px 0;
   font-size: 1.4rem;
   font-weight: 700;
@@ -9,7 +9,7 @@ const Heading = styled.h1`
   font-feature-settings: "liga" 1;
 
   :hover {
-    color: ${props => props.theme.sub};
+    color: ${(props) => props.theme.sub};
     transition: all 0.4s;
   }
 `

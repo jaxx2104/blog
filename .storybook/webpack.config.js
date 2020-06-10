@@ -10,18 +10,18 @@ module.exports = ({ config }) => {
   // use @babel/preset-react for JSX and env (instead of staged presets)
   config.module.rules[0].use[0].options.presets = [
     require.resolve("@babel/preset-react"),
-    require.resolve("@babel/preset-env")
+    require.resolve("@babel/preset-env"),
   ]
 
   // use @babel/plugin-proposal-class-properties for class arrow functions
   config.module.rules[0].use[0].options.plugins = [
     require.resolve("@babel/plugin-proposal-class-properties"),
-    require.resolve("babel-plugin-remove-graphql-queries")
+    require.resolve("babel-plugin-remove-graphql-queries"),
   ]
 
   // use babel-plugin-styled-components
   config.module.rules[0].use[0].options.plugins = [
-    require.resolve("babel-plugin-styled-components")
+    require.resolve("babel-plugin-styled-components"),
   ]
 
   // custom config

@@ -16,7 +16,10 @@ stories.add("NaviMenu", () => {
   return (
     <React.Fragment>
       <NaviMenu
-        items={[{ text: "Home", to: "/" }, { text: "Profile", to: "/profile" }]}
+        items={[
+          { text: "Home", to: "/" },
+          { text: "Profile", to: "/profile" },
+        ]}
       />
     </React.Fragment>
   )

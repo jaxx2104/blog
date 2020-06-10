@@ -21,7 +21,7 @@ const PostTemplate = ({ data }) => (
         site={get(data, "site.meta")}
         options={{
           isIndex: false,
-          adsense: get(data, "site.meta.adsense")
+          adsense: get(data, "site.meta.adsense"),
         }}
       />
     </Layout>

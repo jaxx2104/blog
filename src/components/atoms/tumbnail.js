@@ -28,12 +28,12 @@ const Tumbnail = ({ src, title, circle, size, fluid }) =>
 export default Tumbnail
 
 const Image = styled(Img)`
-  border-radius: ${props => (props.circle ? 50 : 0)}%;
+  border-radius: ${(props) => (props.circle ? 50 : 0)}%;
   margin: auto;
-  width: ${props => props.size || 120}px;
+  width: ${(props) => props.size || 120}px;
 `
 
 const Tumb = styled.img`
-  border-radius: ${props => (props.circle ? 50 : 0)}%;
-  width: ${props => props.size || 120}px;
+  border-radius: ${(props) => (props.circle ? 50 : 0)}%;
+  width: ${(props) => props.size || 120}px;
 `

@@ -5,7 +5,7 @@ const Flex = styled.div`
   display: flex;
   flex-direction: row;
   flex-flow: wrap;
-  justify-content: ${props => (props.center ? "center" : "left")};
+  justify-content: ${(props) => (props.center ? "center" : "left")};
 `
 
 export default Flex

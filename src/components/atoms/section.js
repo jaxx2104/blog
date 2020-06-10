@@ -6,19 +6,19 @@ const Section = styled.section`
   padding: 2rem 0;
   position: relative;
   margin: 0 auto;
-  text-align: ${props => (props.center ? "center" : "left")};
-  color: ${props =>
+  text-align: ${(props) => (props.center ? "center" : "left")};
+  color: ${(props) =>
     props.primary || props.dark ? "white" : props.theme.accent};
-  border-bottom: 1px solid ${props => props.theme.sub};
+  border-bottom: 1px solid ${(props) => props.theme.sub};
 
-  background: ${props => {
+  background: ${(props) => {
     if (props.dark) return gradient
     if (props.primary) return props.theme.main
     return "inherit"
   }};
 
   a {
-    color: ${props =>
+    color: ${(props) =>
       props.primary || props.dark ? "white" : props.theme.accent};
   }
 `

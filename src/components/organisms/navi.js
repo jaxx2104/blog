@@ -14,7 +14,7 @@ const Navi = ({ title, isDarkMode, onDarkMode }) => (
         <NaviMenu
           items={[
             { text: "Home", to: "/" },
-            { text: "Profile", to: "/profile" }
+            { text: "Profile", to: "/profile" },
           ]}
         />
         <NaviMenu
@@ -28,7 +28,7 @@ const Navi = ({ title, isDarkMode, onDarkMode }) => (
 export default Navi
 
 const Header = styled.header`
-  background-color: ${props => props.theme.main};
+  background-color: ${(props) => props.theme.main};
   opacity: 0.8;
   padding: 0.5rem 0;
   position: sticky;

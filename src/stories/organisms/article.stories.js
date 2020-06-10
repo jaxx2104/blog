@@ -23,13 +23,13 @@ stories.add("Article", () => {
           title,
           date,
           category: [category],
-          tags: [tag]
+          tags: [tag],
         }}
         html={"saple text"}
         site={{}}
         options={{
           isIndex: false,
-          adsense: null
+          adsense: null,
         }}
       />
     </React.Fragment>

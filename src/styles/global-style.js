@@ -10,8 +10,8 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
-    background-color: ${props => props.theme.background};
-    color: ${props => props.theme.text};
+    background-color: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
     font-family: 'Noto Sans JP', sans-serif!important;
     font-weight: 400;
     text-size-adjust: 100%;
@@ -19,7 +19,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: ${props => props.theme.main};
+    color: ${(props) => props.theme.main};
     font-weight: 100;
     text-decoration: 'none'
   }
@@ -49,9 +49,9 @@ const GlobalStyles = createGlobalStyle`
     }
 
     blockquote {
-      background-color: ${props => props.theme.background};
-      border-left: 5px solid ${props => props.theme.main};
-      color: ${props => props.theme.sub};
+      background-color: ${(props) => props.theme.background};
+      border-left: 5px solid ${(props) => props.theme.main};
+      color: ${(props) => props.theme.sub};
       padding: 0.25em 1.5em;
       margin: 0;
 
@@ -70,7 +70,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     .gatsby-image-wrapper {
-      border: 1px solid ${props => props.theme.sub};
+      border: 1px solid ${(props) => props.theme.sub};
       border-radius: 3px;
     }
 

@@ -2,7 +2,7 @@ import {
   FacebookShareButton,
   TwitterShareButton,
   FacebookIcon,
-  TwitterIcon
+  TwitterIcon,
 } from "react-share"
 import React from "react"
 import styled from "styled-components"
