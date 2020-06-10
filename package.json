@@ -91,12 +91,10 @@
   },
   "lint-staged": {
     "*.{js,json,md}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "*.md": [
-      "npm run lint:textfix",
-      "git add"
+      "npm run lint:textfix"
     ]
   }
 }
