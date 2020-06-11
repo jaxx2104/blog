@@ -1,5 +1,5 @@
 import { storiesOf } from "@storybook/react"
-import { withKnobs, boolean, number, text } from "@storybook/addon-knobs"
+import { withKnobs } from "@storybook/addon-knobs"
 import React from "react"
 
 import IconBox from "components/molecules/icon-box"

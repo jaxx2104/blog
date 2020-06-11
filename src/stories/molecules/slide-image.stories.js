@@ -1,5 +1,5 @@
 import { storiesOf } from "@storybook/react"
-import { withKnobs, boolean, number, text } from "@storybook/addon-knobs"
+import { withKnobs, text } from "@storybook/addon-knobs"
 import React from "react"
 import emergence from "emergence.js"
 

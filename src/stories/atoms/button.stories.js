@@ -1,5 +1,5 @@
 import { storiesOf } from "@storybook/react"
-import { withKnobs, boolean, text } from "@storybook/addon-knobs"
+import { withKnobs, text } from "@storybook/addon-knobs"
 import React from "react"
 
 import Button from "components/atoms/button"
