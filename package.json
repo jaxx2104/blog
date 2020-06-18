@@ -81,8 +81,7 @@
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",
     "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore .",
-    "storybook": "start-storybook -p 6006",
-    "test": "prettier --write \"**/*.+(ts|tsx|json|css|scss)\""
+    "test": "tsc -p ./tsconfig.json"
   },
   "husky": {
     "hooks": {

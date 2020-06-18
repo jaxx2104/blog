@@ -2,7 +2,7 @@ import Img, { FluidObject } from "gatsby-image"
 import React from "react"
 import styled from "styled-components"
 
-/* global __PATH_PREFIX__ */
+declare let __PATH_PREFIX__: any
 const pathPrefix = process.env.NODE_ENV === "development" ? "" : __PATH_PREFIX__
 
 interface Props {

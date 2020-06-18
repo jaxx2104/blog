@@ -1,0 +1,23 @@
+name: Lint
+on:
+  push:
+    branches:
+      - master
+      - staging
+      - develop
+  pull_request:
+    branches:
+      - master
+      - staging
+      - develop
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint

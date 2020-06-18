@@ -10,7 +10,7 @@ const theme = {
   fontSize: 1.4,
   fontWeight: 400,
   fontWeightBold: 900,
-} as const
+}
 
 export const lightTheme = theme
 
@@ -21,4 +21,4 @@ export const darkTheme = {
     colorText: "#fff",
     colorBackground: "#282c35",
   },
-} as const
+}
