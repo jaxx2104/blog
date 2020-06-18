@@ -8,11 +8,14 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/react",
   ],
-  plugins: ["@typescript-eslint", "react", "react-hooks", "prettier"],
+  plugins: ["@typescript-eslint", "react", "import", "react-hooks", "prettier"],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module",
@@ -22,6 +25,8 @@ module.exports = {
   },
   rules: {
     "prettier/prettier": "error",
+    "import/order": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
   },
   settings: {
     react: {

@@ -1,39 +1,51 @@
-import { graphql } from "gatsby"
-import get from "lodash/get"
 import React from "react"
+import { graphql } from "gatsby"
+import { FluidObject } from "gatsby-image"
+import { IndexPageQuery } from "../../types/graphql-types"
+import Article, {
+  FrontFormatter,
+  SiteMetaType,
+} from "../containers/article/article"
+import Layout from "../containers/template"
+import Meta from "../components/meta"
 
-import Meta from "components/atoms/meta"
-import Article from "components/organisms/article"
-import Layout from "components/templates/layout"
+interface Props {
+  data: IndexPageQuery
+}
 
-const BlogIndex = ({ data }) => {
-  const posts = get(data, "remark.posts")
-  const site = get(data, "site.meta")
+const IndexPage: React.FC<Props> = ({ data }: Props) => {
+  const posts = data.remark.posts
+  const site = data.site?.meta as SiteMetaType
   return (
     <Layout>
       <Meta site={site} />
-      {posts.map(({ post }, i) => (
-        <Article
-          key={i}
-          frontmatter={get(post, "frontmatter")}
-          html={get(post, "html")}
-          site={site}
-          options={{ isIndex: true }}
-        />
-      ))}
+      {posts.map(({ post }, i) => {
+        return (
+          <Article
+            key={i}
+            frontmatter={post.frontmatter as FrontFormatter}
+            image={
+              post.frontmatter?.image?.childImageSharp?.fluid as FluidObject
+            }
+            html={post.html || ""}
+            site={site}
+            options={{ isIndex: true }}
+          />
+        )
+      })}
     </Layout>
   )
 }
 
-export default BlogIndex
+export default IndexPage
 
 export const pageQuery = graphql`
-  query IndexQuery {
+  query IndexPage {
     site {
       meta: siteMetadata {
         title
         description
-        url: siteUrl
+        siteUrl
         author
         twitter
         adsense

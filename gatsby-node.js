@@ -1,7 +1,6 @@
-const each = require("lodash/each")
-const Promise = require("bluebird")
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path")
-const PostTemplate = path.resolve("./src/components/templates/post-template.js")
+const PostTemplate = path.resolve("./src/pages/post.tsx")
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -38,7 +37,7 @@ exports.createPages = ({ graphql, actions }) => {
         // Create blog posts & pages.
         const items = data.allFile.edges
         const posts = items.filter(({ node }) => /posts/.test(node.name))
-        each(posts, ({ node }) => {
+        posts.forEach(({ node }) => {
           if (!node.remark) return
           const { path } = node.remark.frontmatter
           createPage({
@@ -48,7 +47,7 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         const pages = items.filter(({ node }) => /page/.test(node.name))
-        each(pages, ({ node }) => {
+        pages.forEach(({ node }) => {
           if (!node.remark) return
           const { name } = path.parse(node.path)
           const PageTemplate = path.resolve(node.path)
@@ -59,18 +58,5 @@ exports.createPages = ({ graphql, actions }) => {
         })
       })
     )
-  })
-}
-
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        "~": __dirname,
-        components: path.resolve(__dirname, "src/components"),
-        plugins: path.resolve(__dirname, "src/plugins"),
-        styles: path.resolve(__dirname, "src/styles"),
-      },
-    },
   })
 }

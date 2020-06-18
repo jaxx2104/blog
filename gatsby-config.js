@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 module.exports = {
   siteMetadata: {
     title: "jaxx2104.info",
@@ -86,6 +87,12 @@ module.exports = {
         mergeCachingHeaders: true,
       },
     },
+    {
+      resolve: "gatsby-plugin-graphql-codegen",
+      options: {
+        fileName: `types/graphql-types.d.ts`,
+      },
+    },
     "gatsby-plugin-catch-links",
     "gatsby-plugin-offline",
     "gatsby-plugin-react-helmet",
@@ -93,6 +100,7 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-twitter",
+    "gatsby-plugin-typescript",
     "gatsby-transformer-sharp",
   ],
 }
