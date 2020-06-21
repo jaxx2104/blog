@@ -80,7 +80,7 @@
     "format": "prettier --write \"**/*.+(ts|tsx|json|md)\" --ignore-path .gitignore",
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",
-    "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore .",
+    "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore src",
     "test": "tsc -p ./tsconfig.json"
   },
   "husky": {
