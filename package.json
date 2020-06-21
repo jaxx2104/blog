@@ -33,11 +33,6 @@
     "@fortawesome/fontawesome-svg-core": "1.2.27",
     "@fortawesome/free-brands-svg-icons": "5.12.1",
     "@fortawesome/react-fontawesome": "0.1.8",
-    "@storybook/addon-actions": "5.3.14",
-    "@storybook/addon-knobs": "5.3.14",
-    "@storybook/addon-links": "5.3.14",
-    "@storybook/addons": "5.3.14",
-    "@storybook/react": "5.3.14",
     "animate.css": "3.7.2",
     "babel-eslint": "10.1.0",
     "babel-plugin-styled-components": "1.10.7",
@@ -73,7 +68,6 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build-storybook": "build-storybook",
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "env NODE_PATH=./src/components gatsby develop",
@@ -81,7 +75,6 @@
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",
     "lint": "eslint --ext .js,.jsx --ignore-path .gitignore .",
-    "storybook": "start-storybook -p 6006",
     "test": "prettier --write \"**/*.+(js|jsx|json|css|scss)\""
   },
   "husky": {
