@@ -1,6 +1,6 @@
+const path = require("path")
 const each = require("lodash/each")
 const Promise = require("bluebird")
-const path = require("path")
 const PostTemplate = path.resolve("./src/components/templates/post-template.js")
 
 exports.createPages = ({ graphql, actions }) => {
