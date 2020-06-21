@@ -5,7 +5,7 @@ module.exports = {
     siteUrl: "https://jaxx2104.info",
     author: "jaxx2104",
     twitter: "jaxx2104",
-    adsense: "ca-pub-3858517603539412"
+    adsense: "ca-pub-3858517603539412",
   },
   pathPrefix: "/",
   plugins: [
@@ -13,15 +13,15 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/content/posts/`,
-        name: "posts"
-      }
+        name: "posts",
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/content/images/`,
-        name: "images"
-      }
+        name: "images",
+      },
     },
     {
       resolve: "gatsby-transformer-remark",
@@ -32,20 +32,20 @@ module.exports = {
             options: {
               maxWidth: 780,
               linkImagesToOriginal: false,
-              wrapperStyle: "margin: 2rem 0"
-            }
+              wrapperStyle: "margin: 2rem 0",
+            },
           },
           {
             resolve: "gatsby-remark-responsive-iframe",
             options: {
-              wrapperStyle: "margin: 2rem 0"
-            }
+              wrapperStyle: "margin: 2rem 0",
+            },
           },
           "gatsby-remark-prismjs",
           "gatsby-remark-copy-linked-files",
-          "gatsby-remark-smartypants"
-        ]
-      }
+          "gatsby-remark-smartypants",
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -62,29 +62,35 @@ module.exports = {
           {
             src: "/img/android-chrome-192x192.png",
             sizes: "192x192",
-            type: "image/png"
+            type: "image/png",
           },
           {
             src: "/img/android-chrome-512x512.png",
             sizes: "512x512",
-            type: "image/png"
-          }
-        ]
-      }
+            type: "image/png",
+          },
+        ],
+      },
     },
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: "UA-24867215-2"
-      }
+        trackingId: "UA-24867215-2",
+      },
     },
     {
       resolve: "gatsby-plugin-netlify",
       options: {
         mergeSecurityHeaders: true,
         mergeLinkHeaders: true,
-        mergeCachingHeaders: true
-      }
+        mergeCachingHeaders: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-graphql-codegen",
+      options: {
+        fileName: `types/graphql-types.d.ts`,
+      },
     },
     "gatsby-plugin-catch-links",
     "gatsby-plugin-offline",
@@ -92,7 +98,8 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-styled-components",
+    "gatsby-plugin-typescript",
     "gatsby-plugin-twitter",
-    "gatsby-transformer-sharp"
-  ]
+    "gatsby-transformer-sharp",
+  ],
 }

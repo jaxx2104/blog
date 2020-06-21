@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
   },
   extends: [
     "plugin:react/recommended",
@@ -13,24 +13,25 @@ module.exports = {
     "plugin:import/typescript",
     "prettier",
     "prettier/@typescript-eslint",
-    "prettier/react"
+    "prettier/react",
   ],
   plugins: ["@typescript-eslint", "react", "import", "react-hooks", "prettier"],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   rules: {
     "prettier/prettier": "error",
     "import/order": "error",
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
   settings: {
     react: {
-      version: "16.13.0"
-    }
-  }
+      version: "16.13.0",
+    },
+  },
 }
