@@ -4,7 +4,6 @@ import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 
-import { siteMetadata } from "~/gatsby-config"
 import Meta from "components/atoms/meta"
 import Lead from "components/atoms/lead"
 import Display from "components/atoms/display"
@@ -17,6 +16,7 @@ import SlideImage from "components/molecules/slide-image"
 import Icon from "components/atoms/icon"
 import Layout from "components/templates/layout"
 import Hr from "components/atoms/hr"
+import { siteMetadata } from "~/gatsby-config"
 
 const UserSection = ({ profile }) => (
   <Section center>

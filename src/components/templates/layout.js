@@ -3,13 +3,13 @@ import emergence from "emergence.js"
 import Helmet from "react-helmet"
 import React from "react"
 
-import { siteMetadata } from "~/gatsby-config"
 import storage from "plugins/storage"
 
 import { light, dark } from "styles/theme"
 import GlobalStyle from "styles/global-style"
 import Footer from "components/organisms/footer"
 import Navi from "components/organisms/navi"
+import { siteMetadata } from "~/gatsby-config"
 
 class Layout extends React.Component {
   constructor() {
