@@ -87,9 +87,9 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-graphql-codegen",
+      resolve: "gatsby-plugin-typegen",
       options: {
-        fileName: `types/graphql-types.d.ts`,
+        outputPath: `types/graphql-types.d.ts`,
       },
     },
     "gatsby-plugin-catch-links",
