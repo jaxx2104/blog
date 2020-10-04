@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Section = styled.section<Props>`
-  padding: 2rem 0;
+  padding: 2rem 0 4rem;
   position: relative;
   margin: 0 auto;
   text-align: ${(props) => (props.center ? "center" : "left")};
@@ -27,10 +27,10 @@ const Section = styled.section<Props>`
 
   a {
     color: ${(props) => {
-      if (props.primary) return "white"
-      if (props.dark) return "white"
-      return props.theme.colorAccent
-    }};
+    if (props.primary) return "white"
+    if (props.dark) return "white"
+    return props.theme.colorAccent
+  }};
   }
 `
 

@@ -7,6 +7,7 @@ import Meta from "../components/meta"
 import ProfileOthers from "../containers/profile/profile-others"
 import ProfileUser from "../containers/profile/profile-user"
 import ProfileWork from "../containers/profile/profile-work"
+import ProfileLink from "../containers/profile/profile-link"
 
 interface Props {
   data: GatsbyTypes.ProfilePageQuery
@@ -18,7 +19,9 @@ const ProfilePage: React.FC<Props> = ({ data }: Props) => (
     <ProfileUser
       profile={data.profile?.childImageSharp?.fluid as FluidObject}
     />
+    <ProfileLink />
     <ProfileWork
+      kawaii={data.kawaii?.childImageSharp?.fluid as FluidObject}
       mockup1={data.mockup1?.childImageSharp?.fluid as FluidObject}
       mockup2={data.mockup2?.childImageSharp?.fluid as FluidObject}
       mockup3={data.mockup3?.childImageSharp?.fluid as FluidObject}
@@ -36,6 +39,13 @@ export const query = graphql`
     profile: file(name: { eq: "profile" }) {
       childImageSharp {
         fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    kawaii: file(name: { eq: "kawaii" }) {
+      childImageSharp {
+        fluid(maxWidth: 200) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
