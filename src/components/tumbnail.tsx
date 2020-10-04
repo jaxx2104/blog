@@ -21,13 +21,9 @@ const Tumbnail: React.FC<Props> = ({
   fluid,
 }: Props) => {
   return fluid ? (
-    <StyledImage
-      alt={title}
-      circle={circle}
-      size={size}
-      fluid={fluid}
-      title={title}
-    />
+    <StyledImage circle={circle} size={size}>
+      <Img alt={title} fluid={fluid} title={title} />
+    </StyledImage>
   ) : (
     <StyledTumbnail
       alt={title}
@@ -41,7 +37,7 @@ const Tumbnail: React.FC<Props> = ({
 
 export default Tumbnail
 
-const StyledImage = styled(Img)<{ circle?: boolean; size: number }>`
+const StyledImage = styled.div<{ circle?: boolean; size: number }>`
   border-radius: ${(props) => (props.circle ? 50 : 0)}%;
   margin: auto;
   width: ${(props) => props.size || 120}px;

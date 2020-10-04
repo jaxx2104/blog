@@ -7,8 +7,6 @@ import Share from "../../components/icon/icon-share"
 import ArticleAd from "./article-ad"
 import ArticleInfo from "./article-info"
 
-type Options = { isIndex: boolean; adsense?: string }
-
 export type SiteMetaType = typeof siteMetadata
 
 interface Props {

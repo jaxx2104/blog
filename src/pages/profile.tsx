@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { FluidObject } from "gatsby-image"
-import { ProfilePageQuery } from "../../types/graphql-types"
 import { siteMetadata } from "../../gatsby-config"
 import Layout from "../containers/templates/layout"
 import Meta from "../components/meta"
@@ -10,7 +9,7 @@ import ProfileUser from "../containers/profile/profile-user"
 import ProfileWork from "../containers/profile/profile-work"
 
 interface Props {
-  data: ProfilePageQuery
+  data: GatsbyTypes.ProfilePageQuery
 }
 
 const ProfilePage: React.FC<Props> = ({ data }: Props) => (
