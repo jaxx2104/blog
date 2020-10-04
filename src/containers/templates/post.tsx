@@ -1,13 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { FluidObject } from "gatsby-image"
-import { PostByPathQuery } from "../../../types/graphql-types"
 import Article, { SiteMetaType } from "../article/article"
 import Meta from "../../components/meta"
 import Layout from "./layout"
 
 interface Props {
-  data: PostByPathQuery
+  data: GatsbyTypes.PostByPathQuery
 }
 
 const PostTemplate = ({ data }: Props) => {

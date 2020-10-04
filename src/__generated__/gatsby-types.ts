@@ -733,13 +733,13 @@ enum FileFieldsEnum {
   childMarkdownRemark___frontmatter___image___publicURL = 'childMarkdownRemark.frontmatter.image.publicURL',
   childMarkdownRemark___frontmatter___image___id = 'childMarkdownRemark.frontmatter.image.id',
   childMarkdownRemark___frontmatter___image___children = 'childMarkdownRemark.frontmatter.image.children',
-  childMarkdownRemark___frontmatter___description = 'childMarkdownRemark.frontmatter.description',
   childMarkdownRemark___frontmatter___category = 'childMarkdownRemark.frontmatter.category',
   childMarkdownRemark___frontmatter___tags = 'childMarkdownRemark.frontmatter.tags',
-  childMarkdownRemark___frontmatter___guid = 'childMarkdownRemark.frontmatter.guid',
-  childMarkdownRemark___frontmatter___id = 'childMarkdownRemark.frontmatter.id',
-  childMarkdownRemark___frontmatter___dsq_thread_id = 'childMarkdownRemark.frontmatter.dsq_thread_id',
+  childMarkdownRemark___frontmatter___description = 'childMarkdownRemark.frontmatter.description',
   childMarkdownRemark___frontmatter___descripton = 'childMarkdownRemark.frontmatter.descripton',
+  childMarkdownRemark___frontmatter___guid = 'childMarkdownRemark.frontmatter.guid',
+  childMarkdownRemark___frontmatter___dsq_thread_id = 'childMarkdownRemark.frontmatter.dsq_thread_id',
+  childMarkdownRemark___frontmatter___id = 'childMarkdownRemark.frontmatter.id',
   childMarkdownRemark___excerpt = 'childMarkdownRemark.excerpt',
   childMarkdownRemark___rawMarkdownBody = 'childMarkdownRemark.rawMarkdownBody',
   childMarkdownRemark___fileAbsolutePath = 'childMarkdownRemark.fileAbsolutePath',
@@ -1576,13 +1576,13 @@ enum MarkdownRemarkFieldsEnum {
   frontmatter___image___childMarkdownRemark___timeToRead = 'frontmatter.image.childMarkdownRemark.timeToRead',
   frontmatter___image___childMarkdownRemark___tableOfContents = 'frontmatter.image.childMarkdownRemark.tableOfContents',
   frontmatter___image___childMarkdownRemark___children = 'frontmatter.image.childMarkdownRemark.children',
-  frontmatter___description = 'frontmatter.description',
   frontmatter___category = 'frontmatter.category',
   frontmatter___tags = 'frontmatter.tags',
-  frontmatter___guid = 'frontmatter.guid',
-  frontmatter___id = 'frontmatter.id',
-  frontmatter___dsq_thread_id = 'frontmatter.dsq_thread_id',
+  frontmatter___description = 'frontmatter.description',
   frontmatter___descripton = 'frontmatter.descripton',
+  frontmatter___guid = 'frontmatter.guid',
+  frontmatter___dsq_thread_id = 'frontmatter.dsq_thread_id',
+  frontmatter___id = 'frontmatter.id',
   excerpt = 'excerpt',
   rawMarkdownBody = 'rawMarkdownBody',
   fileAbsolutePath = 'fileAbsolutePath',
@@ -1710,13 +1710,13 @@ type MarkdownRemarkFrontmatter = {
   readonly layout: Maybe<Scalars['String']>;
   readonly path: Maybe<Scalars['String']>;
   readonly image: Maybe<File>;
-  readonly description: Maybe<Scalars['String']>;
   readonly category: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly guid: Maybe<Scalars['String']>;
-  readonly id: Maybe<Scalars['Int']>;
-  readonly dsq_thread_id: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly description: Maybe<Scalars['String']>;
   readonly descripton: Maybe<Scalars['String']>;
+  readonly guid: Maybe<Scalars['String']>;
+  readonly dsq_thread_id: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly id: Maybe<Scalars['Int']>;
 };
 
 
@@ -1734,13 +1734,13 @@ type MarkdownRemarkFrontmatterFilterInput = {
   readonly layout: Maybe<StringQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly image: Maybe<FileFilterInput>;
-  readonly description: Maybe<StringQueryOperatorInput>;
   readonly category: Maybe<StringQueryOperatorInput>;
   readonly tags: Maybe<StringQueryOperatorInput>;
-  readonly guid: Maybe<StringQueryOperatorInput>;
-  readonly id: Maybe<IntQueryOperatorInput>;
-  readonly dsq_thread_id: Maybe<StringQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
   readonly descripton: Maybe<StringQueryOperatorInput>;
+  readonly guid: Maybe<StringQueryOperatorInput>;
+  readonly dsq_thread_id: Maybe<StringQueryOperatorInput>;
+  readonly id: Maybe<IntQueryOperatorInput>;
 };
 
 type MarkdownRemarkGroupConnection = {
@@ -2610,7 +2610,6 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___mergeSecurityHeaders = 'pluginCreator.pluginOptions.mergeSecurityHeaders',
   pluginCreator___pluginOptions___mergeLinkHeaders = 'pluginCreator.pluginOptions.mergeLinkHeaders',
   pluginCreator___pluginOptions___mergeCachingHeaders = 'pluginCreator.pluginOptions.mergeCachingHeaders',
-  pluginCreator___pluginOptions___outputPath = 'pluginCreator.pluginOptions.outputPath',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator.pluginOptions.pathCheck',
   pluginCreator___nodeAPIs = 'pluginCreator.nodeAPIs',
   pluginCreator___browserAPIs = 'pluginCreator.browserAPIs',
@@ -2832,7 +2831,6 @@ enum SitePluginFieldsEnum {
   pluginOptions___mergeSecurityHeaders = 'pluginOptions.mergeSecurityHeaders',
   pluginOptions___mergeLinkHeaders = 'pluginOptions.mergeLinkHeaders',
   pluginOptions___mergeCachingHeaders = 'pluginOptions.mergeCachingHeaders',
-  pluginOptions___outputPath = 'pluginOptions.outputPath',
   pluginOptions___pathCheck = 'pluginOptions.pathCheck',
   nodeAPIs = 'nodeAPIs',
   browserAPIs = 'browserAPIs',
@@ -2969,7 +2967,6 @@ type SitePluginPluginOptions = {
   readonly mergeSecurityHeaders: Maybe<Scalars['Boolean']>;
   readonly mergeLinkHeaders: Maybe<Scalars['Boolean']>;
   readonly mergeCachingHeaders: Maybe<Scalars['Boolean']>;
-  readonly outputPath: Maybe<Scalars['String']>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
 };
 
@@ -2996,7 +2993,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly mergeSecurityHeaders: Maybe<BooleanQueryOperatorInput>;
   readonly mergeLinkHeaders: Maybe<BooleanQueryOperatorInput>;
   readonly mergeCachingHeaders: Maybe<BooleanQueryOperatorInput>;
-  readonly outputPath: Maybe<StringQueryOperatorInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
 };
 

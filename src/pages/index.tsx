@@ -1,13 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { FluidObject } from "gatsby-image"
-import { IndexPageQuery } from "../../types/graphql-types"
 import Article, { SiteMetaType } from "../containers/article/article"
 import Layout from "../containers/templates/layout"
 import Meta from "../components/meta"
 
 interface Props {
-  data: IndexPageQuery
+  data: GatsbyTypes.IndexPageQuery
 }
 
 const IndexPage: React.FC<Props> = ({ data }: Props) => {
