@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Noto Sans JP', sans-serif!important;
     font-weight: ${(props) => props.theme.fontWeight};
     transition: color 0.2s ease-out, background 0.2s ease-out;
+    line-height: 1.4;
   }
 
   a {
