@@ -27,10 +27,10 @@ const Section = styled.section<Props>`
 
   a {
     color: ${(props) => {
-    if (props.primary) return "white"
-    if (props.dark) return "white"
-    return props.theme.colorAccent
-  }};
+      if (props.primary) return "white"
+      if (props.dark) return "white"
+      return props.theme.colorAccent
+    }};
   }
 `
 
