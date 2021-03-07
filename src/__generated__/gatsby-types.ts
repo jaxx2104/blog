@@ -733,13 +733,13 @@ enum FileFieldsEnum {
   childMarkdownRemark___frontmatter___image___publicURL = 'childMarkdownRemark.frontmatter.image.publicURL',
   childMarkdownRemark___frontmatter___image___id = 'childMarkdownRemark.frontmatter.image.id',
   childMarkdownRemark___frontmatter___image___children = 'childMarkdownRemark.frontmatter.image.children',
+  childMarkdownRemark___frontmatter___description = 'childMarkdownRemark.frontmatter.description',
   childMarkdownRemark___frontmatter___category = 'childMarkdownRemark.frontmatter.category',
   childMarkdownRemark___frontmatter___tags = 'childMarkdownRemark.frontmatter.tags',
-  childMarkdownRemark___frontmatter___description = 'childMarkdownRemark.frontmatter.description',
-  childMarkdownRemark___frontmatter___descripton = 'childMarkdownRemark.frontmatter.descripton',
   childMarkdownRemark___frontmatter___guid = 'childMarkdownRemark.frontmatter.guid',
-  childMarkdownRemark___frontmatter___dsq_thread_id = 'childMarkdownRemark.frontmatter.dsq_thread_id',
   childMarkdownRemark___frontmatter___id = 'childMarkdownRemark.frontmatter.id',
+  childMarkdownRemark___frontmatter___dsq_thread_id = 'childMarkdownRemark.frontmatter.dsq_thread_id',
+  childMarkdownRemark___frontmatter___descripton = 'childMarkdownRemark.frontmatter.descripton',
   childMarkdownRemark___excerpt = 'childMarkdownRemark.excerpt',
   childMarkdownRemark___rawMarkdownBody = 'childMarkdownRemark.rawMarkdownBody',
   childMarkdownRemark___fileAbsolutePath = 'childMarkdownRemark.fileAbsolutePath',
@@ -1576,13 +1576,13 @@ enum MarkdownRemarkFieldsEnum {
   frontmatter___image___childMarkdownRemark___timeToRead = 'frontmatter.image.childMarkdownRemark.timeToRead',
   frontmatter___image___childMarkdownRemark___tableOfContents = 'frontmatter.image.childMarkdownRemark.tableOfContents',
   frontmatter___image___childMarkdownRemark___children = 'frontmatter.image.childMarkdownRemark.children',
+  frontmatter___description = 'frontmatter.description',
   frontmatter___category = 'frontmatter.category',
   frontmatter___tags = 'frontmatter.tags',
-  frontmatter___description = 'frontmatter.description',
-  frontmatter___descripton = 'frontmatter.descripton',
   frontmatter___guid = 'frontmatter.guid',
-  frontmatter___dsq_thread_id = 'frontmatter.dsq_thread_id',
   frontmatter___id = 'frontmatter.id',
+  frontmatter___dsq_thread_id = 'frontmatter.dsq_thread_id',
+  frontmatter___descripton = 'frontmatter.descripton',
   excerpt = 'excerpt',
   rawMarkdownBody = 'rawMarkdownBody',
   fileAbsolutePath = 'fileAbsolutePath',
@@ -1710,13 +1710,13 @@ type MarkdownRemarkFrontmatter = {
   readonly layout: Maybe<Scalars['String']>;
   readonly path: Maybe<Scalars['String']>;
   readonly image: Maybe<File>;
+  readonly description: Maybe<Scalars['String']>;
   readonly category: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly description: Maybe<Scalars['String']>;
-  readonly descripton: Maybe<Scalars['String']>;
   readonly guid: Maybe<Scalars['String']>;
-  readonly dsq_thread_id: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly id: Maybe<Scalars['Int']>;
+  readonly dsq_thread_id: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly descripton: Maybe<Scalars['String']>;
 };
 
 
@@ -1734,13 +1734,13 @@ type MarkdownRemarkFrontmatterFilterInput = {
   readonly layout: Maybe<StringQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly image: Maybe<FileFilterInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
   readonly category: Maybe<StringQueryOperatorInput>;
   readonly tags: Maybe<StringQueryOperatorInput>;
-  readonly description: Maybe<StringQueryOperatorInput>;
-  readonly descripton: Maybe<StringQueryOperatorInput>;
   readonly guid: Maybe<StringQueryOperatorInput>;
-  readonly dsq_thread_id: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<IntQueryOperatorInput>;
+  readonly dsq_thread_id: Maybe<StringQueryOperatorInput>;
+  readonly descripton: Maybe<StringQueryOperatorInput>;
 };
 
 type MarkdownRemarkGroupConnection = {
