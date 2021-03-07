@@ -14,7 +14,7 @@ const PostTemplate = ({ data }: Props) => {
   return (
     <Layout>
       <Meta
-        image={data.post?.frontmatter?.image?.childImageSharp?.sizes?.src}
+        image={data.post?.frontmatter?.image?.childImageSharp?.original?.src}
         path={data.post?.frontmatter?.path || ""}
         site={site}
         title={data.post?.frontmatter?.title || ""}
@@ -72,7 +72,7 @@ export const pageQuery = graphql`
             fluid(maxWidth: 700) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG
             }
-            sizes {
+            original {
               src
             }
           }
