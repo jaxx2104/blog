@@ -4,8 +4,8 @@
   "version": "1.9.119",
   "author": "Futoshi Iwashita <jaxx2104@gmail.com>",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "1.2.34",
-    "@fortawesome/free-brands-svg-icons": "5.15.2",
+    "@fortawesome/fontawesome-svg-core": "1.2.35",
+    "@fortawesome/free-brands-svg-icons": "5.15.3",
     "@fortawesome/react-fontawesome": "0.1.14",
     "font-awesome": "4.7.0",
     "gatsby": "3.0.3",
