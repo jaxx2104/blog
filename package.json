@@ -8,7 +8,7 @@
     "@fortawesome/free-brands-svg-icons": "5.15.3",
     "@fortawesome/react-fontawesome": "0.1.14",
     "font-awesome": "4.7.0",
-    "gatsby": "3.2.0",
+    "gatsby": "3.2.1",
     "gatsby-image": "3.2.0",
     "gatsby-link": "3.2.0",
     "gatsby-plugin-catch-links": "3.2.0",
