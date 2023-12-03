@@ -23,7 +23,7 @@
     "gatsby-plugin-sitemap": "3.3.0",
     "gatsby-plugin-styled-components": "4.15.0",
     "gatsby-plugin-twitter": "3.15.0",
-    "gatsby-plugin-typegen": "^2.2.4",
+    "gatsby-plugin-typegen": "^3.0.0",
     "gatsby-remark-copy-linked-files": "3.2.0",
     "gatsby-remark-images": "4.2.0",
     "gatsby-remark-prismjs": "4.2.0",
