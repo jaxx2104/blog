@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { FluidObject } from "gatsby-image"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import { siteMetadata } from "../../gatsby-config"
 import Layout from "../containers/templates/layout"
 import Meta from "../components/meta"
@@ -17,16 +17,16 @@ const ProfilePage: React.FC<Props> = ({ data }: Props) => (
   <Layout>
     <Meta site={siteMetadata} title="Profile" />
     <ProfileUser
-      profile={data.profile?.childImageSharp?.fluid as FluidObject}
+      profile={data.profile?.childImageSharp?.fluid as IGatsbyImageData}
     />
     <ProfileLink />
     <ProfileWork
-      kawaii={data.kawaii?.childImageSharp?.fluid as FluidObject}
-      mockup1={data.mockup1?.childImageSharp?.fluid as FluidObject}
-      mockup2={data.mockup2?.childImageSharp?.fluid as FluidObject}
-      mockup3={data.mockup3?.childImageSharp?.fluid as FluidObject}
-      work1={data.work1?.childImageSharp?.fluid as FluidObject}
-      work2={data.work2?.childImageSharp?.fluid as FluidObject}
+      kawaii={data.kawaii?.childImageSharp?.fluid as IGatsbyImageData}
+      mockup1={data.mockup1?.childImageSharp?.fluid as IGatsbyImageData}
+      mockup2={data.mockup2?.childImageSharp?.fluid as IGatsbyImageData}
+      mockup3={data.mockup3?.childImageSharp?.fluid as IGatsbyImageData}
+      work1={data.work1?.childImageSharp?.fluid as IGatsbyImageData}
+      work2={data.work2?.childImageSharp?.fluid as IGatsbyImageData}
     />
     <ProfileOthers />
   </Layout>

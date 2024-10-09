@@ -1,14 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 
-import { FluidObject } from "gatsby-image"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import Tumbnail from "../../components/tumbnail"
 import Container from "../../components/container"
 import Flex from "../../components/flex"
 import Section from "../../components/section"
 
 interface Props {
-  profile: FluidObject | FluidObject[] | undefined
+  profile: IGatsbyImageData | IGatsbyImageData[] | undefined
 }
 
 const ProfileUser: React.FC<Props> = ({ profile }: Props) => (
@@ -24,7 +24,13 @@ const ProfileUser: React.FC<Props> = ({ profile }: Props) => (
           <li>2020 ~ : freee</li>
         </BioWrap>
         <UserWrap>
-          <Tumbnail fluid={profile} title="jaxx2104" size={160} />
+          {profile instanceof Array ? (
+            profile.map((f) => (
+              <Tumbnail fluid={f} title="jaxx2104" size={160} />
+            ))
+          ) : (
+            <Tumbnail fluid={profile} title="jaxx2104" size={160} />
+          )}
         </UserWrap>
       </Flex>
     </Container>

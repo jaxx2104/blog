@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { FluidObject } from "gatsby-image"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import Article, { SiteMetaType } from "../article/article"
 import Meta from "../../components/meta"
 import Layout from "./layout"
@@ -31,7 +31,8 @@ const PostTemplate = ({ data }: Props) => {
         }
         tags={(data.post?.frontmatter?.tags as string[]) || null}
         image={
-          data.post?.frontmatter?.image?.childImageSharp?.fluid as FluidObject
+          data.post?.frontmatter?.image?.childImageSharp
+            ?.fluid as IGatsbyImageData
         }
         html={data.post?.html || ""}
         site={site}
