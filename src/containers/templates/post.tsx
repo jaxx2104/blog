@@ -30,10 +30,7 @@ const PostTemplate = ({ data }: Props) => {
             : null
         }
         tags={(data.post?.frontmatter?.tags as string[]) || null}
-        image={
-          data.post?.frontmatter?.image?.childImageSharp
-            ?.fluid as IGatsbyImageData
-        }
+        image={data.post?.frontmatter?.image?.childImageSharp?.gatsbyImageData}
         html={data.post?.html || ""}
         site={site}
         isIndex={false}
@@ -70,9 +67,11 @@ export const pageQuery = graphql`
         date(formatString: "YYYY/MM/DD")
         image {
           childImageSharp {
-            fluid(maxWidth: 700) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
-            }
+            gatsbyImageData(
+              width: 700
+              layout: FULL_WIDTH
+              placeholder: TRACED_SVG
+            )
             original {
               src
             }

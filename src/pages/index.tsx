@@ -27,10 +27,7 @@ const IndexPage: React.FC<Props> = ({ data }: Props) => {
               post?.frontmatter?.category ? [post?.frontmatter?.category] : null
             }
             tags={(post?.frontmatter?.tags as string[]) || null}
-            image={
-              post?.frontmatter?.image?.childImageSharp
-                ?.fluid as IGatsbyImageData
-            }
+            image={post?.frontmatter?.image?.childImageSharp?.gatsbyImageData}
             html={post?.html || ""}
             site={site}
             isIndex={true}
@@ -72,9 +69,11 @@ export const pageQuery = graphql`
             date(formatString: "YYYY/MM/DD")
             image {
               childImageSharp {
-                fluid(maxWidth: 700) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                }
+                gatsbyImageData(
+                  width: 700
+                  layout: FULL_WIDTH
+                  placeholder: TRACED_SVG
+                )
               }
             }
           }
