@@ -5,4 +5,7 @@ public
 .intermediate-representation/
 .cache/
 .vscode/
-.yarn/
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
