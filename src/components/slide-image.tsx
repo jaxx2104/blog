@@ -14,8 +14,8 @@ const SlideImage: React.FC<Props> = ({ fluid, src, title }: Props) => {
   return (
     <>
       {fluid instanceof Array ? (
-        fluid.map((f) => (
-          <Tumbnail fluid={f} src={src} title={title} size={200} />
+        fluid.map((f, i) => (
+          <Tumbnail key={i} fluid={f} src={src} title={title} size={200} />
         ))
       ) : (
         <Tumbnail fluid={fluid} src={src} title={title} size={200} />

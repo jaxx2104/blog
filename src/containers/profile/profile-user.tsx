@@ -25,8 +25,8 @@ const ProfileUser: React.FC<Props> = ({ profile }: Props) => (
         </BioWrap>
         <UserWrap>
           {profile instanceof Array ? (
-            profile.map((f) => (
-              <Tumbnail fluid={f} title="jaxx2104" size={160} />
+            profile.map((f, i) => (
+              <Tumbnail key={i} fluid={f} title="jaxx2104" size={160} />
             ))
           ) : (
             <Tumbnail fluid={profile} title="jaxx2104" size={160} />
