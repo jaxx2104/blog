@@ -1,5 +1,4 @@
 import React from "react"
-import { Helmet } from "react-helmet"
 
 export type Site = {
   title: string
@@ -25,7 +24,7 @@ const Meta: React.FC<Props> = ({ image, path = "", site, title }: Props) => {
   const metaImage = image ? `${siteUrl}${image}` : `${siteUrl}/img/back.jpeg`
 
   return (
-    <Helmet>
+    <>
       <title>{metaTitle}</title>
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content={`@${site.twitter}`} />
@@ -38,7 +37,7 @@ const Meta: React.FC<Props> = ({ image, path = "", site, title }: Props) => {
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Permanent+Marker&display=swap"
         rel="stylesheet"
       />
-    </Helmet>
+    </>
   )
 }
 export default Meta
