@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.23.3",
+    "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-helmet": "6.1.9",
     "@types/styled-components": "5.1.34",

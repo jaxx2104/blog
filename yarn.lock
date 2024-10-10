@@ -4831,7 +4831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:>=10.0.0":
+"@types/node@npm:>=10.0.0, @types/node@npm:^22.7.5":
   version: 22.7.5
   resolution: "@types/node@npm:22.7.5"
   dependencies:
@@ -6560,6 +6560,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": "npm:6.6.0"
     "@fortawesome/free-brands-svg-icons": "npm:6.6.0"
     "@fortawesome/react-fontawesome": "npm:0.2.2"
+    "@types/node": "npm:^22.7.5"
     "@types/react": "npm:^18.3.11"
     "@types/react-helmet": "npm:6.1.9"
     "@types/styled-components": "npm:5.1.34"
