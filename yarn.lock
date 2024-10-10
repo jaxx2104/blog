@@ -4911,6 +4911,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react@npm:^18.3.11":
+  version: 18.3.11
+  resolution: "@types/react@npm:18.3.11"
+  dependencies:
+    "@types/prop-types": "npm:*"
+    csstype: "npm:^3.0.2"
+  checksum: 10c0/ce80512246ca5bda69db85b9f4f1835189334acfb6b2c4f3eda8cabff1ff1a3ea9ce4f3b895bdbc18c94140aa45592331aa3fdeb557f525c1b048de7ce84fc0e
+  languageName: node
+  linkType: hard
+
 "@types/readable-stream@npm:^2.3.9":
   version: 2.3.9
   resolution: "@types/readable-stream@npm:2.3.9"
@@ -6570,6 +6580,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": "npm:6.6.0"
     "@fortawesome/free-brands-svg-icons": "npm:6.6.0"
     "@fortawesome/react-fontawesome": "npm:0.2.2"
+    "@types/react": "npm:^18.3.11"
     "@types/react-helmet": "npm:6.1.9"
     "@types/styled-components": "npm:5.1.32"
     "@typescript-eslint/eslint-plugin": "npm:4.33.0"
