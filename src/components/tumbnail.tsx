@@ -1,4 +1,4 @@
-import Img, { FluidObject } from "gatsby-image"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
 
@@ -7,7 +7,7 @@ const pathPrefix = process.env.NODE_ENV === "development" ? "" : __PATH_PREFIX__
 
 interface Props {
   circle?: boolean
-  fluid: FluidObject | FluidObject[] | undefined
+  fluid: IGatsbyImageData | undefined
   size: number
   src?: string
   title: string
@@ -22,7 +22,7 @@ const Tumbnail: React.FC<Props> = ({
 }: Props) => {
   return fluid ? (
     <StyledImage circle={circle} size={size}>
-      <Img alt={title} fluid={fluid} title={title} />
+      <GatsbyImage alt={title} image={fluid} title={title} />
     </StyledImage>
   ) : (
     <StyledTumbnail

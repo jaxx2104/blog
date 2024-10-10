@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import { FluidObject } from "gatsby-image"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import Display from "../../components/display"
 import Container from "../../components/container"
 import Flex from "../../components/flex"
@@ -9,12 +9,12 @@ import Section from "../../components/section"
 import SlideImage from "../../components/slide-image"
 
 interface Props {
-  kawaii: FluidObject | FluidObject[] | undefined
-  mockup1: FluidObject | FluidObject[] | undefined
-  mockup2: FluidObject | FluidObject[] | undefined
-  mockup3: FluidObject | FluidObject[] | undefined
-  work1: FluidObject | FluidObject[] | undefined
-  work2: FluidObject | FluidObject[] | undefined
+  kawaii: IGatsbyImageData | IGatsbyImageData[] | undefined
+  mockup1: IGatsbyImageData | IGatsbyImageData[] | undefined
+  mockup2: IGatsbyImageData | IGatsbyImageData[] | undefined
+  mockup3: IGatsbyImageData | IGatsbyImageData[] | undefined
+  work1: IGatsbyImageData | IGatsbyImageData[] | undefined
+  work2: IGatsbyImageData | IGatsbyImageData[] | undefined
 }
 
 const ProfileWork: React.FC<Props> = ({
