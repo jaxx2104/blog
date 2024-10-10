@@ -56,8 +56,6 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "gh-pages": "3.2.3",
-    "husky": "4.3.8",
-    "lint-staged": "10.5.4",
     "prettier": "2.8.8",
     "styled-components": "6.1.13",
     "textlint": "11.9.1",
@@ -82,20 +80,5 @@
     "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore src",
     "test": "tsc -p ./tsconfig.json"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.md": [
-      "npm run lint:textfix",
-      "git add"
-    ]
-  },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "pnpm@9.12.1"
 }
