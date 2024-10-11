@@ -1,5 +1,5 @@
 import React from "react"
-import Img, { FluidObject } from "gatsby-image"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { siteMetadata } from "../../../gatsby-config"
 import Button from "../../components/button"
 import Container from "../../components/container"
@@ -16,7 +16,7 @@ interface Props {
   description: string
   categories: string[] | null
   tags: string[] | null
-  image: FluidObject
+  image: IGatsbyImageData
   html: string
   site: SiteMetaType
   isIndex: boolean
@@ -54,7 +54,7 @@ const Article: React.FC<Props> = ({
       />
       <div className="content">
         <p>{description}</p>
-        {image && <Img fluid={image} />}
+        {image && <GatsbyImage image={image} alt={title} />}
       </div>
       <div
         className="content"

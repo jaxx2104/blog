@@ -8,30 +8,30 @@
     "@fortawesome/free-brands-svg-icons": "6.6.0",
     "@fortawesome/react-fontawesome": "0.2.2",
     "font-awesome": "4.7.0",
-    "gatsby": "3.15.0",
-    "gatsby-image": "3.11.0",
-    "gatsby-link": "3.15.0",
-    "gatsby-plugin-catch-links": "3.15.0",
-    "gatsby-plugin-feed": "3.15.0",
-    "gatsby-plugin-google-analytics": "3.15.0",
-    "gatsby-plugin-manifest": "3.15.0",
-    "gatsby-plugin-netlify": "3.14.0",
-    "gatsby-plugin-nprogress": "3.15.0",
-    "gatsby-plugin-offline": "4.15.0",
-    "gatsby-plugin-react-helmet": "4.15.0",
-    "gatsby-plugin-sharp": "3.14.0",
-    "gatsby-plugin-sitemap": "3.3.0",
-    "gatsby-plugin-styled-components": "4.15.0",
-    "gatsby-plugin-twitter": "3.15.0",
+    "gatsby": "^4.25.9",
+    "gatsby-link": "^4.25.0",
+    "gatsby-plugin-catch-links": "^4.25.0",
+    "gatsby-plugin-feed": "^4.25.0",
+    "gatsby-plugin-google-analytics": "^4.25.0",
+    "gatsby-plugin-image": "^3.13.1",
+    "gatsby-plugin-manifest": "^4.25.0",
+    "gatsby-plugin-netlify": "^4.4.0",
+    "gatsby-plugin-nprogress": "^4.25.0",
+    "gatsby-plugin-offline": "^5.25.0",
+    "gatsby-plugin-pnpm": "^1.2.10",
+    "gatsby-plugin-sharp": "^4.25.1",
+    "gatsby-plugin-sitemap": "^5.25.0",
+    "gatsby-plugin-styled-components": "^5.25.0",
+    "gatsby-plugin-twitter": "^4.25.0",
     "gatsby-plugin-typegen": "^2.2.4",
-    "gatsby-remark-copy-linked-files": "3.2.0",
-    "gatsby-remark-images": "4.2.0",
-    "gatsby-remark-prismjs": "4.2.0",
-    "gatsby-remark-responsive-iframe": "3.2.0",
-    "gatsby-remark-smartypants": "3.2.0",
-    "gatsby-source-filesystem": "3.15.0",
-    "gatsby-transformer-remark": "3.2.0",
-    "gatsby-transformer-sharp": "3.15.0",
+    "gatsby-remark-copy-linked-files": "^5.25.0",
+    "gatsby-remark-images": "^6.25.0",
+    "gatsby-remark-prismjs": "^6.25.0",
+    "gatsby-remark-responsive-iframe": "^5.25.0",
+    "gatsby-remark-smartypants": "^5.25.0",
+    "gatsby-source-filesystem": "^4.25.0",
+    "gatsby-transformer-remark": "^5.25.1",
+    "gatsby-transformer-sharp": "^4.25.0",
     "localforage": "1.10.0",
     "modern-normalize": "1.1.0",
     "prismjs": "1.29.0",
@@ -42,12 +42,14 @@
     "react-share": "4.4.1"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "7.23.3",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
     "@types/react-helmet": "6.1.9",
-    "@types/styled-components": "5.1.32",
+    "@types/styled-components": "5.1.34",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
-    "@babel/eslint-parser": "7.23.3",
-    "babel-plugin-styled-components": "1.13.3",
+    "babel-plugin-styled-components": "2.1.4",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.10.0",
     "eslint-plugin-import": "2.29.0",
@@ -55,14 +57,12 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "gh-pages": "3.2.3",
-    "husky": "4.3.8",
-    "lint-staged": "10.5.4",
     "prettier": "2.8.8",
-    "styled-components": "5.3.11",
+    "styled-components": "6.1.13",
     "textlint": "11.9.1",
     "textlint-rule-preset-ja-spacing": "2.3.0",
     "textlint-rule-preset-japanese": "5.0.0",
-    "typescript": "4.9.5"
+    "typescript": "5.6.3"
   },
   "keywords": [
     "gatsby",
@@ -72,28 +72,14 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
-    "develop": "env NODE_PATH=./src/components gatsby develop",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider gatsby build",
+    "deploy": "NODE_OPTIONS=--openssl-legacy-provider gatsby build --prefix-paths && gh-pages -d public",
+    "develop": "NODE_OPTIONS=--openssl-legacy-provider NODE_PATH=./src/components gatsby develop",
     "format": "prettier --write \"**/*.+(ts|tsx|json|md)\" --ignore-path .gitignore",
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",
     "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore src",
-    "test": "npx tsc -p ./tsconfig.json"
+    "test": "tsc -p ./tsconfig.json"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.md": [
-      "npm run lint:textfix",
-      "git add"
-    ]
-  }
+  "packageManager": "pnpm@9.12.1"
 }
