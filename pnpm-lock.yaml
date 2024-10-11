@@ -50,6 +50,9 @@ importers:
       gatsby-plugin-offline:
         specifier: ^5.25.0
         version: 5.25.0(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      gatsby-plugin-pnpm:
+        specifier: ^1.2.10
+        version: 1.2.10(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))
       gatsby-plugin-sharp:
         specifier: ^4.25.1
         version: 4.25.1(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(graphql@15.9.0)
@@ -3635,6 +3638,11 @@ packages:
     engines: {node: '>=14.15.0'}
     peerDependencies:
       gatsby: ^4.0.0-next
+
+  gatsby-plugin-pnpm@1.2.10:
+    resolution: {integrity: sha512-29xjIakNEUY42OBb3wI9Thmawr5EcUUOB3dB8nE51yr/TfKQFCREk+HAOATQHTNedG3VZhgU4wVjl2V3wgOXJA==}
+    peerDependencies:
+      gatsby: ~2.x.x || ~3.x.x || ~4.x.x
 
   gatsby-plugin-sharp@4.25.1:
     resolution: {integrity: sha512-cGRb8lmwJkzwT1Qze0R+VL+55BIb9weM17m+dUf6gs5Z++lQltqge+L8a1qWWsGL6KfLQN7+bIqjhmTTscIPMQ==}
@@ -10166,7 +10174,7 @@ snapshots:
   capital-case@1.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
       upper-case-first: 2.0.2
 
   ccount@1.1.0: {}
@@ -10430,7 +10438,7 @@ snapshots:
   constant-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
       upper-case: 2.0.2
 
   content-disposition@0.5.4:
@@ -10860,7 +10868,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
 
   dot-prop@5.3.0:
     dependencies:
@@ -11938,6 +11946,12 @@ snapshots:
       - graphql
       - supports-color
 
+  gatsby-plugin-pnpm@1.2.10(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3)):
+    dependencies:
+      gatsby: 4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3)
+      lodash.get: 4.4.2
+      lodash.uniq: 4.5.0
+
   gatsby-plugin-sharp@4.25.1(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(graphql@15.9.0):
     dependencies:
       '@babel/runtime': 7.25.7
@@ -12703,7 +12717,7 @@ snapshots:
   header-case@2.0.4:
     dependencies:
       capital-case: 1.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
 
   hoist-non-react-statics@3.3.2:
     dependencies:
@@ -13980,7 +13994,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
 
   parent-module@1.0.1:
     dependencies:
@@ -14083,7 +14097,7 @@ snapshots:
   path-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
 
   path-exists@3.0.0: {}
 
@@ -15008,7 +15022,7 @@ snapshots:
   sentence-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
       upper-case-first: 2.0.2
 
   sentence-splitter@1.2.0:
@@ -15157,7 +15171,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.7.0
 
   socket.io-adapter@2.4.0: {}
 
