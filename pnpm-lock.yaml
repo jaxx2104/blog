@@ -42,8 +42,8 @@ importers:
         specifier: ^4.25.0
         version: 4.25.0(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(graphql@15.9.0)
       gatsby-plugin-netlify:
-        specifier: ^4.4.0
-        version: 4.4.0(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(webpack@5.95.0)
+        specifier: ^5.0.0
+        version: 5.1.1(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(webpack@5.95.0)
       gatsby-plugin-nprogress:
         specifier: ^4.25.0
         version: 4.25.0(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))
@@ -3613,11 +3613,11 @@ packages:
     peerDependencies:
       gatsby: ^4.0.0-next
 
-  gatsby-plugin-netlify@4.4.0:
-    resolution: {integrity: sha512-AfgcTsD4T+dvgoQlbTxIIdLRFV6wj96JTXcN6EoQBzC+XYQUFWYLTAVxM1NnQ3OhVm8FDKsMlT41BpnpQzBVFw==}
-    engines: {node: '>=12.13.0'}
+  gatsby-plugin-netlify@5.1.1:
+    resolution: {integrity: sha512-CembvYjbP7NJvVIdffqWaBKXMHIxYBKBEoXFGvCKX+8phRNkfmjnvoljoOakv0ypHBpgjgtpa7Nvc3PI+IjB1A==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
-      gatsby: ^4.0.0
+      gatsby: ^4.0.0 || ^5.0.0
 
   gatsby-plugin-nprogress@4.25.0:
     resolution: {integrity: sha512-euUOETtrv2AonJilIawILEGmxxp+13lTEn6j005ri5qPPJwD9x6plITUdlYWweP0Ktr3oPaIldJhvVAUTXxyDg==}
@@ -4697,6 +4697,9 @@ packages:
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
+
+  lodash.mergewith@4.6.2:
+    resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
 
   lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
@@ -11895,14 +11898,14 @@ snapshots:
     transitivePeerDependencies:
       - graphql
 
-  gatsby-plugin-netlify@4.4.0(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(webpack@5.95.0):
+  gatsby-plugin-netlify@5.1.1(gatsby@4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3))(webpack@5.95.0):
     dependencies:
       '@babel/runtime': 7.25.7
-      fs-extra: 10.1.0
+      fs-extra: 11.2.0
       gatsby: 4.25.9(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(type-fest@0.21.3)(typescript@5.6.3)
-      gatsby-core-utils: 3.25.0
+      gatsby-core-utils: 4.13.1
       kebab-hash: 0.1.2
-      lodash: 4.17.21
+      lodash.mergewith: 4.6.2
       webpack-assets-manifest: 5.2.1(webpack@5.95.0)
     transitivePeerDependencies:
       - webpack
@@ -13372,6 +13375,8 @@ snapshots:
   lodash.memoize@4.1.2: {}
 
   lodash.merge@4.6.2: {}
+
+  lodash.mergewith@4.6.2: {}
 
   lodash.sortby@4.7.0: {}
 
