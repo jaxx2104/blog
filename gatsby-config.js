@@ -5,9 +5,9 @@ module.exports = {
     siteUrl: "https://jaxx2104.info",
     author: "jaxx2104",
     twitter: "jaxx2104",
-    adsense: "ca-pub-3858517603539412",
   },
   pathPrefix: "/",
+  trailingSlash: "ignore",
   plugins: [
     {
       resolve: "gatsby-source-filesystem",
@@ -81,13 +81,13 @@ module.exports = {
       resolve: "gatsby-plugin-netlify",
       options: {
         mergeSecurityHeaders: true,
-        mergeLinkHeaders: true,
         mergeCachingHeaders: true,
       },
     },
     "gatsby-plugin-catch-links",
+    "gatsby-plugin-image",
     "gatsby-plugin-offline",
-    "gatsby-plugin-pnpm",
+    "gatsby-plugin-pnpm-gatsby-5",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-styled-components",

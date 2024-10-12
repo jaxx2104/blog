@@ -4,7 +4,7 @@ date: "2018-11-15T00:00:00+00:00"
 author: jaxx2104
 layout: post
 path: /smarthome-xiaomi
-image:
+image: "smarthome.jpeg"
 description: スマートホームはラズパイで自作しなくても安く構築できる時代
 category: メモ
 tags:
@@ -48,7 +48,7 @@ Google Home アプリは機能面でも UI でも快適。
 ## Xiaomi 家電のコスパが良すぎる
 
 購入して思うのが AI アシスタントと連携できるスマート家電は少ないし、高すぎる。
-そんな中で Xiaomi の家電は安いし使い勝手もいいのでおすすめしたい。
+そんな中で Xiaomi の家電は安いし使い勝手もいいのでオススメしたい。
 
 <blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr">書斎とベットをXiaomiの電飾でオシャンティにした。スマート家電なので完璧。 <a href="https://t.co/Z8SUyFmw4L">pic.twitter.com/Z8SUyFmw4L</a></p>&mdash; ᴊᴀxx₂₁₀₄ (@jaxx2104) <a href="https://twitter.com/jaxx2104/status/1048591056600629248?ref_src=twsrc%5Etfw">October 6, 2018</a></blockquote>
 

@@ -34,7 +34,6 @@ const PostTemplate = ({ data }: Props) => {
         html={data.post?.html || ""}
         site={site}
         isIndex={false}
-        adsense={site?.adsense}
       />
     </Layout>
   )
@@ -51,7 +50,6 @@ export const pageQuery = graphql`
         siteUrl
         author
         twitter
-        adsense
       }
     }
     post: markdownRemark(frontmatter: { path: { eq: $path } }) {
@@ -69,8 +67,8 @@ export const pageQuery = graphql`
           childImageSharp {
             gatsbyImageData(
               width: 700
-              layout: FULL_WIDTH
-              placeholder: TRACED_SVG
+              layout: CONSTRAINED
+              placeholder: DOMINANT_COLOR
             )
             original {
               src

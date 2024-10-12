@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { IGatsbyImageData } from "gatsby-plugin-image"
-import Article, { SiteMetaType } from "../containers/article/article"
+import Article, { SiteMetaType } from "../containers/article/article-index"
 import Layout from "../containers/templates/layout"
 import Meta from "../components/meta"
 
@@ -27,11 +26,6 @@ const IndexPage: React.FC<Props> = ({ data }: Props) => {
               post?.frontmatter?.category ? [post?.frontmatter?.category] : null
             }
             tags={(post?.frontmatter?.tags as string[]) || null}
-            image={post?.frontmatter?.image?.childImageSharp?.gatsbyImageData}
-            html={post?.html || ""}
-            site={site}
-            isIndex={true}
-            adsense={null}
           />
         )
       })}
@@ -50,15 +44,21 @@ export const pageQuery = graphql`
         siteUrl
         author
         twitter
-        adsense
       }
     }
-    remark: allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
+    image: file(name: { eq: "image" }) {
+      childImageSharp {
+        gatsbyImageData(
+          width: 100
+          height: 100
+          layout: FIXED
+          placeholder: DOMINANT_COLOR
+        )
+      }
+    }
+    remark: allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
       posts: edges {
         post: node {
-          html
           frontmatter {
             layout
             title
@@ -67,15 +67,6 @@ export const pageQuery = graphql`
             tags
             description
             date(formatString: "YYYY/MM/DD")
-            image {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 700
-                  layout: FULL_WIDTH
-                  placeholder: TRACED_SVG
-                )
-              }
-            }
           }
         }
       }

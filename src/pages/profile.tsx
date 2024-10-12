@@ -36,37 +36,65 @@ export const query = graphql`
   query ProfilePage {
     profile: file(name: { eq: "profile" }) {
       childImageSharp {
-        gatsbyImageData(width: 700, layout: FULL_WIDTH, placeholder: TRACED_SVG)
+        gatsbyImageData(
+          width: 700
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+        )
       }
     }
     kawaii: file(name: { eq: "kawaii" }) {
       childImageSharp {
-        gatsbyImageData(width: 700, layout: FULL_WIDTH, placeholder: TRACED_SVG)
+        gatsbyImageData(
+          width: 700
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+        )
       }
     }
     mockup1: file(name: { eq: "mockup1" }) {
       childImageSharp {
-        gatsbyImageData(width: 700, layout: FULL_WIDTH, placeholder: TRACED_SVG)
+        gatsbyImageData(
+          width: 700
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+        )
       }
     }
     mockup2: file(name: { eq: "mockup2" }) {
       childImageSharp {
-        gatsbyImageData(width: 700, layout: FULL_WIDTH, placeholder: TRACED_SVG)
+        gatsbyImageData(
+          width: 700
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+        )
       }
     }
     mockup3: file(name: { eq: "mockup3" }) {
       childImageSharp {
-        gatsbyImageData(width: 700, layout: FULL_WIDTH, placeholder: TRACED_SVG)
+        gatsbyImageData(
+          width: 700
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+        )
       }
     }
     work1: file(name: { eq: "work1" }) {
       childImageSharp {
-        gatsbyImageData(width: 700, layout: FULL_WIDTH, placeholder: TRACED_SVG)
+        gatsbyImageData(
+          width: 700
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+        )
       }
     }
     work2: file(name: { eq: "work2" }) {
       childImageSharp {
-        gatsbyImageData(width: 700, layout: FULL_WIDTH, placeholder: TRACED_SVG)
+        gatsbyImageData(
+          width: 700
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+        )
       }
     }
   }

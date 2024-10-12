@@ -6,6 +6,7 @@ import Tumbnail from "../../components/tumbnail"
 import Container from "../../components/container"
 import Flex from "../../components/flex"
 import Section from "../../components/section"
+import Display from "../../components/display"
 
 interface Props {
   profile: IGatsbyImageData | IGatsbyImageData[] | undefined
@@ -16,11 +17,11 @@ const ProfileUser: React.FC<Props> = ({ profile }: Props) => (
     <Container>
       <Flex>
         <BioWrap>
-          <h2>Futoshi Iwashita</h2>
+          <Display>Futoshi Iwashita</Display>
           <strong>jaxx2104</strong>
           <p> I&apos;m a front-end engineer in Japan 🗼</p>
-          <li>2013 ~ 2017: J-CAST News</li>
-          <li>2017 ~ : Recruit</li>
+          <li>2013 ~ 2017: J-CAST</li>
+          <li>2017 ~ 2020: Recruit</li>
           <li>2020 ~ : freee</li>
         </BioWrap>
         <UserWrap>
