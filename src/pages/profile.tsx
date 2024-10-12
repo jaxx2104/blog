@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import { siteMetadata } from "../../gatsby-config"
 import Layout from "../containers/templates/layout"
 import Meta from "../components/meta"

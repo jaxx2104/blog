@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import Article, { SiteMetaType } from "../article/article"
 import Meta from "../../components/meta"
 import Layout from "./layout"
@@ -33,7 +32,6 @@ const PostTemplate = ({ data }: Props) => {
         image={data.post?.frontmatter?.image?.childImageSharp?.gatsbyImageData}
         html={data.post?.html || ""}
         site={site}
-        isIndex={false}
       />
     </Layout>
   )
