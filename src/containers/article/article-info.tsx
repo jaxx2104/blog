@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "gatsby-link"
+import { Link } from "gatsby"
 import styled from "styled-components"
 
 import Badges from "../../components/badges"
@@ -22,18 +22,26 @@ const ArticleInfo: React.FC<Props> = ({
   tags,
 }: Props) => (
   <InfoWrap>
-    <Link style={{ textDecoration: "none" }} to={path}>
+    <Link
+      style={{ textDecoration: "none", display: "block", margin: "0.5rem 0" }}
+      to={path}
+    >
       <Heading>{title}</Heading>
+    </Link>
+    <div style={{ margin: "0.5rem 0", display: "flex", columnGap: "0.5rem" }}>
       <Time date={date} />
       <Badges items={categories} primary />
       <Badges items={tags} />
-    </Link>
+    </div>
   </InfoWrap>
 )
 
 export default ArticleInfo
 
 const InfoWrap = styled.div`
-  margin: 2rem 0;
+  display: flex;
+  height: 7.5rem;
+  flex-direction: column;
+  justify-content: center;
   word-break: break-word;
 `

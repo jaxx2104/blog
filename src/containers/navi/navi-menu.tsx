@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "gatsby-link"
+import { Link } from "gatsby"
 import styled from "styled-components"
 
 type Item = {
@@ -35,9 +35,10 @@ const MenuWrap = styled.div`
 const MenuItem = styled.p`
   color: white;
   cursor: pointer;
-  margin: 0 8px;
+  margin-right: 1rem;
+  font-size: ${(props) => `${props.theme.fontSize}rem`};
 
-  :hover {
+  &:hover {
     color: ${(props) => props.theme.colorAccent};
     transition: color 0.2s ease-out;
   }

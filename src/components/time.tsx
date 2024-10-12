@@ -15,8 +15,7 @@ const TimeWrap = styled.time`
   color: ${(props) => props.theme.colorSub};
   display: inline-block;
   font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
-  font-weight: ${(props) => props.theme.fontWeightBold};
-  margin-right: 8px;
+  font-weight: ${(props) => props.theme.fontWeight};
   text-align: center;
   vertical-align: baseline;
 `

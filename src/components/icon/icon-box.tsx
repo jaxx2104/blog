@@ -36,7 +36,7 @@ const BoxWrap = styled.div`
     width: 50%;
   }
 
-  :hover {
+  &:hover {
     animation: ${move} 0.3s linear;
   }
 `

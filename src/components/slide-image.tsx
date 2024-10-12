@@ -27,7 +27,7 @@ const SlideImage: React.FC<Props> = ({ fluid, src, title }: Props) => {
 export default SlideImage
 
 const Capture = styled.p`
-  font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
+  font-size: ${(props) => `${props.theme.fontSizeLargeSmall}rem`};
   font-weight: ${(props) => props.theme.fontWeightBold};
   font-family: "Courier New", Courier, monospace;
   text-align: center;

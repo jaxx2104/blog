@@ -6,7 +6,6 @@ export type Site = {
   siteUrl: string
   author: string
   twitter: string
-  adsense: string
 }
 
 interface Props {

@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "gatsby-link"
+import { Link } from "gatsby"
 import styled from "styled-components"
 
 interface Props {
@@ -25,7 +25,7 @@ const StyledButton = styled.button<{ primary: boolean }>`
     props.primary ? props.theme.colorMain : props.theme.colorSub};
   cursor: pointer;
   display: block;
-  font-size: 1rem;
+  font-size: ${(props) => `${props.theme.fontSizeLarge}rem`};
   font-weight: ${(props) => props.theme.fontWeightBold};
   text-align: center;
   user-select: none;
@@ -33,7 +33,7 @@ const StyledButton = styled.button<{ primary: boolean }>`
   width: 100%;
   height: 48px;
 
-  :hover {
+  &:hover {
     transition: color 0.2s ease-out, background 0.2s ease-out;
     background-color: ${(props) =>
       props.primary ? props.theme.colorMain : props.theme.colorSub};

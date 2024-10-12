@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import Article, { SiteMetaType } from "../article/article"
 import Meta from "../../components/meta"
 import Layout from "./layout"
@@ -33,8 +32,6 @@ const PostTemplate = ({ data }: Props) => {
         image={data.post?.frontmatter?.image?.childImageSharp?.gatsbyImageData}
         html={data.post?.html || ""}
         site={site}
-        isIndex={false}
-        adsense={site?.adsense}
       />
     </Layout>
   )
@@ -51,7 +48,6 @@ export const pageQuery = graphql`
         siteUrl
         author
         twitter
-        adsense
       }
     }
     post: markdownRemark(frontmatter: { path: { eq: $path } }) {
@@ -69,8 +65,8 @@ export const pageQuery = graphql`
           childImageSharp {
             gatsbyImageData(
               width: 700
-              layout: FULL_WIDTH
-              placeholder: TRACED_SVG
+              layout: CONSTRAINED
+              placeholder: DOMINANT_COLOR
             )
             original {
               src

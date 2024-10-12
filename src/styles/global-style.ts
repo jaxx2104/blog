@@ -11,8 +11,9 @@ const GlobalStyles = createGlobalStyle`
     color: ${(props) => props.theme.colorText};
     font-family: 'Noto Sans JP', sans-serif!important;
     font-weight: ${(props) => props.theme.fontWeight};
+    font-size: ${(props) => `${props.theme.fontSize}rem`};
     transition: color 0.2s ease-out, background 0.2s ease-out;
-    line-height: 1.4;
+    line-height: 1.25rem;
   }
 
   a {
@@ -21,10 +22,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .content {
-    margin: 40px 0;
+    margin: 0;
     padding: 0;
-    font-size: 1rem;
-    line-height: 2;
 
     h1,
     h2,

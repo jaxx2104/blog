@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
 const Hr = styled.hr`
-  max-width: 50px;
+  max-width: 5rem;
   margin: 2rem auto;
   border: 0;
-  border-top: 3px solid ${(props) => props.theme.colorMain};
+  border-top: 3px solid ${(props) => props.theme.colorSub};
 `
 
 export default Hr

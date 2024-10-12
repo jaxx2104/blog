@@ -38,6 +38,7 @@ export default Navi
 const Header = styled.header`
   background-color: ${(props) => props.theme.colorMain};
   position: sticky;
+  margin-bottom: 1rem;
   top: 0;
   z-index: 1;
 
