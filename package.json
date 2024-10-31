@@ -80,5 +80,5 @@
     "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore src",
     "test": "tsc -p ./tsconfig.json"
   },
-  "packageManager": "pnpm@9.12.1"
+  "packageManager": "pnpm@9.12.3"
 }
