@@ -114,8 +114,8 @@ importers:
         specifier: 3.2.1
         version: 3.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-share:
-        specifier: 5.1.0
-        version: 5.1.0(react@18.3.1)
+        specifier: 5.1.1
+        version: 5.1.1(react@18.3.1)
     devDependencies:
       '@babel/eslint-parser':
         specifier: 7.25.9
@@ -5779,8 +5779,8 @@ packages:
       react: 0.0.0-experimental-c8b778b7f-20220825
       webpack: ^5.59.0
 
-  react-share@5.1.0:
-    resolution: {integrity: sha512-OvyfMtj/0UzH1wi90OdHhZVJ6WUC/+IeWvBwppeZozwIGyAjQgyR0QXlHOrxVHVECqnGvcpBaFTXVrqouTieaw==}
+  react-share@5.1.1:
+    resolution: {integrity: sha512-9rX6X4FiLwKi/eygTx6TWEKv0EuL15AdP6vnFMw5sA4UwTja0mgV4N3gAbkE9+5n3ry7BsBBeOnhaXbJ+jn9kQ==}
     peerDependencies:
       react: ^17 || ^18
 
@@ -14395,7 +14395,7 @@ snapshots:
       react: 18.3.1
       webpack: 5.95.0
 
-  react-share@5.1.0(react@18.3.1):
+  react-share@5.1.1(react@18.3.1):
     dependencies:
       classnames: 2.5.1
       jsonp: 0.2.1
