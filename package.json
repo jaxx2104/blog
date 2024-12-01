@@ -61,7 +61,7 @@
     "textlint": "11.9.1",
     "textlint-rule-preset-ja-spacing": "2.4.3",
     "textlint-rule-preset-japanese": "5.0.0",
-    "typescript": "5.6.3"
+    "typescript": "5.7.2"
   },
   "keywords": [
     "gatsby",
