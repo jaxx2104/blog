@@ -4,9 +4,10 @@ import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default async function HashtagPage({ params }: { params: { name: string } }) {
+export default async function HashtagPage({ params }: { params: Promise<{ name: string }> }) {
   const supabase = await createClient();
-  const hashtagName = decodeURIComponent(params.name);
+  const { name } = await params;
+  const hashtagName = decodeURIComponent(name);
 
   // ハッシュタグを取得
   const { data: hashtag } = await supabase
@@ -59,17 +60,17 @@ export default async function HashtagPage({ params }: { params: { name: string }
           {posts.map((post) => (
             <Card key={post.id}>
               <CardHeader>
-                <Link href={`/${post.id}`}>
-                  <CardTitle className="hover:underline cursor-pointer">
-                    {post.title}
-                  </CardTitle>
-                </Link>
                 <CardDescription>
                   {formatDistanceToNow(new Date(post.created_at), {
                     addSuffix: true,
                     locale: ja,
                   })}
                 </CardDescription>
+                <Link href={`/${post.id}`}>
+                  <CardTitle className="hover:underline cursor-pointer">
+                    {post.title}
+                  </CardTitle>
+                </Link>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground line-clamp-3">

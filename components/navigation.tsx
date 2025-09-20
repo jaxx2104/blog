@@ -51,9 +51,6 @@ export function Navigation() {
               </>
             ) : (
               <>
-                <Link href="/auth/login">
-                  <Button variant="ghost">ログイン</Button>
-                </Link>
                 <Link href="/auth/sign-up">
                   <Button>サインアップ</Button>
                 </Link>

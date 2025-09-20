@@ -3,9 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import { $getRoot, $getSelection, EditorState } from "lexical";
-import { $generateHtmlFromNodes } from "@lexical/html";
+import { EditorState } from "lexical";
 import {
   InitialConfigType,
   LexicalComposer,
@@ -235,17 +233,6 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
     }
   };
 
-  const handleDelete = async () => {
-    if (!postId || !confirm("この記事を削除しますか？")) return;
-
-    try {
-      const { error } = await supabase.from("posts").delete().eq("id", postId);
-      if (error) throw error;
-      router.push("/");
-    } catch (error) {
-      console.error("Delete error:", error);
-    }
-  };
 
   const onChange = (editorState: EditorState) => {
     editorState.read(() => {
@@ -320,20 +307,6 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
         {isSaving && (
           <div className="absolute top-0 right-0 text-xs text-gray-400">
             保存中...
-          </div>
-        )}
-
-        {/* 削除ボタンは既存記事の場合のみ表示 */}
-        {!isNew && postId && (
-          <div className="mt-12 pt-4 border-t">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-gray-400 hover:text-red-600"
-              onClick={handleDelete}
-            >
-              記事を削除
-            </Button>
           </div>
         )}
       </LexicalComposer>
