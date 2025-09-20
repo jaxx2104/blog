@@ -7,16 +7,17 @@ export default async function NewPostPage() {
   const supabase = await createClient();
 
   const { data: { user } } = await supabase.auth.getUser();
+  const isAuthor = !!user?.id
 
   if (!user) {
     redirect("/auth/login");
   }
 
   return (
-    <div className="container mx-auto py-8 max-w-4xl">
+    <div className="container mx-auto py-8">
       <Card>
         <CardContent className="pt-6">
-          <PostEditor isNew={true} />
+          <PostEditor post={undefined} canEdit={isAuthor} />
         </CardContent>
       </Card>
     </div>

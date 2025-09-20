@@ -27,15 +27,11 @@ import {
   TRANSFORMERS
 } from "@lexical/markdown";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
+import { Post } from "@/lib/types/post";
 
 interface PostEditorProps {
-  post?: {
-    id: string;
-    title: string;
-    content: string;
-    author_id: string;
-  };
-  isNew?: boolean;
+  post: Post | undefined;
+  canEdit: boolean;
 }
 
 const URL_REGEX = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
@@ -56,7 +52,7 @@ const MATCHERS = [
   },
 ];
 
-export function PostEditor({ post, isNew = false }: PostEditorProps) {
+export function PostEditor({ post, canEdit }: PostEditorProps) {
   const [title, setTitle] = useState(post?.title || "");
   const [content, setContent] = useState(post?.content || "");
   const [isSaving, setIsSaving] = useState(false);
@@ -144,6 +140,7 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
       console.error("Lexical error:", error);
     },
     editorState: () => $convertFromMarkdownString(content, TRANSFORMERS),
+    editable: canEdit,
   };
 
   const extractHashtags = (text: string): string[] => {
@@ -159,7 +156,7 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
     setIsSaving(true);
 
     try {
-      if (isNew && !postId) {
+      if (!postId) {
         // 新規作成
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error("ログインが必要です");
@@ -277,8 +274,9 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
               autoSave(e.target.value, content);
             }, 1000);
           }}
-          placeholder="タイトルを入力"
-          className="text-3xl font-bold w-full border-0 outline-none focus:outline-none bg-transparent"
+          readOnly={!canEdit}
+          placeholder={"Edit title..."}
+          className={`text-3xl font-bold w-full border-0 outline-none focus:outline-none bg-transparent`}
         />
       </div>
       <LexicalComposer initialConfig={initialConfig}>
@@ -286,7 +284,7 @@ export function PostEditor({ post, isNew = false }: PostEditorProps) {
           <RichTextPlugin
             contentEditable={
               <ContentEditable
-                className="outline-none min-h-[200px] focus:outline-none transition-all"
+                className={`outline-none min-h-[200px] focus:outline-none transition-all`}
                 style={{
                   padding: '0',
                   lineHeight: '1.6',

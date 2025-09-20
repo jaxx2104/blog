@@ -1,19 +1,27 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound, redirect } from "next/navigation";
-import { formatDistanceToNow } from "date-fns";
-import { ja } from "date-fns/locale";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card";
 import { PostEditor } from "@/components/post-editor";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { PostTimestamp } from "@/components/post-timestamp";
 
-export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const supabase = await createClient();
   const { id } = await params;
 
   const { data: post, error } = await supabase
     .from("posts")
-    .select(`
+    .select(
+      `
       *,
       post_hashtags (
         hashtag_id,
@@ -22,7 +30,8 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           name
         )
       )
-    `)
+    `
+    )
     .eq("id", id)
     .single();
 
@@ -30,8 +39,10 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
     notFound();
   }
 
-  const { data: { user } } = await supabase.auth.getUser();
-  const isAuthor = user?.id === post.author_id;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const isAuthor = !!user?.id
 
   async function deletePost() {
     "use server";
@@ -43,25 +54,16 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   }
 
   return (
-    <div className="container mx-auto py-8 max-w-4xl">
+    <div className="container mx-auto py-8">
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start gap-4">
             <div className="flex-1">
-              {!isAuthor && <CardTitle className="text-3xl">{post.title}</CardTitle>}
               <CardDescription>
-                {formatDistanceToNow(new Date(post.created_at), {
-                  addSuffix: true,
-                  locale: ja,
-                })}
-                {post.updated_at !== post.created_at && (
-                  <span className="ml-2">
-                    (更新: {formatDistanceToNow(new Date(post.updated_at), {
-                      addSuffix: true,
-                      locale: ja,
-                    })})
-                  </span>
-                )}
+                <PostTimestamp
+                  createdAt={post.created_at}
+                  updatedAt={post.updated_at}
+                />
               </CardDescription>
             </div>
             {isAuthor && (
@@ -79,29 +81,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           </div>
         </CardHeader>
         <CardContent>
-          {isAuthor ? (
-            <PostEditor post={post} />
-          ) : (
-            <div className="prose prose-sm max-w-none">
-              <p className="whitespace-pre-wrap" style={{ lineHeight: '1.6' }}>
-                {post.content.split(/(#[^\s#]+)/).map((part: string, index: number) => {
-                  if (part.startsWith("#")) {
-                    const tagName = part.slice(1);
-                    return (
-                      <Link
-                        key={index}
-                        href={`/hashtags/${tagName}`}
-                        className="text-blue-600 hover:underline"
-                      >
-                        {part}
-                      </Link>
-                    );
-                  }
-                  return part;
-                })}
-              </p>
-            </div>
-          )}
+          <PostEditor post={post} canEdit={isAuthor} />
         </CardContent>
       </Card>
     </div>
