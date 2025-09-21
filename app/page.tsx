@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { PostList } from "@/components/post-list";
 import { Post } from "@/lib/types/post";
+import { ERROR_MESSAGES } from "@/lib/constants/messages";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -21,7 +22,7 @@ export default async function HomePage() {
 
   if (error) {
     console.error("Error fetching posts:", error);
-    return <div className="container mx-auto py-8">記事の取得に失敗しました</div>;
+    return <div className="container mx-auto py-8">{ERROR_MESSAGES.POST_FETCH_FAILED}</div>;
   }
 
   await supabase.auth.getUser();

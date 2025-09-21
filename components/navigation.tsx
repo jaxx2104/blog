@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
+import { UI_MESSAGES, POST_MESSAGES } from "@/lib/constants/messages";
 
 export function Navigation() {
   const [user, setUser] = useState<User | null>(null);
@@ -19,7 +20,7 @@ export function Navigation() {
     };
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
       setUser(session?.user ?? null);
     });
 
@@ -43,16 +44,16 @@ export function Navigation() {
             {user ? (
               <>
                 <Link href="/new">
-                  <Button variant="outline">新規作成</Button>
+                  <Button variant="outline">{POST_MESSAGES.CREATE_NEW}</Button>
                 </Link>
                 <Button onClick={handleSignOut} variant="ghost">
-                  ログアウト
+                  {UI_MESSAGES.LOGOUT}
                 </Button>
               </>
             ) : (
               <>
                 <Link href="/auth/sign-up">
-                  <Button>サインアップ</Button>
+                  <Button>{UI_MESSAGES.SIGNUP}</Button>
                 </Link>
               </>
             )}

@@ -9,6 +9,7 @@ import {
 import { PostEditor } from "@/components/post-editor";
 import { Button } from "@/components/ui/button";
 import { PostTimestamp } from "@/components/post-timestamp";
+import { POST_MESSAGES } from "@/lib/constants/messages";
 
 export default async function PostPage({
   params,
@@ -74,7 +75,7 @@ export default async function PostPage({
                   size="sm"
                   className="text-gray-400 hover:text-red-600 transition-colors"
                 >
-                  削除
+                  {POST_MESSAGES.DELETE}
                 </Button>
               </form>
             )}
