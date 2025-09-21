@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Navigation } from "@/components/navigation";
 import "./globals.css";
@@ -14,10 +14,11 @@ export const metadata: Metadata = {
   description: "Scrapboxにインスパイアされたライブ編集機能を持つ個人ブログ",
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  display: "swap",
+const notoSansJP = Noto_Sans_JP({
+  weight: ["300", "400", "500", "700", "900"],
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-noto-sans-jp",
 });
 
 export default function RootLayout({
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
+      <body className={`${notoSansJP.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

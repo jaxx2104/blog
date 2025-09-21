@@ -35,7 +35,7 @@ export function PostList({
               </div>
             </div>
           </CardHeader>
-          <CardContent className="pt-6">
+          <CardContent>
             <Link href={`/${post.id}`}>
               <PostEditor key={post.id} post={post} canEdit={false} />
             </Link>

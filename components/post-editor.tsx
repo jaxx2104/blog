@@ -276,7 +276,7 @@ export function PostEditor({ post, canEdit }: PostEditorProps) {
           }}
           readOnly={!canEdit}
           placeholder={"Edit title..."}
-          className={`text-3xl font-bold w-full border-0 outline-none focus:outline-none bg-transparent`}
+          className="w-full border-0 outline-none focus:outline-none bg-transparent font-black tracking-tight text-2xl leading-8"
         />
       </div>
       <LexicalComposer initialConfig={initialConfig}>
@@ -284,11 +284,7 @@ export function PostEditor({ post, canEdit }: PostEditorProps) {
           <RichTextPlugin
             contentEditable={
               <ContentEditable
-                className={`outline-none min-h-[200px] focus:outline-none transition-all`}
-                style={{
-                  padding: '0',
-                  lineHeight: '1.6',
-                }}
+                className={`outline-none min-h-[200px] focus:outline-none transition-all p-0 font-normal text-base leading-6`}
               />
             }
             ErrorBoundary={LexicalErrorBoundary}

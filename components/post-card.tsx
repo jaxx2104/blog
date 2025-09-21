@@ -28,7 +28,6 @@ export function PostCard({ post }: PostCardProps) {
         <CardContent>
           <p 
             className="text-muted-foreground whitespace-pre-wrap" 
-            style={{ lineHeight: "1.6" }}
           >
             {contentPreview}
           </p>
