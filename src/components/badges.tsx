@@ -15,7 +15,7 @@ const Badges: React.FC<Props> = ({ items, primary }: Props) => {
     <>
       {items.map((item, i) => {
         return (
-          <Badge key={i} primary={primary}>
+          <Badge key={i} $primary={primary}>
             {item}
           </Badge>
         )
@@ -26,9 +26,9 @@ const Badges: React.FC<Props> = ({ items, primary }: Props) => {
 
 export default Badges
 
-const Badge = styled.span<{ primary?: boolean }>`
+const Badge = styled.span<{ $primary?: boolean }>`
   background-color: ${(props) =>
-    props.primary ? props.theme.colorMain : props.theme.colorSub};
+    props.$primary ? props.theme.colorMain : props.theme.colorSub};
   border-radius: 4px;
   box-sizing: border-box;
   color: rgb(255, 255, 255);

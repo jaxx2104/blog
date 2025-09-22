@@ -1,11 +1,17 @@
-import React from "react"
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
-import { siteMetadata } from "../../../gatsby-config"
-import Container from "../../components/container"
-import Share from "../../components/icon/icon-share"
-import ArticleInfo from "./article-info"
+"use client"
 
-export type SiteMetaType = typeof siteMetadata
+import React from "react"
+import Container from "@/src/components/container"
+import Share from "@/src/components/icon/icon-share"
+import ArticleInfo from "@/components/ArticleInfo"
+
+export interface SiteMetaType {
+  title: string
+  description: string
+  siteUrl: string
+  author: string
+  twitter: string
+}
 
 interface Props {
   path: string
@@ -14,7 +20,7 @@ interface Props {
   description: string
   categories: string[] | null
   tags: string[] | null
-  image: IGatsbyImageData
+  image?: string
   html: string
   site: SiteMetaType
 }
@@ -41,7 +47,7 @@ const Article: React.FC<Props> = ({
       />
       <div className="content">
         <p>{description}</p>
-        {image && <GatsbyImage image={image} alt={title} />}
+        {image && <img src={image} alt={title} />}
       </div>
       <div
         className="content"

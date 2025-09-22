@@ -1,25 +1,17 @@
 import React from "react"
 import styled from "styled-components"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import Tumbnail from "./tumbnail"
 
 interface Props {
-  fluid: IGatsbyImageData | IGatsbyImageData[] | undefined
   src?: string
   title: string
   animation: string
 }
 
-const SlideImage: React.FC<Props> = ({ fluid, src, title }: Props) => {
+const SlideImage: React.FC<Props> = ({ src, title }: Props) => {
   return (
     <>
-      {fluid instanceof Array ? (
-        fluid.map((f, i) => (
-          <Tumbnail key={i} fluid={f} src={src} title={title} size={200} />
-        ))
-      ) : (
-        <Tumbnail fluid={fluid} src={src} title={title} size={200} />
-      )}
+      <Tumbnail src={src} title={title} size={200} />
       <Capture>{title}</Capture>
     </>
   )

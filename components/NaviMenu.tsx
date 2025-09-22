@@ -1,5 +1,7 @@
+"use client"
+
 import React from "react"
-import { Link } from "gatsby"
+import Link from "next/link"
 import styled from "styled-components"
 
 type Item = {
@@ -19,7 +21,7 @@ const Menu: React.FC<Props> = ({ items }: Props) => (
       const menuItem = <MenuItem onClick={action}>{text}</MenuItem>
       return (
         <span key={index}>
-          {to ? <Link to={to}>{menuItem}</Link> : menuItem}
+          {to ? <Link href={to}>{menuItem}</Link> : menuItem}
         </span>
       )
     })}

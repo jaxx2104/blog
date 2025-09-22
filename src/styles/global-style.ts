@@ -1,6 +1,4 @@
-import "modern-normalize/modern-normalize.css"
-import "prismjs/themes/prism-okaidia.css"
-import "font-awesome/css/font-awesome.css"
+"use client"
 
 import { createGlobalStyle } from "styled-components"
 
@@ -9,7 +7,6 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     background-color: ${(props) => props.theme.colorBackground};
     color: ${(props) => props.theme.colorText};
-    font-family: 'Noto Sans JP', sans-serif!important;
     font-weight: ${(props) => props.theme.fontWeight};
     font-size: ${(props) => `${props.theme.fontSize}rem`};
     transition: color 0.2s ease-out, background 0.2s ease-out;

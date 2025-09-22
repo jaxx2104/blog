@@ -1,9 +1,16 @@
-import React from "react"
-import { siteMetadata } from "../../../gatsby-config"
-import Container from "../../components/container"
-import ArticleInfo from "./article-info"
+"use client"
 
-export type SiteMetaType = typeof siteMetadata
+import React from "react"
+import Container from "@/src/components/container"
+import ArticleInfo from "@/components/ArticleInfo"
+
+export interface SiteMetaType {
+  title: string
+  description: string
+  siteUrl: string
+  author: string
+  twitter: string
+}
 
 interface Props {
   path: string

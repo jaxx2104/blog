@@ -1,30 +1,22 @@
+"use client"
+
 import React from "react"
 import styled from "styled-components"
+import Container from "@/src/components/container"
+import Flex from "@/src/components/flex"
+import NaviLogo from "@/components/NaviLogo"
+import NaviMenu from "@/components/NaviMenu"
 
-import Container from "../../components/container"
-import Flex from "../../components/flex"
-import NaviLogo from "./navi-logo"
-import NaviMenu from "./navi-menu"
-
-interface Props {
-  title: string
-  theme: "light" | "dark"
-  onDarkMode: (
-    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>
-  ) => void
-}
-
-const Navi: React.FC<Props> = ({ title, theme, onDarkMode }: Props) => {
+const Navi: React.FC = () => {
   return (
     <Header>
       <Container>
         <Flex>
-          <NaviLogo title={title} />
+          <NaviLogo title="jaxx2104.info" />
           <NaviMenu
             items={[
               { text: "Home", to: "/" },
               { text: "Profile", to: "/profile" },
-              { text: theme === "light" ? "🌅" : "🌃", action: onDarkMode },
             ]}
           />
         </Flex>

@@ -1,23 +1,21 @@
+"use client"
+
 import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
 
-import Hr from "./hr"
-import Container from "./container"
+import Hr from "@/src/components/hr"
+import Container from "@/src/components/container"
 
-interface Props {
-  author: string
-}
-
-const Footer: React.FC<Props> = ({ author }: Props) => {
+const Footer: React.FC = () => {
   return (
     <Container>
       <StyledFooter>
         <Hr />
         <p>コーラとバグが好き</p>
-        <Link href="/profile/">
+        <Link href="/profile">
           <p>
-            <strong>{author}</strong> on Profile
+            <strong>jaxx2104</strong> on Profile
           </p>
         </Link>
       </StyledFooter>

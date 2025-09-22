@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import Link from "next/link"
 import styled from "styled-components"
 
 interface Props {
@@ -9,20 +9,21 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({ label, path, primary }: Props) => (
-  <Link className="readmore" to={path} style={{ textDecoration: "none" }}>
-    <StyledButton primary={primary}>{label}</StyledButton>
+  <Link className="readmore" href={path} style={{ textDecoration: "none" }}>
+    <StyledButton $primary={primary}>{label}</StyledButton>
   </Link>
 )
 
 export default Button
 
-const StyledButton = styled.button<{ primary: boolean }>`
+const StyledButton = styled.button<{ $primary: boolean }>`
   background-color: transparent;
   border-radius: 4px;
   border: 2px solid
-    ${(props) => (props.primary ? props.theme.colorMain : props.theme.colorSub)};
+    ${(props) =>
+      props.$primary ? props.theme.colorMain : props.theme.colorSub};
   color: ${(props) =>
-    props.primary ? props.theme.colorMain : props.theme.colorSub};
+    props.$primary ? props.theme.colorMain : props.theme.colorSub};
   cursor: pointer;
   display: block;
   font-size: ${(props) => `${props.theme.fontSizeLarge}rem`};
@@ -36,7 +37,7 @@ const StyledButton = styled.button<{ primary: boolean }>`
   &:hover {
     transition: color 0.2s ease-out, background 0.2s ease-out;
     background-color: ${(props) =>
-      props.primary ? props.theme.colorMain : props.theme.colorSub};
+      props.$primary ? props.theme.colorMain : props.theme.colorSub};
     color: white;
   }
 `

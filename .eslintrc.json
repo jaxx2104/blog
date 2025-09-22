@@ -1,0 +1,8 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "import/no-unresolved": "off",
+    "import/no-named-as-default": "off"
+  }
+}

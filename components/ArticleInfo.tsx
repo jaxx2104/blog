@@ -1,10 +1,12 @@
+"use client"
+
 import React from "react"
-import { Link } from "gatsby"
+import Link from "next/link"
 import styled from "styled-components"
 
-import Badges from "../../components/badges"
-import Heading from "../../components/heading"
-import Time from "../../components/time"
+import Badges from "@/src/components/badges"
+import Heading from "@/src/components/heading"
+import Time from "@/src/components/time"
 
 interface Props {
   path: string
@@ -24,7 +26,7 @@ const ArticleInfo: React.FC<Props> = ({
   <InfoWrap>
     <Link
       style={{ textDecoration: "none", display: "block", margin: "0.5rem 0" }}
-      to={path}
+      href={path}
     >
       <Heading>{title}</Heading>
     </Link>

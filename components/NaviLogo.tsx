@@ -1,5 +1,7 @@
+"use client"
+
 import React from "react"
-import { Link } from "gatsby"
+import Link from "next/link"
 import styled from "styled-components"
 
 interface Props {
@@ -7,7 +9,7 @@ interface Props {
 }
 
 const Logo: React.FC<Props> = ({ title }: Props) => (
-  <Link to="/">
+  <Link href="/">
     <LogoWrap>{title}</LogoWrap>
   </Link>
 )
@@ -18,6 +20,7 @@ const LogoWrap = styled.h1<{ uppercase?: boolean }>`
   color: white;
   font-family: "Permanent Marker";
   font-size: ${(props) => `${props.theme.fontSizeLarge}rem`};
+  font-weight: 900;
   letter-spacing: -0.05rem;
   text-transform: "uppercase";
   margin-right: 1rem;
