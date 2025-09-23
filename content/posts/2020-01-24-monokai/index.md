@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmonokai.nl%2Fimg%2Fshare-image.png)
+![](./monokaipro.png)
 
 it’s also the name of a color palette
 https://monokai.nl/

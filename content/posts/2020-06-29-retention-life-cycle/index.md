@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://d25qe19fo1nsn4.cloudfront.net/wp-content/uploads/2016/12/Customer-lifecycle-framework-ecommerce-marketing-1024x604.png)
+![](./retention-lifecycle.png)
 

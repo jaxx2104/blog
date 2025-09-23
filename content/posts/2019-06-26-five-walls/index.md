@@ -9,4 +9,4 @@ tags:
   - scrapbox
 ---
 
-![](https://scrapbox.io/files/6669a97276fdd0001c1959c1.webp)
+![](./0c5bac67528c89ef9abb097cfff91337.webp)
