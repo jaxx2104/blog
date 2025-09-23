@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-<https://gyazo.com/c658c89fa8a2d28c79fa8d6c916f4af7>
+![](./c658c89fa8a2d28c79fa8d6c916f4af7.jpg)
 
 いくつかのモデルに課金してみた
 OpenRouter

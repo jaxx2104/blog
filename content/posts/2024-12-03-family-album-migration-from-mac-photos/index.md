@@ -11,7 +11,7 @@ tags:
 Mac の Photos アプリを家族アルバムとして使っていた
 が2TBを超えたあたりで限界になって写真管理を Windows マシンに移行したので備忘録
 
-<https://gyazo.com/cf426f4c05881b4db3f87fa8bf683848>
+![](./cf426f4c05881b4db3f87fa8bf683848.jpg)
 
 
 なぜ Mac の Photos を使っていたか

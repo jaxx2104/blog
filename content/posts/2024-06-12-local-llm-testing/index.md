@@ -18,9 +18,9 @@ tags:
 - 一旦 windows 版で試すことに
 どんな感じ
 - ollama run （モデル名）でコンソール上から入力できる
-- <https://gyazo.com/918f6a9fed9418d3d4d6d7b331b54c7e>
+- ![](./918f6a9fed9418d3d4d6d7b331b54c7e.jpg)
 - curl でも入力できる
-- <https://gyazo.com/1ace1dad41f8b2626b3444072271ba94>
+- ![](./1ace1dad41f8b2626b3444072271ba94.jpg)
 モデルをいろいろと試す	
 - https://ollama.com/library/llama3
 - Facebook製 

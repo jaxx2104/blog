@@ -9,7 +9,7 @@ tags:
   - scrapbox
 ---
 
-<https://gyazo.com/b90c460e84614e8f41f768c80530e279>
+![](./b90c460e84614e8f41f768c80530e279.jpg)
 
 必要なもの
 - キーボードの原型 メルカリで買った
@@ -24,11 +24,8 @@ tags:
 
 手順
 https://github.com/imyownyear/Z-Butt/wiki
-<https://gyazo.com/c432957592c81be02a6b35454ec72689>
 
-<https://gyazo.com/f4d3aa8eacc1f5a74a26ecd02d12c8c2>
-<https://gyazo.com/747dc09e915fe1870cc87b61aee98159>
-<https://gyazo.com/b5e27baca4b6dc8f4d2bab723deea9cf>
+![](./b5e27baca4b6dc8f4d2bab723deea9cf.jpg)
 
 コツ
 レジンは湯煎すると粘度が下がって気泡が抜けるよ
@@ -105,16 +102,16 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 - ステッカー
 - メッセージカード
 郵便局かポスト
-<https://gyazo.com/c530bd0b47aae80b77de98263b4c46d0>
+![](./c530bd0b47aae80b77de98263b4c46d0.jpg)
 
 
 追加で購入したもの
 レジンだけでなくスカルピーにも挑戦した
 - スカルピー
 - ヒートガン
-<https://gyazo.com/675d0b10b56d79b8a3ea13cd6dd8e017>
+![](./675d0b10b56d79b8a3ea13cd6dd8e017.jpg)
 3Dプリンターも買った
-<https://gyazo.com/a22965121d0a574990ecc7349b4d1deb>
+![](./a22965121d0a574990ecc7349b4d1deb.jpg)
 
 写真綺麗に撮るために
 - 一眼レンズ（マクロ）

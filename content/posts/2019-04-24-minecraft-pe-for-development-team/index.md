@@ -9,7 +9,7 @@ tags:
   - scrapbox
 ---
 フロントエンドチーム（10 ~ 20人程度）で遊びたかったのでメモ
-<https://gyazo.com/b4bd63ce943967a8bf8e024b4a99c2b9>
+![](./b4bd63ce943967a8bf8e024b4a99c2b9.jpg)
 
 [*** サーバー情報]
 

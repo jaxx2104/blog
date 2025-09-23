@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-<https://gyazo.com/d50ab2c1f9203e5ad03fd11cd1325aad>
+![](./d50ab2c1f9203e5ad03fd11cd1325aad.jpg)
 https://suzuri.jp/jaxx2104/1718688/t-shirt/s/white
