@@ -30,8 +30,8 @@
     "components/**/*.tsx",
     "lib/**/*.ts",
     "lib/**/*.tsx",
-    "./src/components/**/*",
-    "./src/styles/**/*",
+    "styles/**/*.ts",
+    "styles/**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
@@ -40,10 +40,6 @@
     "public",
     ".cache",
     "**/*.old/**/*",
-    "**/*.bak/**/*",
-    "**/*.gatsby/**/*",
-    "src/containers.old/**/*",
-    "src/pages.bak.old/**/*",
-    "src/pages.gatsby.old/**/*"
+    "**/*.bak/**/*"
   ]
 }

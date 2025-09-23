@@ -50,9 +50,9 @@
     "typescript": "5.8.2"
   },
   "keywords": [
-    "gatsby",
-    "gatstrap",
-    "starter"
+    "blog",
+    "nextjs",
+    "typescript"
   ],
   "license": "MIT",
   "main": "n/a",
@@ -61,9 +61,7 @@
     "build": "next build",
     "start": "next start",
     "export": "next build",
-    "build:gatsby": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
-    "develop": "NODE_PATH=./src/components gatsby develop",
+    "deploy": "pnpm build && pnpm export",
     "format": "prettier --write \"**/*.+(ts|tsx|json|md)\" --ignore-path .gitignore",
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",

@@ -1,34 +1,105 @@
-# Gatstrap
+# jaxx2104.info Blog
 
-[![Build Status](https://travis-ci.org/jaxx2104/gatsby-starter-bootstrap.svg?branch=master)](https://travis-ci.org/jaxx2104/gatsby-starter-bootstrap)
-[![dependency Status](https://img.shields.io/david/jaxx2104/gatsby-starter-bootstrap.svg?style=flat-square)](https://david-dm.org/jaxx2104/gatsby-starter-bootstrap#info=dependencies)
-
-Gatsby starter for bootstrap a blog
-
-![thumb](https://i.imgur.com/Qcd3NwR.png)
-
-## GatsbyJS v1
-
-- For v1 version of this starter, check out the [master branch](https://github.com/jaxx2104/gatsby-starter-bootstrap).
-- For v0 version, check out the [v0 branch](https://github.com/jaxx2104/gatsby-starter-bootstrap/tree/v0).
-- Make sure to read the [migration guide](https://www.gatsbyjs.org/docs/migrating-from-v0-to-v1/) when porting v0 projects to v1.
+A personal blog built with Next.js 15, TypeScript, and styled-components.
 
 ## Features
 
-- Single column layout
-- Simple components: SiteNavi, SitePost, SitePage.
-- [Twitter Bootstrap](https://github.com/twbs/bootstrap) css framework.
+- Static site generation with Next.js 15
+- TypeScript for type safety
+- styled-components for CSS-in-JS
+- MDX support for blog posts
+- Responsive design
+- Dark mode support
 
-## Installation
+## Tech Stack
 
-Install this starter (assuming Gatsby is installed) by running from your CLI:
-`gatsby new gatstrap https://github.com/jaxx2104/gatsby-starter-bootstrap`
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: styled-components
+- **Package Manager**: pnpm
+- **Font**: Noto Sans JP
 
-## Usage
+## Development
 
-develop
-`gatsby develop`
+### Install dependencies
+```bash
+pnpm install
+```
 
-### Custom Theme
+### Start development server
+```bash
+pnpm dev
+```
 
-`/src/layouts/gatstrap.css`
+### Build for production
+```bash
+pnpm build
+```
+
+### Start production server
+```bash
+pnpm start
+```
+
+### Deploy (static export)
+```bash
+pnpm deploy
+```
+
+## Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm export` - Export as static site
+- `pnpm deploy` - Build and export for deployment
+- `pnpm lint` - Run ESLint
+- `pnpm lint:text` - Check Japanese text in blog posts
+- `pnpm lint:textfix` - Auto-fix Japanese text issues
+- `pnpm format` - Format code with Prettier
+- `pnpm test` - Run TypeScript type checking
+
+## Project Structure
+
+```
+.
+├── app/                  # Next.js App Router pages
+│   ├── layout.tsx       # Root layout
+│   ├── page.tsx         # Homepage
+│   ├── [...slug]/       # Blog post pages
+│   └── profile/         # Profile page
+├── components/          # React components
+├── content/            # Blog posts (Markdown)
+│   └── posts/
+├── lib/                # Utility functions
+├── public/             # Static assets
+└── styles/             # Global styles
+```
+
+## Writing Blog Posts
+
+Blog posts are stored in `/content/posts/` as Markdown files with frontmatter.
+
+### Post Structure
+```
+content/posts/
+└── my-post-slug/
+    ├── index.md    # Post content
+    └── image.png   # Post images
+```
+
+### Frontmatter Example
+```yaml
+---
+title: "Post Title"
+date: "2024-01-01"
+path: "/my-post-slug"
+description: "Brief description"
+category: "tech"
+tags: ["nextjs", "typescript"]
+---
+```
+
+## License
+
+MIT

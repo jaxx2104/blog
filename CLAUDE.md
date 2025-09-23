@@ -23,7 +23,7 @@ pnpm format              # Format code with Prettier
 
 ## Architecture
 
-This is a **Next.js 15** blog application migrating from Gatsby. Key architectural points:
+This is a **Next.js 15** blog application. Key architectural points:
 
 ### Tech Stack
 - **Next.js 15** with App Router (output: 'export' for static site generation)
@@ -39,7 +39,7 @@ This is a **Next.js 15** blog application migrating from Gatsby. Key architectur
   - `[...slug]/page.tsx` - Dynamic catch-all route for blog posts
   - `profile/page.tsx` - Profile page
 
-- `/components` - React components (migrating from `/src/containers`)
+- `/components` - React components
   - `Article*.tsx` - Blog post components
   - `Navi*.tsx` - Navigation components
   - `Layout.tsx` - Main layout wrapper
@@ -53,8 +53,7 @@ This is a **Next.js 15** blog application migrating from Gatsby. Key architectur
   - Each post is a directory with `index.md` and optional images
   - Images are embedded as base64 data URIs during processing
 
-- `/src` - Legacy Gatsby components being migrated
-  - Contains old components, styles, and helpers
+- `/styles` - Global styles and styled-components themes
 
 ### Key Implementation Details
 
@@ -67,15 +66,10 @@ This is a **Next.js 15** blog application migrating from Gatsby. Key architectur
 
 3. **Styling**:
    - styled-components with SSR registry
-   - Global styles in `/src/styles/global-style.ts`
+   - Global styles in `/styles/global-style.ts`
    - Noto Sans JP font for Japanese text
 
-4. **Migration Status**:
-   - Actively migrating from Gatsby to Next.js
-   - Both Gatsby and Next.js configurations present
-   - Some components exist in both old (`/src`) and new (`/components`) locations
-
-5. **TypeScript Configuration**:
+4. **TypeScript Configuration**:
    - Strict mode enabled
    - Path alias `@/*` configured
    - Build errors temporarily ignored during migration

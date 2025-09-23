@@ -54,11 +54,8 @@ coverage/
 *.log
 tmp/
 
-# Old Gatsby files (can be removed after migration)
+# Build output
 public
-.gatsby-context.js
-.intermediate-representation/
-.cache/
 
 # Playwright
 .playwright-mcp/
