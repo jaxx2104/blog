@@ -41,7 +41,7 @@ const GlobalStyles = createGlobalStyle`
 
     blockquote {
       background-color: ${(props) => props.theme.colorBackground};
-      border-left: 5px solid ${(props) => props.theme.colorMain};
+      border-left: 5px solid ${(props) => props.theme.colorBorder};
       color: ${(props) => props.theme.colorSub};
       padding: 0.25em 1.5em;
       margin: 0;
@@ -58,11 +58,6 @@ const GlobalStyles = createGlobalStyle`
 
     img {
       width: 100%;
-    }
-
-    .gatsby-image-wrapper {
-      border: 1px solid ${(props) => props.theme.colorSub};
-      border-radius: 3px;
     }
 
     /* Code block styles - レイアウトのみ（色はrehype-pretty-codeのテーマが適用） */

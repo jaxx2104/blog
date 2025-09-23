@@ -5,6 +5,8 @@ const baseTheme = {
   colorAccent: "#495057",
   colorText: "#495057",
   colorBackground: "#fff",
+  colorBorder: "#eee",
+  colorShadow: "rgba(0, 0, 0, 0.1)",
   contentWidth: 600,
   fontSizeSmall: 0.5,
   fontSize: 0.8,
@@ -24,5 +26,7 @@ export const darkTheme = {
   colorAccent: "#fff",
   colorText: "#fff",
   colorBackground: "#282c35",
+  colorBorder: "#444",
+  colorShadow: "rgba(255, 255, 255, 0.1)",
   mode: "dark" as const,
 }

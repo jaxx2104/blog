@@ -19,6 +19,8 @@ export interface PostData {
   tags?: string[]
   content?: string
   html?: string
+  excerpt?: string
+  thumbnail?: string
 }
 
 export async function getAllPosts(): Promise<PostData[]> {
@@ -33,7 +35,65 @@ export async function getAllPosts(): Promise<PostData[]> {
         const indexPath = path.join(fullPath, "index.md")
         if (fs.existsSync(indexPath)) {
           const fileContents = fs.readFileSync(indexPath, "utf8")
-          const { data } = matter(fileContents)
+          const { data, content } = matter(fileContents)
+
+          // Extract excerpt (first 20 characters of content)
+          const plainContent = content
+            .replace(/^#+\s+.*$/gm, "") // Remove headings
+            .replace(/!\[.*?\]\(.*?\)/g, "") // Remove images
+            .replace(/\[.*?\]\(.*?\)/g, "") // Remove links
+            .replace(/<https?:\/\/[^\s>]+>/g, "") // Remove URL links
+            .replace(/```[\s\S]*?```/g, "") // Remove code blocks
+            .replace(/`[^`]*`/g, "") // Remove inline code
+            .replace(/^[-*+]\s+/gm, "") // Remove list markers
+            .replace(/\n+/g, " ") // Replace newlines with spaces
+            .trim()
+          const excerpt =
+            plainContent.slice(0, 40) + (plainContent.length > 40 ? "..." : "")
+
+          // Extract first image
+          let thumbnail: string | undefined
+          const imageMatch = content.match(/!\[.*?\]\(([^)]+)\)/)
+
+          if (imageMatch) {
+            const imageSrc = imageMatch[1]
+
+            // Check if it's an external URL
+            if (
+              imageSrc.startsWith("http://") ||
+              imageSrc.startsWith("https://")
+            ) {
+              thumbnail = imageSrc
+            } else {
+              // Local image - convert to base64
+              const filename = imageSrc.startsWith("./")
+                ? imageSrc.slice(2)
+                : imageSrc
+              const imagePath = path.join(fullPath, filename)
+
+              if (fs.existsSync(imagePath)) {
+                try {
+                  const imageBuffer = fs.readFileSync(imagePath)
+                  const base64 = imageBuffer.toString("base64")
+
+                  // Determine MIME type
+                  const ext = path.extname(filename).toLowerCase()
+                  let mimeType = "image/jpeg"
+                  if (ext === ".png") mimeType = "image/png"
+                  else if (ext === ".gif") mimeType = "image/gif"
+                  else if (ext === ".jpg" || ext === ".jpeg")
+                    mimeType = "image/jpeg"
+
+                  thumbnail = `data:${mimeType};base64,${base64}`
+                } catch (error) {
+                  console.error(
+                    `Failed to convert thumbnail ${filename} to base64:`,
+                    error
+                  )
+                }
+              }
+            }
+          }
 
           return {
             slug: dir,
@@ -43,6 +103,8 @@ export async function getAllPosts(): Promise<PostData[]> {
             path: data.path || `/${dir}`,
             category: data.category,
             tags: data.tags,
+            excerpt,
+            thumbnail,
           } as PostData
         }
       }
