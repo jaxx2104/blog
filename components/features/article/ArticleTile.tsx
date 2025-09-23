@@ -45,6 +45,7 @@ const Title = styled.h2`
   color: ${(props) => props.theme.colorMain};
   font-size: ${(props) => `${props.theme.fontSize}rem`};
   font-weight: ${(props) => props.theme.fontWeightBold};
+  line-height: 1.25;
   letter-spacing: -0.025rem;
   margin: 0 0 4px 0;
   overflow: hidden;
@@ -55,11 +56,10 @@ const Title = styled.h2`
 
 const Excerpt = styled.p`
   font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
-  line-height: ${(props) => `${props.theme.fontSizeSmall}rem`};
   font-weight: ${(props) => props.theme.fontWeight};
   color: ${(props) => props.theme.colorText};
+  line-height: 1.25;
   margin: 0 0 8px 0;
-  line-height: 1.4;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
