@@ -1,15 +1,15 @@
 ---
 title: Bebelを使ってJavaScriptをES2015で書く
-date: "2016-03-26T19:53:32+00:00"
-author: jaxx2104
-layout: post
+created_at: "2016-03-26T19:53:32+00:00"
+updated_at: "2016-03-26T19:53:32+00:00"
 path: /bebel-es2015
-image: ./babel.png
 category: JavaScript
 tags:
   - Node.js
   - ES2015
 ---
+
+![](./babel.png)
 
 ## ES2015(ES6)について
 

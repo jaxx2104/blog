@@ -1,8 +1,7 @@
 ---
 title: CentOSにLAMP環境構築からWordPressインストールまでの手順
-date: "2013-12-05T00:56:38+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-12-05T00:56:38+00:00"
+updated_at: "2013-12-05T00:56:38+00:00"
 path: /centos-lamp-wordpress-step
 category: 開発環境
 tags:

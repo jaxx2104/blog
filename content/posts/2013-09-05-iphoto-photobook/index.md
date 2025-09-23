@@ -1,16 +1,17 @@
 ---
 title: iPhotoを使って旅行のフォトブックを作ってみた
-date: "2013-09-05T00:39:33+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-09-05T00:39:33+00:00"
+updated_at: "2013-09-05T00:39:33+00:00"
 path: /iphoto-photobook
-image: ./af7f052ca06f2b0bce7cd562ab0ef139.jpg
-description: iPhoto を使ってフォトブックが簡単に作れるみたいですので、ためしてみる。
 category: 旅行
 tags:
   - iPhoto
   - フォトブック
 ---
+
+iPhoto を使ってフォトブックが簡単に作れるみたいですので、ためしてみる。
+
+![](./af7f052ca06f2b0bce7cd562ab0ef139.jpg)
 
 ではさっそく作っていきます！
 

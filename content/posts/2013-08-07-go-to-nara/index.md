@@ -1,15 +1,15 @@
 ---
 title: 夏季休暇を使って旅行に行きます。
-date: "2013-08-07T01:35:20+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-08-07T01:35:20+00:00"
+updated_at: "2013-08-07T01:35:20+00:00"
 path: /go-to-nara
-image: "./IMG_0897.jpg"
 category: 旅行
 tags:
   - 奈良
   - 旅行
 ---
+
+![](./IMG_0897.jpg)
 
 <small>飛び出し坊や</small>
 

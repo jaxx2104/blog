@@ -1,11 +1,9 @@
 ---
 title: JavaScript で Arrow 関数を使った時の this の代わり
-date: "2016-12-11T17:15:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2016-12-11T17:15:00+00:00"
+updated_at: "2016-12-11T17:15:00+00:00"
 guid: http://jaxx2104.info/?p=1404
 path: /arrow-function
-image:
 category: JavaScript
 tags:
   - ES2015

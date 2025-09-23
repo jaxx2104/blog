@@ -1,8 +1,7 @@
 ---
 title: iOS , Androidアプリ内WebView での User Agent について
-date: "2014-01-11T23:21:37+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-01-11T23:21:37+00:00"
+updated_at: "2014-01-11T23:21:37+00:00"
 path: /webview-user-agent
 category: iOS
 tags:

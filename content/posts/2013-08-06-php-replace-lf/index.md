@@ -1,10 +1,8 @@
 ---
 title: PHPで改行コードを（LF）に統一する方法
-date: "2013-08-06T00:22:48+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-08-06T00:22:48+00:00"
+updated_at: "2013-08-06T00:22:48+00:00"
 path: /php-replace-lf
-image: ./IMG_1003.jpg
 category: PHP
 tags:
   - LF
@@ -12,6 +10,8 @@ tags:
   - 改行コード
   - 置換
 ---
+
+![](./IMG_1003.jpg)
 
 最近アイスコーヒーばっかり飲んでいる。
 

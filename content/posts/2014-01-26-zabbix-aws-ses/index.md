@@ -1,8 +1,7 @@
 ---
 title: Zabbix と AWS SES による死活監視とアラートメールの送信方法
-date: "2014-01-26T14:50:56+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-01-26T14:50:56+00:00"
+updated_at: "2014-01-26T14:50:56+00:00"
 path: /zabbix-aws-ses
 category: AWS
 tags:

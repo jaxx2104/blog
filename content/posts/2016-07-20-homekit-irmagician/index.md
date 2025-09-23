@@ -1,10 +1,8 @@
 ---
 title: Raspberry Pi と irMagician を使って家をスマートホーム化する
-date: "2016-07-20T09:02:29+00:00"
-author: jaxx2104
-layout: post
+created_at: "2016-07-20T09:02:29+00:00"
+updated_at: "2016-07-20T09:02:29+00:00"
 path: /homekit-irmagician
-image: ./001.jpg
 category: メモ
 tags:
   - Raspberry Pi
@@ -12,6 +10,8 @@ tags:
   - HomeKit
   - Node.js
 ---
+
+![](./001.jpg)
 
 暑い季節になってきました。夏の自由研究ということで電子工作と IoT に挑戦したいと思います。
 

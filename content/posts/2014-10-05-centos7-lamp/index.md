@@ -1,12 +1,9 @@
 ---
 title: "CentOS7にLAMP環境とWordPress構築[さくらVPS]"
-date: "2014-10-05T15:23:17+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-10-05T15:23:17+00:00"
+updated_at: "2014-10-05T15:23:17+00:00"
 guid: http://jaxx2104.info/?p=988
 path: /centos7-lamp
-image: ./centos.png
-description: さくら VPS を CentOS7 へアップデートしました。いろいろ変更点あったので備忘録としてメモしました。
 category: 開発環境
 tags:
   - CentOS
@@ -15,6 +12,10 @@ tags:
   - PHP
   - WordPress
 ---
+
+さくら VPS を CentOS7 へアップデートしました。いろいろ変更点あったので備忘録としてメモしました。
+
+![](./centos.png)
 
 ## CentOS7 アップデート
 

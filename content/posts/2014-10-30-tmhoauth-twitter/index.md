@@ -1,8 +1,7 @@
 ---
 title: tmhOAuthを使ってTwitterに画像付きで投稿する
-date: "2014-10-30T23:06:40+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-10-30T23:06:40+00:00"
+updated_at: "2014-10-30T23:06:40+00:00"
 path: /tmhoauth-twitter
 category: PHP
 tags:

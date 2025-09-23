@@ -15,8 +15,7 @@ export interface SiteMetaType {
 interface Props {
   path: string
   title: string
-  date: string
-  description: string
+  created_at: string
   categories: string[] | null
   tags: string[] | null
 }
@@ -24,7 +23,7 @@ interface Props {
 const Article: React.FC<Props> = ({
   path,
   title,
-  date,
+  created_at,
   categories,
   tags,
 }: Props) => {
@@ -33,7 +32,7 @@ const Article: React.FC<Props> = ({
       <ArticleInfo
         path={path}
         title={title}
-        date={date}
+        created_at={created_at}
         categories={categories}
         tags={tags}
       />

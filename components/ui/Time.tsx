@@ -2,11 +2,11 @@ import React from "react"
 import styled from "styled-components"
 
 interface Props {
-  date: string
+  created_at: string
 }
 
-const Time: React.FC<Props> = ({ date }: Props) => {
-  return <TimeWrap dateTime={date}>{date}</TimeWrap>
+const Time: React.FC<Props> = ({ created_at }: Props) => {
+  return <TimeWrap dateTime={created_at}>{created_at}</TimeWrap>
 }
 
 export default Time

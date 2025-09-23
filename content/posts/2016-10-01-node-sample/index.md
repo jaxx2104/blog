@@ -1,15 +1,15 @@
 ---
 title: Gulp タスクランナーを使ったフロントエンド開発環境
-date: "2016-10-01T09:02:29+00:00"
-author: jaxx2104
-layout: post
+created_at: "2016-10-01T09:02:29+00:00"
+updated_at: "2016-10-01T09:02:29+00:00"
 path: /node-sample
-image: ./gulp.jpg
 category: JavaScript
 tags:
   - Node.js
   - Gulp
 ---
+
+![](./gulp.jpg)
 
 最近のフロントエンドはブラウザやライブラリ互換の問題を解決するため、
 以前の書いた[記事](https://jaxx2104.info/bebel-es2015/)のように ES や SCSS をコンパイルして使うことが増えてきました。

@@ -1,8 +1,7 @@
 ---
 title: jQueryを使って指定した要素へのスクロールアニメーション
-date: "2014-02-10T21:48:17+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-02-10T21:48:17+00:00"
+updated_at: "2014-02-10T21:48:17+00:00"
 path: /jquery-scroll-button
 category: JavaScript
 ---

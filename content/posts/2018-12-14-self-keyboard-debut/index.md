@@ -1,17 +1,18 @@
 ---
 title: "自作キーボード沼に最短でハマるまでの手順書"
-date: "2018-12-14T00:00:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2018-12-14T00:00:00+00:00"
+updated_at: "2018-12-14T00:00:00+00:00"
 path: /self-keyboard-debut
-image: "DSC03710.jpg"
-description: 自作キーボード沼に最短でハマるまでの手順書を書き記しておきます。
 category: 自作キーボード
 tags:
   - keyboard
   - keyswitch
   - keycaps
 ---
+
+自作キーボード沼に最短でハマるまでの手順書を書き記しておきます。
+
+![](DSC03710.jpg)
 
 ここ 1,2 ヶ月で興味を持ち始めて自作キーボードデビューしました！
 

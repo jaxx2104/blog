@@ -10,12 +10,9 @@ const postsDirectory = path.join(process.cwd(), "content/posts")
 export interface PostData {
   slug: string
   title: string
-  date: string
-  author?: string
-  layout?: string
+  created_at: string
+  updated_at: string
   path: string
-  image?: string
-  description?: string
   category?: string
   tags?: string[]
   content?: string
@@ -39,12 +36,9 @@ export async function getAllPosts(): Promise<PostData[]> {
           return {
             slug: dir,
             title: data.title || "",
-            date: data.date || "",
-            author: data.author,
-            layout: data.layout,
+            created_at: data.created_at || "",
+            updated_at: data.updated_at || "",
             path: data.path || `/${dir}`,
-            image: data.image,
-            description: data.description,
             category: data.category,
             tags: data.tags,
           } as PostData
@@ -57,7 +51,8 @@ export async function getAllPosts(): Promise<PostData[]> {
   return posts
     .filter(Boolean)
     .sort(
-      (a, b) => new Date(b!.date).getTime() - new Date(a!.date).getTime()
+      (a, b) =>
+        new Date(b!.created_at).getTime() - new Date(a!.created_at).getTime()
     ) as PostData[]
 }
 
@@ -119,12 +114,9 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   return {
     slug,
     title: data.title || "",
-    date: data.date || "",
-    author: data.author,
-    layout: data.layout,
+    created_at: data.created_at || "",
+    updated_at: data.updated_at || "",
     path: data.path || `/${slug}`,
-    image: data.image,
-    description: data.description,
     category: data.category,
     tags: data.tags,
     content,

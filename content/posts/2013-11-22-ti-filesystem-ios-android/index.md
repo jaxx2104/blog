@@ -1,11 +1,8 @@
 ---
 title: Ti.Filesystemを使ってiOSとAndroidでローカル保存
-date: "2013-11-22T01:46:33+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-11-22T01:46:33+00:00"
+updated_at: "2013-11-22T01:46:33+00:00"
 path: /ti-filesystem-ios-android
-dsq_thread_id:
-  - "1986276865"
 category: JavaScript
 tags:
   - Android

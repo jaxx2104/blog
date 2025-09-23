@@ -1,8 +1,7 @@
 ---
 title: MacのターミナルのプロンプトをLinuxっぽく変える
-date: "2013-11-11T00:13:03+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-11-11T00:13:03+00:00"
+updated_at: "2013-11-11T00:13:03+00:00"
 path: /mac-terminal-prompt-linux-like
 category: Terminal
 tags:

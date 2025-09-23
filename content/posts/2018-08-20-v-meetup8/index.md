@@ -1,16 +1,17 @@
 ---
 title: "Vue.js Tokyo v-meetup #8 に行ってきた"
-date: "2018-08-29T00:00:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2018-08-29T00:00:00+00:00"
+updated_at: "2018-08-29T00:00:00+00:00"
 path: /v-meetup8
-image: "image.jpg"
-description: ブログ書く枠で参加させていただいたのでレポート👨‍💻
 category: メモ
 tags:
   - Vue.js
   - Netlify
 ---
+
+ブログ書く枠で参加させていただいたのでレポート👨‍💻
+
+![](image.jpg)
 
 - Connpass [Vue.js Tokyo v-meetup #8](https://vuejs-meetup.connpass.com/event/95678/)
 - ハッシュタグ [#vuejs_meetup8](https://twitter.com/hashtag/vuejs_meetup8)

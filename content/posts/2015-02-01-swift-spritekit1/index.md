@@ -1,16 +1,16 @@
 ---
 title: SwiftとSpriteKitでアプリ開発1:プロジェクト作成からシミュレータ実行まで
-date: "2015-02-01T15:10:50+00:00"
-author: jaxx2104
-layout: post
+created_at: "2015-02-01T15:10:50+00:00"
+updated_at: "2015-02-01T15:10:50+00:00"
 path: /swift-spritekit1
-image: /wp/images/2015/01/swift-logo-hero-1.jpg
 category: iOS
 tags:
   - SpriteKit
   - Swift
   - Xcode
 ---
+
+![](/wp/images/2015/01/swift-logo-hero-1.jpg)
 
 iOS の新プログラミング言語 Swift をゲームアプリケーションを作りながら触りたいと思います。
 

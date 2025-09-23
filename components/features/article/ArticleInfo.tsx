@@ -11,7 +11,7 @@ import Time from "@/components/ui/Time"
 interface Props {
   path: string
   title: string
-  date: string
+  created_at: string
   categories: string[] | null
   tags: string[] | null
 }
@@ -19,7 +19,7 @@ interface Props {
 const ArticleInfo: React.FC<Props> = ({
   path,
   title,
-  date,
+  created_at,
   categories,
   tags,
 }: Props) => (
@@ -31,7 +31,7 @@ const ArticleInfo: React.FC<Props> = ({
       <Heading>{title}</Heading>
     </Link>
     <div style={{ margin: "0.5rem 0", display: "flex", columnGap: "0.5rem" }}>
-      <Time date={date} />
+      <Time created_at={created_at} />
       <Badges items={categories} primary />
       <Badges items={tags} />
     </div>

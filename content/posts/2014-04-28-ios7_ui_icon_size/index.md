@@ -1,8 +1,7 @@
 ---
 title: アプリ開発時にiOS7のUI・アイコンなどで参考になったサイト
-date: "2014-04-28T01:36:33+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-04-28T01:36:33+00:00"
+updated_at: "2014-04-28T01:36:33+00:00"
 path: /ios7_ui_icon_size
 category: iOS
 tags:

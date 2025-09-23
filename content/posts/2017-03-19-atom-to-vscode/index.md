@@ -1,15 +1,16 @@
 ---
 title: Atom から VScode のエディタ移行と拡張機能について
-date: "2017-03-19T23:15:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2017-03-19T23:15:00+00:00"
+updated_at: "2017-03-19T23:15:00+00:00"
 path: /atom-to-vscode
-image: ./atom-to-vscode.png
-description: いままでコードを書くとき Emacs か Atom で書いてました。
 category: 開発環境
 tags:
   - VSCode
 ---
+
+いままでコードを書くとき Emacs か Atom で書いてました。
+
+![](./atom-to-vscode.png)
 
 ローカルではもっぱら Atom を使っていたのですが自分の環境だとちょっと立ち上がりが重い。
 さすがに耐えられなくなって少し前から Visual Studio Code にエディタを移行してみています。

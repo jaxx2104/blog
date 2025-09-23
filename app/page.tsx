@@ -12,8 +12,7 @@ export default async function HomePage() {
           key={post.slug}
           path={post.path}
           title={post.title}
-          date={post.date}
-          description={post.description || ""}
+          created_at={post.created_at}
           categories={post.category ? [post.category] : null}
           tags={post.tags || null}
         />

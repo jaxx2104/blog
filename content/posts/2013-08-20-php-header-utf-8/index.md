@@ -1,8 +1,7 @@
 ---
 title: PHPで文字コードをUTF-8にする
-date: "2013-08-20T00:57:59+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-08-20T00:57:59+00:00"
+updated_at: "2013-08-20T00:57:59+00:00"
 path: /php-header-utf-8
 category: PHP
 tags:

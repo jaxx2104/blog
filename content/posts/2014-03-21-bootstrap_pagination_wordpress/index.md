@@ -1,19 +1,20 @@
 ---
 id: 915
 title: WordPressでBootstrapのPaginationを実装する
-date: "2014-03-21T12:28:51+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-03-21T12:28:51+00:00"
+updated_at: "2014-03-21T12:28:51+00:00"
 guid: http://jaxx2104.info/?p=915
 path: /bootstrap_pagination_wordpress
-image: ./pagenation-01.png
-description: こんにちは、今日から三連休ということで、ワークスペースを利用してブログ書きます。
 category: PHP
 tags:
   - bootstrap
   - PHP
   - WordPress
 ---
+
+こんにちは、今日から三連休ということで、ワークスペースを利用してブログ書きます。
+
+![](./pagenation-01.png)
 
 では WordPress で Bootstrap の Pagination を実装方法について、
 

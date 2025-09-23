@@ -32,7 +32,8 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} | jaxx2104.info`,
-    description: post.description || "",
+    // 100文字まで
+    description: post.content?.slice(0, 100) || "",
   }
 }
 
@@ -58,8 +59,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <Article
         path={post.path}
         title={post.title}
-        date={post.date}
-        description={post.description || ""}
+        created_at={post.created_at}
         categories={post.category ? [post.category] : null}
         tags={post.tags || null}
         html={post.html || ""}

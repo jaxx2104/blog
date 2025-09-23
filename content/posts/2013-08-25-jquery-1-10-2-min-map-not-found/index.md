@@ -1,8 +1,7 @@
 ---
 title: WordPress3.6で「jquery-1.10.2.min.map not found」のエラーが出る
-date: "2013-08-25T00:39:22+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-08-25T00:39:22+00:00"
+updated_at: "2013-08-25T00:39:22+00:00"
 path: /jquery-1-10-2-min-map-not-found
 category: JavaScript
 tags:

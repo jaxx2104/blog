@@ -1,18 +1,19 @@
 ---
 title: TitaniumでデバイスのOSバージョンの取得
-date: "2013-11-21T02:48:24+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-11-21T02:48:24+00:00"
+updated_at: "2013-11-21T02:48:24+00:00"
 guid: http://jaxx2104.info/?p=715
 path: /titanium-get-device-os-version
-image: ./f19313ab36c560af5c9a4d02c866846d.jpg
-description: アプリケーションを iOS 7 のデザインへ対応するとき新しいナビゲーション部分に回りこんでしまうため、iOS 7 のみで分岐が必要になってきます。
 category: JavaScript
 tags:
   - iOS7
   - Ti.Platform.version
   - Titanium
 ---
+
+アプリケーションを iOS 7 のデザインへ対応するとき新しいナビゲーション部分に回りこんでしまうため、iOS 7 のみで分岐が必要になってきます。
+
+![](./f19313ab36c560af5c9a4d02c866846d.jpg)
 
 <small>正直この分岐は納得いかない。</small>
 

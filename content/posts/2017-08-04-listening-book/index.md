@@ -1,17 +1,18 @@
 ---
 title: 本をSiriに読んでもらう
-date: "2017-07-19T23:15:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2017-07-19T23:15:00+00:00"
+updated_at: "2017-07-19T23:15:00+00:00"
 path: /readme-siri
-image: ./image.jpg
-description: 正直なところ本を読むのが苦手です。
 category: 開発環境
 tags:
   - iPad
   - Siri
   - Kindle
 ---
+
+正直なところ本を読むのが苦手です。
+
+![](./image.jpg)
 
 なぜか理由はよくわからないけど。学生時代、活字に親しんでこなかったツケがまわってきたんだと思います。
 

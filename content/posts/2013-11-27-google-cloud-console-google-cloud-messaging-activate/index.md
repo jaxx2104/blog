@@ -1,8 +1,7 @@
 ---
 title: Google Cloud Console から Google Cloud Messaging を有効にする
-date: "2013-11-27T01:40:45+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-11-27T01:40:45+00:00"
+updated_at: "2013-11-27T01:40:45+00:00"
 path: /google-cloud-console-google-cloud-messaging-activate
 category: サービス
 tags:

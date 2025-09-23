@@ -1,15 +1,15 @@
 ---
 title: FuelPHP で「oops an unexpected error has occurred」の画面が出た場合
-date: "2015-03-05T21:50:23+00:00"
-author: jaxx2104
-layout: post
+created_at: "2015-03-05T21:50:23+00:00"
+updated_at: "2015-03-05T21:50:23+00:00"
 path: /fuelphp-oops-an-unexpected-error-has-occurred
-image: ./1415367437FuelPHP.jpg
 category: PHP
 tags:
   - Apache
   - FuelPHP
 ---
+
+![](./1415367437FuelPHP.jpg)
 
 環境変数の値を変更するとエラー内容を表示できる。
 

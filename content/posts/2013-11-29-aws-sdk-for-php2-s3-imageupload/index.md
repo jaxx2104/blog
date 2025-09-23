@@ -1,8 +1,7 @@
 ---
 title: AWS SDK for PHP2 を使って S3 に画像をアップしてみた
-date: "2013-11-29T23:58:21+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-11-29T23:58:21+00:00"
+updated_at: "2013-11-29T23:58:21+00:00"
 path: /aws-sdk-for-php2-s3-imageupload
 category: AWS
 tags:

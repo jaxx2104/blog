@@ -1,16 +1,17 @@
 ---
 title: Titaniumで初アプリを作った際に参考にしたサイト
-date: "2014-12-13T03:59:22+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-12-13T03:59:22+00:00"
+updated_at: "2014-12-13T03:59:22+00:00"
 path: /titanium-app-ref
-image: ./b0edb59d97976fb1c698b9997460f6e3.jpg
-description: アプリケーションを作った際に、参考にしたサイトについて初心者目線ですが紹介したいと思います。
 category: iOS
 tags:
   - Titanium
   - Android
 ---
+
+アプリケーションを作った際に、参考にしたサイトについて初心者目線ですが紹介したいと思います。
+
+![](./b0edb59d97976fb1c698b9997460f6e3.jpg)
 
 Titanium は以前に少しだけ触ったことがあって、その時は「Resources/app.js」に書く Classic なものでした。
 

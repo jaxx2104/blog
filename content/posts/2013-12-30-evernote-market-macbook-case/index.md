@@ -1,18 +1,19 @@
 ---
 id: 831
 title: Evernote Market でMacBookAirのケース買った
-date: "2013-12-30T01:28:02+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-12-30T01:28:02+00:00"
+updated_at: "2013-12-30T01:28:02+00:00"
 guid: http://jaxx2104.info/?p=831
 path: /evernote-market-macbook-case
-image: ./image.jpg
-description: Evernote がネットでセレクトショップ始めたようですので、おしゃれだった MacBook ケースを買ってみました。
 category: 買い物
 tags:
   - Evernote
   - Mac
 ---
+
+Evernote がネットでセレクトショップ始めたようですので、おしゃれだった MacBook ケースを買ってみました。
+
+![](./image.jpg)
 
 お値段は商品 ¥4410 + 送料 ¥600 でした。商品は注文してから 2, 3 日で届きました。
 

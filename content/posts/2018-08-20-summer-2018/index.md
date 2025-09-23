@@ -1,11 +1,8 @@
 ---
 title: 2018年の夏休みメモ
-date: "2018-08-20T00:00:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2018-08-20T00:00:00+00:00"
+updated_at: "2018-08-20T00:00:00+00:00"
 path: /summer-2018
-image: "image.jpg"
-description:
 category: メモ
 tags:
   - styled-components
@@ -13,6 +10,8 @@ tags:
   - GCP
   - Firebase
 ---
+
+![](image.jpg)
 
 夏休みの期間でやったこと、技術的な部分は Qiita にエントリーでも書きたいけど仕事復帰すると忘れてしまいそうなのでこのエントリーは一旦のメモです。（写真は 6 日目に行った蔵前のカフェ）
 

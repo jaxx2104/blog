@@ -92,9 +92,9 @@ content/posts/
 ```yaml
 ---
 title: "Post Title"
-date: "2024-01-01"
+created_at: "2024-01-01"
+updated_at: "2024-01-01"
 path: "/my-post-slug"
-description: "Brief description"
 category: "tech"
 tags: ["nextjs", "typescript"]
 ---

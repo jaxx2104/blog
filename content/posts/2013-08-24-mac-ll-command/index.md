@@ -1,8 +1,7 @@
 ---
 title: Macでllコマンドを使えるようにする
-date: "2013-08-24T22:48:39+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-08-24T22:48:39+00:00"
+updated_at: "2013-08-24T22:48:39+00:00"
 path: /mac-ll-command
 category: Terminal
 tags:
