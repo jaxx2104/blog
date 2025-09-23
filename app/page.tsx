@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/lib/posts"
-import Layout from "@/components/Layout"
-import Article from "@/components/ArticleIndex"
+import Layout from "@/components/layout/Layout"
+import Article from "@/components/features/article/ArticleIndex"
 
 export default async function HomePage() {
   const posts = await getAllPosts()

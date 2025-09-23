@@ -30,7 +30,9 @@ export const useDarkMode = () => {
   useEffect(() => {
     const getStorage = async () => {
       const localTheme = await storage.getItem<Theme>(key)
-      localTheme && setTheme(localTheme)
+      if (localTheme) {
+        setTheme(localTheme)
+      }
     }
     getStorage()
   }, [])

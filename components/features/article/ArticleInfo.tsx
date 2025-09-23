@@ -4,9 +4,9 @@ import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
 
-import Badges from "@/src/components/badges"
-import Heading from "@/src/components/heading"
-import Time from "@/src/components/time"
+import Badges from "@/components/ui/Badge"
+import Heading from "@/components/ui/Heading"
+import Time from "@/components/ui/Time"
 
 interface Props {
   path: string

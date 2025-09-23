@@ -1,8 +1,8 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getPostByPath, getAllPosts } from "@/lib/posts"
-import Layout from "@/components/Layout"
-import Article, { SiteMetaType } from "@/components/Article"
+import Layout from "@/components/layout/Layout"
+import Article, { SiteMetaType } from "@/components/features/article/Article"
 
 interface PostPageProps {
   params: Promise<{
@@ -62,7 +62,6 @@ export default async function PostPage({ params }: PostPageProps) {
         description={post.description || ""}
         categories={post.category ? [post.category] : null}
         tags={post.tags || null}
-        image={undefined}
         html={post.html || ""}
         site={siteMeta}
       />

@@ -1,9 +1,9 @@
 "use client"
 
 import React from "react"
-import Container from "@/src/components/container"
-import Share from "@/src/components/icon/icon-share"
-import ArticleInfo from "@/components/ArticleInfo"
+import Container from "@/components/ui/Container"
+import Share from "@/components/icons/icon-share"
+import ArticleInfo from "@/components/features/article/ArticleInfo"
 
 export interface SiteMetaType {
   title: string
@@ -20,7 +20,6 @@ interface Props {
   description: string
   categories: string[] | null
   tags: string[] | null
-  image?: string
   html: string
   site: SiteMetaType
 }
@@ -32,7 +31,6 @@ const Article: React.FC<Props> = ({
   description,
   categories,
   tags,
-  image,
   html,
   site,
 }: Props) => {
@@ -47,7 +45,6 @@ const Article: React.FC<Props> = ({
       />
       <div className="content">
         <p>{description}</p>
-        {image && <img src={image} alt={title} />}
       </div>
       <div
         className="content"

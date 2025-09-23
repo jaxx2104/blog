@@ -2,8 +2,8 @@
 
 import React from "react"
 import { ThemeProvider } from "styled-components"
-import GlobalStyles from "@/src/styles/global-style"
-import { lightTheme } from "@/src/styles/theme"
+import GlobalStyles from "@/styles/global-style"
+import { lightTheme } from "@/styles/theme"
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (

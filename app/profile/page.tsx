@@ -1,6 +1,6 @@
 import { Metadata } from "next"
-import Layout from "@/components/Layout"
-import Container from "@/src/components/container"
+import Layout from "@/components/layout/Layout"
+import Container from "@/components/ui/Container"
 
 export const metadata: Metadata = {
   title: "Profile | jaxx2104.info",

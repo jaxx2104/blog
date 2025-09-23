@@ -4,8 +4,8 @@ import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
 
-import Hr from "@/src/components/hr"
-import Container from "@/src/components/container"
+import Hr from "@/components/ui/Hr"
+import Container from "@/components/ui/Container"
 
 const Footer: React.FC = () => {
   return (
