@@ -6,8 +6,11 @@ import Container from "@/components/ui/Container"
 import Flex from "@/components/ui/Flex"
 import NaviLogo from "@/components/layout/NaviLogo"
 import NaviMenu from "@/components/layout/NaviMenu"
+import { useTheme } from "@/lib/ThemeContext"
 
 const Navi: React.FC = () => {
+  const { theme, toggleTheme } = useTheme()
+
   return (
     <Header>
       <Container>
@@ -17,6 +20,7 @@ const Navi: React.FC = () => {
             items={[
               { text: "Home", to: "/" },
               { text: "Profile", to: "/profile" },
+              { text: theme === "light" ? "🌅" : "🌃", action: toggleTheme },
             ]}
           />
         </Flex>
