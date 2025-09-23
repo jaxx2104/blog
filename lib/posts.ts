@@ -1,9 +1,11 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
-import { remark } from "remark"
+import { unified } from "unified"
+import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import rehypeStringify from "rehype-stringify"
+import rehypePrettyCode from "rehype-pretty-code"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
 
@@ -105,11 +107,16 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   }
 
   // HTMLタグを含むコンテンツを処理
-  const processedContent = await remark()
+  const processedContent = await unified()
+    .use(remarkParse)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypePrettyCode, {
+      theme: "dracula",
+      keepBackground: true,
+      defaultLang: "plaintext",
+    })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(contentWithDataUris)
-  const contentHtml = processedContent.toString()
 
   return {
     slug,
@@ -120,7 +127,7 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
     category: data.category,
     tags: data.tags,
     content,
-    html: contentHtml,
+    html: processedContent.toString(),
   }
 }
 

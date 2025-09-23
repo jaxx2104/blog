@@ -65,6 +65,18 @@ const GlobalStyles = createGlobalStyle`
       border-radius: 3px;
     }
 
+    /* Code block styles - レイアウトのみ（色はrehype-pretty-codeのテーマが適用） */
+    pre {
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0;
+      overflow-x: auto;
+      font-size: ${(props) => `${props.theme.fontSize}rem`};
+      line-height: 1.25rem;
+      font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+    }
+
+
   }
 `
 export default GlobalStyles

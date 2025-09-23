@@ -21,10 +21,14 @@
     "react-helmet": "6.1.0",
     "react-lazyload": "3.2.1",
     "react-share": "5.2.2",
+    "rehype-pretty-code": "^0.14.1",
     "rehype-stringify": "^10.0.1",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "remark-rehype": "^11.1.2"
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "shiki": "^3.13.0",
+    "unified": "^11.0.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.27.0",

@@ -10,10 +10,10 @@ tags:
 ---
 はじめに
 2025年のスマートホーム環境を構築するにあたり、Home Assistantを選択しました。選定理由は以下の通りです：
-オープンソース：コミュニティが活発で、カスタマイズ性が高い
-日本の家電対応：ECHONET Lite対応により、国内メーカーの家電を制御可能
-ローカル制御：クラウド依存を最小限に抑え、プライバシーとレスポンスを重視
-拡張性：ESPHomeによる自作デバイスの追加が容易
+- オープンソース：コミュニティが活発で、カスタマイズ性が高い
+- 日本の家電対応：ECHONET Lite対応により、国内メーカーの家電を制御可能
+- ローカル制御：クラウド依存を最小限に抑え、プライバシーとレスポンスを重視
+- 拡張性：ESPHomeによる自作デバイスの追加が容易
 
 実現したかったこと：
 1. 音声での家電制御（日本語対応）
@@ -24,18 +24,18 @@ tags:
 基本セットアップ
 
 インストール環境
-バージョン: Home Assistant Core 2025.8.3
-Supervisor: 2025.09.0
-インストール方法: Home Assistant OS（推奨）
-ハードウェア: Beelink EQ14
+- バージョン: Home Assistant Core 2025.8.3
+- Supervisor: 2025.09.0
+- インストール方法: Home Assistant OS（推奨）
+- ハードウェア: Beelink EQ14
 
 ミニPC: Beelink EQ14
 Home Assistant OSをインストールするマシンとして、省電力性と静音性に優れたミニPC「Beelink EQ14」を選択しました。
-CPU: Intel N100 (4コア/4スレッド, 最大3.4GHz)
-メモリ: 16GB DDR4
-ストレージ: 500GB M.2 NVMe SSD
-ネットワーク: 2.5Gbps Ethernetポート x2, Wi-Fi 6
-特徴: 低消費電力でありながら、Home Assistantおよび多数のアドオンを快適に動作させるのに十分な性能を持っています。ファンレス設計に近く、非常に静かです。
+- CPU: Intel N100 (4コア/4スレッド, 最大3.4GHz)
+- メモリ: 16GB DDR4
+- ストレージ: 500GB M.2 NVMe SSD
+- ネットワーク: 2.5Gbps Ethernetポート x2, Wi-Fi 6
+- 特徴: 低消費電力でありながら、Home Assistantおよび多数のアドオンを快適に動作させるのに十分な性能を持っています。ファンレス設計に近く、非常に静かです。
 
 初期設定のポイント
 基本設定ファイル（`configuration.yaml`）の構成：
@@ -119,11 +119,12 @@ M5Stack ATOM3 Lite（Bluetooth Proxy）
 Bluetooth対応デバイスをHome Assistantに接続するためのProxyとして構築しました。
 
 製品スペック
-MCU: ESP32-S3FN8 (デュアルコア, 最大240MHz)
-Wi-Fi: 2.4GHz
-Bluetooth: 5.0 (BLE + Mesh)
-Flash: 8MB
-特徴: 小型ながら強力なESP32-S3を搭載し、Bluetoothプロキシとして安定した動作が期待できます。
+- MCU: ESP32-S3FN8 (デュアルコア, 最大240MHz)
+- Wi-Fi: 2.4GHz
+- Bluetooth: 5.0 (BLE + Mesh)
+- Flash: 8MB
+- 特徴: 小型ながら強力なESP32-S3を搭載し、Bluetoothプロキシとして安定した動作が期待できます。
+
 ```yaml
 esphome:
   name: m5stack-atom3-lite
@@ -165,11 +166,12 @@ M5Stack Atom Echo（音声アシスタント）
 音声アシスタント機能を持つスマートスピーカーとして構築しました。
 
 製品スペック
-MCU: ESP32-PICO-D4 (デュアルコア, 240MHz)
-Wi-Fi: 2.4GHz
-マイク: SPM1423 (PDM)
-スピーカー: 0.5W
-特徴: マイクとスピーカーを内蔵した超小型のESP32開発ボード。Home Assistantの音声アシスタントを安価に構築するのに最適です。
+- MCU: ESP32-PICO-D4 (デュアルコア, 240MHz)
+- Wi-Fi: 2.4GHz
+- マイク: SPM1423 (PDM)
+- スピーカー: 0.5W
+- 特徴: マイクとスピーカーを内蔵した超小型のESP32開発ボード。Home Assistantの音声アシスタントを安価に構築するのに最適です。
+
 ```yaml
 esphome:
   name: m5stack-atom-echo
@@ -262,11 +264,11 @@ Wake Word対応で「OK Nabu」で起動
 ECHONET Liteカスタムコンポーネント
 日本の家電制御規格であるECHONET Liteに対応するため、カスタムコンポーネントを導入しました。
 対応メーカー例：
-Panasonic
-三菱電機
-ダイキン
-日立
-Nichicon（蓄電池）
+- Panasonic
+- 三菱電機
+- ダイキン
+- 日立
+- Nichicon（蓄電池）
 
 Panasonic Eoliaエアコンの連携
 ```yaml
@@ -436,11 +438,11 @@ ESPHomeデバイスの接続問題
 まとめと今後の展望
 
 実現できたこと
-音声による家電制御（日本語対応）
-自動化による快適な生活環境
-外出先からの安全なアクセス（Tailscale）
-既存家電の統合（ECHONET Lite、Panasonic Eolia）
-Bluetooth機器の統合（M5Stack ATOM3 Lite）
+- 音声による家電制御（日本語対応）
+- 自動化による快適な生活環境
+- 外出先からの安全なアクセス（Tailscale）
+- 既存家電の統合（ECHONET Lite、Panasonic Eolia）
+- Bluetooth機器の統合（M5Stack ATOM3 Lite）
 
 今後追加したい機能
 1. エネルギー管理
@@ -457,10 +459,10 @@ Bluetooth機器の統合（M5Stack ATOM3 Lite）
 - ChatGPT統合による自然言語制御
 
 コミュニティの活用
-Home Assistantの最大の強みはコミュニティです：
-公式フォーラム: https://community.home-assistant.io/
-日本語コミュニティ: Discord、Facebook groups
-HACS: 3000以上のカスタムコンポーネント
-継続的な改善と新機能の追加により、より快適なスマートホーム環境を構築していきます。
+- Home Assistantの最大の強みはコミュニティです：
+- 公式フォーラム: https://community.home-assistant.io/
+- 日本語コミュニティ: Discord、Facebook groups
+- HACS: 3000以上のカスタムコンポーネント
+- 継続的な改善と新機能の追加により、より快適なスマートホーム環境を構築していきます。
 
 このセットアップログが、これからHome Assistantを始める方の参考になれば幸いです。質問やフィードバックはお気軽にコメントください。

@@ -1,5 +1,5 @@
 // Define what props.theme will look like
-const theme = {
+const baseTheme = {
   colorMain: "#e91e63",
   colorSub: "#868e96",
   colorAccent: "#495057",
@@ -14,13 +14,15 @@ const theme = {
   fontWeightBold: 900,
 }
 
-export const lightTheme = theme
+export const lightTheme = {
+  ...baseTheme,
+  mode: "light" as const,
+}
 
 export const darkTheme = {
-  ...theme,
-  ...{
-    colorAccent: "#fff",
-    colorText: "#fff",
-    colorBackground: "#282c35",
-  },
+  ...baseTheme,
+  colorAccent: "#fff",
+  colorText: "#fff",
+  colorBackground: "#282c35",
+  mode: "dark" as const,
 }
