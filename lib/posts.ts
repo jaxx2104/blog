@@ -6,6 +6,7 @@ import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import rehypeStringify from "rehype-stringify"
 import rehypePrettyCode from "rehype-pretty-code"
+import { processImagePath } from "./image-utils"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
 
@@ -57,42 +58,7 @@ export async function getAllPosts(): Promise<PostData[]> {
 
           if (imageMatch) {
             const imageSrc = imageMatch[1]
-
-            // Check if it's an external URL
-            if (
-              imageSrc.startsWith("http://") ||
-              imageSrc.startsWith("https://")
-            ) {
-              thumbnail = imageSrc
-            } else {
-              // Local image - convert to base64
-              const filename = imageSrc.startsWith("./")
-                ? imageSrc.slice(2)
-                : imageSrc
-              const imagePath = path.join(fullPath, filename)
-
-              if (fs.existsSync(imagePath)) {
-                try {
-                  const imageBuffer = fs.readFileSync(imagePath)
-                  const base64 = imageBuffer.toString("base64")
-
-                  // Determine MIME type
-                  const ext = path.extname(filename).toLowerCase()
-                  let mimeType = "image/jpeg"
-                  if (ext === ".png") mimeType = "image/png"
-                  else if (ext === ".gif") mimeType = "image/gif"
-                  else if (ext === ".jpg" || ext === ".jpeg")
-                    mimeType = "image/jpeg"
-
-                  thumbnail = `data:${mimeType};base64,${base64}`
-                } catch (error) {
-                  console.error(
-                    `Failed to convert thumbnail ${filename} to base64:`,
-                    error
-                  )
-                }
-              }
-            }
+            thumbnail = processImagePath(imageSrc, dir, fullPath)
           }
 
           return {
@@ -130,55 +96,40 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   const fileContents = fs.readFileSync(fullPath, "utf8")
   const { data, content } = matter(fileContents)
 
-  // Convert images to data URIs
+  // Convert images to public URLs
   const postDir = path.join(postsDirectory, slug)
-  let contentWithDataUris = content
+  let contentWithUrls = content
 
   // Find all image references (both ./image.jpg and image.jpg patterns)
   const imageRegex = /!\[([^\]]*)\]\((\.\/)?([^)]+\.(jpg|jpeg|png|gif))\)/gi
-  const matches = [...contentWithDataUris.matchAll(imageRegex)]
+  const matches = [...contentWithUrls.matchAll(imageRegex)]
 
   for (const match of matches) {
     const fullMatch = match[0]
     const altText = match[1]
-    const filename = match[3]
-    const imagePath = path.join(postDir, filename)
+    const imageSrc = match[2]
+      ? match[3]
+      : match[0].match(/\(([^)]+)\)/)?.[1] || match[3]
 
-    try {
-      if (fs.existsSync(imagePath)) {
-        // Read image and convert to base64
-        const imageBuffer = fs.readFileSync(imagePath)
-        const base64 = imageBuffer.toString("base64")
-
-        // Determine MIME type
-        const ext = path.extname(filename).toLowerCase()
-        let mimeType = "image/jpeg"
-        if (ext === ".png") mimeType = "image/png"
-        else if (ext === ".gif") mimeType = "image/gif"
-        else if (ext === ".jpg" || ext === ".jpeg") mimeType = "image/jpeg"
-
-        // Create data URI - base64が長すぎるとremarkが処理できない可能性があるため、HTMLタグとして埋め込む
-        const imgTag = `<img src="data:${mimeType};base64,${base64}" alt="${altText}" />`
-
-        // Replace image reference with HTML img tag
-        contentWithDataUris = contentWithDataUris.replace(fullMatch, imgTag)
-      }
-    } catch (error) {
-      console.error(`Failed to convert image ${filename} to data URI:`, error)
+    const publicUrl = processImagePath(imageSrc, slug, postDir)
+    if (publicUrl) {
+      // Replace with markdown image syntax using public URL
+      const newImageTag = `![${altText}](${publicUrl})`
+      contentWithUrls = contentWithUrls.replace(fullMatch, newImageTag)
     }
   }
 
-  // HTMLタグを含むコンテンツを処理
+  // Process content with markdown
   const processedContent = await unified()
     .use(remarkParse)
-    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRehype)
     .use(rehypePrettyCode, {
       theme: "dracula",
       keepBackground: true,
       defaultLang: "plaintext",
     })
-    .use(rehypeStringify, { allowDangerousHtml: true })
-    .process(contentWithDataUris)
+    .use(rehypeStringify)
+    .process(contentWithUrls)
 
   return {
     slug,
