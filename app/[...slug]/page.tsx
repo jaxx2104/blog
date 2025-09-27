@@ -1,8 +1,8 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getPostByPath, getAllPosts } from "@/lib/posts"
-import Layout from "@/components/layout/Layout"
-import Article, { SiteMetaType } from "@/components/features/article/Article"
+import Layout from "@/components/layout/layout"
+import Article, { SiteMetaType } from "@/components/features/article/article"
 
 interface PostPageProps {
   params: Promise<{
@@ -32,8 +32,7 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} | jaxx2104.info`,
-    // 100文字まで
-    description: post.content?.slice(0, 100) || "",
+    description: post.content?.split(/\n/)[0],
   }
 }
 

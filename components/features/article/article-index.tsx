@@ -1,8 +1,8 @@
 "use client"
 
 import React from "react"
-import Container from "@/components/ui/Container"
-import ArticleInfo from "@/components/features/article/ArticleInfo"
+import Container from "@/components/ui/container"
+import ArticleInfo from "@/components/features/article/article-info"
 
 export interface SiteMetaType {
   title: string

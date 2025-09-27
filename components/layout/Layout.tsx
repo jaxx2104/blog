@@ -1,8 +1,8 @@
 "use client"
 
 import React from "react"
-import Navi from "@/components/layout/Navi"
-import Footer from "@/components/layout/Footer"
+import Navi from "@/components/layout/navi"
+import Footer from "@/components/layout/footer"
 
 interface LayoutProps {
   children: React.ReactNode

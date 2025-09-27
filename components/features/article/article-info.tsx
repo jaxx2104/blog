@@ -4,9 +4,9 @@ import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
 
-import Badges from "@/components/ui/Badge"
-import Heading from "@/components/ui/Heading"
-import Time from "@/components/ui/Time"
+import Badges from "@/components/ui/badge"
+import Heading from "@/components/ui/heading"
+import Time from "@/components/ui/time"
 
 interface Props {
   path: string
@@ -42,7 +42,7 @@ export default ArticleInfo
 
 const InfoWrap = styled.div`
   display: flex;
-  height: 7.5rem;
+  margin: 2rem 0 1rem;
   flex-direction: column;
   justify-content: center;
   word-break: break-word;

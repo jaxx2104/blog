@@ -2,10 +2,10 @@
 
 import React from "react"
 import styled from "styled-components"
-import Container from "@/components/ui/Container"
-import Flex from "@/components/ui/Flex"
-import NaviLogo from "@/components/layout/NaviLogo"
-import NaviMenu from "@/components/layout/NaviMenu"
+import Container from "@/components/ui/container"
+import Flex from "@/components/ui/flex"
+import NaviLogo from "@/components/layout/navi-logo"
+import NaviMenu from "@/components/layout/navi-menu"
 import { useTheme } from "@/lib/ThemeContext"
 
 const Navi: React.FC = () => {

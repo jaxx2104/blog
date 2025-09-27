@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/lib/posts"
-import Layout from "@/components/layout/Layout"
-import ArticleTile from "@/components/features/article/ArticleTile"
-import TileGrid from "@/components/ui/TileGrid"
+import Layout from "@/components/layout/layout"
+import ArticleTile from "@/components/features/article/article-tile"
+import TileGrid from "@/components/ui/tile-grid"
 
 export default async function HomePage() {
   const posts = await getAllPosts()

@@ -10,12 +10,21 @@ const GlobalStyles = createGlobalStyle`
     font-weight: ${(props) => props.theme.fontWeight};
     font-size: ${(props) => `${props.theme.fontSize}rem`};
     transition: color 0.2s ease-out, background 0.2s ease-out;
-    line-height: 1.25rem;
+    line-height: ${(props) => `${props.theme.fontSize * 1.75}rem`};
   }
 
   a {
     color: ${(props) => props.theme.colorMain};
     text-decoration: 'none'
+  }
+
+  ul, ol {
+        padding-inline-start: 1rem;
+
+  }
+
+  li {
+    list-style-position: inside;
   }
 
   .content {
