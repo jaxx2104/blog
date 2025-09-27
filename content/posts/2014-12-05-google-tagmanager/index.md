@@ -1,15 +1,16 @@
 ---
 title: Googleタグマネージャーを使ってスクロール計測
-date: "2014-12-05T02:58:08+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-12-05T02:58:08+00:00"
+updated_at: "2014-12-05T02:58:08+00:00"
 path: /google-tagmanager
-image: ./Google-Tag-Manager-1.png
-description: GoogleAnalytics で離脱率や平均セッションを見ていて、ユーザーがページのどこまで目を通しているのか気になりました。
 category: JavaScript
 tags:
   - Google Tag Manager
 ---
+
+GoogleAnalytics で離脱率や平均セッションを見ていて、ユーザーがページのどこまで目を通しているのか気になりました。
+
+![](./Google-Tag-Manager-1.png)
 
 海外の技術ブログや GitHub でも評価のある、「Scroll Depth」というライブラリを使用します。要件として jQuery1.7 以上です。
 

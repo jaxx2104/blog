@@ -1,8 +1,7 @@
 ---
 title: ハイゼンバグって何だろうと思ってWikipedia見たら面白かった
-date: "2013-12-04T01:01:54+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-12-04T01:01:54+00:00"
+updated_at: "2013-12-04T01:01:54+00:00"
 path: /heisenbugs
 category: メモ
 ---

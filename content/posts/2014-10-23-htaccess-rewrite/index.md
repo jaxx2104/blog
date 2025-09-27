@@ -1,8 +1,7 @@
 ---
 title: htaccess によるURLパラメータの書き換え
-date: "2014-10-23T01:42:18+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-10-23T01:42:18+00:00"
+updated_at: "2014-10-23T01:42:18+00:00"
 guid: http://jaxx2104.info/?p=1030
 path: /htaccess-rewrite
 category: PHP

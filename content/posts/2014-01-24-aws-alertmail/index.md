@@ -1,8 +1,7 @@
 ---
 title: AWS での死活監視とアラートメールの送信方法
-date: "2014-01-24T00:01:44+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-01-24T00:01:44+00:00"
+updated_at: "2014-01-24T00:01:44+00:00"
 path: /aws-alertmail
 category: AWS
 tags:

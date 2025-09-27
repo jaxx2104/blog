@@ -1,16 +1,17 @@
 ---
 title: WordCamp Tokyo 2013 に行ってステッカーたくさんもらった。
-date: "2013-09-14T20:34:28+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-09-14T20:34:28+00:00"
+updated_at: "2013-09-14T20:34:28+00:00"
 path: /wordcamp-tokyo-2013-sticker
-image: ./002.jpg
-description: 去年に続き、今年も参加してきました。楽しかったぞ！
 category: 勉強会
 tags:
   - WordCamp Tokyo 2013
   - WordPress
 ---
+
+去年に続き、今年も参加してきました。楽しかったぞ！
+
+![](./002.jpg)
 
 ## 12：30 会場に到着
 

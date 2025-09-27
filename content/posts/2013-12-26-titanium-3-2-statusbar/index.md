@@ -1,8 +1,7 @@
 ---
 title: Titanium 3.2 から statusbarの文字色を白くする方法が変更になった
-date: "2013-12-26T09:07:10+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-12-26T09:07:10+00:00"
+updated_at: "2013-12-26T09:07:10+00:00"
 path: /titanium-3-2-statusbar
 category: JavaScript
 tags:

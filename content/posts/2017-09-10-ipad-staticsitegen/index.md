@@ -1,16 +1,17 @@
 ---
 title: iPadで静的サイトジェネレータを更新する
-date: "2017-09-10T00:51:08+00:00"
-author: jaxx2104
-layout: post
+created_at: "2017-09-10T00:51:08+00:00"
+updated_at: "2017-09-10T00:51:08+00:00"
 path: /ipad-staticsitegen
-image: "image.png"
-description: このブログは静的サイトジェネレータを使って書いてます。
 category: 開発環境
 tags:
   - Editorial
   - iPad
 ---
+
+このブログは静的サイトジェネレータを使って書いてます。
+
+![](image.png)
 
 マークダウンなので文章自体は書きやすいんですが、WordPress と違って iPad や iPhone から更新する方法はいまひとつな感じでした。通勤時間や寝る前のちょっとの時間を有効活用したかったので、試している方法を書いておきます。
 

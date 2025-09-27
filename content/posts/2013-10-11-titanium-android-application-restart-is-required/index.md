@@ -1,10 +1,8 @@
 ---
 title: Titaniumで作ったAndroidアプリ起動時に"application restart is required"が出る
-date: "2013-10-11T00:24:18+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-10-11T00:24:18+00:00"
+updated_at: "2013-10-11T00:24:18+00:00"
 path: /titanium-android-application-restart-is-required
-image:
 category: JavaScript
 tags:
   - 3.1.3

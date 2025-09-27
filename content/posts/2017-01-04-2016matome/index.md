@@ -1,17 +1,18 @@
 ---
 title: いまさらですが2016年を振り返る
-date: "2017-01-05T23:15:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2017-01-05T23:15:00+00:00"
+updated_at: "2017-01-05T23:15:00+00:00"
 path: /2016matome
-image: ./00.jpg
-description: かなり遅いけれど最後の正月休みなので区切りのため去年を振り返ってみました。
 category: メモ
 tags:
   - IoT
   - 人喰いの大鷲トリコ
   - Apple Watch
 ---
+
+かなり遅いけれど最後の正月休みなので区切りのため去年を振り返ってみました。
+
+![](./00.jpg)
 
 ## IoT 関連
 

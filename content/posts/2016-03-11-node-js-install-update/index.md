@@ -1,15 +1,15 @@
 ---
 title: Node.jsとnpmインストールとアップデート
-date: "2016-03-11T00:41:12+00:00"
-author: jaxx2104
-layout: post
+created_at: "2016-03-11T00:41:12+00:00"
+updated_at: "2016-03-11T00:41:12+00:00"
 path: /node-js-install-update
-image: ./nodejs-image-processing.png
 category: JavaScript
 tags:
   - Node.js
   - npm
 ---
+
+![](./nodejs-image-processing.png)
 
 Node.js と npm インストール
 

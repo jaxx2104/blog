@@ -1,17 +1,17 @@
 ---
 title: React.js製の静的サイトジェネレーターGatsbyに移行した
-date: "2016-11-15T09:02:29+00:00"
-author: jaxx2104
-layout: post
+created_at: "2016-11-15T09:02:29+00:00"
+updated_at: "2016-11-15T09:02:29+00:00"
 guid: http://jaxx2104.info/?p=1404
 path: /gatsby-theme
-image: ./reactjs.jpg
 category: JavaScript
 tags:
   - React.js
   - Gatsby
   - Static Site Generator
 ---
+
+![](./reactjs.jpg)
 
 これまで WordPress で技術メモを書いていたのですが、
 静的サイトジェネレータの記事を読んで試してみたいと思いました。

@@ -1,8 +1,7 @@
 ---
 title: windows版 emacsで日本語ディレクトリ内のファイルがおかしくなった時の対処方法
-date: "2014-05-15T02:02:42+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-05-15T02:02:42+00:00"
+updated_at: "2014-05-15T02:02:42+00:00"
 path: /windows-emacs-shift-jis
 category: Terminal
 tags:

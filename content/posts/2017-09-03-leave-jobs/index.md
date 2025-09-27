@@ -1,11 +1,8 @@
 ---
 title: 3ヶ月前に転職しました。
-date: "2017-09-03T10:46:43+00:00"
-author: jaxx2104
-layout: post
+created_at: "2017-09-03T10:46:43+00:00"
+updated_at: "2017-09-03T10:46:43+00:00"
 path: /leave-jobs
-image:
-description:
 category: 仕事
 tags:
   - 転職

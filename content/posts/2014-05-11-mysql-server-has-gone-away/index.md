@@ -1,8 +1,7 @@
 ---
 title: MySQL server has gone away エラーが出たときの対処方法
-date: "2014-05-11T23:27:36+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-05-11T23:27:36+00:00"
+updated_at: "2014-05-11T23:27:36+00:00"
 path: /mysql-server-has-gone-away
 category: PHP
 tags:

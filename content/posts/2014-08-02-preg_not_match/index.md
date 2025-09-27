@@ -1,8 +1,7 @@
 ---
 title: 正規表現で特定の文字を含まない方法
-date: "2014-08-02T11:44:09+00:00"
-author: jaxx2104
-layout: post
+created_at: "2014-08-02T11:44:09+00:00"
+updated_at: "2014-08-02T11:44:09+00:00"
 path: /preg_not_match
 category: 正規表現
 ---

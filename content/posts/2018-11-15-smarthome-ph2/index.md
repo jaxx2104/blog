@@ -1,16 +1,17 @@
 ---
 title: "我が家のスマートホーム2.0計画"
-date: "2018-11-15T00:00:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2018-11-15T00:00:00+00:00"
+updated_at: "2018-11-15T00:00:00+00:00"
 path: /smarthome-xiaomi
-image: "smarthome.jpeg"
-description: スマートホームはラズパイで自作しなくても安く構築できる時代
 category: メモ
 tags:
   - Google Home
   - Xiaomi
 ---
+
+スマートホームはラズパイで自作しなくても安く構築できる時代
+
+![](smarthome.jpeg)
 
 ## 3 大 AI アシスタントを全部試してみて
 

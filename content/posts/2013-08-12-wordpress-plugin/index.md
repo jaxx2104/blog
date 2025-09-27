@@ -1,8 +1,7 @@
 ---
 title: WordPressのウィジェットプラグインを自作する
-date: "2013-08-12T23:34:37+00:00"
-author: jaxx2104
-layout: post
+created_at: "2013-08-12T23:34:37+00:00"
+updated_at: "2013-08-12T23:34:37+00:00"
 path: /wordpress-plugin
 category: PHP
 tags:
@@ -24,7 +23,6 @@ _/wp/wp-contents/plugin/test/test.php_
 Plugin Name: Get Twitter
 Plugin URI: http://jaxx2104.info
 Description: Twitterを表示するプラグイン
-Author: jaxx2104
 Version: 0.1
 Author URI: http://www.jaxx2104.info
  */

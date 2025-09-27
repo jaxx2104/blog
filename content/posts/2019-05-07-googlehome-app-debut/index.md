@@ -1,17 +1,18 @@
 ---
 title: "Dialogflow + Raspberry Pi でスマートな定点カメラを自作する"
-date: "2019-05-07T00:00:00+00:00"
-author: jaxx2104
-layout: post
+created_at: "2019-05-07T00:00:00+00:00"
+updated_at: "2019-05-07T00:00:00+00:00"
 path: /dialogflow-raspberrypi
-image: "thumb.jpg"
-description: 3月に1週間くらいかけて自作したので備忘録として書いておきます。
 category: メモ
 tags:
   - Node-RED
   - Raspberry Pi
   - Dialogflow
 ---
+
+3月に1週間くらいかけて自作したので備忘録として書いておきます。
+
+![](./thumb.jpg)
 
 以下の機能がある定点カメラを作成しました。
 
