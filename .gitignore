@@ -55,7 +55,7 @@ coverage/
 tmp/
 
 # Build output
-public
+public/images/posts
 
 # Playwright
 .playwright-mcp/
