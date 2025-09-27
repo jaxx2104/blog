@@ -3,7 +3,6 @@ import { Noto_Sans_JP, Permanent_Marker } from "next/font/google"
 import StyledComponentsRegistry from "@/lib/registry"
 import Providers from "@/components/Providers"
 import "modern-normalize/modern-normalize.css"
-import "prismjs/themes/prism-okaidia.css"
 import "font-awesome/css/font-awesome.css"
 
 const notoSansJP = Noto_Sans_JP({
