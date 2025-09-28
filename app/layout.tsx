@@ -22,6 +22,15 @@ const permanentMarker = Permanent_Marker({
 export const metadata: Metadata = {
   title: "jaxx2104.info",
   description: "プログラムとバグが好き",
+  icons: {
+    icon: [
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/images/apple-touch-icon.png",
+  },
+  manifest: "/manifest.json",
+  themeColor: "#e91e63",
 }
 
 export default function RootLayout({
