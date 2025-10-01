@@ -13,8 +13,12 @@ const GridWrapper = styled.div`
   max-width: ${(props) => props.theme.contentWidth}px;
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: repeat(5, minmax(120px, 140px));
-  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-auto-rows: auto;
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 `
 
 const TileGrid: React.FC<Props> = ({ children }) => {
