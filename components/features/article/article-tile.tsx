@@ -17,7 +17,7 @@ const TileContainer = styled.article`
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.2s ease;
-  height: 120px;
+  aspect-ratio: 1;
   display: flex;
   flex-direction: column;
 
