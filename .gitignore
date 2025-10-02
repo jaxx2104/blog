@@ -57,5 +57,8 @@ tmp/
 # Build output
 public/images/posts
 
+# Image optimization backups
+*.original
+
 # Playwright
 .playwright-mcp/
