@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://www.oreilly.co.jp/books/images/picture_large978-4-87311-856-7.jpeg)
+![](https://www.oreilly.co.jp/books/images/picture_large978-4-87311-856-7.webp)
 
 まとめ
 - 進化的アーキテクチャは、具体的なアーキテクチャを決める手法ではなく、継続的に変更可能なアーキテクチャを支援するための手法

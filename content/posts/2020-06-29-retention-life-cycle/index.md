@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-![](./retention-lifecycle.png)
+![](./retention-lifecycle.webp)
 

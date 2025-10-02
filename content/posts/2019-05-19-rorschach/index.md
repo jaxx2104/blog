@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://i.pinimg.com/originals/41/b0/ef/41b0ef900049fb11f1075f2d7d022831.jpg)
+![](https://i.pinimg.com/originals/41/b0/ef/41b0ef900049fb11f1075f2d7d022831.webp)
 #img

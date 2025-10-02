@@ -10,7 +10,7 @@ tags:
   - Xcode
 ---
 
-![](/wp/images/2015/01/swift-logo-hero-1.jpg)
+![](/wp/images/2015/01/swift-logo-hero-1.webp)
 
 iOS の新プログラミング言語 Swift をゲームアプリケーションを作りながら触りたいと思います。
 

@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://i.imgur.com/967crLUl.jpg)
+![](https://i.imgur.com/967crLUl.webp)
 #img

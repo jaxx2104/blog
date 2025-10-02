@@ -12,7 +12,7 @@ tags:
 
 3月に1週間くらいかけて自作したので備忘録として書いておきます。
 
-![](./thumb.jpg)
+![](./thumb.webp)
 
 以下の機能がある定点カメラを作成しました。
 
@@ -45,7 +45,7 @@ tags:
 
 ## Raspberry Pi を組み立てる
 
-![](./raspi.jpg)
+![](./raspi.webp)
 
 撮影するためにカメラモジュールを買い足しました。別に Raspberry Pi で無くても常時稼働することが出来る PC と WEB カメラがあれば作る分には問題ないです。が持っていない場合は総額 5,000 円くらいで気軽に作れるのでオススメです。
 
@@ -58,7 +58,7 @@ tags:
 
 ## Dialogflow を設定する
 
-![](./dialogflow.png)
+![](./dialogflow.webp)
 
 **Agent を設定する**
 
@@ -104,13 +104,13 @@ Webhook 用の API に連携する設定です。API を作成したら入力し
 
 Action on Google に実際に利用する際に使うアプリケーション名を登録したら Simulator を使ってテストをします。これで問題なく実行が出来ていて、開発アカウントと実利用アカウントが同じであれば実機の Google Home でも動作するはずです。
 
-![](./actions.png)
+![](./actions.webp)
 
 <small>_「アプリケーション名につないで」「写真撮って」が通れば OK です_</small>
 
 ## Node-RED を設定する
 
-![](./nodered.png)
+![](./nodered.webp)
 
 個人的に IoT やるときは Node-RED に任せるようにしています。理由としては可視化によってメンテがしやすい点とノードのつなぎ合わせによるトライアンドエラーがモノの開発に向いている点です。インストール方法と pm2 での起動は以下の公式ドキュメントを参照してみてください。
 
@@ -119,7 +119,7 @@ Action on Google に実際に利用する際に使うアプリケーション名
 
 **Webhook 用の API を設定する**
 
-![](./nodered-p1.png)
+![](./nodered-p1.webp)
 
 function node に Dialogflow の Responses を設定します。ここでは固定にしていますが、動的に返すこともできます。
 
@@ -135,7 +135,7 @@ API 設定について、ここでは割愛しますが API の URL は SSL 化�
 
 **Cron job を作成する**
 
-![](./nodered-p2.png)
+![](./nodered-p2.webp)
 
 inject node の payload を「日時」に設定することで Cron として利用することが出来ます。
 自分の場合は朝夕の 1 時間を 15 分おきにスケジュールで撮影をしています。

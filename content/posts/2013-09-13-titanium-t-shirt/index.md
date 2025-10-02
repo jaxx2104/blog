@@ -8,6 +8,6 @@ tags:
   - Titanium
 ---
 
-![](./001.jpeg)
+![](./001.webp)
 
 Titanium もくもく会初参加しました。

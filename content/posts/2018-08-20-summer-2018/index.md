@@ -11,7 +11,7 @@ tags:
   - Firebase
 ---
 
-![](image.jpg)
+![](image.webp)
 
 夏休みの期間でやったこと、技術的な部分は Qiita にエントリーでも書きたいけど仕事復帰すると忘れてしまいそうなのでこのエントリーは一旦のメモです。（写真は 6 日目に行った蔵前のカフェ）
 
@@ -32,7 +32,7 @@ tags:
 
 ## vue-styled-components を試してみる
 
-![](image2.jpg)
+![](image2.webp)
 
 Nuxt.js（Vue.js）で作った [Nikuman](https://nikuman.jaxx2104.info/) を scss から styled-components へ置き換えてみた。
 
@@ -55,7 +55,7 @@ vue-styled-components を使う人が増えてマージされて欲しい 🙏
 
 ## Firebase と GCP を触る
 
-![](image3.jpg)
+![](image3.webp)
 
 フロントエンドエンジニアとしてインフラまわりの技術は浅くてもいいので広く知っておきたかったので、 AWS 以外のオーケストレーションツールとして GCP の App Engine のチュートリアルとドキュメントを見ながら API サーバーと cron を動かしてみた。
 

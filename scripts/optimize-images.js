@@ -6,7 +6,7 @@ const IMAGE_DIR = path.join(process.cwd(), "content/posts")
 const MAX_WIDTH = 1200
 const QUALITY = 80
 
-const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png"]
+const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"]
 
 async function optimizeImage(filePath) {
   const ext = path.extname(filePath).toLowerCase()
@@ -16,6 +16,11 @@ async function optimizeImage(filePath) {
 
   const stats = fs.statSync(filePath)
   const originalSize = stats.size
+
+  // Skip if already webp
+  if (ext === ".webp") {
+    return null
+  }
 
   // Create backup
   const backupPath = filePath + ".original"
@@ -37,32 +42,34 @@ async function optimizeImage(filePath) {
     })
   }
 
-  // Apply compression based on format
-  if (ext === ".png") {
-    optimizedImage = optimizedImage.png({ quality: QUALITY, compressionLevel: 9 })
-  } else {
-    optimizedImage = optimizedImage.jpeg({ quality: QUALITY, mozjpeg: true })
-  }
+  // Convert to WebP
+  optimizedImage = optimizedImage.webp({ quality: QUALITY })
 
-  await optimizedImage.toFile(filePath + ".tmp")
+  // Change extension to .webp
+  const webpPath = filePath.replace(/\.(jpg|jpeg|png)$/i, ".webp")
+  await optimizedImage.toFile(webpPath + ".tmp")
 
-  const newStats = fs.statSync(filePath + ".tmp")
+  const newStats = fs.statSync(webpPath + ".tmp")
   const newSize = newStats.size
 
   // Only replace if new file is smaller
   if (newSize < originalSize) {
-    fs.renameSync(filePath + ".tmp", filePath)
+    fs.renameSync(webpPath + ".tmp", webpPath)
+    // Remove original file (backup exists)
+    fs.unlinkSync(filePath)
     return {
-      path: filePath,
+      path: webpPath,
+      originalPath: filePath,
       originalSize,
       newSize,
       saved: originalSize - newSize,
       savedPercent: ((1 - newSize / originalSize) * 100).toFixed(1),
     }
   } else {
-    fs.unlinkSync(filePath + ".tmp")
+    fs.unlinkSync(webpPath + ".tmp")
     return {
       path: filePath,
+      originalPath: filePath,
       originalSize,
       newSize: originalSize,
       saved: 0,

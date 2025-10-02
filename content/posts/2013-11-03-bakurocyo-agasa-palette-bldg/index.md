@@ -13,7 +13,7 @@ tags:
 
 馬喰町になかなかナイスな場所があると知って行ってきた。
 
-![](./IMG_1532.jpg)
+![](./IMG_1532.webp)
 
 > 辛酸なめ子のギャラリー探訪記 「アガタ竹澤ビル」
 > http://www.artgene.net/labo/theme/cat243/post_45.php

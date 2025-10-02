@@ -8,6 +8,6 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://i.imgur.com/sdZ3mOC.png)
+![](https://i.imgur.com/sdZ3mOC.webp)
 
 https://dixiemech.com/gmkdracula

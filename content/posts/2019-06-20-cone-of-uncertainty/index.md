@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://cdn-ak.f.st-hatena.com/images/fotolife/d/dkfj/20170518/20170518115300.png)
+![](https://cdn-ak.f.st-hatena.com/images/fotolife/d/dkfj/20170518/20170518115300.webp)
 #エンジニア

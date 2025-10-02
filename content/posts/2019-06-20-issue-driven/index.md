@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://images-fe.ssl-images-amazon.com/images/I/41L3zp2Fp%2BL.jpg)
+![](https://images-fe.ssl-images-amazon.com/images/I/41L3zp2Fp%2BL.webp)
 
 イシューを「解く」前に「見極める」ことが重要。
 良いイシューの3条件

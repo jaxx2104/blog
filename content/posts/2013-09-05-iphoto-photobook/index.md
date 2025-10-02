@@ -11,7 +11,7 @@ tags:
 
 iPhoto を使ってフォトブックが簡単に作れるみたいですので、ためしてみる。
 
-![](./af7f052ca06f2b0bce7cd562ab0ef139.jpg)
+![](./af7f052ca06f2b0bce7cd562ab0ef139.webp)
 
 ではさっそく作っていきます！
 

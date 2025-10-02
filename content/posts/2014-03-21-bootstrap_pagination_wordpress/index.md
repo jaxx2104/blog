@@ -14,7 +14,7 @@ tags:
 
 こんにちは、今日から三連休ということで、ワークスペースを利用してブログ書きます。
 
-![](./pagenation-01.png)
+![](./pagenation-01.webp)
 
 では WordPress で Bootstrap の Pagination を実装方法について、
 

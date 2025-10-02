@@ -8,6 +8,6 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://images-fe.ssl-images-amazon.com/images/I/51AD73MYD5L.jpg)
+![](https://images-fe.ssl-images-amazon.com/images/I/51AD73MYD5L.webp)
 
 #エンジニア

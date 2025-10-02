@@ -9,11 +9,11 @@ tags:
   - scrapbox
 ---
 フロントエンドチーム（10 ~ 20人程度）で遊びたかったのでメモ
-![](./b4bd63ce943967a8bf8e024b4a99c2b9.jpg)
+![](./b4bd63ce943967a8bf8e024b4a99c2b9.webp)
 
 [*** サーバー情報]
 
-![](https://budget.ramshard.com/index.php?r=status/52385.png)
+![](https://budget.ramshard.com/index.php?r=status/52385.webp)
 
 [*** 技術選定]
 

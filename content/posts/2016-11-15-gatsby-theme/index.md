@@ -11,7 +11,7 @@ tags:
   - Static Site Generator
 ---
 
-![](./reactjs.jpg)
+![](./reactjs.webp)
 
 これまで WordPress で技術メモを書いていたのですが、
 静的サイトジェネレータの記事を読んで試してみたいと思いました。

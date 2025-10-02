@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://images-na.ssl-images-amazon.com/images/I/413zYBVOo2L._SX354_BO1,204,203,200_.jpg)
+![](https://images-na.ssl-images-amazon.com/images/I/413zYBVOo2L._SX354_BO1,204,203,200_.webp)
 
 [** チーム]
 [* チームとは]
@@ -72,7 +72,7 @@ good cycle
 ジョハリの窓
 - 内的な自己認識
 - 外的な自己認識
-![](https://re-sta.jp/wp-content/uploads/2018/09/shutterstock_669626179.png)
+![](https://re-sta.jp/wp-content/uploads/2018/09/shutterstock_669626179.webp)
 
 [* プラクティス]
 価値観ババ抜き
@@ -107,21 +107,21 @@ CCPM
 パーキンソンの法則
 
 [* ギャレットの5段階]
-![](https://d2l930y2yx77uc.cloudfront.net/production/uploads/images/8769028/picture_pc_36843661814bfb5d06cf45afd64d9581.jpg)
+![](https://d2l930y2yx77uc.cloudfront.net/production/uploads/images/8769028/picture_pc_36843661814bfb5d06cf45afd64d9581.webp)
 
 [* 仮説キャンバス]
 顧客の目的、課題解決達成のためのソリューションを得るためのフレームワーク
-![](https://kray.jp/wp/wp-content/uploads/2016/12/7cbe35b1-44d8-46dc-9ef8-a1bde09826bb-668x506.png)
+![](https://kray.jp/wp/wp-content/uploads/2016/12/7cbe35b1-44d8-46dc-9ef8-a1bde09826bb-668x506.webp)
 
 
 [* ビジネスモデル・キャンバス]
-![](https://s3-ap-northeast-1.amazonaws.com/gwsite-content/entry_img_20161111_1.png)
+![](https://s3-ap-northeast-1.amazonaws.com/gwsite-content/entry_img_20161111_1.webp)
 
 [* リーンキャンバス]
-![](https://leanstack.com/assets/v2/leancanvas-0c61f6b1e7c978ea69a47946f2ab60a5a3be0909da861c2b377d7c63faf1e5d6.png)
+![](https://leanstack.com/assets/v2/leancanvas-0c61f6b1e7c978ea69a47946f2ab60a5a3be0909da861c2b377d7c63faf1e5d6.webp)
 
 [* SL理論]
-![](http://www.earthship-c.com/images/column/SL-theory.fw.png)
+![](http://www.earthship-c.com/images/column/SL-theory.fw.webp)
 S1 : 教示的リーダーシップ
 S2 : 説得的リーダーシップ
 S3 : 参加的リーダーシップ

@@ -10,7 +10,7 @@ tags:
 
 GoogleAnalytics で離脱率や平均セッションを見ていて、ユーザーがページのどこまで目を通しているのか気になりました。
 
-![](./Google-Tag-Manager-1.png)
+![](./Google-Tag-Manager-1.webp)
 
 海外の技術ブログや GitHub でも評価のある、「Scroll Depth」というライブラリを使用します。要件として jQuery1.7 以上です。
 

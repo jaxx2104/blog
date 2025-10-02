@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://lh5.googleusercontent.com/-VWBvzl8AztY/AAAAAAAAAAI/AAAAAAAA6G0/hEqCqhRWKNc/photo.jpg)
+![](https://lh5.googleusercontent.com/-VWBvzl8AztY/AAAAAAAAAAI/AAAAAAAA6G0/hEqCqhRWKNc/photo.webp)
 
 this is jaxx2104’s page
 https://jaxx2104.info/

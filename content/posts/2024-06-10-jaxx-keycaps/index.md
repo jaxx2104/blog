@@ -9,7 +9,7 @@ tags:
   - scrapbox
 ---
 
-![](./b90c460e84614e8f41f768c80530e279.jpg)
+![](./b90c460e84614e8f41f768c80530e279.webp)
 
 必要なもの
 - キーボードの原型 メルカリで買った
@@ -25,7 +25,7 @@ tags:
 手順
 https://github.com/imyownyear/Z-Butt/wiki
 
-![](./b5e27baca4b6dc8f4d2bab723deea9cf.jpg)
+![](./b5e27baca4b6dc8f4d2bab723deea9cf.webp)
 
 コツ
 レジンは湯煎すると粘度が下がって気泡が抜けるよ
@@ -102,16 +102,16 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 - ステッカー
 - メッセージカード
 郵便局かポスト
-![](./c530bd0b47aae80b77de98263b4c46d0.jpg)
+![](./c530bd0b47aae80b77de98263b4c46d0.webp)
 
 
 追加で購入したもの
 レジンだけでなくスカルピーにも挑戦した
 - スカルピー
 - ヒートガン
-![](./675d0b10b56d79b8a3ea13cd6dd8e017.jpg)
+![](./675d0b10b56d79b8a3ea13cd6dd8e017.webp)
 3Dプリンターも買った
-![](./a22965121d0a574990ecc7349b4d1deb.jpg)
+![](./a22965121d0a574990ecc7349b4d1deb.webp)
 
 写真綺麗に撮るために
 - 一眼レンズ（マクロ）

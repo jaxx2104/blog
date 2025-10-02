@@ -8,6 +8,6 @@ tags:
   - imported
   - scrapbox
 ---
-![](./suica.png)
+![](./suica.webp)
 
 https://suzuri.jp/jaxx2104/1718688/t-shirt/s/white

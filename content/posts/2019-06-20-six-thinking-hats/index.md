@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://images-na.ssl-images-amazon.com/images/I/41aQuF4jK5L.jpg)
+![](https://images-na.ssl-images-amazon.com/images/I/41aQuF4jK5L.webp)
 
 ホワイトハット：テーマに関する事実や情報の確認・話し合い
 レッドハット：テーマに対する感情面の確認・話し合い

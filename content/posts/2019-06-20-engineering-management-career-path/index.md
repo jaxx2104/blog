@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://images-na.ssl-images-amazon.com/images/I/51sEua-%2BejL._SX350_BO1,204,203,200_.jpg)
+![](https://images-na.ssl-images-amazon.com/images/I/51sEua-%2BejL._SX350_BO1,204,203,200_.webp)
 
 ダメなエンジニアリングマネージャーの例
 
