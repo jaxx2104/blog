@@ -7,13 +7,17 @@ const baseTheme = {
   colorBackground: "#fff",
   colorBorder: "#eee",
   colorShadow: "rgba(0, 0, 0, 0.1)",
-  contentWidth: 600,
-  fontSizeSmall: 0.6,
-  fontSize: 0.8,
-  fontSizeLarge: 1,
-  fontSizeJumbo: 1.5,
+  contentWidth: 720,
+  fontSizeSmall: 0.875,
+  fontSize: 1,
+  fontSizeLarge: 1.125,
+  fontSizeJumbo: 2,
+  fontSizeH1: 1.75,
+  fontSizeH2: 1.375,
+  fontSizeH3: 1.125,
   fontWeight: 400,
-  fontWeightBold: 900,
+  fontWeightBold: 700,
+  lineHeight: 1.8,
 }
 
 export const lightTheme = {
