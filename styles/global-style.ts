@@ -31,36 +31,15 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
 
-    h1 {
-      font-size: ${(props) => `${props.theme.fontSizeH1}rem`};
-      font-weight: ${(props) => props.theme.fontWeightBold};
-      margin: 2.5rem 0 1rem;
-      line-height: 1.3;
-      letter-spacing: -0.025rem;
-    }
-
-    h2 {
-      font-size: ${(props) => `${props.theme.fontSizeH2}rem`};
-      font-weight: ${(props) => props.theme.fontWeightBold};
-      margin: 2rem 0 0.75rem;
-      line-height: 1.4;
-      letter-spacing: -0.025rem;
-    }
-
-    h3 {
-      font-size: ${(props) => `${props.theme.fontSizeH3}rem`};
-      font-weight: ${(props) => props.theme.fontWeightBold};
-      margin: 1.5rem 0 0.5rem;
-      line-height: 1.4;
-      letter-spacing: -0.025rem;
-    }
-
+    h1,
+    h2,
+    h3,
     h4,
     h5,
     h6 {
       font-size: ${(props) => `${props.theme.fontSize}rem`};
       font-weight: ${(props) => props.theme.fontWeightBold};
-      margin: 1.5rem 0 0.5rem;
+      margin: 2rem 0 1rem;
       line-height: 1.4;
       letter-spacing: -0.025rem;
     }
