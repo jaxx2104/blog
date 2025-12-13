@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
 
   a {
     color: ${(props) => props.theme.colorMain};
-    text-decoration: 'none'
+    text-decoration: none;
   }
 
   ul, ol {
@@ -54,7 +54,7 @@ const GlobalStyles = createGlobalStyle`
       border-left: 5px solid ${(props) => props.theme.colorBorder};
       color: ${(props) => props.theme.colorSub};
       padding: 0.25em 1.5em;
-      margin: 0;
+      margin: 1.5rem 0;
 
       p {
         margin: 1rem 0;
@@ -81,7 +81,14 @@ const GlobalStyles = createGlobalStyle`
       font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
     }
 
-
+    /* Inline code styles */
+    code:not(pre code) {
+      background-color: ${(props) => props.theme.colorBorder};
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
+      font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+    }
   }
 `
 export default GlobalStyles
