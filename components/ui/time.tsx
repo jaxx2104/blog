@@ -1,12 +1,14 @@
 import React from "react"
 import styled from "styled-components"
+import { format, parseISO } from "date-fns"
 
 interface Props {
   created_at: string
 }
 
 const Time: React.FC<Props> = ({ created_at }: Props) => {
-  return <TimeWrap dateTime={created_at}>{created_at}</TimeWrap>
+  const formattedDate = format(parseISO(created_at), "yyyy/MM/dd")
+  return <TimeWrap dateTime={created_at}>{formattedDate}</TimeWrap>
 }
 
 export default Time
