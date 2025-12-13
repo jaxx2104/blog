@@ -40,7 +40,7 @@ const GlobalStyles = createGlobalStyle`
       font-size: ${(props) => `${props.theme.fontSize}rem`};
       font-weight: ${(props) => props.theme.fontWeightBold};
       margin: 2rem 0 1rem;
-      line-height: 1.6;
+      line-height: 1.2;
       letter-spacing: -0.025rem;
     }
 

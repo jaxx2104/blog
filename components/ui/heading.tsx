@@ -5,7 +5,7 @@ const Heading = styled.h1`
   font-size: ${(props) => `${props.theme.fontSizeLarge}rem`};
   font-weight: ${(props) => props.theme.fontWeightBold};
   letter-spacing: -0.025rem;
-  line-height: 1rem;
+  line-height: 1.2;
   margin: 0;
 
   &:hover {
