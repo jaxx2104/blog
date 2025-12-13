@@ -19,12 +19,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ul, ol {
-        padding-inline-start: 1rem;
-
+    padding-inline-start: 1rem;
   }
 
   li {
     list-style-position: inside;
+    margin: 0.25rem 0;
   }
 
   .content {
@@ -68,6 +68,7 @@ const GlobalStyles = createGlobalStyle`
 
     img {
       width: 100%;
+      margin: 1.5rem 0;
     }
 
     /* Code block styles - レイアウトのみ（色はrehype-pretty-codeのテーマが適用） */
