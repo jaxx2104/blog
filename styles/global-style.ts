@@ -10,21 +10,21 @@ const GlobalStyles = createGlobalStyle`
     font-weight: ${(props) => props.theme.fontWeight};
     font-size: ${(props) => `${props.theme.fontSize}rem`};
     transition: color 0.2s ease-out, background 0.2s ease-out;
-    line-height: ${(props) => `${props.theme.fontSize * 1.75}rem`};
+    line-height: ${(props) => props.theme.lineHeight};
   }
 
   a {
     color: ${(props) => props.theme.colorMain};
-    text-decoration: 'none'
+    text-decoration: none;
   }
 
   ul, ol {
-        padding-inline-start: 1rem;
-
+    padding-inline-start: 1rem;
   }
 
   li {
     list-style-position: inside;
+    margin: 0.25rem 0;
   }
 
   .content {
@@ -40,12 +40,13 @@ const GlobalStyles = createGlobalStyle`
       font-size: ${(props) => `${props.theme.fontSize}rem`};
       font-weight: ${(props) => props.theme.fontWeightBold};
       margin: 2rem 0 1rem;
-      line-height: 1;
+      line-height: 1.2;
       letter-spacing: -0.025rem;
     }
 
     p {
       font-weight: ${(props) => props.theme.fontWeight};
+      margin: 1rem 0;
     }
 
     blockquote {
@@ -53,7 +54,7 @@ const GlobalStyles = createGlobalStyle`
       border-left: 5px solid ${(props) => props.theme.colorBorder};
       color: ${(props) => props.theme.colorSub};
       padding: 0.25em 1.5em;
-      margin: 0;
+      margin: 1.5rem 0;
 
       p {
         margin: 1rem 0;
@@ -67,20 +68,28 @@ const GlobalStyles = createGlobalStyle`
 
     img {
       width: 100%;
+      margin: 1.5rem 0;
     }
 
     /* Code block styles - レイアウトのみ（色はrehype-pretty-codeのテーマが適用） */
     pre {
       border-radius: 8px;
       padding: 1rem;
-      margin: 0;
+      margin: 1.5rem 0;
       overflow-x: auto;
-      font-size: ${(props) => `${props.theme.fontSize}rem`};
-      line-height: 1.25rem;
+      font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
+      line-height: 1.6;
       font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
     }
 
-
+    /* Inline code styles */
+    code:not(pre code) {
+      background-color: ${(props) => props.theme.colorBorder};
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
+      font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+    }
   }
 `
 export default GlobalStyles
