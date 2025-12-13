@@ -7,7 +7,7 @@ const baseTheme = {
   colorBackground: "#fff",
   colorBorder: "#eee",
   colorShadow: "rgba(0, 0, 0, 0.1)",
-  contentWidth: 720,
+  contentWidth: 900,
   fontSizeSmall: 0.875,
   fontSize: 1,
   fontSizeLarge: 1.125,
