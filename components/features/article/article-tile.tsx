@@ -16,7 +16,7 @@ const TileContainer = styled.article`
   border: 1px solid ${(props) => props.theme.colorBorder};
   border-radius: 8px;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease-out;
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
@@ -45,9 +45,9 @@ const Title = styled.h2`
   color: ${(props) => props.theme.colorMain};
   font-size: ${(props) => `${props.theme.fontSize}rem`};
   font-weight: ${(props) => props.theme.fontWeightBold};
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: -0.025rem;
-  margin: 0 0 4px 0;
+  margin: 0 0 0.25rem 0;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -58,8 +58,8 @@ const Excerpt = styled.p`
   font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
   font-weight: ${(props) => props.theme.fontWeight};
   color: ${(props) => props.theme.colorText};
-  line-height: 1.25;
-  margin: 0 0 8px 0;
+  line-height: 1.4;
+  margin: 0 0 0.5rem 0;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
