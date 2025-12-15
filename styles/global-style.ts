@@ -91,14 +91,17 @@ const GlobalStyles = createGlobalStyle`
       font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
     }
 
-    /* Link card styles */
-    .link-card {
+    /* Link card styles (remark-link-card-plus) */
+    .remark-link-card-plus__container {
+      margin: 1.5rem 0;
+    }
+
+    .remark-link-card-plus__card {
       display: flex;
       align-items: stretch;
       border: 1px solid ${(props) => props.theme.colorBorder};
       border-radius: 8px;
       overflow: hidden;
-      margin: 1.5rem 0;
       text-decoration: none;
       color: inherit;
       transition: box-shadow 0.2s ease, border-color 0.2s ease;
@@ -109,7 +112,7 @@ const GlobalStyles = createGlobalStyle`
       }
     }
 
-    .link-card-image {
+    .remark-link-card-plus__thumbnail {
       flex-shrink: 0;
       width: 120px;
       min-height: 100px;
@@ -118,24 +121,17 @@ const GlobalStyles = createGlobalStyle`
       align-items: center;
       justify-content: center;
       overflow: hidden;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        margin: 0;
-      }
+      order: -1;
     }
 
-    .link-card-no-image {
-      span {
-        font-size: 2rem;
-        font-weight: bold;
-        color: ${(props) => props.theme.colorSub};
-      }
+    .remark-link-card-plus__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin: 0 !important;
     }
 
-    .link-card-content {
+    .remark-link-card-plus__main {
       flex: 1;
       padding: 0.75rem 1rem;
       display: flex;
@@ -144,7 +140,11 @@ const GlobalStyles = createGlobalStyle`
       min-width: 0;
     }
 
-    .link-card-title {
+    .remark-link-card-plus__content {
+      flex: 1;
+    }
+
+    .remark-link-card-plus__title {
       font-weight: ${(props) => props.theme.fontWeightBold};
       font-size: ${(props) => `${props.theme.fontSize}rem`};
       line-height: 1.4;
@@ -153,9 +153,10 @@ const GlobalStyles = createGlobalStyle`
       -webkit-box-orient: vertical;
       overflow: hidden;
       margin-bottom: 0.25rem;
+      color: ${(props) => props.theme.colorText};
     }
 
-    .link-card-description {
+    .remark-link-card-plus__description {
       font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
       color: ${(props) => props.theme.colorSub};
       line-height: 1.4;
@@ -166,26 +167,39 @@ const GlobalStyles = createGlobalStyle`
       margin-bottom: 0.25rem;
     }
 
-    .link-card-site {
+    .remark-link-card-plus__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .remark-link-card-plus__favicon {
+      width: 16px;
+      height: 16px;
+      margin: 0 !important;
+    }
+
+    .remark-link-card-plus__url {
       font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
       color: ${(props) => props.theme.colorSub};
     }
 
     @media (max-width: 480px) {
-      .link-card-image {
+      .remark-link-card-plus__thumbnail {
         width: 80px;
         min-height: 80px;
       }
 
-      .link-card-content {
+      .remark-link-card-plus__main {
         padding: 0.5rem 0.75rem;
       }
 
-      .link-card-title {
+      .remark-link-card-plus__title {
         font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
       }
 
-      .link-card-description {
+      .remark-link-card-plus__description {
         -webkit-line-clamp: 1;
       }
     }

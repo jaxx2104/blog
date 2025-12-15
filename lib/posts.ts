@@ -6,7 +6,7 @@ import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import rehypeStringify from "rehype-stringify"
 import rehypePrettyCode from "rehype-pretty-code"
-import rehypeLinkCard from "./rehype-link-card"
+import remarkLinkCardPlus from "remark-link-card-plus"
 import { processImagePath } from "./image-utils"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
@@ -123,14 +123,17 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   // Process content with markdown
   const processedContent = await unified()
     .use(remarkParse)
-    .use(remarkRehype)
+    .use(remarkLinkCardPlus, {
+      thumbnailPosition: "left",
+      noFavicon: true,
+    })
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypePrettyCode, {
       theme: "dracula",
       keepBackground: true,
       defaultLang: "plaintext",
     })
-    .use(rehypeLinkCard)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(contentWithUrls)
 
   return {
