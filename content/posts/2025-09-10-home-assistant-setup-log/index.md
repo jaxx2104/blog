@@ -254,10 +254,10 @@ switch:
     restore_mode: RESTORE_DEFAULT_ON
 ```
 実装のポイント：
-I2S 接続でマイクとスピーカーを制御
-ノイズ抑制レベル 2 で環境音をカット
-LED で動作状態を視覚的に表示
-Wake Word 対応で「OK Nabu」で起動
+- I2S 接続でマイクとスピーカーを制御
+- ノイズ抑制レベル 2 で環境音をカット
+- LED で動作状態を視覚的に表示
+- Wake Word 対応で「OK Nabu」で起動
 
 日本の家電制御
 

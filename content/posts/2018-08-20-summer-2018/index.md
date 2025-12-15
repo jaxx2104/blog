@@ -57,7 +57,7 @@ vue-styled-components を使う人が増えてマージされて欲しい 🙏
 
 ![](image3.jpg)
 
-フロントエンドエンジニアとしてインフラまわりの技術は浅くてもいいので広く知っておきたかったので、 AWS 以外のオーケストレーションツールとして GCP の App Engine のチュートリアルとドキュメントを見ながら API サーバーと cron を動かしてみた。
+フロントエンドエンジニアとしてインフラ技術は広く知っておきたかった。GCP の App Engine のチュートリアルとドキュメントを見ながら API サーバーと cron を動かしてみた。
 
 Firebase は、これまで Realtime Database と Auth しか使ってなかったので、
 今回 Firebase Hosting と Cloud Functions を使って Nuxt.js で SSR をやってみた。

@@ -83,13 +83,15 @@ Facebook カタログに登録する（Instagram でリンク貼れる）
 - Instagram の商品タグを追加できる
 
 実店舗
+
 遊舎工房の Artisan Keycaps 委託販売
 https://yushakobo.jp/news/2019/09/06/artisan/
-受付商品：Artisan キーキャップ
-受付個数：1～5 個
-委託期間：3 カ月（延長あり）
-最低設定価格：3,000 円（税別）
-委託料：20%
+
+- 受付商品：Artisan キーキャップ
+- 受付個数：1～5 個
+- 委託期間：3 カ月（延長あり）
+- 最低設定価格：3,000 円（税別）
+- 委託料：20%
 
 配送
 クリックポストを利用して住所と氏名を入力して決済を済ませる
@@ -118,9 +120,11 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 
 
 以下は将来
+
 Google Form の方法
-https://github.com/imyownyear/Z-Butt/wiki/Making-Money
-https://github.com/imyownyear/Z-Butt/wiki/Google-Forms-raffle-setup
+- https://github.com/imyownyear/Z-Butt/wiki/Making-Money
+- https://github.com/imyownyear/Z-Butt/wiki/Google-Forms-raffle-setup
+
 Paypal の決済方法がわかってない
 
 
