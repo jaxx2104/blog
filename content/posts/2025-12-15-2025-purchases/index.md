@@ -59,7 +59,7 @@ https://ja.aliexpress.com/item/1005009507027327.html
 
 https://jp.store.bambulab.com/products/a1-mini
 
-## New Balance Fresh Foam X More v4
+## New Balance Fresh Foam X More v5
 
 クッション性が良くて出社が楽しくなりました。
 
