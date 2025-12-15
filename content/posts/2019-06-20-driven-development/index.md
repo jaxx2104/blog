@@ -8,17 +8,17 @@ tags:
   - imported
   - scrapbox
 ---
-テスト駆動開発 (Test Driven Developmen; TDD)
-ビヘイビア駆動開発 (Behavior Driven Development; BDD)
-品質特性駆動型設計 (Attribute Driven Design; ADD)
-ユーザ機能駆動開発 (Feature-Driven Development; FDD)
-コンポーネント駆動開発 (Component-Driven Development; CDD)
-スキーマ駆動開発 (Schema-Driven Development; CDD)
-ドメイン駆動設計 (Domain-driven design; DDD)
-モデル駆動開発 (Model Driven Development; MDD)
-ユースケース駆動開発 (use case driven development; UCDD)
-証明駆動開発 (Proof Driven Development; PDD)
-イシュー駆動開発 (Issue Driven Developmen; IDD)
+- テスト駆動開発 (Test Driven Developmen; TDD)
+- ビヘイビア駆動開発 (Behavior Driven Development; BDD)
+- 品質特性駆動型設計 (Attribute Driven Design; ADD)
+- ユーザ機能駆動開発 (Feature-Driven Development; FDD)
+- コンポーネント駆動開発 (Component-Driven Development; CDD)
+- スキーマ駆動開発 (Schema-Driven Development; CDD)
+- ドメイン駆動設計 (Domain-driven design; DDD)
+- モデル駆動開発 (Model Driven Development; MDD)
+- ユースケース駆動開発 (use case driven development; UCDD)
+- 証明駆動開発 (Proof Driven Development; PDD)
+- イシュー駆動開発 (Issue Driven Developmen; IDD)
 
 ふざけたやつ
 
@@ -35,6 +35,6 @@ tags:
 アルコール駆動開発
 つぶやき駆動開発
 やさしさ駆動開発
-YOLO駆動開発
+YOLO 駆動開発
 
 #エンジニア

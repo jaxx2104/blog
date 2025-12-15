@@ -10,12 +10,12 @@ tags:
 ---
 所信表明。いつか書く
 
-https://managerreadme.com/
-https://github.com/yoshiori/manager-readme
-https://www.rco.recruit.co.jp/career/engineer/blog/manager-readme/
-https://medium.com/@golden_eggg/manager-readmeを書いた-44fa7d3b4baf
-https://hackernoon.com/12-manager-readmes-from-silicon-valleys-top-tech-companies-26588a660afe
-https://svnk.github.io/manager-READMEs/
+- https://managerreadme.com/
+- https://github.com/yoshiori/manager-readme
+- https://www.rco.recruit.co.jp/career/engineer/blog/manager-readme/
+- https://medium.com/@golden_eggg/manager-readmeを書いた-44fa7d3b4baf
+- https://hackernoon.com/12-manager-readmes-from-silicon-valleys-top-tech-companies-26588a660afe
+- https://svnk.github.io/manager-READMEs/
 
 [* 構成]
 まえがき
@@ -27,9 +27,9 @@ https://svnk.github.io/manager-READMEs/
 - 権利・主張
 各項目
 - 1 on 1 について
-- フィードバック について
-- スケジュール・タスク について
-- パフォーマンス評価 について
-- DRI原則
+- フィードバックについて
+- スケジュール・タスクについて
+- パフォーマンス評価について
+- DRI 原則
 
 #エンジニア

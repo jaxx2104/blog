@@ -10,7 +10,7 @@ tags:
   - Dialogflow
 ---
 
-3月に1週間くらいかけて自作したので備忘録として書いておきます。
+3 月に 1 週間くらいかけて自作したので備忘録として書いておきます。
 
 ![](./thumb.jpg)
 
@@ -27,7 +27,7 @@ tags:
 
 **やること**
 
-最近は WEB サイトや CLI ツールを作ることが多かったので Raspberry Pi を使ってモノづくりが出来ないかなと考えて、だいぶ前に観た「父親が娘の写真を 18 年間撮ってつなぎ合わせた動画」が勝手な親心ながら良いなと思ったので、Raspberry Pi を使って似たようなことを自動化をしてみることにしました。
+最近は WEB サイトや CLI ツールを作ることが多かったので Raspberry Pi でモノづくりをしたいと考えました。だいぶ前に観た「父親が娘の写真を 18 年間撮ってつなぎ合わせた動画」に感銘を受け、似たようなことを自動化してみることにしました。
 
 <!--more-->
 
@@ -102,7 +102,7 @@ Webhook 用の API に連携する設定です。API を作成したら入力し
 
 **Action on Google からテストする**
 
-Action on Google に実際に利用する際に使うアプリケーション名を登録したら Simulator を使ってテストをします。これで問題なく実行が出来ていて、開発アカウントと実利用アカウントが同じであれば実機の Google Home でも動作するはずです。
+Action on Google でアプリケーション名を登録し、Simulator を使ってテストします。問題なく実行できていて、開発アカウントと実利用アカウントが同じであれば実機の Google Home でも動作するはずです。
 
 ![](./actions.png)
 
@@ -112,7 +112,7 @@ Action on Google に実際に利用する際に使うアプリケーション名
 
 ![](./nodered.png)
 
-個人的に IoT やるときは Node-RED に任せるようにしています。理由としては可視化によってメンテがしやすい点とノードのつなぎ合わせによるトライアンドエラーがモノの開発に向いている点です。インストール方法と pm2 での起動は以下の公式ドキュメントを参照してみてください。
+IoT をやるときは Node-RED を使うようにしています。可視化でメンテがしやすく、ノードのつなぎ合わせによるトライアンドエラーがモノの開発に向いています。インストール方法と pm2 での起動は公式ドキュメントを参照してください。
 
 > Getting Started - Node-RED User Group Japan
 > https://nodered.jp/docs/getting-started/
@@ -131,7 +131,7 @@ newMsg.payload = { fulfillmentText: "3, 2, 1 ハイチーズ" }
 return newMsg
 ```
 
-API 設定について、ここでは割愛しますが API の URL は SSL 化の設定が必須だったので Dynamic DNS の設定や Let's Encrypt を使って証明書の発行をする必要があります。
+API 設定について、ここでは割愛しますが API の URL は SSL 化が必須です。そのため Dynamic DNS の設定や Let's Encrypt を使った証明書の発行が必要です。
 
 **Cron job を作成する**
 
@@ -148,7 +148,7 @@ Google Drive で設定をしましたが S3 や Dropbox など選択肢が多い
 > ncw/rclone
 > https://github.com/ncw/rclone
 
-最初 API がまだ十分でない Google Photos にアップ出来ないか調べていて、以下が良かったんですが Puppeteer を使ってスクレイピングしてアップしているということもあり Raspberry Pi での利用は難しかったです。Mac や Windows 環境から利用される人は良いかもしれません。
+最初 API が不十分な Google Photos へアップできないか調べました。以下のライブラリが良かったのですが、Puppeteer でスクレイピングしているため Raspberry Pi での利用は難しかったです。Mac や Windows 環境からなら使えるかもしれません。
 
 > 3846masa/upload-gphotos
 > https://github.com/3846masa/upload-gphotos

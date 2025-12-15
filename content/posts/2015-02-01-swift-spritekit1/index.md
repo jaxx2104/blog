@@ -20,7 +20,7 @@ iOS の新プログラミング言語 Swift をゲームアプリケーション
 
 ## プロジェクトの作成
 
-まず Xcode を App Store からインストールし立ち上げ、[File] -> [New] -> [Project] -> [Game] と選択します。Language は Swift で、GameTechnology は SpriteKit にします。
+まず Xcode を App Store からインストールし立ち上げ、[File]->[New]->[Project]->[Game]と選択します。Language は Swift で、GameTechnology は SpriteKit にします。
 
 next を押すとプロジェクトの保存場所を聞かれます。
 
@@ -38,7 +38,11 @@ next を押すとプロジェクトの保存場所を聞かれます。
 
 クラスの GameScene の**SKScene** は 1 画面の役割です。
 
-`didMoveToView`は画面が呼ばれた際に実行されるメソッド、初期状態では SKLabelNode で&#8221;Hello World&#8221;とセットしています。`touchesBegan`は画面がタップされた時に実行されるメソッド、タッチした座標に SKSpriteNode で画像を表示・回転しています。`update`は画面が毎フレームごと実行されるメソッドです。
+`didMoveToView`は画面が呼ばれた際に実行されるメソッドです。初期状態では SKLabelNode で&#8221;Hello World&#8221;とセットしています。
+
+`touchesBegan`は画面がタップされた時に実行されます。タッチした座標に SKSpriteNode で画像を表示・回転しています。
+
+`update`は毎フレームごと実行されるメソッドです。
 
 ## シミュレータ実行
 

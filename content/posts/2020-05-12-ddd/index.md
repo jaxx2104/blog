@@ -14,7 +14,7 @@ deploys / a day / a developer
 d/d/d というのを用いてる。
 
 deploys / a day / a developer の略で
-1日あたりのデプロイ回数を開発者数で割ったもの。
+1 日あたりのデプロイ回数を開発者数で割ったもの。
 
 だいたい、0.1 以上なら健全と言える
 

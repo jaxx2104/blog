@@ -49,7 +49,10 @@
     "prettier": "2.8.8",
     "sharp": "^0.34.4",
     "styled-components": "6.1.16",
-    "textlint": "11.9.1",
+    "textlint": "15.5.0",
+    "textlint-filter-rule-comments": "^1.2.2",
+    "textlint-rule-no-mix-dearu-desumasu": "^6.0.4",
+    "textlint-rule-preset-ai-writing": "1.1.0",
     "textlint-rule-preset-ja-spacing": "2.4.3",
     "textlint-rule-preset-japanese": "5.0.0",
     "typescript": "5.8.2"
