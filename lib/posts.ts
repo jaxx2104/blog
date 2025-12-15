@@ -6,6 +6,7 @@ import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import rehypeStringify from "rehype-stringify"
 import rehypePrettyCode from "rehype-pretty-code"
+import rehypeLinkCard from "./rehype-link-card"
 import { processImagePath } from "./image-utils"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
@@ -128,6 +129,7 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
       keepBackground: true,
       defaultLang: "plaintext",
     })
+    .use(rehypeLinkCard)
     .use(rehypeStringify)
     .process(contentWithUrls)
 
