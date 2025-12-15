@@ -16,7 +16,8 @@ content/posts/
 ```yaml
 ---
 title: "記事タイトル"
-date: "YYYY-MM-DD"
+created_at: 'YYYY-MM-DDTHH:mm:ss.000Z'
+updated_at: 'YYYY-MM-DDTHH:mm:ss.000Z'
 path: "/path/to/post"
 description: "記事の説明文"
 category: "カテゴリ名"
@@ -28,7 +29,8 @@ tags:
 
 ### Required Fields
 - `title`: 記事タイトル
-- `date`: 公開日 (YYYY-MM-DD 形式)
+- `created_at`: 作成日時 (ISO 8601 形式、例: `'2025-12-15T00:00:00.000Z'`)
+- `updated_at`: 更新日時 (ISO 8601 形式)
 - `path`: URL パス
 
 ### Optional Fields
