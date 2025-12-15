@@ -1,6 +1,7 @@
 ---
 title: 買ってよかったもの2025
-date: "2025-12-15"
+created_at: '2025-12-15T00:00:00.000Z'
+updated_at: '2025-12-15T00:00:00.000Z'
 path: /2025-purchases
 category: Gadget
 tags:
