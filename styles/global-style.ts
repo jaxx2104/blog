@@ -112,7 +112,7 @@ const GlobalStyles = createGlobalStyle`
     .link-card-image {
       flex-shrink: 0;
       width: 120px;
-      min-height: 100px;
+      aspect-ratio: 1.2;
       background-color: ${(props) => props.theme.colorBorder};
       display: flex;
       align-items: center;
@@ -122,7 +122,7 @@ const GlobalStyles = createGlobalStyle`
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         margin: 0;
       }
     }
@@ -174,7 +174,7 @@ const GlobalStyles = createGlobalStyle`
     @media (max-width: 480px) {
       .link-card-image {
         width: 80px;
-        min-height: 80px;
+        aspect-ratio: 1;
       }
 
       .link-card-content {
