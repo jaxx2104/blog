@@ -16,7 +16,7 @@ tags:
 タックマンモデル
 チームビルディングによって時間軸を短縮しよう
 
-[* チームの5つの機能不全]
+[* チームの 5 つの機能不全]
 信頼の欠如
 衝突への恐怖
 責任感の不足
@@ -54,7 +54,7 @@ good cycle
 上記をチームで確認した後に最後の質問
 その期待は合っているか
 
-[* インセプションデッキ] 
+[* インセプションデッキ]
 以下の 10 の問いに答えることで、プロジェクトの Why, How を明確にする
 我われはなぜここにいるのか(Why1)
 エレベーターピッチを作る(Why2)
@@ -106,7 +106,7 @@ TWI を用いる
 CCPM
 パーキンソンの法則
 
-[* ギャレットの5段階]
+[* ギャレットの 5 段階]
 ![](https://d2l930y2yx77uc.cloudfront.net/production/uploads/images/8769028/picture_pc_36843661814bfb5d06cf45afd64d9581.jpg)
 
 [* 仮説キャンバス]
@@ -120,7 +120,7 @@ CCPM
 [* リーンキャンバス]
 ![](https://leanstack.com/assets/v2/leancanvas-0c61f6b1e7c978ea69a47946f2ab60a5a3be0909da861c2b377d7c63faf1e5d6.png)
 
-[* SL理論]
+[* SL 理論]
 ![](http://www.earthship-c.com/images/column/SL-theory.fw.png)
 S1 : 教示的リーダーシップ
 S2 : 説得的リーダーシップ

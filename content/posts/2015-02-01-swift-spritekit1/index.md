@@ -20,7 +20,7 @@ iOS の新プログラミング言語 Swift をゲームアプリケーション
 
 ## プロジェクトの作成
 
-まず Xcode を App Store からインストールし立ち上げ、[File] -> [New] -> [Project] -> [Game] と選択します。Language は Swift で、GameTechnology は SpriteKit にします。
+まず Xcode を App Store からインストールし立ち上げ、[File]->[New]->[Project]->[Game]と選択します。Language は Swift で、GameTechnology は SpriteKit にします。
 
 next を押すとプロジェクトの保存場所を聞かれます。
 
