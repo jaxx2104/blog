@@ -1,11 +1,36 @@
 {
-  "filters": {},
+  "filters": {
+    "comments": true
+  },
   "rules": {
     "preset-ja-spacing": {
       "ja-space-between-half-and-full-width": {
         "space": "always"
-      }
+      },
+      "ja-no-space-around-parentheses": true,
+      "ja-nakaguro-or-halfwidth-space-between-katakana": true,
+      "ja-space-after-exclamation": false,
+      "ja-space-after-question": false
     },
-    "preset-japanese": true
+    "preset-japanese": {
+      "sentence-length": {
+        "max": 120
+      },
+      "no-doubled-conjunction": true,
+      "no-doubled-joshi": {
+        "strict": false,
+        "allow": ["も", "や", "か"]
+      },
+      "no-double-negative-ja": true,
+      "no-dropping-the-ra": true,
+      "no-nfd": true,
+      "no-mix-dearu-desumasu": false
+    },
+    "no-mix-dearu-desumasu": {
+      "preferInHeader": "",
+      "preferInBody": "ですます",
+      "preferInList": "ですます",
+      "strict": false
+    }
   }
 }

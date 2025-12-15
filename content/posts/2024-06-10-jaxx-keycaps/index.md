@@ -12,7 +12,7 @@ tags:
 ![](./b90c460e84614e8f41f768c80530e279.jpg)
 
 必要なもの
-- キーボードの原型 メルカリで買った
+- キーボードの原型メルカリで買った
 - Zbutt https://www.zappycappys.com/pages/z-butt
 - シリコン https://amzn.asia/d/jlNhE6s
 - クリスタルレジン https://www.monotaro.com/p/7205/4746/
@@ -30,19 +30,19 @@ https://github.com/imyownyear/Z-Butt/wiki
 コツ
 レジンは湯煎すると粘度が下がって気泡が抜けるよ
 - ただし粘度が下がるので装飾は沈みやすい
-1時間まつ
+1 時間まつ
 - クリスタルレジンは硬化気持ち早い
 レジンの割合守らないと硬化しないのでちゃんと守ろう
-- 色1滴白1滴✕
-- 色3滴白3滴○
-白が重いのを利用して色と白は交互に1滴ずつ入れていく
+- 色 1 滴白 1 滴✕
+- 色 3 滴白 3 滴○
+白が重いのを利用して色と白は交互に 1 滴ずつ入れていく
 白は少し爪楊枝とかで混ぜると底につきにくい
-白を入れてから10分くらいは蓋しない
+白を入れてから 10 分くらいは蓋しない
 最後にレジンを追加すると軸が強くなる
 
 
 デザイン
-名刺やステッカー、SNSのアイコンなどは以下
+名刺やステッカー、SNS のアイコンなどは以下
 https://www.figma.com/file/s8UXaaxl0hZDOWgTfYNmBZ/JaxxKeycaps?node-id=0%3A1
 
 マーケティング
@@ -54,7 +54,7 @@ Instagram
 - トレンドを追ったものやおしゃれな投稿のほうが良い
 - プロフィールにブースのサイト掲載
 - 買い物アカウント
-- 1万人超えないとショップやリンク貼れない！
+- 1 万人超えないとショップやリンク貼れない！
 - https://help.instagram.com/337910740093030/
 - とりあえずフォロワー取得目標
 - (メロンズキーキャップ参考)
@@ -75,26 +75,26 @@ Google Drive のこのディレクトリにアップする
 BOOTH に登録する
 - 商品管理から
 - 説明文とかの内容は既存のやつに倣って
-Facebook カタログに登録する（Instagramでリンク貼れる）
+Facebook カタログに登録する（Instagram でリンク貼れる）
 - このスプレッドシートに行を追加すると一時間おきに更新される
 - https://docs.google.com/spreadsheets/d/1qQNF7T_aEWJeVmPZc_4XN0eM0C0Ju94NjoKVcDYHk3w/edit#gid=2078879708
-- Facebookカタログマネージャーに登録される
+- Facebook カタログマネージャーに登録される
 - https://www.facebook.com/products/catalogs/314995313215228/products
-- Instagramの商品タグを追加できる
+- Instagram の商品タグを追加できる
 
 実店舗
-遊舎工房のArtisan Keycaps委託販売
+遊舎工房の Artisan Keycaps 委託販売
 https://yushakobo.jp/news/2019/09/06/artisan/
-受付商品：Artisanキーキャップ
-受付個数：1～5個
-委託期間：3カ月（延長あり）
-最低設定価格：3,000円（税別）
+受付商品：Artisan キーキャップ
+受付個数：1～5 個
+委託期間：3 カ月（延長あり）
+最低設定価格：3,000 円（税別）
 委託料：20%
 
 配送
 クリックポストを利用して住所と氏名を入力して決済を済ませる
 - https://www.post.japanpost.jp/service/clickpost/
-印刷用紙をPDFでダウンロードしてネットプリント
+印刷用紙を PDF でダウンロードしてネットプリント
 - https://networkprint.ne.jp/sharp_netprint/ja/mypage.aspx
 包装する
 - メッセージカードを書く
@@ -110,7 +110,7 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 - スカルピー
 - ヒートガン
 ![](./675d0b10b56d79b8a3ea13cd6dd8e017.jpg)
-3Dプリンターも買った
+3D プリンターも買った
 ![](./a22965121d0a574990ecc7349b4d1deb.jpg)
 
 写真綺麗に撮るために
@@ -122,7 +122,7 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 Google Form の方法
 https://github.com/imyownyear/Z-Butt/wiki/Making-Money
 https://github.com/imyownyear/Z-Butt/wiki/Google-Forms-raffle-setup
-Paypalの決済方法がわかってない
+Paypal の決済方法がわかってない
 
 
 

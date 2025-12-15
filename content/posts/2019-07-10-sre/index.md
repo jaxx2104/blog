@@ -17,7 +17,7 @@ tags:
 [** DevOps interface]
 
 Reduce organizational silos
-- IT会社に限らずチーム間の溝が深まり連携ができなくなる現象をサイロ化と呼びます。DevOpsではまず、開発チームと運用チームの壁を壊し、チーム間のコラボレーションを促進します。
+- IT 会社に限らずチーム間の溝が深まり連携ができなくなる現象をサイロ化と呼びます。DevOps ではまず、開発チームと運用チームの壁を壊し、チーム間のコラボレーションを促進します。
 Accept failure as normal
 - なかなか理解してもらえない事実ですが、あらゆるシステムは必ず壊れます。そのためシステムでエラーが発生するのを前提として設計や運用を計画します。
 Implement gradual change
@@ -25,7 +25,7 @@ Implement gradual change
 Leverage tooling and automation
 - あらゆるツールと自動化を活用して効率化し、人為的なミスを減らします。
 Measure everything
-- 全てを測定します。これは上記4つの領域の成功させるために重要です。
+- 全てを測定します。これは上記 4 つの領域の成功させるために重要です。
 
 [** How SRE implement DevOps]
 
@@ -51,7 +51,7 @@ The Evolution of Automation
 Release Engineering
 Simplicity
 
-詳細や実践手法は以下のURL
+詳細や実践手法は以下の URL
 https://landing.google.com/sre/sre-book/toc/index.html
 
 [** Reference]

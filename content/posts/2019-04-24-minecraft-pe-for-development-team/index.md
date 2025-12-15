@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-フロントエンドチーム（10 ~ 20人程度）で遊びたかったのでメモ
+フロントエンドチーム（10 ~ 20 人程度）で遊びたかったのでメモ
 ![](./b4bd63ce943967a8bf8e024b4a99c2b9.jpg)
 
 [*** サーバー情報]
@@ -69,6 +69,6 @@ install.sh の内容を変更する
 
 1. Docker 入れる https://www.docker.com/
 2. Kitematic 入れる https://kitematic.com/
-3. コンテナ検索する（自分はこれ） https://hub.docker.com/r/lomot/minecraft-bedrock
+3. コンテナ検索する（自分はこれ）https://hub.docker.com/r/lomot/minecraft-bedrock
 4. 実行
 
