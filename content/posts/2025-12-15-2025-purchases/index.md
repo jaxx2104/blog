@@ -49,7 +49,7 @@ https://ja.aliexpress.com/item/1005009658413745.html
 
 土壌の水分量と温度をリアルタイムでアプリから確認できます。IP67 防水で屋外でも使用可能。Zigbee 接続なので Home Assistant との連携もスムーズです。Tuya 水タイマーと組み合わせれば自動灌漑システムも構築できます。観葉植物を枯らしがちな人、ベランダ菜園を始めたい人におすすめ。
 
-https://www.aliexpress.com/w/wholesale-tuya-soil-sensor.html
+https://ja.aliexpress.com/item/1005009507027327.html
 
 ## Bambu Lab A1 mini
 
