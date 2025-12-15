@@ -90,6 +90,105 @@ const GlobalStyles = createGlobalStyle`
       font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
       font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
     }
+
+    /* Link card styles */
+    .link-card {
+      display: flex;
+      align-items: stretch;
+      border: 1px solid ${(props) => props.theme.colorBorder};
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+      &:hover {
+        border-color: ${(props) => props.theme.colorMain};
+        box-shadow: 0 2px 8px ${(props) => props.theme.colorShadow};
+      }
+    }
+
+    .link-card-image {
+      flex-shrink: 0;
+      width: 120px;
+      min-height: 100px;
+      background-color: ${(props) => props.theme.colorBorder};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+      }
+    }
+
+    .link-card-no-image {
+      span {
+        font-size: 2rem;
+        font-weight: bold;
+        color: ${(props) => props.theme.colorSub};
+      }
+    }
+
+    .link-card-content {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .link-card-title {
+      font-weight: ${(props) => props.theme.fontWeightBold};
+      font-size: ${(props) => `${props.theme.fontSize}rem`};
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0.25rem;
+    }
+
+    .link-card-description {
+      font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
+      color: ${(props) => props.theme.colorSub};
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0.25rem;
+    }
+
+    .link-card-site {
+      font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
+      color: ${(props) => props.theme.colorSub};
+    }
+
+    @media (max-width: 480px) {
+      .link-card-image {
+        width: 80px;
+        min-height: 80px;
+      }
+
+      .link-card-content {
+        padding: 0.5rem 0.75rem;
+      }
+
+      .link-card-title {
+        font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
+      }
+
+      .link-card-description {
+        -webkit-line-clamp: 1;
+      }
+    }
   }
 `
 export default GlobalStyles

@@ -13,9 +13,11 @@
     "date-fns": "^4.1.0",
     "font-awesome": "4.7.0",
     "gray-matter": "^4.0.3",
+    "hast-util-from-html": "^2.0.3",
     "localforage": "1.10.0",
     "modern-normalize": "3.0.1",
     "next": "^15.5.3",
+    "open-graph-scraper": "^6.11.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-helmet": "6.1.0",
@@ -28,10 +30,12 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "shiki": "^3.13.0",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.27.0",
+    "@types/hast": "^3.0.4",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-helmet": "6.1.11",

@@ -37,6 +37,8 @@ Home Assistant OS をインストールするマシンとして、省電力性�
 - ネットワーク: 2.5Gbps Ethernet ポート x2, Wi-Fi 6
 - 特徴: 低消費電力でありながら、Home Assistant および多数のアドオンを快適に動作させるのに十分な性能を持っています。ファンレス設計に近く、非常に静かです。
 
+https://www.amazon.co.jp/dp/B0D5XNYVHN
+
 初期設定のポイント
 基本設定ファイル（`configuration.yaml`）の構成：
 
@@ -125,6 +127,8 @@ Bluetooth 対応デバイスを Home Assistant に接続するための Proxy �
 - Flash: 8MB
 - 特徴: 小型ながら強力な ESP32-S3 を搭載し、Bluetooth プロキシとして安定した動作が期待できます。
 
+https://www.switch-science.com/products/8778
+
 ```yaml
 esphome:
   name: m5stack-atom3-lite
@@ -171,6 +175,8 @@ M5Stack Atom Echo（音声アシスタント）
 - マイク: SPM1423 (PDM)
 - スピーカー: 0.5W
 - 特徴: マイクとスピーカーを内蔵した超小型の ESP32 開発ボード。Home Assistant の音声アシスタントを安価に構築するのに最適です。
+
+https://www.switch-science.com/products/6347
 
 ```yaml
 esphome:
