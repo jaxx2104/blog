@@ -32,10 +32,6 @@
       "preferInList": "ですます",
       "strict": false
     },
-    "preset-ai-writing": {
-      "no-ai-list-formatting": false,
-      "no-ai-hype-expressions": false,
-      "ai-tech-writing-guideline": false
-    }
+    "preset-ai-writing": true
   }
 }
