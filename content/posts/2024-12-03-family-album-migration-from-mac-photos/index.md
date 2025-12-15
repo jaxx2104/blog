@@ -41,13 +41,13 @@ Mac の Photos アプリを家族アルバムとして使っていた
 
 SSD の故障きっかけで見直したこと
 - Mac Photos
-  - macOS Catalina 前までは管理しているフォルダが日付ごとに整理されていて Photos を介さなくても中身を取り出すのが容易だったが、Catalina 以降からフォルダ構成が「0」〜「F」までにランダムに保存されるようになった。なので日付や Exif 情報や XMP に保存するメタデータは Photos の SQLite で管理されるようになった。ファイルベースではないのでパフォーマンス面での恩恵があったが Photos からでないとオリジナル写真を取り出せないので、若干気持ちが悪かった。
-  - 写真の整理という点でも、近似値をさがして重複やグルーピングして選別といった機能が欲しいなと思ったのと、不要な Live Photos の一括削除、RAW+JPEG の JPEG 削除といった機能が欲しいと思ったが、Mac Photos はそういった機能がなく、ファイルサイズがひたすら増えてしまうのが不満だった。
+  - macOS Catalina 以前はフォルダが日付ごとに整理されていたが、Catalina 以降は「0」〜「F」のランダム保存に変更された。メタデータは SQLite 管理となりパフォーマンスは向上したが、Photos を介さないとオリジナル写真を取り出せないのが難点だった。
+  - 写真の整理機能も不足していた。近似値での重複検出や選別、不要な Live Photos の一括削除、RAW+JPEG の JPEG 削除などがなく、ファイルサイズが増える一方だった。
 
 移行
 - Mac Photos から Windows の Capture One https://www.captureone.com/ja への乗り換え（GPU の恩恵も受けることが出来る）
   - Live Photos さえ諦めれば、写真選別機能やこまかい絞り込み機能など便利な点が多い
-  移行するときに Mac Photos の書き出し https://support.apple.com/ja-jp/guide/photos/pht6e157c5f/mac を介さないといけない & 細かい条件で書き出しできないのがとても不便だったが osxphotos という OSS を見つけた、Live Photos は移行しない、RAW だけ移行、リトライ機構など細かく設定できて便利だった。
+  - 移行時は Mac Photos の書き出しを介す必要があり不便だったが、osxphotos という OSS を発見した。Live Photos をスキップ、RAW のみ移行、リトライ機構など細かく設定できて便利だった。
 
 写真なら
 ```shell
