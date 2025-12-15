@@ -65,7 +65,7 @@ https://jp.store.bambulab.com/products/a1-mini
 
 シリーズ史上最も厚く、柔らかい Fresh Foam X ミッドソールを搭載。厚底なのに安定感があり、長時間歩いても足が疲れにくいです。つま先がそり上がったロッカー構造で、自然と足が前に出る感覚。通勤からジョギングまで使える万能シューズです。デザインも落ち着いていて普段履きしやすいのもポイント。
 
-https://shop.newbalance.jp/shop/g/gMMORLJ5
+https://www.amazon.co.jp/dp/B0D3142WBV
 
 ## NVIDIA GeForce RTX 5070 Ti
 
