@@ -41,7 +41,7 @@ https://www.amazon.co.jp/dp/B0DPHFMN6V
 
 Snapdragon 8 Gen 3 搭載で AnTuTu 200 万点超えのハイエンドタブレットが 3 万円台で買えるのは破格。11.1 インチ 3K ディスプレイは 144Hz 対応で、動画視聴やゲームが快適。スタイラスペン付属で 8192 段階の筆圧検知にも対応しています。中国版ですが Google Play も導入可能。壁掛けダッシュボードとして使っています。
 
-https://www.aliexpress.com/w/wholesale-lenovo-xiaoxin-pad-pro.html
+https://ja.aliexpress.com/item/1005009658413745.html
 
 ## Tuya スマート Zigbee 土壌センサー
 
