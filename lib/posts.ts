@@ -97,6 +97,14 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   const fileContents = fs.readFileSync(fullPath, "utf8")
   const { data, content } = matter(fileContents)
 
+  // Extract first image for thumbnail
+  let thumbnail: string | undefined
+  const imageMatch = content.match(/!\[.*?\]\(([^)]+)\)/)
+  if (imageMatch) {
+    const imageSrc = imageMatch[1]
+    thumbnail = processImagePath(imageSrc, slug, fullPath.replace("/index.md", ""))
+  }
+
   // Convert images to public URLs
   const postDir = path.join(postsDirectory, slug)
   let contentWithUrls = content
@@ -143,6 +151,7 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
     tags: data.tags,
     content,
     html: processedContent.toString(),
+    thumbnail,
   }
 }
 
