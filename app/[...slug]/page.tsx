@@ -34,7 +34,6 @@ export async function generateMetadata({
   const title = `${post.title} | jaxx2104.info`
   const description = post.content?.split(/\n/)[0] || ""
   const url = `${siteUrl}${post.path}`
-  const imageUrl = post.thumbnail ? `${siteUrl}${post.thumbnail}` : undefined
 
   return {
     title,
@@ -45,17 +44,11 @@ export async function generateMetadata({
       url,
       siteName: "jaxx2104.info",
       type: "article",
-      ...(imageUrl && {
-        images: [{ url: imageUrl }],
-      }),
     },
     twitter: {
-      card: imageUrl ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title,
       description,
-      ...(imageUrl && {
-        images: [imageUrl],
-      }),
     },
   }
 }
