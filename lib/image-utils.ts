@@ -1,6 +1,8 @@
 import fs from "fs"
 import path from "path"
 
+export const DEFAULT_THUMBNAIL = "/images/ogp-default.png"
+
 export function ensureImageCopied(
   sourceImagePath: string,
   postSlug: string,
