@@ -28,10 +28,11 @@ export async function fetchOgp(url: string): Promise<OgpData | null> {
     })
 
     if (result.success) {
+      const rawImage = result.ogImage?.[0]?.url || ""
       const ogpData: OgpData = {
         title: result.ogTitle || result.dcTitle || extractTitleFromUrl(url),
         description: result.ogDescription || result.dcDescription || "",
-        image: result.ogImage?.[0]?.url || "",
+        image: isValidProductImage(rawImage) ? rawImage : "",
         url: result.ogUrl || url,
         siteName: result.ogSiteName || extractDomain(url),
       }
@@ -52,6 +53,19 @@ export async function fetchOgp(url: string): Promise<OgpData | null> {
   }
   ogpCache.set(url, fallbackData)
   return fallbackData
+}
+
+// Amazonロゴなど無効な画像を除外
+function isValidProductImage(imageUrl: string): boolean {
+  if (!imageUrl) return false
+
+  const invalidPatterns = [
+    /amazon.*share.*logo/i,
+    /images\/G\/.*\.gif$/i, // Amazon generic images
+    /\/images\/G\//i, // Amazon site assets
+  ]
+
+  return !invalidPatterns.some((pattern) => pattern.test(imageUrl))
 }
 
 function extractDomain(url: string): string {
