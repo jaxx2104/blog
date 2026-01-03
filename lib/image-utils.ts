@@ -1,6 +1,8 @@
 import fs from "fs"
 import path from "path"
 
+export const DEFAULT_THUMBNAIL = "/images/profile.jpg"
+
 export function ensureImageCopied(
   sourceImagePath: string,
   postSlug: string,

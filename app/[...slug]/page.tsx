@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getPostByPath, getAllPosts } from "@/lib/posts"
+import { DEFAULT_THUMBNAIL } from "@/lib/image-utils"
 import Layout from "@/components/layout/layout"
 import Article, { SiteMetaType } from "@/components/features/article/article"
 
@@ -34,7 +35,8 @@ export async function generateMetadata({
   const title = `${post.title} | jaxx2104.info`
   const description = post.content?.split(/\n/)[0] || ""
   const url = `${siteUrl}${post.path}`
-  const imageUrl = post.thumbnail ? `${siteUrl}${post.thumbnail}` : undefined
+  const thumbnail = post.thumbnail || DEFAULT_THUMBNAIL
+  const imageUrl = `${siteUrl}${thumbnail}`
 
   return {
     title,
@@ -45,17 +47,13 @@ export async function generateMetadata({
       url,
       siteName: "jaxx2104.info",
       type: "article",
-      ...(imageUrl && {
-        images: [{ url: imageUrl }],
-      }),
+      images: [{ url: imageUrl }],
     },
     twitter: {
-      card: imageUrl ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title,
       description,
-      ...(imageUrl && {
-        images: [imageUrl],
-      }),
+      images: [imageUrl],
     },
   }
 }
