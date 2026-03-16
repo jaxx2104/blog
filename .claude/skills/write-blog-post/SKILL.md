@@ -2,28 +2,16 @@
 name: write-blog-post
 description: ブログ記事を新規作成し、テキスト校正まで行う。トピックを指定すると記事ファイルの生成から日本語lintまで自動で実行する。
 argument-hint: [トピック]
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash(pnpm lint:text), Bash(pnpm lint:textfix), Bash(date *), Bash(mkdir *)
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash(pnpm lint:text), Bash(pnpm lint:textfix), Bash(date *), Bash(mkdir *), Bash(mv *)
 ---
 
 # ブログ記事の新規作成
 
 トピック: $ARGUMENTS
 
-## ステップ 1: 記事情報の決定
+## ステップ 1: 骨子（アウトライン）の作成
 
-ユーザーの指定したトピックをもとに、以下を決定する：
-
-- **title**: 記事タイトル（日本語）
-- **slug**: URL用のスラッグ（英語、ケバブケース）
-- **category**: カテゴリ名
-- **tags**: 関連タグの配列
-- **description**: 記事の説明文（OGP用、1-2文）
-
-決定した内容をユーザーに提示し、**確認を取ってから**次に進む。
-
-## ステップ 2: 骨子（アウトライン）の作成
-
-記事の全体構成を骨子として提示する：
+トピックをもとに記事の全体構成を骨子として提示する：
 
 - 各セクションの見出し（##, ###）
 - 各セクションで扱う要点を箇条書きで記載
@@ -51,36 +39,31 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash(pnpm lint:text), Bash(pnpm li
 骨子をユーザーに提示し、**確認を取ってから**次に進む。
 ユーザーから「このセクションは不要」「ここを深掘りして」等のフィードバックがあれば反映する。
 
-## ステップ 3: 記事ファイルの作成
+## ステップ 2: 記事ファイルの仮作成
 
-以下の規約に従ってファイルを作成する：
+骨子が確定したら、仮の slug でファイルを作成する：
 
+- **slug**: トピックから仮決め（英語、ケバブケース）
 - **ディレクトリ**: `content/posts/YYYY-MM-DD-<slug>/`（日付は今日の日付）
 - **ファイル**: `index.md`
-- **日時**: `created_at` と `updated_at` は現在日時（ISO 8601形式、例: `2026-03-15T00:00:00.000Z`）
-- **path**: `/<slug>` 形式
 
-Frontmatter テンプレート：
+この時点では仮の frontmatter と本文なしで作成する：
 
 ```yaml
 ---
-title: "タイトル"
+title: "仮タイトル"
 created_at: "YYYY-MM-DDTHH:mm:ss.000Z"
 updated_at: "YYYY-MM-DDTHH:mm:ss.000Z"
 path: "/slug"
-description: "説明文"
-category: "カテゴリ"
-tags:
-  - tag1
-  - tag2
+description: ""
+category: ""
+tags: []
 ---
 ```
 
-frontmatter のみ書き込み、本文はまだ書かない。
+## ステップ 3: セクションごとの執筆
 
-## ステップ 4: セクションごとの執筆
-
-骨子の各セクションを**1つずつ順に執筆**する。
+骨子の各セクションを**1つずつ順に執筆**し、ファイルに追記していく。
 
 各セクションについて：
 1. 骨子の要点に沿って本文を書く
@@ -94,7 +77,7 @@ frontmatter のみ書き込み、本文はまだ書かない。
 - 簡潔で読みやすい文体にする
 - 画像を使う場合は同じディレクトリに配置し `![alt](./filename.jpg)` で参照する
 
-## ステップ 5: テキスト校正
+## ステップ 4: テキスト校正
 
 全セクションの執筆が完了したら以下を順に実行する：
 
@@ -102,6 +85,20 @@ frontmatter のみ書き込み、本文はまだ書かない。
 2. エラーがあれば `pnpm lint:textfix` で自動修正
 3. 自動修正後もエラーが残る場合は手動で修正
 4. 最終的に `pnpm lint:text` がエラーなしで通ることを確認
+
+## ステップ 5: メタ情報の確定
+
+記事の内容が固まったので、最終的なメタ情報を決定する：
+
+- **title**: 記事の内容に合ったタイトル（日本語）
+- **slug**: URL用のスラッグ（必要なら仮 slug から変更し、ディレクトリ名もリネーム）
+- **category**: カテゴリ名
+- **tags**: 関連タグの配列
+- **description**: 記事の説明文（OGP用、1-2文）
+- **path**: `/<slug>` 形式
+
+提案した内容をユーザーに提示し、**確認を取ってから** frontmatter を更新する。
+slug を変更した場合はディレクトリ名も `mv` でリネームする。
 
 ## ステップ 6: 完了報告
 
