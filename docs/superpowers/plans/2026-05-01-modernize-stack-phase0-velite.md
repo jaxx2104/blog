@@ -493,7 +493,11 @@ git commit -m "test(content): verify velite output matches legacy getAllPosts"
     for (const m of matches) {
       const src = m[1]
       if (src.startsWith("http://") || src.startsWith("https://")) continue
-      if (src.startsWith("/images/posts/")) continue
+      // Skip every absolute path: it's either /images/posts/ (Velite-rewritten)
+      // or a legacy WordPress URL like /wp/images/... (externally hosted, not
+      // a Velite asset). Relative paths (./img.png, img.png) still fall through
+      // to the failure case, which is what we want.
+      if (src.startsWith("/")) continue
       badAssetRefs.push(`${v.slug}: ${src}`)
     }
   }
