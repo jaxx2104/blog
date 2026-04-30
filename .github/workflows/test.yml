@@ -23,3 +23,9 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
       - run: pnpm test
+      - name: Build content layer (velite)
+        run: pnpm velite:build
+      # NOTE: temporary cross-check during stack modernization Phase 0.
+      # Remove together with lib/posts.ts legacy reader in Phase 4.
+      - name: Verify velite output matches legacy
+        run: pnpm verify:velite
