@@ -24,8 +24,9 @@
 import { getAllPosts } from "../lib/posts"
 
 // Posts that exist in the legacy output but are rejected by Velite due to
-// dead image references. Must remain exactly this set — any change is a
-// signal to investigate.
+// dead image references. When Phase 1 fixes the content gap, this set must
+// shrink. The verifier fails if a slug here unexpectedly succeeds in Velite
+// — that's the cleanup signal.
 const KNOWN_LEGACY_ONLY = new Set([
   "2013-09-05-iphoto-photobook",
   "2024-06-10-jaxx-keycaps",
@@ -80,10 +81,11 @@ async function main() {
     process.exit(1)
   }
   if (missingKnown.length > 0) {
-    console.warn(
-      "WARN: known dead-image slugs unexpectedly succeeded in velite:",
+    console.error(
+      "FAIL: known dead-image slugs unexpectedly succeeded in velite. Remove them from KNOWN_LEGACY_ONLY.",
       missingKnown,
     )
+    process.exit(1)
   }
   if (onlyInVelite.length > 0) {
     console.error("FAIL: velite-only slugs:", onlyInVelite)
