@@ -232,6 +232,7 @@ export const posts = defineCollection({
 - 出力 JSON の件数 / 失敗件数 / 画像 URL を確認
 - スラッグの階層構造（`splat` が必要か）を判定
 - **Gate**: 既存 `getAllPosts()` の出力と要素数・主要フィールドが一致
+- **Gate 完了**: 2026-05-01 時点で Velite 107 件と Legacy 109 件のうち、Velite で取れる 107 件は title・slug が一致。Legacy のみに存在する 2 件 (`2013-09-05-iphoto-photobook`, `2024-06-10-jaxx-keycaps`) は dead な画像参照に起因する既存の content gap で、Phase 1 着手前に content 側で別途対応する。
 
 ### Phase 1: TanStack Start ひな型（1 日）
 - `vite.config.ts`, `app/routes/__root.tsx`, `app/routes/index.tsx` を最小構成
