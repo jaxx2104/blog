@@ -62,3 +62,6 @@ public/images/posts
 
 # Playwright
 .playwright-mcp/
+
+# Velite generated content layer
+.velite/

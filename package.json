@@ -48,7 +48,9 @@
     "textlint-rule-preset-ai-writing": "1.1.0",
     "textlint-rule-preset-ja-spacing": "2.4.3",
     "textlint-rule-preset-japanese": "5.0.0",
-    "typescript": "5.8.2"
+    "tsx": "^4",
+    "typescript": "5.8.2",
+    "velite": "^0.3"
   },
   "keywords": [
     "blog",
@@ -62,6 +64,11 @@
     "build": "next build",
     "start": "next start",
     "deploy": "pnpm build",
+    "velite": "velite",
+    "velite:build": "velite build",
+    "velite:dev": "velite dev",
+    "verify:velite": "tsx scripts/verify-velite.ts",
+    "inspect:paths": "tsx scripts/inspect-paths.ts",
     "format": "biome format --write .",
     "lint": "biome check --write .",
     "lint:ci": "biome ci .",
