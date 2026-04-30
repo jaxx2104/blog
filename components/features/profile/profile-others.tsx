@@ -1,8 +1,7 @@
 "use client"
 
-import React from "react"
-import Display from "../../ui/display"
 import Container from "../../ui/container"
+import Display from "../../ui/display"
 import Section from "../../ui/section"
 
 const ProfileOthers = () => {

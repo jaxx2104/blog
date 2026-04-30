@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Noto_Sans_JP, Permanent_Marker } from "next/font/google"
-import StyledComponentsRegistry from "@/lib/registry"
 import Providers from "@/components/Providers"
+import StyledComponentsRegistry from "@/lib/registry"
 import "modern-normalize/modern-normalize.css"
 import "font-awesome/css/font-awesome.css"
 

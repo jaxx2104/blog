@@ -1,11 +1,11 @@
 "use client"
 
-import React from "react"
+import type React from "react"
 import styled from "styled-components"
 import Container from "../../ui/container"
+import Display from "../../ui/display"
 import Flex from "../../ui/flex"
 import Section from "../../ui/section"
-import Display from "../../ui/display"
 import Thumbnail from "./thumbnail"
 
 interface Props {

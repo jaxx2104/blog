@@ -1,13 +1,13 @@
-import fs from "fs"
-import path from "path"
+import fs from "node:fs"
+import path from "node:path"
 import matter from "gray-matter"
-import { unified } from "unified"
+import rehypePrettyCode from "rehype-pretty-code"
+import rehypeStringify from "rehype-stringify"
 import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
-import rehypeStringify from "rehype-stringify"
-import rehypePrettyCode from "rehype-pretty-code"
-import rehypeLinkCard from "./rehype-link-card"
+import { unified } from "unified"
 import { processImagePath } from "./image-utils"
+import rehypeLinkCard from "./rehype-link-card"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
 
@@ -76,14 +76,14 @@ export async function getAllPosts(): Promise<PostData[]> {
         }
       }
       return null
-    })
+    }),
   )
 
   return posts
     .filter(Boolean)
     .sort(
       (a, b) =>
-        new Date(b!.created_at).getTime() - new Date(a!.created_at).getTime()
+        new Date(b!.created_at).getTime() - new Date(a!.created_at).getTime(),
     ) as PostData[]
 }
 
@@ -102,7 +102,11 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   const imageMatch = content.match(/!\[.*?\]\(([^)]+)\)/)
   if (imageMatch) {
     const imageSrc = imageMatch[1]
-    thumbnail = processImagePath(imageSrc, slug, fullPath.replace("/index.md", ""))
+    thumbnail = processImagePath(
+      imageSrc,
+      slug,
+      fullPath.replace("/index.md", ""),
+    )
   }
 
   // Convert images to public URLs
@@ -171,7 +175,7 @@ export async function getPostSlugs(): Promise<string[]> {
 }
 
 export async function getPostByPath(
-  postPath: string
+  postPath: string,
 ): Promise<PostData | null> {
   const posts = await getAllPosts()
 

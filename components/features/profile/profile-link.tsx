@@ -1,11 +1,11 @@
 "use client"
 
-import React from "react"
+import type React from "react"
 import styled from "styled-components"
-import Section from "../../ui/section"
+import Container from "../../ui/container"
 import Display from "../../ui/display"
 import Flex from "../../ui/flex"
-import Container from "../../ui/container"
+import Section from "../../ui/section"
 
 const ProfileLink: React.FC = () => (
   <Section>

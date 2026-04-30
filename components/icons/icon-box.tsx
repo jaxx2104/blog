@@ -1,4 +1,4 @@
-import React from "react"
+import type React from "react"
 import styled, { keyframes } from "styled-components"
 
 import Icon from "./icon"

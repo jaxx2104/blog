@@ -1,7 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { library, IconName } from "@fortawesome/fontawesome-svg-core"
-import React from "react"
-import styled from "styled-components"
+import { type IconName, library } from "@fortawesome/fontawesome-svg-core"
 import {
   faApple,
   faAws,
@@ -15,6 +12,9 @@ import {
   faTwitter,
   faVuejs,
 } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import type React from "react"
+import styled from "styled-components"
 
 library.add(
   faAws,
@@ -27,7 +27,7 @@ library.add(
   faTwitter,
   faFacebook,
   faGithub,
-  faNode
+  faNode,
 )
 
 interface Props {

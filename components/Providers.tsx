@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import type React from "react"
 import { ThemeProvider } from "@/lib/ThemeContext"
 import GlobalStyles from "@/styles/global-style"
 

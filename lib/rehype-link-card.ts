@@ -1,6 +1,6 @@
-import { visit } from "unist-util-visit"
-import type { Root, Element, Text } from "hast"
+import type { Element, Root, Text } from "hast"
 import { fromHtml } from "hast-util-from-html"
+import { visit } from "unist-util-visit"
 import { fetchOgp, generateLinkCardHtml } from "./link-card"
 
 const URL_REGEX = /^https?:\/\/[^\s]+$/
@@ -57,7 +57,7 @@ export default function rehypeLinkCard() {
       nodesToReplace.map(async ({ url }) => {
         const ogp = await fetchOgp(url)
         return { url, ogp }
-      })
+      }),
     )
 
     // ノードを置換（逆順で処理してインデックスがずれないようにする）

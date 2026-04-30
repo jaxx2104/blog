@@ -1,19 +1,19 @@
-import fs from "fs"
-import path from "path"
+import fs from "node:fs"
+import path from "node:path"
 
 export const DEFAULT_THUMBNAIL = "/images/ogp-default.png"
 
 export function ensureImageCopied(
   sourceImagePath: string,
   postSlug: string,
-  imageName: string
+  imageName: string,
 ): string {
   const targetDir = path.join(
     process.cwd(),
     "public",
     "images",
     "posts",
-    postSlug
+    postSlug,
   )
   const targetPath = path.join(targetDir, imageName)
   const publicPath = `/images/posts/${postSlug}/${imageName}`
@@ -32,7 +32,7 @@ export function ensureImageCopied(
 export function processImagePath(
   imageSrc: string,
   postSlug: string,
-  postDir: string
+  postDir: string,
 ): string | undefined {
   if (imageSrc.startsWith("http://") || imageSrc.startsWith("https://")) {
     return imageSrc
