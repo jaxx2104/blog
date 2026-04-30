@@ -14,6 +14,7 @@ export const postSchema = s
   })
   .transform((data) => ({
     ...data,
+    // s.path() returns "posts/<dir>" (index suffix stripped) for content/posts/<dir>/index.md
     permalink: data.path ?? `/${data.slug.split("/").pop()}/`,
   }))
 
