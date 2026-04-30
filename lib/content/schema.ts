@@ -7,7 +7,10 @@ export const postSchema = s
     updated_at: s.isodate().optional(),
     path: s.string().regex(/^\/.+/, "path must start with '/'").optional(),
     category: s.string().optional(),
-    tags: s.array(s.string()).default([]),
+    tags: s
+      .array(s.string())
+      .nullish()
+      .transform((v) => v ?? []),
     slug: s.path(),
     body: s.markdown(),
     excerpt: s.excerpt({ length: 40 }),
