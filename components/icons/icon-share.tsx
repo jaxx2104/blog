@@ -1,10 +1,10 @@
+import type React from "react"
 import {
-  FacebookShareButton,
-  TwitterShareButton,
   FacebookIcon,
+  FacebookShareButton,
   TwitterIcon,
+  TwitterShareButton,
 } from "react-share"
-import React from "react"
 import styled from "styled-components"
 
 interface Props {

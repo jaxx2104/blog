@@ -1,9 +1,11 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getPostByPath, getAllPosts } from "@/lib/posts"
-import { DEFAULT_THUMBNAIL } from "@/lib/image-utils"
+import Article, {
+  type SiteMetaType,
+} from "@/components/features/article/article"
 import Layout from "@/components/layout/layout"
-import Article, { SiteMetaType } from "@/components/features/article/article"
+import { DEFAULT_THUMBNAIL } from "@/lib/image-utils"
+import { getAllPosts, getPostByPath } from "@/lib/posts"
 
 interface PostPageProps {
   params: Promise<{
@@ -22,7 +24,7 @@ export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const { slug } = await params
-  const postPath = "/" + slug.join("/")
+  const postPath = `/${slug.join("/")}`
   const post = await getPostByPath(postPath)
 
   if (!post) {
@@ -60,7 +62,7 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params
-  const path = "/" + slug.join("/")
+  const path = `/${slug.join("/")}`
   const post = await getPostByPath(path)
 
   if (!post) {

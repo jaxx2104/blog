@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
 import { format, parseISO } from "date-fns"
+import type React from "react"
+import styled from "styled-components"
 
 interface Props {
   created_at: string

@@ -1,11 +1,11 @@
 "use client"
 
-import React from "react"
+import type React from "react"
 import styled from "styled-components"
-import Container from "@/components/ui/container"
-import Flex from "@/components/ui/flex"
 import NaviLogo from "@/components/layout/navi-logo"
 import NaviMenu from "@/components/layout/navi-menu"
+import Container from "@/components/ui/container"
+import Flex from "@/components/ui/flex"
 import { useTheme } from "@/lib/ThemeContext"
 
 const Navi: React.FC = () => {

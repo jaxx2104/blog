@@ -76,14 +76,14 @@ function extractTitleFromUrl(url: string): string {
 export function generateLinkCardHtml(ogp: OgpData): string {
   const imageHtml = ogp.image
     ? `<div class="link-card-image"><img src="${escapeHtml(
-        ogp.image
+        ogp.image,
       )}" alt="" loading="lazy" /></div>`
     : `<div class="link-card-image link-card-no-image"><span>${escapeHtml(
-        ogp.siteName.charAt(0).toUpperCase()
+        ogp.siteName.charAt(0).toUpperCase(),
       )}</span></div>`
 
   return `<a href="${escapeHtml(
-    ogp.url
+    ogp.url,
   )}" class="link-card" target="_blank" rel="noopener noreferrer">
   ${imageHtml}
   <div class="link-card-content">

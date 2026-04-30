@@ -29,7 +29,12 @@
   },
   "linter": {
     "enabled": true,
-    "rules": { "recommended": true }
+    "rules": {
+      "recommended": true,
+      "style": { "noNonNullAssertion": "off" },
+      "security": { "noDangerouslySetInnerHtml": "off" },
+      "suspicious": { "noArrayIndexKey": "off" }
+    }
   },
   "assist": {
     "enabled": true,

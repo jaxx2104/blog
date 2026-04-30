@@ -1,9 +1,9 @@
 "use client"
 
-import React from "react"
+import type React from "react"
 import styled from "styled-components"
-import Display from "../../ui/display"
 import Container from "../../ui/container"
+import Display from "../../ui/display"
 import Flex from "../../ui/flex"
 import Section from "../../ui/section"
 import SlideImage from "../../ui/slide-image"
