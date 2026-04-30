@@ -37,6 +37,7 @@ type VelitePost = {
   created_at: string
   path?: string
   permalink: string
+  body: string
 }
 
 /** Normalize a Velite slug ("posts/2013-08-06-foo") to the bare directory name ("2013-08-06-foo") */
@@ -101,6 +102,34 @@ async function main() {
   if (titleMismatches.length > 0) {
     console.error("FAIL: title mismatches:")
     for (const m of titleMismatches) console.error(`  ${m}`)
+    process.exit(1)
+  }
+
+  // Image asset check: every body should reference /images/posts/ for local images
+  const badAssetRefs: string[] = []
+  for (const v of velitePosts as Array<VelitePost & { body: string }>) {
+    const matches = [...v.body.matchAll(/<img[^>]+src="([^"]+)"/g)]
+    for (const m of matches) {
+      const src = m[1]
+      if (src.startsWith("http://") || src.startsWith("https://")) continue
+      // absolute paths (e.g. legacy /wp/images/...) are external references — skip
+      if (src.startsWith("/")) continue
+      badAssetRefs.push(`${v.slug}: ${src}`)
+    }
+  }
+  if (badAssetRefs.length > 0) {
+    console.error("FAIL: unexpected asset references:")
+    for (const r of badAssetRefs) console.error(`  ${r}`)
+    process.exit(1)
+  }
+
+  // Confirm at least one post has a copied asset on disk
+  const fs = await import("node:fs")
+  const path = await import("node:path")
+  const assetRoot = path.join(process.cwd(), "public", "images", "posts")
+  const assetDirs = fs.existsSync(assetRoot) ? fs.readdirSync(assetRoot) : []
+  if (assetDirs.length === 0) {
+    console.error("FAIL: no copied assets under public/images/posts")
     process.exit(1)
   }
 
