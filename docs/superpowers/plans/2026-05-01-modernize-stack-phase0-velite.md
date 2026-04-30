@@ -99,7 +99,7 @@ git commit -m "chore: add velite and tsx for content layer migration"
 
 ## Task 2: Zod スキーマ定義（`lib/content/schema.ts`）
 
-既存 `PostData` フィールドに対応する Zod スキーマを定義する。すべての記事 109 件をパースしてエラー件数を可視化することが目的なので、緩めの定義で始める（`updated_at` 任意、`category` 任意、`tags` 配列既定 `[]`）。
+既存 `PostData` フィールドに対応する Zod スキーマを定義する。すべての記事 109 件をパースしてエラー件数を可視化することが目的なので、緩めの定義で始める（`updated_at` 任意、`category` 任意、`tags` は `.nullish().transform()` で空配列にフォールバック）。
 
 **Files:**
 - Create: `lib/content/schema.ts`
@@ -116,7 +116,7 @@ export const postSchema = s
     updated_at: s.isodate().optional(),
     path: s.string().regex(/^\/.+/, "path must start with '/'").optional(),
     category: s.string().optional(),
-    tags: s.array(s.string()).default([]),
+    tags: s.array(s.string()).nullish().transform((v) => v ?? []),
     slug: s.path(),
     body: s.markdown(),
     excerpt: s.excerpt({ length: 40 }),
@@ -128,6 +128,8 @@ export const postSchema = s
 
 export type Post = ReturnType<typeof postSchema.parse>
 ```
+
+Note: YAML `tags:` (bare) parses to null, so we use `.nullish().transform()` rather than `.default([])`.
 
 `s.isodate()` が `created_at: "2013-08-06T00:22:48+00:00"` のようなタイムゾーン付き ISO 文字列も受けることを Velite ドキュメントで確認しておく（受けない場合は `s.string().datetime({ offset: true })` に置換）。
 
@@ -234,6 +236,8 @@ export default defineConfig({
 
 `include` に以下のエントリを追加:
 
+> 実装中に発見: `.velite/index.d.ts` が `velite.config.ts` を type-import で取り込み、project tsconfig に引きずり込まれるため、include ではなく exclude に置く。
+
 ```json
 {
   "include": [
@@ -247,7 +251,6 @@ export default defineConfig({
     "styles/**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "velite.config.ts",
     "scripts/**/*.ts"
   ],
   "exclude": [
@@ -255,6 +258,7 @@ export default defineConfig({
     "public",
     ".cache",
     ".velite",
+    "velite.config.ts",
     "**/*.old/**/*",
     "**/*.bak/**/*"
   ]

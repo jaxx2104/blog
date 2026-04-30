@@ -296,6 +296,7 @@ export const posts = defineCollection({
 - Phase 1〜2 完了時点で Netlify Preview をユーザーレビュー
 - Phase 3 完了時点で再度 Preview レビュー
 - Phase 5 通過後に main へマージ
+- **改訂（2026-05-01）**: Phase 0 は既存ランタイムに一切手を触れない純粋な追加であり、CI の継続的な健全性チェックを早期に得られる利点が大きいため、単独で main にマージする方針に変更した。Phase 1 以降は当初方針通り 1 本のブランチで進める可能性が高いが、各 Phase の完了時点で同様の判断（独立 merge できるか）を行う。
 
 ### ロールバック
 - 移行ブランチでの大変更のため、main を Next.js のままキープ
