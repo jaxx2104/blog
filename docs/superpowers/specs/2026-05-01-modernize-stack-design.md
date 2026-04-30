@@ -323,6 +323,10 @@ export const posts = defineCollection({
 3. localforage を使うのが ThemeContext 以外にあるか（ある場合は維持対象を明示）
 4. `react-share` を使っているコンポーネントが styled-components に依存していないか、CSS Modules 化の対象範囲を確定
 
+### Phase 0 ノート
+
+- `velite.config.ts` は `tsconfig.json` の `exclude` に入れている。`scripts/verify-velite.ts` が dynamic に `.velite/index.js` を import すると、生成された `.velite/index.d.ts` が `velite.config.ts` を type-import で取り込み、project tsconfig に引きずり込まれるため。Phase 4 で legacy `lib/posts.ts` と一緒に再評価する。
+
 ## 13. 参考リンク
 
 - TanStack Start: https://tanstack.com/start
