@@ -33,12 +33,15 @@
     "styles/**/*.ts",
     "styles/**/*.tsx",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "velite.config.ts",
+    "scripts/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "public",
     ".cache",
+    ".velite",
     "**/*.old/**/*",
     "**/*.bak/**/*"
   ]

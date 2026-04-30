@@ -12,7 +12,9 @@
       "lib/**",
       "styles/**",
       "types/**",
-      "**/*.json"
+      "**/*.json",
+      "scripts/**",
+      "velite.config.ts"
     ]
   },
   "formatter": {
