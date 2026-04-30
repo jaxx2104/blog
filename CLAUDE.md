@@ -39,3 +39,32 @@ pnpm format              # Format code with Prettier
 | `/styles` | Global styles and theme configuration | `styles/CLAUDE.md` |
 | `/content` | Blog posts in Markdown | `content/CLAUDE.md` |
 | `/public` | Static assets (PWA manifest, icons) | - |
+
+## Build Artifacts and Type Pitfalls
+
+Hard-won lessons from the Velite migration (Phase 0). Read these before
+touching `velite.config.ts`, the generated `.velite/` content layer, the
+project tsconfig, or anything that runs in CI.
+
+- Do not seal a value with `as const` if it is going to be passed as a
+  function argument to an external SDK. SDK parameter types are almost
+  always mutable (`Array<T>`, plain object), and the `readonly` form
+  produced by `as const` fails to assign with TS2322. Velite's
+  `MarkdownOptions.rehypePlugins` is the canonical example in this repo.
+- For tools that emit a `.d.ts` next to their generated runtime (Velite,
+  contentlayer, tRPC, zod-to-* and friends), add the source files those
+  declarations re-import to tsconfig's `exclude`, not just remove them
+  from `include`. Generated `import type` statements pull excluded
+  sources back in transitively and re-surface the error you tried to
+  suppress.
+- If a tsconfig-included script depends on a build artifact (e.g.
+  `scripts/verify-velite.ts` importing `.velite/index.js`), the CI
+  pipeline must run the generator before tsc. Local runs hide this
+  failure because the previous build's artifact is still on disk —
+  reproduce the CI environment with `rm -rf <output-dir> && pnpm test`
+  before pushing.
+- When a young OSS dependency's documented behavior is unclear, grep
+  `node_modules/<lib>/dist/` directly instead of arguing from README
+  excerpts. Velite's `s.path()` defaulting to `removeIndex: true` only
+  became unambiguous after reading the dist source; one upstream-doc
+  disagreement during review cost extra round-trips.
