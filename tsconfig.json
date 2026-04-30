@@ -34,7 +34,6 @@
     "styles/**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "velite.config.ts",
     "scripts/**/*.ts"
   ],
   "exclude": [
@@ -42,6 +41,7 @@
     "public",
     ".cache",
     ".velite",
+    "velite.config.ts",
     "**/*.old/**/*",
     "**/*.bak/**/*"
   ]

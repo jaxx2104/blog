@@ -21,5 +21,7 @@ export default defineConfig({
     clean: true,
   },
   collections: { posts },
+  // @ts-expect-error — MarkdownOptions Pluggable[] vs rehype-pretty-code tuple
+  // Velite's own build validates this correctly; project tsconfig excludes this file.
   markdown: markdownConfig,
 })
