@@ -13,7 +13,7 @@
       "styles/**",
       "types/**",
       "**/*.json",
-      "scripts/**",
+      "scripts/**/*.ts",
       "velite.config.ts"
     ]
   },

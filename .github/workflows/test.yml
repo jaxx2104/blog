@@ -22,9 +22,10 @@ jobs:
           node-version-file: ./.node-version
           cache: "pnpm"
       - run: pnpm install
-      - run: pnpm test
+      # Build velite before tsc so .velite/index.d.ts exists when scripts/verify-velite.ts is type-checked.
       - name: Build content layer (velite)
         run: pnpm velite:build
+      - run: pnpm test
       # NOTE: temporary cross-check during stack modernization Phase 0.
       # Remove together with lib/posts.ts legacy reader in Phase 4.
       - name: Verify velite output matches legacy
