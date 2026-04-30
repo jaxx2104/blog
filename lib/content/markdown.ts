@@ -14,4 +14,4 @@ export const markdownConfig = {
     ],
     rehypeLinkCard,
   ],
-} as const
+}
