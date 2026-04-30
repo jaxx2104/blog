@@ -225,7 +225,7 @@ export const posts = defineCollection({
 
 ## 9. 移行ステップ
 
-### Phase 0: 検証（1〜2 日）
+### Phase 0: 検証（1〜2 日）（完了: 2026-05-01）
 - `velite.config.ts` を作り、`content/posts/**/index.md` を全件パース
 - shiki + rehype-pretty-code をパイプラインに移植
 - 画像コピー asset handler を実装
@@ -314,14 +314,21 @@ export const posts = defineCollection({
 | ダークモード初期表示のちらつき | UX 劣化 | `<head>` でインライン script を実行し、`localforage` 同期前に system preference を `data-theme` に反映 |
 | OGP 自動生成パイプラインの欠落 | 記事 OGP 画像が出ない | Phase 2 で現行の生成方式を再確認、cover 画像フォールバックを実装 |
 
-## 12. 未決事項（Phase 0 で確定する項目）
+## 12. Phase 0 検証結果と未決事項
 
-1. 既存 slug が階層を含むか
-   - 検証結果（2026-05-01 時点）: with-path=109, without-path=0, slash-counts={1:109}, mismatches=4
-   - 結論: ルートには `$slug.tsx` を採用し、loader 内で frontmatter.path を見て該当記事を選ぶ／slug は日付プレフィックスを除いた tail を使う、を Phase 1 で確定する
-2. OGP 画像の生成パイプラインが現状どこに存在するか
-3. localforage を使うのが ThemeContext 以外にあるか（ある場合は維持対象を明示）
-4. `react-share` を使っているコンポーネントが styled-components に依存していないか、CSS Modules 化の対象範囲を確定
+### 解消済み
+
+1. **slug の階層構造**: 全 109 件が `/<single-segment>/` 形式（slash 数 1）。splat ルート `$.tsx` で問題なくカバー可能。ただし 4 件は slug と `frontmatter.path` が一致しない（歴史的リネーム）: `2017-08-04-listening-book → /readme-siri`、`2018-11-15-smarthome-ph2 → /smarthome-xiaomi`、`2019-05-07-googlehome-app-debut → /dialogflow-raspberrypi`、`2025-01-23-syntax-highlight-test → /2025-01-23-syntax-highlight-test`。Phase 1 のルーター設計では slug ではなく `permalink`（`frontmatter.path`）でルックアップする方針で確定。
+2. **Velite と既存 getAllPosts の整合**: Velite 107 件・Legacy 109 件。Legacy のみに存在する 2 件（`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`）は dead な画像参照に起因する既存の content gap であり、Velite 側の問題ではない。Velite が取れる 107 件はタイトル・slug が一致。
+3. **画像コピー先**: Velite の `output.assets` を `public/images/posts/`、`output.base` を `/images/posts/` にすることで既存 URL 形状（`/images/posts/<slug>/<file>`）と整合。`clean: true` 設定下でも `public/images/posts/` 配下の既存サブディレクトリは保持されることを確認済み。
+
+### 残課題（Phase 1 以降で解消）
+
+- **4 件の歴史的リネームスラッグ**（上記「解消済み 1」参照）: Phase 1 でルーター実装時に `permalink` フィールドを使って URL → 記事のルックアップを行う設計を確定させる。
+- **2 件の dead-image content gap**（`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`）: Phase 1 着手前に content 側で `![](missing.jpg)` を削除するか画像を補充する。
+- **OGP 画像の生成パイプライン**（`scripts/`）の確認は Phase 2 で実施。
+- **`react-share` の利用箇所と styled-components 依存の有無**は Phase 3 着手時に再確認。
+- **`velite.config.ts` の tsconfig exclude と `@ts-expect-error`** は Phase 4 で `lib/posts.ts` と一緒に再評価する。
 
 ### Phase 0 ノート
 
