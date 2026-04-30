@@ -22,4 +22,4 @@ jobs:
           node-version-file: ./.node-version
           cache: "pnpm"
       - run: pnpm install
-      - run: pnpm lint
+      - run: pnpm lint:ci
