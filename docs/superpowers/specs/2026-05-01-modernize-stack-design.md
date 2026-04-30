@@ -315,7 +315,9 @@ export const posts = defineCollection({
 
 ## 12. 未決事項（Phase 0 で確定する項目）
 
-1. 既存 slug が階層を含むか → splat ルート `$.tsx` が当面の前提。階層を含まないことが確認できれば `$slug.tsx`（dynamic）にしてもよい
+1. 既存 slug が階層を含むか
+   - 検証結果（2026-05-01 時点）: with-path=109, without-path=0, slash-counts={1:109}, mismatches=4
+   - 結論: ルートには `$slug.tsx` を採用し、loader 内で frontmatter.path を見て該当記事を選ぶ／slug は日付プレフィックスを除いた tail を使う、を Phase 1 で確定する
 2. OGP 画像の生成パイプラインが現状どこに存在するか
 3. localforage を使うのが ThemeContext 以外にあるか（ある場合は維持対象を明示）
 4. `react-share` を使っているコンポーネントが styled-components に依存していないか、CSS Modules 化の対象範囲を確定
