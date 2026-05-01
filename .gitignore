@@ -68,3 +68,8 @@ public/images/posts
 
 # Git worktrees (used by superpowers subagent workflow)
 .worktrees/
+
+# Vite / TanStack Start build artifacts
+.netlify/
+app/routeTree.gen.ts
+.tanstack/
