@@ -73,6 +73,12 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html lang="ja">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();",
+          }}
+        />
       </head>
       <body>
         <ThemeProvider>
