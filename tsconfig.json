@@ -35,7 +35,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "scripts/**/*.ts",
-    "vite.config.ts"
+    "vite.config.mts"
   ],
   "exclude": [
     "node_modules",
@@ -47,8 +47,6 @@
     ".netlify",
     "velite.config.ts",
     "app/routeTree.gen.ts",
-    "app/router.tsx",
-    "app/routes/index.tsx",
     "**/*.old/**/*",
     "**/*.bak/**/*"
   ]
