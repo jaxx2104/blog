@@ -17,7 +17,7 @@
  *   here and the verifier will treat it as an expected legacy-only entry.
  */
 
-import { getAllPosts } from "../lib/posts"
+import { getAllPosts } from "../lib/posts-legacy"
 
 // see header for KNOWN_LEGACY_ONLY usage
 const KNOWN_LEGACY_ONLY = new Set<string>([])
