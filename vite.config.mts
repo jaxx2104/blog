@@ -16,6 +16,13 @@ export default defineConfig({
           },
         },
       },
+      resolve: {
+        // styled-components has a CJS default export that does not
+        // round-trip cleanly through Vite/rolldown's ESM externalization
+        // in the SSR bundle (yields `styled.article is not a function`).
+        // Bundling it into the SSR output sidesteps the interop hole.
+        noExternal: ["styled-components"],
+      },
     },
   },
   plugins: [
