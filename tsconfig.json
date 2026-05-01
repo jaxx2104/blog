@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -34,14 +34,22 @@
     "styles/**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "vite.config.ts"
   ],
   "exclude": [
     "node_modules",
     "public",
     ".cache",
     ".velite",
+    ".tanstack",
+    "dist",
+    ".netlify",
     "velite.config.ts",
+    "vite.config.ts",
+    "app/routeTree.gen.ts",
+    "app/router.tsx",
+    "app/routes/index.tsx",
     "**/*.old/**/*",
     "**/*.bak/**/*"
   ]
