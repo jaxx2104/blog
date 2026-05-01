@@ -46,7 +46,6 @@
     "dist",
     ".netlify",
     "velite.config.ts",
-    "vite.config.ts",
     "app/routeTree.gen.ts",
     "app/router.tsx",
     "app/routes/index.tsx",
