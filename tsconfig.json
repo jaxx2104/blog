@@ -32,8 +32,6 @@
     "lib/**/*.tsx",
     "styles/**/*.ts",
     "styles/**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
     "scripts/**/*.ts",
     "vite.config.mts"
   ],
@@ -45,6 +43,7 @@
     ".tanstack",
     "dist",
     ".netlify",
+    ".next",
     "velite.config.ts",
     "app/routeTree.gen.ts",
     "**/*.old/**/*",
