@@ -1,0 +1,13 @@
+.display {
+  font-size: var(--display-size, var(--font-size-jumbo));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-size-large);
+  letter-spacing: -0.05rem;
+  color: var(--color-main);
+  padding: 0;
+  text-transform: none;
+}
+
+.display[data-uppercase] {
+  text-transform: uppercase;
+}

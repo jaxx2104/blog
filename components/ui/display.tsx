@@ -1,13 +1,24 @@
-import styled from "styled-components"
+import type React from "react"
+import styles from "./display.module.css"
 
-const Display = styled.h2<{ $size?: number; $uppercase?: boolean }>`
-  font-size: ${(props) => props.$size || props.theme.fontSizeJumbo}rem;
-  font-weight: ${(props) => props.theme.fontWeightBold};
-  line-height: ${(props) => `${props.theme.fontSizeLarge}rem`};
-  letter-spacing: -0.05rem;
-  color: ${(props) => props.theme.colorMain};
-  padding: 0;
-  text-transform: ${(props) => (props.$uppercase ? "uppercase" : "none")};
-`
+interface Props {
+  $size?: number
+  $uppercase?: boolean
+  children?: React.ReactNode
+}
+
+const Display: React.FC<Props> = ({ $size, $uppercase, children }) => (
+  <h2
+    className={styles.display}
+    data-uppercase={$uppercase ? "" : undefined}
+    style={
+      $size !== undefined
+        ? ({ "--display-size": `${$size}rem` } as React.CSSProperties)
+        : undefined
+    }
+  >
+    {children}
+  </h2>
+)
 
 export default Display
