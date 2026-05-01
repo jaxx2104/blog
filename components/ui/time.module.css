@@ -1,0 +1,8 @@
+.time {
+  color: var(--color-sub);
+  display: inline-block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight);
+  text-align: center;
+  vertical-align: baseline;
+}
