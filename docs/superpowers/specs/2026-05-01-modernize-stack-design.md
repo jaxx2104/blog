@@ -32,7 +32,7 @@
 | スタイリング | CSS Modules + CSS variables | ゼロランタイム、Vite ネイティブ。テーマは CSS variables |
 | コンテンツ層 | Velite | Zod スキーマで frontmatter を検証し、型付き JSON を生成 |
 | Markdown 処理 | shiki + rehype-pretty-code（Velite 経由） | コードハイライト |
-| ホスティング | Netlify（現状維持） | 静的書き出し成果物を配信 |
+| ホスティング | Cloudflare Pages（現状維持） | 静的書き出し成果物を配信。`build.sh` が `CF_PAGES_BRANCH` で main = `pnpm build` (Next.js → `out/`)、それ以外 = `pnpm build:vite` (TanStack Start → `dist/client/`) に分岐し、移行ブランチは `wrangler.toml` で出力ディレクトリを上書きする。当初 spec は誤って Netlify と記載していたが Phase 1 で実態に整流した |
 | 言語 | TypeScript 5.8 strict（target: ES2022 へ更新） | 既存維持＋ターゲット更新 |
 | ランタイム | React 19 | Phase 5 で 18 → 19 |
 | パッケージマネージャ | pnpm 9.x | 既存維持 |
@@ -73,8 +73,8 @@ content/posts/[slug]/index.md
 
 ### ビルドフロー
 1. `velite build` を実行 → `.velite/*.{js,d.ts}` を生成
-2. `vite build` を実行 → TanStack Start の prerender が全 slug について `dist/<slug>/index.html` を生成
-3. Netlify が `dist/` を配信
+2. `vite build` を実行 → TanStack Start の prerender が全 slug について `dist/client/<slug>/index.html` を生成（client / server を分離した出力）
+3. Cloudflare Pages が `dist/client/` を配信（`wrangler.toml` で `pages_build_output_dir` を上書き）
 
 ## 4. ディレクトリ構成（移行後）
 
@@ -86,8 +86,8 @@ content/posts/[slug]/index.md
 │   │   ├── index.tsx           # トップ（記事一覧）
 │   │   ├── profile.tsx         # /profile
 │   │   └── $.tsx               # 記事詳細（splat ルートで /<slug>/ にマッチ）
-│   ├── client.tsx              # ブラウザエントリ
-│   └── ssr.tsx                 # prerender エントリ
+│   ├── router.tsx              # createRouter() / getRouter() (TanStack Start runtime entry)
+│   └── routeTree.gen.ts        # tanstack/router-plugin が自動生成（gitignore + tsconfig exclude）
 ├── components/                 # 既存資産流用、styled → *.module.css に置換
 │   ├── features/article/
 │   ├── features/profile/
@@ -107,7 +107,10 @@ content/posts/[slug]/index.md
 ├── content/posts/[slug]/index.md   # 既存記事ソース
 ├── public/                     # Velite が記事画像をここへコピー
 ├── velite.config.ts            # Zod スキーマ + shiki 設定 + 画像 asset handler
-├── vite.config.ts              # TanStack Start プラグイン
+├── vite.config.mts             # TanStack Start プラグイン (.mts は ESM 必須のため)
+├── tsr.config.json             # TanStack Router の routesDirectory 指定
+├── wrangler.toml               # Cloudflare Pages の pages_build_output_dir 上書き
+├── build.sh                    # Cloudflare Pages の per-branch build エントリ
 ├── tsconfig.json               # target: ES2022, strict, paths
 ├── biome.json                  # 維持
 └── package.json
@@ -276,7 +279,7 @@ export const posts = defineCollection({
 ### Phase 5: 仕上げ（半日〜1 日）
 - React 18 → 19（TanStack Start の対応バージョンを前提に）
 - `tsc -p .` を CI で必須化
-- Netlify 本番切替、リダイレクト確認
+- Cloudflare Pages の `build.sh` 分岐を撤去し、main 単独で `pnpm build:vite` のみを呼ぶ形に整理
 - `package.json` の `description` を実態（"A static blog by jaxx2104"）に修正
 
 ## 10. テスト / 検証戦略
@@ -288,7 +291,7 @@ export const posts = defineCollection({
 
 ### ビルド検証
 - `vite build` で全ページが prerender される
-- `dist/` 配下の `index.html` 数が既存 `out/` の数と整合
+- `dist/client/` 配下の `index.html` 数が既存 `out/` の数と整合
 
 ### スモーク E2E（Playwright を 1 ファイル追加）
 - トップ：記事カードが N 件以上ある
@@ -298,11 +301,11 @@ export const posts = defineCollection({
 - CI で `pnpm exec playwright test --project=chromium` を実行
 
 ### ビジュアル差分（Phase 3 中の手動チェック）
-- 現行プロダクション URL と Netlify Preview を、同じ記事 3 本＋トップ＋プロフィールで目視比較
+- 現行プロダクション URL と Cloudflare Pages Deploy Preview を、同じ記事 3 本＋トップ＋プロフィールで目視比較
 
 ### 段階的マージ
 - 全フェーズを 1 本のブランチで実施。main は移行完了まで Next.js のまま維持
-- Phase 1〜2 完了時点で Netlify Preview をユーザーレビュー
+- Phase 1〜2 完了時点で Cloudflare Pages Deploy Preview をユーザーレビュー
 - Phase 3 完了時点で再度 Preview レビュー
 - Phase 5 通過後に main へマージ
 - **改訂（2026-05-01）**: Phase 0 は既存ランタイムに一切手を触れない純粋な追加であり、CI の継続的な健全性チェックを早期に得られる利点が大きいため、単独で main にマージする方針に変更した。Phase 1 以降は当初方針通り 1 本のブランチで進める可能性が高いが、各 Phase の完了時点で同様の判断（独立 merge できるか）を行う。
@@ -310,7 +313,7 @@ export const posts = defineCollection({
 
 ### ロールバック
 - 移行ブランチでの大変更のため、main を Next.js のままキープ
-- 問題発生時は Netlify 上で前回成功デプロイへロールバック
+- 問題発生時は Cloudflare Pages 上で前回成功デプロイへロールバック
 - URL 互換性が崩れた場合は `_redirects` を生成
 
 ## 11. 主要なリスクと対策

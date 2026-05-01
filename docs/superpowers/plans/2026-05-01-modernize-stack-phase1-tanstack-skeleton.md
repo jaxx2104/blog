@@ -10,6 +10,25 @@
 
 ---
 
+## Revisions（実装中に確定した方針差分）
+
+実装途中で plan の前提が崩れた箇所。spec 側は section 9 / section 2 / section 4 にすべて反映済み。本 plan の本文は **当初案のまま** 残しているので、実装内容の正解は spec を参照すること。
+
+| 当初 plan の前提 | 実装後の現実 | 確定理由 |
+|------|------|------|
+| `vite.config.ts` | `vite.config.mts` | `@tanstack/react-start/plugin/vite` が ESM-only。Vite 8 / rolldown は `.ts` を CJS 解釈するため `.mts` 必須 |
+| `tanstackStart({ tsr: {...} })` 引数で routes 指定 | `tsr.config.json` だけで指定 | インストール版の plugin 型定義に `tsr` キーが無く TS2353。`tsr.config.json` を保険として併用していたのでそちらに一本化 |
+| `app/router.tsx` は `createRouter` のみ export | `createRouter` + `getRouter` を export | `@tanstack/start-client-core` が `getRouter` を `#tanstack-router-entry` 経由で import するため必須 |
+| `vite.config.mts` に `srcDirectory: "app"` 不要 | 必須 | TanStack Start plugin の既定が `src/` で、本リポジトリは `app/` 配置のため明示が必要 |
+| `vite.config.mts` の `environments.ssr` は素 | `entryFileNames: "[name].js"` を強制 | rolldown の SSR 出力が `.mjs` になるが TanStack Start の preview/prerender server が hardcoded で `.js` 拡張子で import するため |
+| `dist/index.html` を deploy / smoke 対象 | `dist/client/index.html` | TanStack Start は `dist/client/` (HTML + assets) と `dist/server/` (SSR bundle) に分離出力する |
+| ホスティングは Netlify、`netlify.toml` で Preview 切替 | Cloudflare Pages、`build.sh` (CF_PAGES_BRANCH 分岐) + `wrangler.toml` (`pages_build_output_dir`) | リポジトリ実態が Cloudflare Pages だった。`netlify.toml` は当初追加したが Phase 1 終盤に削除 |
+| Phase 1 内で main を一切触らない | `build.sh` のみ main に 1 commit 直 push | Cloudflare dashboard が main / preview ともに `bash build.sh` を呼ぶようになるため、main 側にも script 本体が必要 |
+| `package.json` に `vite ^7` を追加 | `vite ^8` | `@vitejs/plugin-react@^6` と `@tanstack/start-plugin-core` の peer 要求 |
+| CI smoke check は `grep` | `grep -F`（fgrep） | prerender HTML に UTF-8 em-dash が含まれ、デフォルト locale の grep が literal match に失敗する |
+
+---
+
 ## File Structure
 
 ### Create

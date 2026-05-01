@@ -9,6 +9,8 @@ export function createRouter() {
   })
 }
 
+// Required by routeTree.gen.ts — TanStack Start's runtime imports
+// getRouter from #tanstack-router-entry for SSR/prerender bootstrap.
 export async function getRouter() {
   return createRouter()
 }
