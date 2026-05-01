@@ -7,10 +7,11 @@ import {
 } from "@tanstack/react-router"
 import type { ReactNode } from "react"
 import "modern-normalize/modern-normalize.css"
+import "@/styles/tokens.css"
+import "@/styles/global.css"
 import "font-awesome/css/font-awesome.css"
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site"
 import { ThemeProvider } from "@/lib/ThemeContext"
-import GlobalStyles from "@/styles/global-style"
 
 export const Route = createRootRoute({
   head: () => ({
@@ -81,10 +82,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         />
       </head>
       <body>
-        <ThemeProvider>
-          <GlobalStyles />
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
         <Scripts />
       </body>
     </html>
