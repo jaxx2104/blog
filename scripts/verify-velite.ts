@@ -9,25 +9,17 @@
  *   directory name, e.g. "2013-08-06-php-replace-lf". We normalize by taking
  *   the last segment of the Velite slug for comparison.
  *
- * KNOWN_LEGACY_ONLY exception:
- *   Two posts exist only in the legacy output because they contain dead image
- *   references that cause Velite's body processing to fail. These are
- *   pre-existing content gaps and are NOT introduced by this migration.
- *   They are tracked here as first-class exceptions so the Phase 0 Gate can
- *   pass with full transparency.
- *
- *   TODO (Phase 1 follow-up / Task 9): Fix the dead image references in the
- *   two posts below so they pass Velite validation and can be removed from
- *   this allowlist.
+ * KNOWN_LEGACY_ONLY:
+ *   Currently empty. The two historical content gaps
+ *   (2013-09-05-iphoto-photobook, 2024-06-10-jaxx-keycaps) were resolved in
+ *   Phase 1 Task 1. The set is kept as a future-proofing hook: if Velite
+ *   ever rejects another post we want to track explicitly, list its slug
+ *   here and the verifier will treat it as an expected legacy-only entry.
  */
 
 import { getAllPosts } from "../lib/posts"
 
-// Posts that exist in the legacy output but are rejected by Velite due to
-// dead image references. When Phase 1 fixes the content gap, this set must
-// shrink. The verifier fails if a slug here unexpectedly succeeds in Velite
-// — that's the cleanup signal.
-// Both known content gaps were fixed in Phase 1 Task 1 (dead image refs removed).
+// see header for KNOWN_LEGACY_ONLY usage
 const KNOWN_LEGACY_ONLY = new Set<string>([])
 
 type VelitePost = {
