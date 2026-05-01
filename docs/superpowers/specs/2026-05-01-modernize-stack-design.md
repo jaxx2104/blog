@@ -130,6 +130,12 @@ content/posts/[slug]/index.md
 | `/profile/` | `app/routes/profile.tsx` | プロフィール |
 | `/<slug>/` | `app/routes/$.tsx` | 記事詳細。splat で `/<slug>/` 形式（階層含む可能性あり）にマッチ |
 
+### Permalink ルックアップ（Phase 1 で確定）
+
+`app/routes/$.tsx` の loader は、リクエスト URL を Velite 出力 `posts[].permalink` と完全一致で照合して該当記事を返す。`permalink` は `lib/content/schema.ts` の `transform` で `data.path ?? "/" + data.slug.split("/").pop() + "/"` として算出済み。
+
+歴史的リネームの 4 件（`2017-08-04-listening-book → /readme-siri/`、`2018-11-15-smarthome-ph2 → /smarthome-xiaomi/`、`2019-05-07-googlehome-app-debut → /dialogflow-raspberrypi/`、`2025-01-23-syntax-highlight-test → /2025-01-23-syntax-highlight-test/`）も `permalink` を介してそのまま照合できる。slug ベースのルックアップは行わない。
+
 ### prerender 戦略
 - `vite.config.ts` の TanStack Start プラグイン設定で、`prerender.crawlLinks: true` ＋静的に既知のエントリ（全 slug）を渡す
 - Velite の出力からビルド時に slug 一覧を取得し、prerender に注入する
@@ -234,11 +240,14 @@ export const posts = defineCollection({
 - **Gate**: 既存 `getAllPosts()` の出力と要素数・主要フィールドが一致
 - **Gate 完了**: 2026-05-01 時点で Velite 107 件と Legacy 109 件のうち、Velite で取れる 107 件は title・slug が一致。Legacy のみに存在する 2 件 (`2013-09-05-iphoto-photobook`, `2024-06-10-jaxx-keycaps`) は dead な画像参照に起因する既存の content gap で、Phase 1 着手前に content 側で別途対応する。
 
-### Phase 1: TanStack Start ひな型（1 日）
-- `vite.config.ts`, `app/routes/__root.tsx`, `app/routes/index.tsx` を最小構成
-- `prerender` 設定、Netlify Preview デプロイ動作確認（中身は仮）
-- `tsconfig.json` を `target: ES2022` 化、`ignoreBuildErrors` 相当を撤廃
-- **Gate**: 空ページが Netlify Preview で表示
+### Phase 1: TanStack Start ひな型（1 日）（完了: 2026-05-01）
+- `vite.config.mts`, `app/routes/__root.tsx`, `app/routes/index.tsx`, `app/router.tsx` を最小構成（vite.config は ESM のため `.mts`）
+- `prerender` を有効化、Cloudflare Pages Deploy Preview で空ページを表示
+- `tsconfig.json` を `target: ES2022` 化、`next.config.mjs` の `typescript.ignoreBuildErrors` / `eslint.ignoreDuringBuilds` を撤廃
+- `pnpm dev:vite` / `pnpm build:vite` / `pnpm preview:vite` を Next.js scripts と並立で追加
+- 本ブランチの `wrangler.toml` で `pages_build_output_dir = ./dist/client/` を指定し、`build.sh` が `CF_PAGES_BRANCH` で main = `pnpm build`、それ以外 = `pnpm build:vite` に分岐。main の本番ビルドは Next.js のまま維持
+- spec section 2 の「ホスティング」記述は誤り（Netlify ではなく Cloudflare Pages）。Phase 1 で Cloudflare Pages 前提に整流（dashboard build command を `bash build.sh` に変更）
+- **Gate 完了**: PR #683 の Cloudflare Pages Deploy Preview に Phase 1 stub のページが表示
 
 ### Phase 2: ルートとデータ層の移植（2〜3 日）
 - `$.tsx` の loader で Velite 出力を import → 記事描画
@@ -297,6 +306,7 @@ export const posts = defineCollection({
 - Phase 3 完了時点で再度 Preview レビュー
 - Phase 5 通過後に main へマージ
 - **改訂（2026-05-01）**: Phase 0 は既存ランタイムに一切手を触れない純粋な追加であり、CI の継続的な健全性チェックを早期に得られる利点が大きいため、単独で main にマージする方針に変更した。Phase 1 以降は当初方針通り 1 本のブランチで進める可能性が高いが、各 Phase の完了時点で同様の判断（独立 merge できるか）を行う。
+- **Phase 1 完了時点の判断（2026-05-01）**: 本フェーズは Next.js を残したまま TanStack Start ひな型を追加するのみで、Cloudflare Pages Preview のみ Vite 成果物に切替えている。main の本番ビルドには影響しないが、Phase 2 で記事描画を loader に移すまで Vite 成果物には実コンテンツが無いため、**Phase 1 単独では main にマージしない**。Phase 2 と束ねて Preview レビューを受けたうえで判断する。なお Phase 1 完了時点で `build.sh` のみ main に直接 push 済み（Cloudflare Pages dashboard が `bash build.sh` を呼ぶための無害な土台で、main の挙動は実質変わらない）。
 
 ### ロールバック
 - 移行ブランチでの大変更のため、main を Next.js のままキープ
@@ -320,13 +330,13 @@ export const posts = defineCollection({
 ### 解消済み
 
 1. **slug の階層構造**: 全 109 件が `/<single-segment>/` 形式（slash 数 1）。splat ルート `$.tsx` で問題なくカバー可能。ただし 4 件は slug と `frontmatter.path` が一致しない（歴史的リネーム）: `2017-08-04-listening-book → /readme-siri`、`2018-11-15-smarthome-ph2 → /smarthome-xiaomi`、`2019-05-07-googlehome-app-debut → /dialogflow-raspberrypi`、`2025-01-23-syntax-highlight-test → /2025-01-23-syntax-highlight-test`。Phase 1 のルーター設計では slug ではなく `permalink`（`frontmatter.path`）でルックアップする方針で確定。
-2. **Velite と既存 getAllPosts の整合**: Velite 107 件・Legacy 109 件。Legacy のみに存在する 2 件（`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`）は dead な画像参照に起因する既存の content gap であり、Velite 側の問題ではない。Velite が取れる 107 件はタイトル・slug が一致。
+2. **Velite と既存 getAllPosts の整合**: Phase 1 Task 1 で 2 件の dead-image content gap を解消した結果、Velite と Legacy がともに 109 件で一致（`pnpm verify:velite` の `OK: counts and titles match`）。
 3. **画像コピー先**: Velite の `output.assets` を `public/images/posts/`、`output.base` を `/images/posts/` にすることで既存 URL 形状（`/images/posts/<slug>/<file>`）と整合。`clean: true` 設定下でも `public/images/posts/` 配下の既存サブディレクトリは保持されることを確認済み。
+4. **歴史的リネームスラッグ 4 件**: section 5「Permalink ルックアップ」を参照。`permalink` を一次キーとして loader でルックアップする方針を Phase 1 で確定。実装は Phase 2 で `app/routes/$.tsx` に。
+5. **2 件の dead-image content gap** (`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`): Phase 1 Task 1 で content 側の dead 参照を削除済み。Velite 出力 109 件に揃った。
 
-### 残課題（Phase 1 以降で解消）
+### 残課題（Phase 2 以降で解消）
 
-- **4 件の歴史的リネームスラッグ**（上記「解消済み 1」参照）: Phase 1 でルーター実装時に `permalink` フィールドを使って URL → 記事のルックアップを行う設計を確定させる。
-- **2 件の dead-image content gap**（`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`）: Phase 1 着手前に content 側で `![](missing.jpg)` を削除するか画像を補充する。
 - **OGP 画像の生成パイプライン**（`scripts/`）の確認は Phase 2 で実施。
 - **`react-share` の利用箇所と styled-components 依存の有無**は Phase 3 着手時に再確認。
 - **`velite.config.ts` の tsconfig exclude と `@ts-expect-error`** は Phase 4 で `lib/posts.ts` と一緒に再評価する。
