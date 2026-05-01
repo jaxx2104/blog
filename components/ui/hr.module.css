@@ -1,0 +1,6 @@
+.hr {
+  max-width: 5rem;
+  margin: 2rem auto;
+  border: 0;
+  border-top: 3px solid var(--color-border);
+}
