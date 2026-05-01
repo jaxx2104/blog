@@ -6,7 +6,7 @@
 
 **Architecture:** Phase 0 で導入した `velite` 出力にはこのフェーズでは触れない。`@tanstack/react-start` の Vite プラグインを `vite.config.ts` に登録し、`@tanstack/router-plugin` で `app/routes` をスキャンして `app/routeTree.gen.ts` を生成する。Next.js は `app/layout.tsx` / `app/page.tsx` / `app/[...slug]/page.tsx` のみを認識し、`app/routes/*.tsx` は無視する（命名規約が一致しないため）。ビルド成果物は Next.js の `out/` と Vite の `dist/` を並立させ、Netlify Preview のみブランチ commit の `netlify.toml` で `dist/` に切り替える。Phase 5 の merge 完了まで main の本番ビルドは Next.js のまま維持。
 
-**Tech Stack:** vite ^7、@tanstack/react-start（最新 stable）、@tanstack/react-router（router-plugin 同梱）、@vitejs/plugin-react、TypeScript 5.8（target ES2022 へ更新）、React 18.3.1（19 化は Phase 5）
+**Tech Stack:** vite ^8（`@vitejs/plugin-react@^6` と `@tanstack/start-plugin-core@^1.169` の peer 要求により Vite 8 必須。Rolldown bundler が RC-stage で同梱される点を許容）、@tanstack/react-start（最新 stable）、@tanstack/react-router（router-plugin 同梱）、@vitejs/plugin-react、TypeScript 5.8（target ES2022 へ更新）、React 18.3.1（19 化は Phase 5）
 
 ---
 
