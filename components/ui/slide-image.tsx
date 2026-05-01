@@ -1,5 +1,5 @@
 import type React from "react"
-import styled from "styled-components"
+import styles from "./slide-image.module.css"
 
 interface Props {
   src: string
@@ -8,79 +8,18 @@ interface Props {
   animation: "fadeIn" | "slideUp" | "slideDown"
 }
 
-const SlideImage: React.FC<Props> = ({ src, alt, title, animation }) => {
-  return (
-    <ImageWrapper $animation={animation}>
-      <StyledImage
-        src={src}
-        alt={alt}
-        width={200}
-        height={200}
-        loading="lazy"
-        style={{
-          width: "200px",
-          height: "auto",
-        }}
-      />
-      <Capture>{title}</Capture>
-    </ImageWrapper>
-  )
-}
+const SlideImage: React.FC<Props> = ({ src, alt, title, animation }) => (
+  <div className={styles.wrapper} data-animation={animation}>
+    <img
+      className={styles.image}
+      src={src}
+      alt={alt}
+      width={200}
+      height={200}
+      loading="lazy"
+    />
+    <p className={styles.capture}>{title}</p>
+  </div>
+)
 
 export default SlideImage
-
-const ImageWrapper = styled.div<{ $animation?: string }>`
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.02);
-  }
-
-  animation: ${(props) => props.$animation} 0.6s ease-in-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideDown {
-    from {
-      transform: translateY(-20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-`
-
-const StyledImage = styled.img`
-  display: block;
-  object-fit: cover;
-`
-
-const Capture = styled.p`
-  font-size: ${(props) => `${props.theme.fontSizeLargeSmall}rem`};
-  font-weight: ${(props) => props.theme.fontWeightBold};
-  font-family: "Courier New", Courier, monospace;
-  text-align: center;
-`
