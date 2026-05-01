@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import ArticleInfo from "@/components/features/article/article-info"
 import Container from "@/components/ui/container"

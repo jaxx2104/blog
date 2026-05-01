@@ -65,9 +65,9 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "vite dev",
+    "build": "pnpm velite:build && vite build",
+    "start": "vite preview --port 4173",
     "deploy": "pnpm build",
     "velite": "velite",
     "velite:build": "velite build",
@@ -82,7 +82,9 @@
     "test": "tsc -p ./tsconfig.json",
     "dev:vite": "vite dev",
     "build:vite": "pnpm velite:build && vite build",
-    "preview:vite": "vite preview --port 4173"
+    "preview:vite": "vite preview --port 4173",
+    "dev:next": "next dev",
+    "build:next": "next build"
   },
   "packageManager": "pnpm@9.15.9"
 }

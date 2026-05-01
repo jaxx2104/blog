@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import styled from "styled-components"
 import Badges from "@/components/ui/badge"

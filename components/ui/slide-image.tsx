@@ -1,6 +1,3 @@
-"use client"
-
-import Image from "next/image"
 import type React from "react"
 import styled from "styled-components"
 
@@ -19,6 +16,7 @@ const SlideImage: React.FC<Props> = ({ src, alt, title, animation }) => {
         alt={alt}
         width={200}
         height={200}
+        loading="lazy"
         style={{
           width: "200px",
           height: "auto",
@@ -75,7 +73,7 @@ const ImageWrapper = styled.div<{ $animation?: string }>`
   }
 `
 
-const StyledImage = styled(Image)`
+const StyledImage = styled.img`
   display: block;
   object-fit: cover;
 `

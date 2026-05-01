@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import styled from "styled-components"
 import NaviLogo from "@/components/layout/navi-logo"

@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import Footer from "@/components/layout/footer"
 import Navi from "@/components/layout/navi"

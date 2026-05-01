@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 import { ThemeProvider as StyledThemeProvider } from "styled-components"

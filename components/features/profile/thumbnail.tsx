@@ -1,6 +1,3 @@
-"use client"
-
-import Image from "next/image"
 import type React from "react"
 import styled from "styled-components"
 
@@ -14,12 +11,13 @@ interface Props {
 const Thumbnail: React.FC<Props> = ({ circle, size, src, title }: Props) => {
   return (
     <StyledThumbnail $circle={circle} $size={size}>
-      <Image
+      <img
         src={src}
         alt={title}
         title={title}
         width={size}
         height={size}
+        loading="lazy"
         style={{
           width: "100%",
           height: "100%",

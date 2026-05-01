@@ -1,23 +1,13 @@
 #!/bin/bash
 # Cloudflare Pages build entry.
 #
-# main: legacy Next.js build (out/) — used until the stack-modernization
-#   migration completes (Phase 5 of docs/superpowers/specs/2026-05-01-modernize-stack-design.md).
-# all other branches: TanStack Start prerender build (dist/client/) so the
-#   migration branches see real Deploy Preview output without disturbing
-#   production.
-#
-# CF_PAGES_BRANCH is provided by Cloudflare Pages. We default to "main" if
-# unset (e.g. local invocation) so the safe path runs.
-
+# After Phase 2 of the stack modernization, `pnpm build` is the
+# TanStack Start prerender (dist/client/). On main (which still ships
+# Next.js until the migration merges), `pnpm build` resolves to
+# `next build` from main's package.json — same script name, branch-
+# specific behavior. We keep this thin wrapper so Cloudflare's dashboard
+# build command does not need to change between branches.
 set -euo pipefail
-
 branch="${CF_PAGES_BRANCH:-main}"
-
-if [ "$branch" = "main" ]; then
-  echo "build.sh: branch=$branch -> pnpm build (Next.js)"
-  pnpm build
-else
-  echo "build.sh: branch=$branch -> pnpm build:vite (TanStack Start)"
-  pnpm build:vite
-fi
+echo "build.sh: branch=$branch -> pnpm build"
+pnpm build

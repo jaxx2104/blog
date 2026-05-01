@@ -20,6 +20,10 @@ function deriveThumbnail(body: string): string | undefined {
   return match?.[1]
 }
 
+function normalizePermalink(p: string): string {
+  return p.endsWith("/") ? p : `${p}/`
+}
+
 function toMeta(post: Post): PostMeta {
   return {
     title: post.title,
@@ -28,7 +32,7 @@ function toMeta(post: Post): PostMeta {
     category: post.category,
     tags: post.tags,
     excerpt: post.excerpt,
-    permalink: post.permalink,
+    permalink: normalizePermalink(post.permalink),
     slug: post.slug,
     thumbnail: deriveThumbnail(post.body),
   }
