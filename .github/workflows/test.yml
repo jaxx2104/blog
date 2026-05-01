@@ -33,11 +33,18 @@ jobs:
       # Remove together with lib/posts.ts legacy reader in Phase 4.
       - name: Verify velite output matches legacy
         run: pnpm verify:velite
-      # NOTE: 'Phase 1 stub' check is temporary. Remove together with the
-      # placeholder copy in app/routes/index.tsx when Phase 2 lands.
-      # Use grep -F because the prerendered HTML contains a UTF-8 em-dash
-      # that breaks default grep regex parsing.
-      - name: Verify dist artifacts (phase 1 stub)
+      # Phase 2 smoke: prerender must emit home + profile + every velite
+      # post (>= 111). Spot-check OGP meta on a known post — both an
+      # original-slug post (php-replace-lf) and a renamed-slug post
+      # (readme-siri, formerly 2017-08-04-listening-book).
+      - name: Verify dist artifacts (phase 2 routes + OGP)
         run: |
           test -f dist/client/index.html
-          grep -F -q 'Phase 1 stub' dist/client/index.html
+          test -f dist/client/profile/index.html
+          test -f dist/client/php-replace-lf/index.html
+          test -f dist/client/readme-siri/index.html
+          count=$(find dist/client -name index.html | wc -l)
+          test "$count" -ge 111 || { echo "expected >=111 index.html, got $count" && exit 1; }
+          grep -a -F -q 'og:image' dist/client/php-replace-lf/index.html
+          grep -a -F -q 'og:type' dist/client/php-replace-lf/index.html
+          grep -a -F -q 'rel="canonical"' dist/client/php-replace-lf/index.html
