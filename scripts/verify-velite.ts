@@ -27,10 +27,8 @@ import { getAllPosts } from "../lib/posts"
 // dead image references. When Phase 1 fixes the content gap, this set must
 // shrink. The verifier fails if a slug here unexpectedly succeeds in Velite
 // — that's the cleanup signal.
-const KNOWN_LEGACY_ONLY = new Set([
-  "2013-09-05-iphoto-photobook",
-  "2024-06-10-jaxx-keycaps",
-])
+// Both known content gaps were fixed in Phase 1 Task 1 (dead image refs removed).
+const KNOWN_LEGACY_ONLY = new Set<string>([])
 
 type VelitePost = {
   slug: string
@@ -135,9 +133,7 @@ async function main() {
     process.exit(1)
   }
 
-  console.log(
-    `OK: titles match on ${velitePosts.length} velite posts; ${KNOWN_LEGACY_ONLY.size} legacy-only slugs are the known content gaps`,
-  )
+  console.log(`OK: counts and titles match (${velitePosts.length} posts)`)
 }
 
 main().catch((err) => {
