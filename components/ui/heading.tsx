@@ -1,16 +1,8 @@
-import styled from "styled-components"
+import type React from "react"
+import styles from "./heading.module.css"
 
-const Heading = styled.h1`
-  color: ${(props) => props.theme.colorMain};
-  font-size: 1.5rem;
-  font-weight: ${(props) => props.theme.fontWeightBold};
-  letter-spacing: -0.025rem;
-  line-height: 1.2;
-  margin: 0;
+const Heading: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
+  <h1 className={styles.heading}>{children}</h1>
+)
 
-  &:hover {
-    transition: color 0.2s ease-out;
-    color: ${(props) => props.theme.colorSub};
-  }
-`
 export default Heading
