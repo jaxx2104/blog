@@ -1,8 +1,8 @@
 "use client"
 
-import Link from "next/link"
 import type React from "react"
 import styled from "styled-components"
+import Link from "@/lib/router-link"
 
 interface Props {
   path: string

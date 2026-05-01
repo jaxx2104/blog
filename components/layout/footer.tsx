@@ -1,10 +1,10 @@
 "use client"
 
-import Link from "next/link"
 import type React from "react"
 import styled from "styled-components"
 import Container from "@/components/ui/container"
 import Hr from "@/components/ui/hr"
+import Link from "@/lib/router-link"
 
 const Footer: React.FC = () => {
   return (

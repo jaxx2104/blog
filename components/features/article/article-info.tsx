@@ -1,12 +1,11 @@
 "use client"
 
-import Link from "next/link"
 import type React from "react"
 import styled from "styled-components"
-
 import Badges from "@/components/ui/badge"
 import Heading from "@/components/ui/heading"
 import Time from "@/components/ui/time"
+import Link from "@/lib/router-link"
 
 interface Props {
   path: string
