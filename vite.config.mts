@@ -6,8 +6,21 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  environments: {
+    ssr: {
+      build: {
+        rollupOptions: {
+          output: {
+            entryFileNames: "[name].js",
+            chunkFileNames: "assets/[name]-[hash].js",
+          },
+        },
+      },
+    },
+  },
   plugins: [
     tanstackStart({
+      srcDirectory: "app",
       prerender: {
         enabled: true,
         crawlLinks: true,
