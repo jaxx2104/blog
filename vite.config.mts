@@ -32,6 +32,13 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  // Bundle all CSS modules into a single asset. With code-split CSS,
+  // SPA navigation between routes drops the previous route's stylesheet
+  // (incl. shared layout/* chunks), leaving the navi/footer unstyled
+  // until a hard reload. A single bundle avoids the per-route teardown.
+  build: {
+    cssCodeSplit: false,
+  },
   environments: {
     ssr: {
       build: {
@@ -41,13 +48,6 @@ export default defineConfig({
             chunkFileNames: "assets/[name]-[hash].js",
           },
         },
-      },
-      resolve: {
-        // styled-components has a CJS default export that does not
-        // round-trip cleanly through Vite/rolldown's ESM externalization
-        // in the SSR bundle (yields `styled.article is not a function`).
-        // Bundling it into the SSR output sidesteps the interop hole.
-        noExternal: ["styled-components"],
       },
     },
   },
