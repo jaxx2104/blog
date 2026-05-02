@@ -1,15 +1,33 @@
 import { type IconName, library } from "@fortawesome/fontawesome-svg-core"
 import {
-  faApple, faAws, faFacebook, faGithub, faHtml5,
-  faJs, faNode, faPhp, faReact, faTwitter, faVuejs,
+  faApple,
+  faAws,
+  faFacebook,
+  faGithub,
+  faHtml5,
+  faJs,
+  faNode,
+  faPhp,
+  faReact,
+  faTwitter,
+  faVuejs,
 } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import type React from "react"
 import styles from "./icon.module.css"
 
 library.add(
-  faAws, faApple, faPhp, faHtml5, faJs, faReact,
-  faVuejs, faTwitter, faFacebook, faGithub, faNode,
+  faAws,
+  faApple,
+  faPhp,
+  faHtml5,
+  faJs,
+  faReact,
+  faVuejs,
+  faTwitter,
+  faFacebook,
+  faGithub,
+  faNode,
 )
 
 interface Props {

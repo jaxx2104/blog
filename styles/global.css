@@ -4,7 +4,9 @@ body {
   color: var(--color-text);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
-  transition: color 0.2s ease-out, background 0.2s ease-out;
+  transition:
+    color 0.2s ease-out,
+    background 0.2s ease-out;
   line-height: var(--line-height);
 }
 
@@ -98,7 +100,9 @@ li {
   margin: 1.5rem 0;
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .content .link-card:hover {

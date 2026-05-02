@@ -1,6 +1,6 @@
 import type React from "react"
-import styles from "./icon-box.module.css"
 import Icon from "./icon"
+import styles from "./icon-box.module.css"
 
 interface Props {
   label: string

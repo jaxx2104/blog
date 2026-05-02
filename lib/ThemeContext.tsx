@@ -1,5 +1,11 @@
 import type React from "react"
-import { createContext, useCallback, useContext, useEffect, useState } from "react"
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
 
 type ThemeMode = "light" | "dark"
 
@@ -28,7 +34,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     const initial =
       (root.dataset.theme as ThemeMode | undefined) ??
       (localStorage.getItem("theme") as ThemeMode | null) ??
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light")
     setTheme(initial)
     root.dataset.theme = initial
   }, [])
