@@ -1,0 +1,19 @@
+.wrap {
+  display: flex;
+  margin: 2rem 0 1rem;
+  flex-direction: column;
+  justify-content: center;
+  word-break: break-word;
+}
+
+.headingLink {
+  text-decoration: none;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.meta {
+  margin: 0.5rem 0;
+  display: flex;
+  column-gap: 0.5rem;
+}
