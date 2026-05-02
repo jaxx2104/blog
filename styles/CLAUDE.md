@@ -1,52 +1,11 @@
 # Styles Directory
 
-グローバルスタイルとテーマ設定を管理するディレクトリ。
+グローバルスタイルとテーマトークンを管理するディレクトリ。
 
 ## Files
 
-### `theme.ts` - Theme Definition
-ダーク/ライトモードのテーマ定義。
+### `tokens.css` - Theme Tokens
+CSS custom properties (`--color-*` / `--font-size-*` / `--font-weight-*` / `--content-width` / `--line-height`) を `:root, [data-theme="light"]` と `[data-theme="dark"]` の 2 セットで定義する。コンポーネント側は `var(--color-main)` のように参照する。
 
-```typescript
-// テーマ構造
-{
-  colors: {
-    background: string
-    text: string
-    primary: string
-    // ...
-  },
-  // その他のテーマ値
-}
-```
-
-- `light` と `dark` の2つのテーマを定義
-- `lib/ThemeContext.tsx` から使用
-
-### `global-style.ts` - Global Styles
-styled-components の `createGlobalStyle` でグローバルスタイルを定義。
-
-- modern-normalize でブラウザスタイルをリセット
-- 基本的なタイポグラフィ設定
-- リンクスタイル
-- コードブロックのスタイル
-
-## Usage
-
-```typescript
-// Providers.tsx で適用
-import { GlobalStyle } from '@/styles/global-style'
-import { lightTheme, darkTheme } from '@/styles/theme'
-
-<ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-  <GlobalStyle />
-  {children}
-</ThemeProvider>
-```
-
-## Dark Mode
-
-1. `lib/useDarkMode.ts` でシステム設定を検出
-2. `lib/ThemeContext.tsx` で状態管理
-3. `styles/theme.ts` からテーマ値を取得
-4. styled-components の `ThemeProvider` でコンポーネントに提供
+### `global.css` - Global Styles
+`body` / `a` / `ul, ol, li` / 記事本文 (`.content` 配下の `h1-h6` / `p` / `blockquote` / `img` / `pre` / `code` / `.link-card*`) をスタイリングする。記事 HTML は Velite が生成した `dangerouslySetInnerHTML` 由来の DOM のため、Module ではなくグローバル CSS として当てる必要がある。

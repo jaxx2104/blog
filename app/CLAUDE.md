@@ -1,38 +1,34 @@
 # App Directory
 
-Next.js 15 App Router のページとレイアウトを管理するディレクトリ。
+TanStack Start (Vite) のエントリポイントとルート定義を管理するディレクトリ。
 
 ## Structure
 
 ```
 app/
-├── layout.tsx        # Root layout (フォント設定, Providers)
-├── page.tsx          # Homepage (ブログ記事一覧)
-├── [...slug]/
-│   └── page.tsx      # Dynamic route for blog posts (MDX rendering)
-└── profile/
-    └── page.tsx      # Profile page
+├── client.tsx              # ブラウザエントリ
+├── ssr.tsx                 # prerender エントリ
+├── router.tsx              # createRouter / getRouter（routeTree を組み立て）
+└── routes/
+    ├── __root.tsx          # ルートレイアウト（meta / fonts / theme bootstrap script / global css import）
+    ├── index.tsx           # トップ（記事一覧、loader で getAllPosts）
+    ├── profile.tsx         # /profile/
+    └── $.tsx               # 記事詳細（splat ルートで /<permalink>/ にマッチ）
 ```
 
 ## Key Patterns
 
 ### Static Site Generation
-- `output: 'export'` で静的サイトとしてビルド
-- `trailingSlash: true` で末尾スラッシュを付与
-- `generateStaticParams` で動的ルートを事前生成
+- TanStack Start の `prerender` 機能で全 permalink を静的書き出し
+- `vite.config.mts` の `tanstackStart()` プラグインに Velite 出力の permalink 配列を渡す（決定論的 prerender）
+- 出力先は `dist/client/`（`wrangler.toml` の `pages_build_output_dir` と整合）
 
-### Root Layout (`layout.tsx`)
-- Noto Sans JP フォントの設定
-- `Providers` コンポーネントでテーマとstyled-componentsレジストリをラップ
-- メタデータの設定
+### Root Layout (`routes/__root.tsx`)
+- `head()` API で site-wide meta（charSet / viewport / og:* / twitter:* / favicon / manifest / Google Fonts）を返す
+- inline bootstrap script で `<html data-theme>` を localStorage / prefers-color-scheme から先行設定（FOUC 防止）
+- `tokens.css` / `global.css` を side-effect import
 
-### Blog Post Route (`[...slug]/page.tsx`)
-- Catch-all route でネストされたパスに対応
-- `lib/posts.ts` からデータ取得
-- MDX を `@next/mdx` でレンダリング
-- rehype-pretty-code でシンタックスハイライト
-
-## Notes
-
-- 画像は `next/image` を使用するが、静的エクスポートのため `unoptimized: true`
-- ビルドエラーは一時的に `ignoreBuildErrors: true` で無視（マイグレーション中）
+### Splat Route (`routes/$.tsx`)
+- `params._splat` から permalink を組み立て、`getPostByPermalink()` で記事を引く
+- `head()` API で記事個別の OGP（title / description / og:image / canonical）を返す
+- 404 は `notFound()` + `notFoundComponent`

@@ -48,6 +48,8 @@ FontAwesome ベースのアイコンコンポーネント。
 
 ## Styling
 
-- **styled-components** を使用
-- テーマは `lib/ThemeContext.tsx` から取得
-- props で `theme` を受け取り、ダークモード対応
+- **CSS Modules** (`*.module.css`) で各コンポーネントのスタイルを管理
+- 色・余白・フォントは `styles/tokens.css` の CSS variables (`var(--color-*)` / `var(--font-size-*)` / `var(--font-weight-*)` / `var(--content-width)`) のみ参照
+- ダークモードは `<html data-theme="dark">` で切替（`lib/ThemeContext.tsx` の `useTheme()` で API 提供）
+- Boolean prop は `data-*` 属性 + CSS attribute selector で表現（例: `data-primary` / `data-center` / `data-variant`）
+- 数値で動的に変わる値（size 等）は CSS variable 経由で `style={{ "--icon-size": "..." }}` として渡す
