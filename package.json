@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "description": "Simple starter for Gatsby",
+  "description": "A static blog by jaxx2104",
   "version": "1.9.119",
   "author": "Futoshi Iwashita <jaxx2104@gmail.com>",
   "dependencies": {
@@ -42,7 +42,6 @@
   },
   "keywords": [
     "blog",
-    "nextjs",
     "typescript"
   ],
   "license": "MIT",
