@@ -69,6 +69,9 @@ public/images/posts
 # Git worktrees (used by superpowers subagent workflow)
 .worktrees/
 
+# Local Claude Code permission settings (per-machine, not project state)
+.claude/
+
 # Vite / TanStack Start build artifacts
 .netlify/
 app/routeTree.gen.ts
