@@ -278,18 +278,30 @@ export const posts = defineCollection({
 - CI smoke を「`data-styled` ランタイム DOM が prerender HTML に無い」「hashed CSS asset が `<link rel=stylesheet>` で参照されている」の 2 条件で拡張
 - **Gate 完了**: PR #683 の Cloudflare Pages Preview で home / profile / 既知記事を Phase 2 完了時と Chrome DevTools で比較し、styled-components ランタイム DOM ゼロ、CSS variables 経由のテーマ切替動作、視覚回帰なしを確認
 
-### Phase 4: 旧依存撤去（半日）
+### Phase 4: 旧依存撤去（半日）（完了: 2026-05-03）
 - `next`, `@next/mdx`, `react-helmet`, `react-lazyload`, `font-awesome`(4.x), `styled-components`, `@types/styled-components`, `@types/react-helmet` を削除
 - `next.config.mjs`, `next-env.d.ts` を削除
 - `image-utils.ts` 削除
 - `react-lazyload` 利用箇所を `loading="lazy"` に置換
 - **Gate**: `pnpm install` 後にビルド・型チェック・Biome すべて通る
+- **Gate 完了**: 2026-05-03 時点で
+  - `lib/posts-legacy.ts` / `scripts/verify-velite.ts` / `lib/image-utils.ts` / `next.config.mjs` / `next-env.d.ts` を削除
+  - `package.json` から `next`, `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `react-helmet`, `@types/react-helmet`, `react-lazyload`, `font-awesome`, `localforage`, `remark`, `remark-html`, `remark-parse`, `remark-rehype`, `unified`, `rehype-stringify` を撤去
+  - `package.json` の `verify:velite` / `dev:next` / `build:next` / `dev:vite` / `build:vite` / `preview:vite` scripts を削除
+  - `tsconfig.json` から dead `compilerOptions.plugins[].name = "next"` エントリを削除、`exclude` の `velite.config.ts` も外して config 自体を tsc に検証させる構成に
+  - `app/routes/__root.tsx` から font-awesome v4 CSS import を削除（v6 SVG レンダリングで完結）
+  - 3 component の `// biome-ignore lint/performance/noImgElement` 抑制コメントを削除（next package 撤去で Biome の Next-aware ルールが消えたため dead 化）
+  - CI（`.github/workflows/test.yml`）から `Verify velite output matches legacy` step を削除、`pnpm build:vite` → `pnpm build` に切替
+  - クリーンインストール (`rm -rf node_modules .velite dist && pnpm install`) 後、`pnpm build && pnpm test && pnpm lint:ci` がすべて exit 0
+  - `dist/client/` の prerender 件数 111 を維持
 
 ### Phase 5: 仕上げ（半日〜1 日）
 - React 18 → 19（TanStack Start の対応バージョンを前提に）
-- `tsc -p .` を CI で必須化
-- Cloudflare Pages の `build.sh` 分岐を撤去し、main 単独で `pnpm build:vite` のみを呼ぶ形に整理
+- `tsc -p .` を CI で必須化（既に Phase 4 時点で test job に組み込まれている）
+- Cloudflare Pages の `build.sh` 分岐を撤去し、main 単独で `pnpm build` のみを呼ぶ形に整理
 - `package.json` の `description` を実態（"A static blog by jaxx2104"）に修正
+- `package.json` の `keywords` から `"nextjs"` を削除（Phase 4 で `next` 撤去済みのため）
+- バンドルサイズ / 初回ロード時間の Phase 2 比計測
 
 ## 10. テスト / 検証戦略
 
@@ -360,7 +372,7 @@ export const posts = defineCollection({
 
 ### Phase 0 ノート
 
-- `velite.config.ts` は `tsconfig.json` の `exclude` に入れている。`scripts/verify-velite.ts` が dynamic に `.velite/index.js` を import すると、生成された `.velite/index.d.ts` が `velite.config.ts` を type-import で取り込み、project tsconfig に引きずり込まれるため。Phase 4 で legacy `lib/posts.ts` と一緒に再評価する。
+- `velite.config.ts` は元々 `tsconfig.json` の `exclude` に入れていた（`scripts/verify-velite.ts` が dynamic に `.velite/index.js` を import すると、生成された `.velite/index.d.ts` が `velite.config.ts` を type-import で取り込み、project tsconfig に引きずり込まれるため）。Phase 4 で exclude を解除し、velite.config.ts は tsc に検証されるようになった。`@ts-expect-error` directive 1 つは現状必要で、`pnpm test` が unused-suppression を検出する形で自浄機能を持つ。
 
 ## 13. 参考リンク
 
