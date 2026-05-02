@@ -1,9 +1,11 @@
-"use client"
-
 import type React from "react"
-import { createContext, useContext, useEffect, useState } from "react"
-import { ThemeProvider as StyledThemeProvider } from "styled-components"
-import { darkTheme, lightTheme } from "@/styles/theme"
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
 
 type ThemeMode = "light" | "dark"
 
@@ -28,28 +30,29 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   const [theme, setTheme] = useState<ThemeMode>("light")
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as ThemeMode
-    if (savedTheme) {
-      setTheme(savedTheme)
-    } else {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches
-      setTheme(prefersDark ? "dark" : "light")
-    }
+    const root = document.documentElement
+    const initial =
+      (root.dataset.theme as ThemeMode | undefined) ??
+      (localStorage.getItem("theme") as ThemeMode | null) ??
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light")
+    setTheme(initial)
+    root.dataset.theme = initial
   }, [])
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light"
-    setTheme(newTheme)
-    localStorage.setItem("theme", newTheme)
-  }
-
-  const currentTheme = theme === "light" ? lightTheme : darkTheme
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => {
+      const next: ThemeMode = prev === "light" ? "dark" : "light"
+      document.documentElement.dataset.theme = next
+      localStorage.setItem("theme", next)
+      return next
+    })
+  }, [])
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <StyledThemeProvider theme={currentTheme}>{children}</StyledThemeProvider>
+      {children}
     </ThemeContext.Provider>
   )
 }

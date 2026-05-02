@@ -1,12 +1,9 @@
-"use client"
-
-import Link from "next/link"
 import type React from "react"
-import styled from "styled-components"
-
 import Badges from "@/components/ui/badge"
 import Heading from "@/components/ui/heading"
 import Time from "@/components/ui/time"
+import Link from "@/lib/router-link"
+import styles from "./article-info.module.css"
 
 interface Props {
   path: string
@@ -22,28 +19,17 @@ const ArticleInfo: React.FC<Props> = ({
   created_at,
   categories,
   tags,
-}: Props) => (
-  <InfoWrap>
-    <Link
-      style={{ textDecoration: "none", display: "block", margin: "0.5rem 0" }}
-      href={path}
-    >
+}) => (
+  <div className={styles.wrap}>
+    <Link className={styles.headingLink} href={path}>
       <Heading>{title}</Heading>
     </Link>
-    <div style={{ margin: "0.5rem 0", display: "flex", columnGap: "0.5rem" }}>
+    <div className={styles.meta}>
       <Time created_at={created_at} />
       <Badges items={categories} primary />
       <Badges items={tags} />
     </div>
-  </InfoWrap>
+  </div>
 )
 
 export default ArticleInfo
-
-const InfoWrap = styled.div`
-  display: flex;
-  margin: 2rem 0 1rem;
-  flex-direction: column;
-  justify-content: center;
-  word-break: break-word;
-`

@@ -14,7 +14,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import type React from "react"
-import styled from "styled-components"
+import styles from "./icon.module.css"
 
 library.add(
   faAws,
@@ -35,17 +35,17 @@ interface Props {
   size?: number
 }
 
-const Icon: React.FC<Props> = ({ name, size }: Props) => (
-  <StyledIcon size={size}>
+const Icon: React.FC<Props> = ({ name, size }) => (
+  <i
+    className={styles.icon}
+    style={
+      size !== undefined
+        ? ({ "--icon-size": `${size}rem` } as React.CSSProperties)
+        : undefined
+    }
+  >
     <FontAwesomeIcon icon={["fab", name as IconName]} width="20px" />
-  </StyledIcon>
+  </i>
 )
 
 export default Icon
-
-const StyledIcon = styled.i<{ size?: number }>`
-  display: block;
-  font-size: ${(props) => props.size || 3}rem;
-  padding: 0.4rem;
-  text-align: center;
-`

@@ -1,8 +1,5 @@
-"use client"
-
-import Image from "next/image"
 import type React from "react"
-import styled from "styled-components"
+import styles from "./thumbnail.module.css"
 
 interface Props {
   circle?: boolean
@@ -11,31 +8,22 @@ interface Props {
   title: string
 }
 
-const Thumbnail: React.FC<Props> = ({ circle, size, src, title }: Props) => {
-  return (
-    <StyledThumbnail $circle={circle} $size={size}>
-      <Image
-        src={src}
-        alt={title}
-        title={title}
-        width={size}
-        height={size}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-        }}
-      />
-    </StyledThumbnail>
-  )
-}
+const Thumbnail: React.FC<Props> = ({ circle, size, src, title }) => (
+  <div
+    className={styles.thumbnail}
+    data-circle={circle ? "" : undefined}
+    style={{ width: `${size}px`, height: `${size}px` }}
+  >
+    {/* biome-ignore lint/performance/noImgElement: prerender static export uses native img by design */}
+    <img
+      src={src}
+      alt={title}
+      title={title}
+      width={size}
+      height={size}
+      loading="lazy"
+    />
+  </div>
+)
 
 export default Thumbnail
-
-const StyledThumbnail = styled.div<{ $circle?: boolean; $size: number }>`
-  position: relative;
-  width: ${(props) => props.$size || 120}px;
-  height: ${(props) => props.$size || 120}px;
-  border-radius: ${(props) => (props.$circle ? "50%" : "0")};
-  overflow: hidden;
-`

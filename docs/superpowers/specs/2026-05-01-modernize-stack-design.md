@@ -32,7 +32,7 @@
 | スタイリング | CSS Modules + CSS variables | ゼロランタイム、Vite ネイティブ。テーマは CSS variables |
 | コンテンツ層 | Velite | Zod スキーマで frontmatter を検証し、型付き JSON を生成 |
 | Markdown 処理 | shiki + rehype-pretty-code（Velite 経由） | コードハイライト |
-| ホスティング | Netlify（現状維持） | 静的書き出し成果物を配信 |
+| ホスティング | Cloudflare Pages（現状維持） | 静的書き出し成果物を配信。`build.sh` が `CF_PAGES_BRANCH` で main = `pnpm build` (Next.js → `out/`)、それ以外 = `pnpm build:vite` (TanStack Start → `dist/client/`) に分岐し、移行ブランチは `wrangler.toml` で出力ディレクトリを上書きする。当初 spec は誤って Netlify と記載していたが Phase 1 で実態に整流した |
 | 言語 | TypeScript 5.8 strict（target: ES2022 へ更新） | 既存維持＋ターゲット更新 |
 | ランタイム | React 19 | Phase 5 で 18 → 19 |
 | パッケージマネージャ | pnpm 9.x | 既存維持 |
@@ -73,8 +73,8 @@ content/posts/[slug]/index.md
 
 ### ビルドフロー
 1. `velite build` を実行 → `.velite/*.{js,d.ts}` を生成
-2. `vite build` を実行 → TanStack Start の prerender が全 slug について `dist/<slug>/index.html` を生成
-3. Netlify が `dist/` を配信
+2. `vite build` を実行 → TanStack Start の prerender が全 slug について `dist/client/<slug>/index.html` を生成（client / server を分離した出力）
+3. Cloudflare Pages が `dist/client/` を配信（`wrangler.toml` で `pages_build_output_dir` を上書き）
 
 ## 4. ディレクトリ構成（移行後）
 
@@ -86,8 +86,8 @@ content/posts/[slug]/index.md
 │   │   ├── index.tsx           # トップ（記事一覧）
 │   │   ├── profile.tsx         # /profile
 │   │   └── $.tsx               # 記事詳細（splat ルートで /<slug>/ にマッチ）
-│   ├── client.tsx              # ブラウザエントリ
-│   └── ssr.tsx                 # prerender エントリ
+│   ├── router.tsx              # createRouter() / getRouter() (TanStack Start runtime entry)
+│   └── routeTree.gen.ts        # tanstack/router-plugin が自動生成（gitignore + tsconfig exclude）
 ├── components/                 # 既存資産流用、styled → *.module.css に置換
 │   ├── features/article/
 │   ├── features/profile/
@@ -107,7 +107,10 @@ content/posts/[slug]/index.md
 ├── content/posts/[slug]/index.md   # 既存記事ソース
 ├── public/                     # Velite が記事画像をここへコピー
 ├── velite.config.ts            # Zod スキーマ + shiki 設定 + 画像 asset handler
-├── vite.config.ts              # TanStack Start プラグイン
+├── vite.config.mts             # TanStack Start プラグイン (.mts は ESM 必須のため)
+├── tsr.config.json             # TanStack Router の routesDirectory 指定
+├── wrangler.toml               # Cloudflare Pages の pages_build_output_dir 上書き
+├── build.sh                    # Cloudflare Pages の per-branch build エントリ
 ├── tsconfig.json               # target: ES2022, strict, paths
 ├── biome.json                  # 維持
 └── package.json
@@ -129,6 +132,12 @@ content/posts/[slug]/index.md
 | `/` | `app/routes/index.tsx` | 記事一覧 |
 | `/profile/` | `app/routes/profile.tsx` | プロフィール |
 | `/<slug>/` | `app/routes/$.tsx` | 記事詳細。splat で `/<slug>/` 形式（階層含む可能性あり）にマッチ |
+
+### Permalink ルックアップ（Phase 1 で確定）
+
+`app/routes/$.tsx` の loader は、リクエスト URL を Velite 出力 `posts[].permalink` と完全一致で照合して該当記事を返す。`permalink` は `lib/content/schema.ts` の `transform` で `data.path ?? "/" + data.slug.split("/").pop() + "/"` として算出済み。
+
+歴史的リネームの 4 件（`2017-08-04-listening-book → /readme-siri/`、`2018-11-15-smarthome-ph2 → /smarthome-xiaomi/`、`2019-05-07-googlehome-app-debut → /dialogflow-raspberrypi/`、`2025-01-23-syntax-highlight-test → /2025-01-23-syntax-highlight-test/`）も `permalink` を介してそのまま照合できる。slug ベースのルックアップは行わない。
 
 ### prerender 戦略
 - `vite.config.ts` の TanStack Start プラグイン設定で、`prerender.crawlLinks: true` ＋静的に既知のエントリ（全 slug）を渡す
@@ -234,28 +243,40 @@ export const posts = defineCollection({
 - **Gate**: 既存 `getAllPosts()` の出力と要素数・主要フィールドが一致
 - **Gate 完了**: 2026-05-01 時点で Velite 107 件と Legacy 109 件のうち、Velite で取れる 107 件は title・slug が一致。Legacy のみに存在する 2 件 (`2013-09-05-iphoto-photobook`, `2024-06-10-jaxx-keycaps`) は dead な画像参照に起因する既存の content gap で、Phase 1 着手前に content 側で別途対応する。
 
-### Phase 1: TanStack Start ひな型（1 日）
-- `vite.config.ts`, `app/routes/__root.tsx`, `app/routes/index.tsx` を最小構成
-- `prerender` 設定、Netlify Preview デプロイ動作確認（中身は仮）
-- `tsconfig.json` を `target: ES2022` 化、`ignoreBuildErrors` 相当を撤廃
-- **Gate**: 空ページが Netlify Preview で表示
+### Phase 1: TanStack Start ひな型（1 日）（完了: 2026-05-01）
+- `vite.config.mts`, `app/routes/__root.tsx`, `app/routes/index.tsx`, `app/router.tsx` を最小構成（vite.config は ESM のため `.mts`）
+- `prerender` を有効化、Cloudflare Pages Deploy Preview で空ページを表示
+- `tsconfig.json` を `target: ES2022` 化、`next.config.mjs` の `typescript.ignoreBuildErrors` / `eslint.ignoreDuringBuilds` を撤廃
+- `pnpm dev:vite` / `pnpm build:vite` / `pnpm preview:vite` を Next.js scripts と並立で追加
+- 本ブランチの `wrangler.toml` で `pages_build_output_dir = ./dist/client/` を指定し、`build.sh` が `CF_PAGES_BRANCH` で main = `pnpm build`、それ以外 = `pnpm build:vite` に分岐。main の本番ビルドは Next.js のまま維持
+- spec section 2 の「ホスティング」記述は誤り（Netlify ではなく Cloudflare Pages）。Phase 1 で Cloudflare Pages 前提に整流（dashboard build command を `bash build.sh` に変更）
+- **Gate 完了**: PR #683 の Cloudflare Pages Deploy Preview に Phase 1 stub のページが表示
 
-### Phase 2: ルートとデータ層の移植（2〜3 日）
-- `$.tsx` の loader で Velite 出力を import → 記事描画
-- `index.tsx` で記事一覧
+### Phase 2: ルートとデータ層の移植（2〜3 日）（完了: 2026-05-02）
+- `$.tsx` の loader で Velite 出力（`lib/posts.ts` 経由）を import → 記事描画
+- `index.tsx` で全 109 件の記事タイル一覧（`getAllPosts()`）
 - `profile.tsx` でプロフィール
-- `head()` API で OGP / title / description を移行
-- 画像は Velite が `public/` に配置済みの URL を使用
-- **Gate**: 全記事と一覧が表示され、OGP が現行と同等
+- `head()` API で OGP / title / description / canonical を移行（`lib/site.ts` で site-wide 定数化）
+- 画像は Velite が `public/images/posts/` に配置済みの URL をそのまま使用、OGP 画像は本文先頭画像 → `DEFAULT_OGP_IMAGE` のフォールバック
+- `vite.config.mts` の `tanstackStart()` プラグインに `pages: [...permalinks]` を渡して決定論的 prerender に（OGP リンクカードの protocol-relative URL を crawlLinks が誤追従する事故を回避）
+- `next/link` を 4 コンポーネントで `@tanstack/react-router` の Link シム（`lib/router-link.tsx`）に置換、`next/image` を 2 コンポーネント (`thumbnail.tsx`, `slide-image.tsx`) で `<img loading="lazy">` に置換（spec section 2 の `react-lazyload` 廃止を Phase 4 から前倒し）
+- Next.js 専用 page (`app/{page,layout,[...slug],profile}.tsx`) と orphan helpers (`lib/registry.tsx`, `components/Providers.tsx`, `components/ui/meta.tsx`) を削除、16 ファイルから `"use client"` を除去、`pnpm dev` / `pnpm build` / `pnpm start` を Vite 系に切替（旧 Next.js は `dev:next` / `build:next` に退避し Phase 4 で削除）
+- ダークモード初期表示のちらつき対策（`<head>` の inline theme bootstrap script）も先行実装
+- styled-components の SSR collection は意図的に省略（FOUC 許容、Phase 3 の CSS Modules 化で解消）。SSR の `styled.x is not a function` interop hole は `environments.ssr.resolve.noExternal: ["styled-components"]` で回避
+- **Gate 完了**: PR #683 の Cloudflare Pages Preview で home / profile / 既知 5 記事を現行 Next.js 本番と目視比較し、表示と OGP が同等であることを確認 (cm 上で確認済みは CI smoke のみ。視覚同等性の最終判定はレビュアー目視待ち)
 
-### Phase 3: スタイル全面置換（3〜5 日、最大）
-- `styles/theme/tokens.css` に CSS variables を定義
-- `<html data-theme>` 切替、`ThemeContext` は localforage 永続化を維持
-- `components/**/*.tsx` の styled-components を `*.module.css` に置換
-  - 移行は機能単位で進める: `ui/` → `layout/` → `features/article/` → `features/profile/`
-  - 1 コンポーネントずつ手動目視確認
-- `lib/registry.tsx` 削除、`styled-components` 依存除去
-- **Gate**: 視覚回帰なし（手動チェック、必要なら scratch でスクリーンショット差分）
+### Phase 3: スタイル全面置換（3〜5 日、最大）（完了: 2026-05-02）
+
+- `styles/tokens.css` に CSS variables（`--color-*` / `--font-size-*` / `--font-weight-*` / `--content-width` / `--line-height`）を `:root, [data-theme="light"]` と `[data-theme="dark"]` の 2 セットで定義
+- `styles/global.css` に `body` / `a` / `ul,ol,li` / `.content` 配下と `.link-card*` のグローバルスタイルを移植
+- `lib/ThemeContext.tsx` を styled-components の `ThemeProvider` 経由から `<html data-theme>` 直接書き換え + localStorage 永続化に作り直し
+- `components/**/*.tsx` 23 ファイルを styled-components → `*.module.css` に置換（ui/ → icons/ → layout/ → features/article/ → features/profile/ の順、1 file = 1 commit）
+- Boolean prop は `data-*` 属性 + CSS attribute selector、数値 prop は `style={{ "--var": ... }}` の CSS variable 経由で表現
+- `next/image` を `<img>` に置換（`thumbnail.tsx`、`slide-image.tsx`）
+- `styled-components` / `@types/styled-components` dep を削除
+- `styles/global-style.ts` / `styles/theme.ts` / `lib/useDarkMode.ts` / `lib/storage.ts` を削除
+- CI smoke を「`data-styled` ランタイム DOM が prerender HTML に無い」「hashed CSS asset が `<link rel=stylesheet>` で参照されている」の 2 条件で拡張
+- **Gate 完了**: PR #683 の Cloudflare Pages Preview で home / profile / 既知記事を Phase 2 完了時と Chrome DevTools で比較し、styled-components ランタイム DOM ゼロ、CSS variables 経由のテーマ切替動作、視覚回帰なしを確認
 
 ### Phase 4: 旧依存撤去（半日）
 - `next`, `@next/mdx`, `react-helmet`, `react-lazyload`, `font-awesome`(4.x), `styled-components`, `@types/styled-components`, `@types/react-helmet` を削除
@@ -267,7 +288,7 @@ export const posts = defineCollection({
 ### Phase 5: 仕上げ（半日〜1 日）
 - React 18 → 19（TanStack Start の対応バージョンを前提に）
 - `tsc -p .` を CI で必須化
-- Netlify 本番切替、リダイレクト確認
+- Cloudflare Pages の `build.sh` 分岐を撤去し、main 単独で `pnpm build:vite` のみを呼ぶ形に整理
 - `package.json` の `description` を実態（"A static blog by jaxx2104"）に修正
 
 ## 10. テスト / 検証戦略
@@ -279,7 +300,7 @@ export const posts = defineCollection({
 
 ### ビルド検証
 - `vite build` で全ページが prerender される
-- `dist/` 配下の `index.html` 数が既存 `out/` の数と整合
+- `dist/client/` 配下の `index.html` 数が既存 `out/` の数と整合
 
 ### スモーク E2E（Playwright を 1 ファイル追加）
 - トップ：記事カードが N 件以上ある
@@ -289,18 +310,21 @@ export const posts = defineCollection({
 - CI で `pnpm exec playwright test --project=chromium` を実行
 
 ### ビジュアル差分（Phase 3 中の手動チェック）
-- 現行プロダクション URL と Netlify Preview を、同じ記事 3 本＋トップ＋プロフィールで目視比較
+- 現行プロダクション URL と Cloudflare Pages Deploy Preview を、同じ記事 3 本＋トップ＋プロフィールで目視比較
 
 ### 段階的マージ
 - 全フェーズを 1 本のブランチで実施。main は移行完了まで Next.js のまま維持
-- Phase 1〜2 完了時点で Netlify Preview をユーザーレビュー
+- Phase 1〜2 完了時点で Cloudflare Pages Deploy Preview をユーザーレビュー
 - Phase 3 完了時点で再度 Preview レビュー
 - Phase 5 通過後に main へマージ
 - **改訂（2026-05-01）**: Phase 0 は既存ランタイムに一切手を触れない純粋な追加であり、CI の継続的な健全性チェックを早期に得られる利点が大きいため、単独で main にマージする方針に変更した。Phase 1 以降は当初方針通り 1 本のブランチで進める可能性が高いが、各 Phase の完了時点で同様の判断（独立 merge できるか）を行う。
+- **Phase 1 完了時点の判断（2026-05-01）**: 本フェーズは Next.js を残したまま TanStack Start ひな型を追加するのみで、Cloudflare Pages Preview のみ Vite 成果物に切替えている。main の本番ビルドには影響しないが、Phase 2 で記事描画を loader に移すまで Vite 成果物には実コンテンツが無いため、**Phase 1 単独では main にマージしない**。Phase 2 と束ねて Preview レビューを受けたうえで判断する。なお Phase 1 完了時点で `build.sh` のみ main に直接 push 済み（Cloudflare Pages dashboard が `bash build.sh` を呼ぶための無害な土台で、main の挙動は実質変わらない）。
+- **Phase 2 完了時点の判断（2026-05-02）**: Phase 1 + Phase 2 が同一ブランチで揃い、Cloudflare Pages Preview に現行 Next.js 本番と表示同等の Vite 成果物が出る状態（`dist/client/` 配下に 111 件以上）。ただし styled-components のランタイム実行が残るため初期描画に FOUC があり、視覚的同等性は完全ではない。Phase 3 で CSS Modules + CSS variables に置換するまでは main にマージしない方針を維持し、Phase 3 完了後にまとめて main に渡す。`build.sh` は branch 分岐を撤廃し、各ブランチの `package.json` の `pnpm build` がブランチ固有の挙動を持つ形に整理（main: `next build`、本ブランチ: `velite build && vite build`）。
+- **Phase 3 完了時点の判断 (2026-05-02)**: Phase 1 + Phase 2 + Phase 3 が同一ブランチで揃い、Cloudflare Pages Preview に「styled-components ランタイムを持たない、CSS variables ベースで dark テーマ切替が動く」Vite 成果物が出る状態に。Chrome DevTools で確認した結果、`[data-styled]` 要素ゼロ、`<link rel="stylesheet" href="/assets/*.css">` で hashed CSS asset がリンクされ、`<html data-theme>` 切替で `--color-background` / `--color-text` が即座に反映される。FOUC は解消、視覚的同等性も確保。残るは Phase 4（旧依存撤去）と Phase 5（React 19 + 仕上げ）のみ。`pnpm build` の出力サイズと初回ロード時間が Phase 2 比でどれだけ縮んだかは Phase 5 完了時に計測する。
 
 ### ロールバック
 - 移行ブランチでの大変更のため、main を Next.js のままキープ
-- 問題発生時は Netlify 上で前回成功デプロイへロールバック
+- 問題発生時は Cloudflare Pages 上で前回成功デプロイへロールバック
 - URL 互換性が崩れた場合は `_redirects` を生成
 
 ## 11. 主要なリスクと対策
@@ -320,16 +344,19 @@ export const posts = defineCollection({
 ### 解消済み
 
 1. **slug の階層構造**: 全 109 件が `/<single-segment>/` 形式（slash 数 1）。splat ルート `$.tsx` で問題なくカバー可能。ただし 4 件は slug と `frontmatter.path` が一致しない（歴史的リネーム）: `2017-08-04-listening-book → /readme-siri`、`2018-11-15-smarthome-ph2 → /smarthome-xiaomi`、`2019-05-07-googlehome-app-debut → /dialogflow-raspberrypi`、`2025-01-23-syntax-highlight-test → /2025-01-23-syntax-highlight-test`。Phase 1 のルーター設計では slug ではなく `permalink`（`frontmatter.path`）でルックアップする方針で確定。
-2. **Velite と既存 getAllPosts の整合**: Velite 107 件・Legacy 109 件。Legacy のみに存在する 2 件（`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`）は dead な画像参照に起因する既存の content gap であり、Velite 側の問題ではない。Velite が取れる 107 件はタイトル・slug が一致。
+2. **Velite と既存 getAllPosts の整合**: Phase 1 Task 1 で 2 件の dead-image content gap を解消した結果、Velite と Legacy がともに 109 件で一致（`pnpm verify:velite` の `OK: counts and titles match`）。
 3. **画像コピー先**: Velite の `output.assets` を `public/images/posts/`、`output.base` を `/images/posts/` にすることで既存 URL 形状（`/images/posts/<slug>/<file>`）と整合。`clean: true` 設定下でも `public/images/posts/` 配下の既存サブディレクトリは保持されることを確認済み。
+4. **`react-share` の styled-components 依存**: Phase 3 Task 1 で `node_modules/react-share/` を grep し、styled-components 依存ゼロを確認（v5.2.2 使用）。`icon-share.tsx` での利用は継続、CSS Module 化のみ実施。runtime に `<style>` 注入される心配なし。
+5. **歴史的リネームスラッグ 4 件**: section 5「Permalink ルックアップ」を参照。`permalink` を一次キーとして loader でルックアップする方針を Phase 1 で確定。実装は Phase 2 で `app/routes/$.tsx` に。
+6. **2 件の dead-image content gap** (`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`): Phase 1 Task 1 で content 側の dead 参照を削除済み。Velite 出力 109 件に揃った。
 
-### 残課題（Phase 1 以降で解消）
+### 残課題（Phase 4 以降で解消）
 
-- **4 件の歴史的リネームスラッグ**（上記「解消済み 1」参照）: Phase 1 でルーター実装時に `permalink` フィールドを使って URL → 記事のルックアップを行う設計を確定させる。
-- **2 件の dead-image content gap**（`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`）: Phase 1 着手前に content 側で `![](missing.jpg)` を削除するか画像を補充する。
-- **OGP 画像の生成パイプライン**（`scripts/`）の確認は Phase 2 で実施。
-- **`react-share` の利用箇所と styled-components 依存の有無**は Phase 3 着手時に再確認。
+- **OGP 画像の生成パイプライン**: Phase 2 で再確認。現行 Next.js の挙動（本文先頭画像 → `DEFAULT_THUMBNAIL` のフォールバック）を `lib/posts.ts:deriveThumbnail` で再現。`/images/ogp-default.png` は既存 static asset をそのまま使う。Phase 3 以降に cover frontmatter フィールドの optional 追加を検討する案はあるが、現状の自動抽出で 109 件すべて OGP 画像が出ているため YAGNI。
 - **`velite.config.ts` の tsconfig exclude と `@ts-expect-error`** は Phase 4 で `lib/posts.ts` と一緒に再評価する。
+- **prerender の `crawlLinks` 戦略**: Phase 2 で `crawlLinks: false` + 明示 `pages` 配列に切り替え（OGP リンクカードの protocol-relative URL を crawler が誤追従する事故を回避）。home が全 permalink を線形列挙している前提に依存しているため、ページネーション等で home の link graph が痩せる場合は別途エントリ注入を検討する。
+- **styled-components の SSR FOUC**: Phase 2 で SSR collection を意図的に省略。Phase 3 の CSS Modules + CSS variables 移行で根治予定。FOUC 期間は Cloudflare Pages Preview のレビュー対象から外して判定。
+- **`<img>` element の biome 警告**: `noImgElement` は Next.js を前提とした性能ガイダンス。本ブランチでは `next/image` を捨てたため不要。Phase 3/4 で biome 設定からルールを除外する。
 
 ### Phase 0 ノート
 

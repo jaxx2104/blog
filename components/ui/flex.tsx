@@ -1,11 +1,15 @@
-import styled from "styled-components"
+import type React from "react"
+import styles from "./flex.module.css"
 
-const Flex = styled.div<{ $center?: boolean }>`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-flow: wrap;
-  justify-content: ${(props) => (props.$center ? "center" : "left")};
-`
+interface Props {
+  $center?: boolean
+  children?: React.ReactNode
+}
+
+const Flex: React.FC<Props> = ({ $center, children }) => (
+  <div className={styles.flex} data-center={$center ? "" : undefined}>
+    {children}
+  </div>
+)
 
 export default Flex

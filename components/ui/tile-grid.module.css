@@ -1,0 +1,15 @@
+.grid {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: var(--content-width);
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-auto-rows: auto;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

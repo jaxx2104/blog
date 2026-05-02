@@ -24,30 +24,23 @@ getPostBySlug()    // スラッグから記事を取得
 - ローカル画像パスを検出して変換
 
 ### `ThemeContext.tsx` - Theme Context
-ダーク/ライトモードのテーマ管理。
+ダーク/ライトモードのテーマ管理。`<html data-theme="...">` 属性を直接書き換え、`localStorage` で永続化する。
 
 ```typescript
-// 使用方法
 const { theme, toggleTheme } = useTheme()
 ```
 
-### `useDarkMode.ts` - Dark Mode Hook
-システム設定とローカルストレージからダークモード状態を管理。
-
-### `registry.tsx` - styled-components SSR
-styled-components の SSR サポート用レジストリ。
-
-### `storage.ts` - Local Storage
-localforage を使用したストレージユーティリティ。
+- 初期判定: (1) `<html data-theme>` （`__root.tsx` の inline bootstrap script で先行設定）→ (2) `localStorage["theme"]` → (3) `prefers-color-scheme` の順
+- 切替時: state 更新 + `document.documentElement.dataset.theme` 書き換え + `localStorage` 書き込み
 
 ## Data Flow
 
 ```
 content/posts/[slug]/index.md
         ↓
-    posts.ts (getAllPosts / getPostBySlug)
+    Velite build (.velite/ generated)
         ↓
-    image-utils.ts (base64 conversion)
+    getAllPosts / getPostByPermalink (posts.ts)
         ↓
-    app/[...slug]/page.tsx (MDX rendering)
+    app/routes/$.tsx (splat route, dangerouslySetInnerHTML)
 ```

@@ -1,32 +1,15 @@
-"use client"
-
-import Link from "next/link"
 import type React from "react"
-import styled from "styled-components"
+import Link from "@/lib/router-link"
+import styles from "./navi-logo.module.css"
 
 interface Props {
   title: string
 }
 
-const Logo: React.FC<Props> = ({ title }: Props) => (
+const Logo: React.FC<Props> = ({ title }) => (
   <Link href="/">
-    <LogoWrap>{title}</LogoWrap>
+    <h1 className={styles.logo}>{title}</h1>
   </Link>
 )
 
 export default Logo
-
-const LogoWrap = styled.h1<{ uppercase?: boolean }>`
-  color: white;
-  font-family: "Permanent Marker";
-  font-size: ${(props) => `${props.theme.fontSizeLarge}rem`};
-  font-weight: 900;
-  letter-spacing: -0.05rem;
-  text-transform: "uppercase";
-  margin-right: 1rem;
-
-  &:hover {
-    color: ${(props) => props.theme.colorAccent};
-    transition: color 0.2s ease-out;
-  }
-`

@@ -65,3 +65,14 @@ public/images/posts
 
 # Velite generated content layer
 .velite/
+
+# Git worktrees (used by superpowers subagent workflow)
+.worktrees/
+
+# Local Claude Code permission settings (per-machine, not project state)
+.claude/
+
+# Vite / TanStack Start build artifacts
+.netlify/
+app/routeTree.gen.ts
+.tanstack/

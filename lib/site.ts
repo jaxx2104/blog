@@ -1,0 +1,6 @@
+export const SITE_URL = "https://jaxx2104.info"
+export const SITE_TITLE = "jaxx2104.info"
+export const SITE_DESCRIPTION = "プログラムとバグが好き"
+export const SITE_AUTHOR = "jaxx2104"
+export const SITE_TWITTER = "jaxx2104"
+export const DEFAULT_OGP_IMAGE = "/images/ogp-default.png"

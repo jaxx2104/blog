@@ -1,10 +1,6 @@
-import styled from "styled-components"
+import type React from "react"
+import styles from "./hr.module.css"
 
-const Hr = styled.hr`
-  max-width: 5rem;
-  margin: 2rem auto;
-  border: 0;
-  border-top: 3px solid ${(props) => props.theme.colorBorder};
-`
+const Hr: React.FC = () => <hr className={styles.hr} />
 
 export default Hr

@@ -1,11 +1,8 @@
-"use client"
+import type React from "react"
+import styles from "./container.module.css"
 
-import styled from "styled-components"
-
-const Container = styled.div`
-  margin: 0 auto;
-  padding: 0 1rem;
-  max-width: ${(props) => props.theme.contentWidth}px;
-`
+const Container: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
+  <div className={styles.container}>{children}</div>
+)
 
 export default Container

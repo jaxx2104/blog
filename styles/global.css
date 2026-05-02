@@ -1,0 +1,190 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  transition:
+    color 0.2s ease-out,
+    background 0.2s ease-out;
+  line-height: var(--line-height);
+}
+
+a {
+  color: var(--color-main);
+  text-decoration: none;
+}
+
+ul,
+ol {
+  padding-inline-start: 1rem;
+}
+
+li {
+  list-style-position: inside;
+  margin: 0.25rem 0;
+}
+
+.content {
+  margin: 0;
+  padding: 0;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-bold);
+  margin: 2rem 0 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.025rem;
+}
+
+.content p {
+  font-weight: var(--font-weight);
+  margin: 1rem 0;
+}
+
+.content blockquote {
+  background-color: var(--color-background);
+  border-left: 5px solid var(--color-border);
+  color: var(--color-sub);
+  padding: 0.25em 1.5em;
+  margin: 1.5rem 0;
+}
+
+.content blockquote p {
+  margin: 1rem 0;
+}
+
+.content blockquote a {
+  display: block;
+  word-break: break-word;
+}
+
+.content img {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+/* Code block styles - レイアウトのみ（色は rehype-pretty-code のテーマが適用） */
+.content pre {
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+}
+
+/* Inline code styles */
+.content code:not(pre code) {
+  background-color: var(--color-border);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: var(--font-size-small);
+  font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+}
+
+/* Link card styles */
+.content .link-card {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.content .link-card:hover {
+  border-color: var(--color-main);
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.content .link-card-image {
+  flex-shrink: 0;
+  width: 120px;
+  min-height: 100px;
+  background-color: var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content .link-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+}
+
+.content .link-card-no-image span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-sub);
+}
+
+.content .link-card-content {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.content .link-card-title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.content .link-card-description {
+  font-size: var(--font-size-small);
+  color: var(--color-sub);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.content .link-card-site {
+  font-size: var(--font-size-small);
+  color: var(--color-sub);
+}
+
+@media (max-width: 480px) {
+  .content .link-card-image {
+    width: 80px;
+    min-height: 80px;
+  }
+
+  .content .link-card-content {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .content .link-card-title {
+    font-size: var(--font-size-small);
+  }
+
+  .content .link-card-description {
+    -webkit-line-clamp: 1;
+  }
+}

@@ -22,11 +22,39 @@ jobs:
           node-version-file: ./.node-version
           cache: "pnpm"
       - run: pnpm install
-      # Build velite before tsc so .velite/index.d.ts exists when scripts/verify-velite.ts is type-checked.
-      - name: Build content layer (velite)
-        run: pnpm velite:build
+      # Build velite + vite (TanStack Start prerender) BEFORE tsc.
+      # vite build generates app/routeTree.gen.ts which app/router.tsx
+      # imports; without this step tsc fails with TS2307. velite output is
+      # also required by scripts/verify-velite.ts type-checking.
+      - name: Build content layer + tanstack start prerender
+        run: pnpm build:vite
       - run: pnpm test
       # NOTE: temporary cross-check during stack modernization Phase 0.
       # Remove together with lib/posts.ts legacy reader in Phase 4.
       - name: Verify velite output matches legacy
         run: pnpm verify:velite
+      # Phase 2 smoke: prerender must emit home + profile + every velite
+      # post (>= 111). Spot-check OGP meta on a known post — both an
+      # original-slug post (php-replace-lf) and a renamed-slug post
+      # (readme-siri, formerly 2017-08-04-listening-book).
+      - name: Verify dist artifacts (phase 2 routes + OGP)
+        run: |
+          test -f dist/client/index.html
+          test -f dist/client/profile/index.html
+          test -f dist/client/php-replace-lf/index.html
+          test -f dist/client/readme-siri/index.html
+          count=$(find dist/client -name index.html | wc -l)
+          test "$count" -ge 111 || { echo "expected >=111 index.html, got $count" && exit 1; }
+          grep -a -F -q 'og:image' dist/client/php-replace-lf/index.html
+          grep -a -F -q 'og:type' dist/client/php-replace-lf/index.html
+          grep -a -F -q 'rel="canonical"' dist/client/php-replace-lf/index.html
+          # Phase 3: ensure styled-components runtime DOM is gone.
+          # The `data-styled` attribute is styled-components v6's marker;
+          # if we still see it, some component slipped through the css modules
+          # migration and is rehydrating styles client-side.
+          if grep -rF 'data-styled' dist/client/ ; then
+            echo "FAIL: found styled-components runtime DOM in prerendered HTML"
+            exit 1
+          fi
+          # Hashed css asset must be linked from the home page.
+          grep -E '<link[^>]*rel="stylesheet"[^>]*assets/[^"]+\.css' dist/client/index.html

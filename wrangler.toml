@@ -1,0 +1,11 @@
+# Cloudflare Pages config — committed only on the modernize-stack-phase1
+# (and successor migration) branches. Overrides the dashboard's output dir
+# so Cloudflare deploys the TanStack Start prerender output (dist/client/)
+# instead of the Next.js out/ that main still emits.
+#
+# Pair: build.sh chooses between `pnpm build` and `pnpm build:vite` based
+# on CF_PAGES_BRANCH. main does NOT have wrangler.toml, so the dashboard's
+# original output dir keeps working there.
+
+name = "blog"
+pages_build_output_dir = "./dist/client/"

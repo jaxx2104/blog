@@ -1,8 +1,6 @@
-"use client"
-
-import Link from "next/link"
 import type React from "react"
-import styled from "styled-components"
+import Link from "@/lib/router-link"
+import styles from "./navi-menu.module.css"
 
 type Item = {
   to?: string
@@ -14,34 +12,23 @@ interface Props {
   items: Item[]
 }
 
-const Menu: React.FC<Props> = ({ items }: Props) => (
-  <MenuWrap>
+const Menu: React.FC<Props> = ({ items }) => (
+  <div className={styles.menu}>
     {(items || []).map((item, index) => {
       const { action, text, to } = item
-      const menuItem = <MenuItem onClick={action}>{text}</MenuItem>
+      const menuItem = (
+        // biome-ignore lint/a11y/useKeyWithClickEvents: legacy interactive-p pattern from styled-components migration
+        <p className={styles.item} onClick={action}>
+          {text}
+        </p>
+      )
       return (
         <span key={index}>
           {to ? <Link href={to}>{menuItem}</Link> : menuItem}
         </span>
       )
     })}
-  </MenuWrap>
+  </div>
 )
+
 export default Menu
-
-const MenuWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
-const MenuItem = styled.p`
-  color: white;
-  cursor: pointer;
-  margin-right: 1rem;
-  font-size: ${(props) => `${props.theme.fontSize}rem`};
-
-  &:hover {
-    color: ${(props) => props.theme.colorAccent};
-    transition: color 0.2s ease-out;
-  }
-`

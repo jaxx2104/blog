@@ -1,8 +1,6 @@
-"use client"
-
-import Link from "next/link"
 import type React from "react"
-import styled from "styled-components"
+import Link from "@/lib/router-link"
+import styles from "./article-tile.module.css"
 
 interface Props {
   path: string
@@ -11,77 +9,25 @@ interface Props {
   thumbnail?: string
 }
 
-const TileContainer = styled.article`
-  background: ${(props) => props.theme.colorBackground};
-  border: 1px solid ${(props) => props.theme.colorBorder};
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.2s ease-out;
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-
-  &:hover {
-    box-shadow: 0 4px 12px ${(props) => props.theme.colorShadow};
-    transform: translateY(-2px);
-  }
-`
-
-const ThumbnailImage = styled.img`
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-`
-
-const ContentContainer = styled.div`
-  padding: 0.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`
-
-const Title = styled.h2`
-  color: ${(props) => props.theme.colorMain};
-  font-size: ${(props) => `${props.theme.fontSize}rem`};
-  font-weight: ${(props) => props.theme.fontWeightBold};
-  line-height: 1.2;
-  letter-spacing: -0.025rem;
-  margin: 0 0 0.25rem 0;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`
-
-const Excerpt = styled.p`
-  font-size: ${(props) => `${props.theme.fontSizeSmall}rem`};
-  font-weight: ${(props) => props.theme.fontWeight};
-  color: ${(props) => props.theme.colorText};
-  line-height: 1.4;
-  margin: 0 0 0.5rem 0;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  flex: 1;
-`
-
-const ArticleTile: React.FC<Props> = ({ path, title, excerpt, thumbnail }) => {
-  return (
-    <Link href={path} style={{ textDecoration: "none" }}>
-      <TileContainer>
-        <ContentContainer>
-          <Title>{title}</Title>
-          {thumbnail ? (
-            <ThumbnailImage src={thumbnail} alt={title} loading="lazy" />
-          ) : (
-            <Excerpt>{excerpt}</Excerpt>
-          )}
-        </ContentContainer>
-      </TileContainer>
-    </Link>
-  )
-}
+const ArticleTile: React.FC<Props> = ({ path, title, excerpt, thumbnail }) => (
+  <Link href={path} className={styles.tileLink}>
+    <article className={styles.container}>
+      <div className={styles.content}>
+        <h2 className={styles.title}>{title}</h2>
+        {thumbnail ? (
+          // biome-ignore lint/performance/noImgElement: prerender static export uses native img by design
+          <img
+            className={styles.thumbnail}
+            src={thumbnail}
+            alt={title}
+            loading="lazy"
+          />
+        ) : (
+          <p className={styles.excerpt}>{excerpt}</p>
+        )}
+      </div>
+    </article>
+  </Link>
+)
 
 export default ArticleTile

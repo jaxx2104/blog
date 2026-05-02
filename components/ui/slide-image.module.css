@@ -1,0 +1,69 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.wrapper:hover {
+  transform: scale(1.02);
+}
+
+.wrapper[data-animation="fadeIn"] {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.wrapper[data-animation="slideUp"] {
+  animation: slideUp 0.6s ease-in-out;
+}
+
+.wrapper[data-animation="slideDown"] {
+  animation: slideDown 0.6s ease-in-out;
+}
+
+.image {
+  display: block;
+  object-fit: cover;
+  width: 200px;
+  height: auto;
+}
+
+.capture {
+  /* NOTE: 旧 styled-components 版は theme.fontSizeLargeSmall（未定義キー）を
+   * 参照しており実質 font-size 未指定（親継承）だった。視覚同等性のため
+   * font-size プロパティを意図的に書かない。Phase 4 以降で修正検討。 */
+  font-weight: var(--font-weight-bold);
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

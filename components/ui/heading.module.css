@@ -1,0 +1,13 @@
+.heading {
+  color: var(--color-main);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.025rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.heading:hover {
+  transition: color 0.2s ease-out;
+  color: var(--color-sub);
+}
