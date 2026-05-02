@@ -3,7 +3,7 @@
 - **対象リポジトリ**: `jaxx2104/blog`
 - **作成日**: 2026-05-01
 - **作成者**: Futoshi Iwashita（ブレインストーミング: Claude Code）
-- **ステータス**: Draft（ユーザーレビュー待ち）
+- **ステータス**: 完了（2026-05-03）
 
 ## 1. 背景と目的
 
@@ -295,13 +295,31 @@ export const posts = defineCollection({
   - クリーンインストール (`rm -rf node_modules .velite dist && pnpm install`) 後、`pnpm build && pnpm test && pnpm lint:ci` がすべて exit 0
   - `dist/client/` の prerender 件数 111 を維持
 
-### Phase 5: 仕上げ（半日〜1 日）
+### Phase 5: 仕上げ（半日〜1 日）（完了: 2026-05-03）
 - React 18 → 19（TanStack Start の対応バージョンを前提に）
 - `tsc -p .` を CI で必須化（既に Phase 4 時点で test job に組み込まれている）
 - Cloudflare Pages の `build.sh` 分岐を撤去し、main 単独で `pnpm build` のみを呼ぶ形に整理
 - `package.json` の `description` を実態（"A static blog by jaxx2104"）に修正
 - `package.json` の `keywords` から `"nextjs"` を削除（Phase 4 で `next` 撤去済みのため）
 - バンドルサイズ / 初回ロード時間の Phase 2 比計測
+- **Gate 完了**: 2026-05-03 時点で
+  - `react` / `react-dom` の specifier を `18.3.1` → `19.2.5` に bump、`@types/react` を `^18.3.11` → `^19.2.14`、`@types/react-dom` を `^19.2.3` で新規追加（TanStack Start / TanStack Router / @vitejs/plugin-react 6 / react-share / @fortawesome/react-fontawesome すべて React 19 peer 範囲内で問題なく解決）
+  - `package.json` の `description` を `"Simple starter for Gatsby"` → `"A static blog by jaxx2104"` に修正、`keywords` から `"nextjs"` を削除（"blog", "typescript" のみ残）
+  - `build.sh` の Phase 1〜4 経過を引きずったコメントを post-Phase 4 の実態に整流。`CF_PAGES_BRANCH` 分岐ロジックは Phase 4 で削除済みのため、本フェーズはコメント簡潔化と dead な `branch` 変数の削除のみ
+  - `tsc -p .` は Phase 4 時点で `.github/workflows/test.yml` の `- run: pnpm test` step として組込み済みであることを確認（追加変更なし）
+  - `@types/react-dom` の specifier を他の `@types/*` 形式に揃え `^19.2.3` に整流（解決バージョンは不変）
+  - クリーンインストール後、`pnpm install && pnpm build && pnpm test && pnpm lint:ci && pnpm lint:text` がすべて exit 0（`lint:text` は既存記事コンテンツの表記揺れで 7 件の error が出るが、Phase 5 の変更に起因しないプリエグジスティングな content lint 問題のため Gate 対象外とする）
+  - `dist/client/` の prerender 件数 111 を維持
+  - バンドルサイズ計測（Phase 4 完了直後 baseline → Phase 5 final、ローカル `pnpm build` 出力）:
+    - `dist/client` 総容量: 25M → 25M
+    - `dist/client/assets` 容量: 800K → 848K
+    - JS 合計バイト: 790,125 → 840,151
+    - CSS 合計バイト: 9,807 → 9,807
+    - 参考: Next.js 時代の `out/` 総容量（ワーキングツリー残存）: 34M（HTML 113、JS 879,689、CSS 221,074）
+  - 初回ロード参考値（ローカル `vite preview`、Playwright navigation timing、Phase 4 baseline）:
+    - `/`: ttfb=92.1ms domLoad=200.2ms totalLoad=221.8ms transferSize=87,198B
+    - `/profile/`: ttfb=6.8ms domLoad=17.3ms totalLoad=22.7ms transferSize=8,557B
+    - `/php-replace-lf/`: ttfb=588.4ms domLoad=598.8ms totalLoad=600.8ms transferSize=10,061B
 
 ## 10. テスト / 検証戦略
 
@@ -362,13 +380,13 @@ export const posts = defineCollection({
 5. **歴史的リネームスラッグ 4 件**: section 5「Permalink ルックアップ」を参照。`permalink` を一次キーとして loader でルックアップする方針を Phase 1 で確定。実装は Phase 2 で `app/routes/$.tsx` に。
 6. **2 件の dead-image content gap** (`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`): Phase 1 Task 1 で content 側の dead 参照を削除済み。Velite 出力 109 件に揃った。
 
-### 残課題（Phase 4 以降で解消）
+### 残課題（Phase 4〜5 で解消）
 
-- **OGP 画像の生成パイプライン**: Phase 2 で再確認。現行 Next.js の挙動（本文先頭画像 → `DEFAULT_THUMBNAIL` のフォールバック）を `lib/posts.ts:deriveThumbnail` で再現。`/images/ogp-default.png` は既存 static asset をそのまま使う。Phase 3 以降に cover frontmatter フィールドの optional 追加を検討する案はあるが、現状の自動抽出で 109 件すべて OGP 画像が出ているため YAGNI。
-- **`velite.config.ts` の tsconfig exclude と `@ts-expect-error`** は Phase 4 で `lib/posts.ts` と一緒に再評価する。
-- **prerender の `crawlLinks` 戦略**: Phase 2 で `crawlLinks: false` + 明示 `pages` 配列に切り替え（OGP リンクカードの protocol-relative URL を crawler が誤追従する事故を回避）。home が全 permalink を線形列挙している前提に依存しているため、ページネーション等で home の link graph が痩せる場合は別途エントリ注入を検討する。
-- **styled-components の SSR FOUC**: Phase 2 で SSR collection を意図的に省略。Phase 3 の CSS Modules + CSS variables 移行で根治予定。FOUC 期間は Cloudflare Pages Preview のレビュー対象から外して判定。
-- **`<img>` element の biome 警告**: `noImgElement` は Next.js を前提とした性能ガイダンス。本ブランチでは `next/image` を捨てたため不要。Phase 3/4 で biome 設定からルールを除外する。
+- **OGP 画像の生成パイプライン**: Phase 2 で再確認。現行 Next.js の挙動（本文先頭画像 → `DEFAULT_THUMBNAIL` のフォールバック）を `lib/posts.ts:deriveThumbnail` で再現。`/images/ogp-default.png` は既存 static asset をそのまま使う。Phase 3 以降に cover frontmatter フィールドの optional 追加を検討する案はあるが、現状の自動抽出で 109 件すべて OGP 画像が出ているため YAGNI。→ 完了 (Phase 2)
+- **`velite.config.ts` の tsconfig exclude と `@ts-expect-error`** は Phase 4 で `lib/posts.ts` と一緒に再評価する。→ 完了 (Phase 4)
+- **prerender の `crawlLinks` 戦略**: Phase 2 で `crawlLinks: false` + 明示 `pages` 配列に切り替え（OGP リンクカードの protocol-relative URL を crawler が誤追従する事故を回避）。home が全 permalink を線形列挙している前提に依存しているため、ページネーション等で home の link graph が痩せる場合は別途エントリ注入を検討する。→ 完了 (Phase 2)
+- **styled-components の SSR FOUC**: Phase 2 で SSR collection を意図的に省略。Phase 3 の CSS Modules + CSS variables 移行で根治予定。FOUC 期間は Cloudflare Pages Preview のレビュー対象から外して判定。→ 完了 (Phase 3)
+- **`<img>` element の biome 警告**: `noImgElement` は Next.js を前提とした性能ガイダンス。本ブランチでは `next/image` を捨てたため不要。Phase 3/4 で biome 設定からルールを除外する。→ 完了 (Phase 4)
 
 ### Phase 0 ノート
 
