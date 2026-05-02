@@ -1,10 +1,10 @@
 import type React from "react"
-import styled from "styled-components"
 import Container from "../../ui/container"
 import Display from "../../ui/display"
 import Flex from "../../ui/flex"
 import Section from "../../ui/section"
 import SlideImage from "../../ui/slide-image"
+import styles from "./profile-work.module.css"
 
 interface WorkItem {
   src: string
@@ -15,28 +15,6 @@ interface WorkItem {
 interface Props {
   workItems?: WorkItem[]
 }
-
-const ProfileWork: React.FC<Props> = ({
-  workItems = defaultWorkItems,
-}: Props) => (
-  <Section>
-    <Container>
-      <Display $uppercase>Work</Display>
-      <Flex $center>
-        {workItems.map((item, index) => (
-          <Anchor key={index} href={item.href}>
-            <SlideImage
-              src={item.src}
-              alt={item.title}
-              title={item.title}
-              animation="fadeIn"
-            />
-          </Anchor>
-        ))}
-      </Flex>
-    </Container>
-  </Section>
-)
 
 const defaultWorkItems: WorkItem[] = [
   {
@@ -71,8 +49,26 @@ const defaultWorkItems: WorkItem[] = [
   },
 ]
 
-export default ProfileWork
+const ProfileWork: React.FC<Props> = ({
+  workItems = defaultWorkItems,
+}) => (
+  <Section>
+    <Container>
+      <Display $uppercase>Work</Display>
+      <Flex $center>
+        {workItems.map((item, index) => (
+          <a key={index} href={item.href} className={styles.anchor}>
+            <SlideImage
+              src={item.src}
+              alt={item.title}
+              title={item.title}
+              animation="fadeIn"
+            />
+          </a>
+        ))}
+      </Flex>
+    </Container>
+  </Section>
+)
 
-const Anchor = styled.a`
-  text-decoration: none;
-`
+export default ProfileWork
