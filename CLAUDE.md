@@ -6,39 +6,44 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Development
 ```bash
-pnpm dev         # Start Next.js development server
-pnpm build       # Build the application for production
-pnpm start       # Start production server
-pnpm deploy      # Build for deployment
+pnpm dev         # Start Vite dev server (TanStack Start)
+pnpm build       # Run velite build + vite build (prerender to dist/client/)
+pnpm start       # Serve dist/ via vite preview
+pnpm deploy      # Alias for pnpm build
 ```
 
 ### Code Quality
 ```bash
-pnpm lint                # Run ESLint on TypeScript files
-pnpm lint:text           # Check Japanese text in blog posts
+pnpm lint                # Run Biome with --write
+pnpm lint:ci             # Run Biome ci (no fixes; fails on warnings/errors)
+pnpm lint:text           # Check Japanese text in blog posts (textlint)
 pnpm lint:textfix        # Auto-fix Japanese text issues
-pnpm test                # Run TypeScript type checking
-pnpm format              # Format code with Prettier
+pnpm test                # Run TypeScript type checking (tsc -p)
+pnpm format              # Format code with Biome
+pnpm verify:velite       # Cross-check Velite output against legacy reader (Phase 4 で削除予定)
 ```
 
 ## Tech Stack
 
-- **Next.js 15.5** with App Router (static site generation via `output: 'export'`)
+- **TanStack Start (Vite + React 18)** with prerender for static site generation (output to `dist/client/`)
+- **TanStack Router** for file-based routing under `app/routes/`
 - **TypeScript 5.8** with strict mode
-- **styled-components 6.1** for CSS-in-JS with SSR support
-- **MDX 3.1** for blog post content with syntax highlighting
-- **pnpm 9.12** as package manager
+- **CSS Modules + CSS variables** for styling (light/dark via `<html data-theme>`); single bundled CSS asset (`build.cssCodeSplit: false`) to avoid SPA-navigation teardown
+- **Velite + Zod** content layer for `content/posts/**/index.md` (`.velite/` 出力)
+- **shiki + rehype-pretty-code** code syntax highlighting (via Velite)
+- **Biome 2.x** for lint + format
+- **pnpm 9.x** as package manager
 
 ## Directory Structure
 
 | Directory | Description | See |
 |-----------|-------------|-----|
-| `/app` | Next.js App Router pages and layouts | `app/CLAUDE.md` |
-| `/components` | React components (features, layout, ui, icons) | `components/CLAUDE.md` |
-| `/lib` | Core utilities and data fetching | `lib/CLAUDE.md` |
-| `/styles` | Global styles and theme configuration | `styles/CLAUDE.md` |
-| `/content` | Blog posts in Markdown | `content/CLAUDE.md` |
-| `/public` | Static assets (PWA manifest, icons) | - |
+| `/app` | TanStack Start entrypoints + `routes/` definitions | `app/CLAUDE.md` |
+| `/components` | React components (features, layout, ui, icons) — CSS Modules | `components/CLAUDE.md` |
+| `/lib` | Velite-backed posts reader, ThemeContext, router-link shim | `lib/CLAUDE.md` |
+| `/styles` | `tokens.css` (CSS variables) + `global.css` (base + 記事本文) | `styles/CLAUDE.md` |
+| `/content` | Blog posts in Markdown (Velite source) | `content/CLAUDE.md` |
+| `/public` | Static assets (PWA manifest, icons, Velite-copied images) | - |
 
 ## Build Artifacts and Type Pitfalls
 

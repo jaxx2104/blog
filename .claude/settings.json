@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm velite:build *)",
+      "Bash(pnpm velite:build)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm test)",
+      "Bash(pnpm verify:velite *)",
+      "Bash(pnpm verify:velite)",
+      "Bash(pnpm build:vite *)",
+      "Bash(pnpm build:vite)",
+      "Bash(pnpm inspect:paths *)",
+      "Bash(pnpm inspect:paths)",
+      "Bash(pnpm list *)",
+      "Bash(pnpm ls *)",
+      "Bash(rm -rf .velite *)",
+      "Bash(rm -rf .velite)",
+      "mcp__context7__query-docs",
+      "mcp__context7__resolve-library-id"
+    ]
+  }
+}
