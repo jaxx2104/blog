@@ -76,12 +76,7 @@
     "lint:ci": "biome ci .",
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",
-    "test": "tsc -p ./tsconfig.json",
-    "dev:vite": "vite dev",
-    "build:vite": "pnpm velite:build && vite build",
-    "preview:vite": "vite preview --port 4173",
-    "dev:next": "next dev",
-    "build:next": "next build"
+    "test": "tsc -p ./tsconfig.json"
   },
   "packageManager": "pnpm@9.15.9"
 }

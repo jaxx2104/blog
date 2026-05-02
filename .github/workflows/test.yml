@@ -26,7 +26,7 @@ jobs:
       # vite build generates app/routeTree.gen.ts which app/router.tsx
       # imports; without this step tsc fails with TS2307.
       - name: Build content layer + tanstack start prerender
-        run: pnpm build:vite
+        run: pnpm build
       - run: pnpm test
       # Phase 2 smoke: prerender must emit home + profile + every velite
       # post (>= 111). Spot-check OGP meta on a known post — both an
