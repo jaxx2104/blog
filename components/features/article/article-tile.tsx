@@ -15,7 +15,6 @@ const ArticleTile: React.FC<Props> = ({ path, title, excerpt, thumbnail }) => (
       <div className={styles.content}>
         <h2 className={styles.title}>{title}</h2>
         {thumbnail ? (
-          // biome-ignore lint/performance/noImgElement: prerender static export uses native img by design
           <img
             className={styles.thumbnail}
             src={thumbnail}
