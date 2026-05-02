@@ -9,7 +9,6 @@ import type { ReactNode } from "react"
 import "modern-normalize/modern-normalize.css"
 import "@/styles/tokens.css"
 import "@/styles/global.css"
-import "font-awesome/css/font-awesome.css"
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site"
 import { ThemeProvider } from "@/lib/ThemeContext"
 

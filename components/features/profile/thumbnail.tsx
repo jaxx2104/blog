@@ -14,7 +14,6 @@ const Thumbnail: React.FC<Props> = ({ circle, size, src, title }) => (
     data-circle={circle ? "" : undefined}
     style={{ width: `${size}px`, height: `${size}px` }}
   >
-    {/* biome-ignore lint/performance/noImgElement: prerender static export uses native img by design */}
     <img
       src={src}
       alt={title}

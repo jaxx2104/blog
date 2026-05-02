@@ -16,12 +16,7 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    }
   },
   "include": [
     "app/**/*.ts",
@@ -44,7 +39,6 @@
     "dist",
     ".netlify",
     ".next",
-    "velite.config.ts",
     "app/routeTree.gen.ts",
     "**/*.old/**/*",
     "**/*.bak/**/*"

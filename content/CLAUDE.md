@@ -42,7 +42,7 @@ tags:
 
 - 記事と同じディレクトリに画像を配置
 - Markdown で相対パスで参照: `![alt](./image.jpg)`
-- ビルド時に base64 data URI に変換される
+- ビルド時に Velite が `public/images/posts/<name>-<hash>.<ext>` のフラット URL にコピーし、本文 HTML 内ではそのまま参照される（`velite.config.ts` の `assets` / `base` / `name` 設定）
 
 ## Linting
 
