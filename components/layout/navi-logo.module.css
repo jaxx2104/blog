@@ -1,0 +1,14 @@
+.logo {
+  color: white;
+  font-family: "Permanent Marker", cursive;
+  font-size: var(--font-size-large);
+  font-weight: 900;
+  letter-spacing: -0.05rem;
+  text-transform: uppercase;
+  margin-right: 1rem;
+}
+
+.logo:hover {
+  color: var(--color-accent);
+  transition: color 0.2s ease-out;
+}
