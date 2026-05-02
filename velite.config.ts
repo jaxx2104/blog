@@ -21,11 +21,14 @@ export default defineConfig({
     clean: true,
   },
   collections: { posts },
-  // PHASE-0-TEMP (remove in Phase 4 with lib/posts.ts):
+  // Re-evaluated in Phase 4 (2026-05-03), kept from Phase 0.
   // MarkdownOptions expects mutable PluggableList; rehype-pretty-code's
-  // tuple form does not satisfy it. velite.config.ts is excluded from the
-  // project tsconfig, so this directive will not surface to `pnpm test`
-  // until Phase 4 re-evaluates that exclusion.
+  // tuple form does not satisfy it. velite.config.ts is now part of the
+  // project tsconfig (the Phase 0 exclude was removed in Phase 4), so
+  // this directive is verified active by `pnpm test` — removing it
+  // surfaces TS2322. No upstream issue filed as of 2026-05-03; if a
+  // future dependency bump fixes the tuple typing, `pnpm test` will fail
+  // on the unused @ts-expect-error and prompt removal.
   // @ts-expect-error MarkdownOptions Pluggable[] vs rehype-pretty-code tuple
   markdown: markdownConfig,
 })

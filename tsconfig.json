@@ -39,7 +39,6 @@
     "dist",
     ".netlify",
     ".next",
-    "velite.config.ts",
     "app/routeTree.gen.ts",
     "**/*.old/**/*",
     "**/*.bak/**/*"
