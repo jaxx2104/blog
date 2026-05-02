@@ -70,7 +70,6 @@
     "velite": "velite",
     "velite:build": "velite build",
     "velite:dev": "velite dev",
-    "verify:velite": "tsx scripts/verify-velite.ts",
     "inspect:paths": "tsx scripts/inspect-paths.ts",
     "format": "biome format --write .",
     "lint": "biome check --write .",
