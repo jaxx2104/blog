@@ -1,0 +1,11 @@
+.share {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding-bottom: 1.5rem;
+}
+
+.share div {
+  display: inline-block;
+  margin: 0.25rem;
+}

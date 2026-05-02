@@ -5,33 +5,22 @@ import {
   TwitterIcon,
   TwitterShareButton,
 } from "react-share"
-import styled from "styled-components"
+import styles from "./icon-share.module.css"
 
 interface Props {
   url: string
   title: string
 }
 
-const Share: React.FC<Props> = ({ url, title }: Props) => (
-  <ShareWrap>
+const Share: React.FC<Props> = ({ url, title }) => (
+  <div className={styles.share}>
     <TwitterShareButton url={url} title={title}>
       <TwitterIcon size={32} round={true} />
     </TwitterShareButton>
     <FacebookShareButton url={url}>
       <FacebookIcon size={32} round={true} />
     </FacebookShareButton>
-  </ShareWrap>
+  </div>
 )
+
 export default Share
-
-const ShareWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  padding-bottom: 1.5rem;
-
-  div {
-    display: inline-block;
-    margin: 0.25rem;
-  }
-`
