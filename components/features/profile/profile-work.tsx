@@ -49,9 +49,7 @@ const defaultWorkItems: WorkItem[] = [
   },
 ]
 
-const ProfileWork: React.FC<Props> = ({
-  workItems = defaultWorkItems,
-}) => (
+const ProfileWork: React.FC<Props> = ({ workItems = defaultWorkItems }) => (
   <Section>
     <Container>
       <Display $uppercase>Work</Display>

@@ -10,6 +10,7 @@ interface Props {
 
 const SlideImage: React.FC<Props> = ({ src, alt, title, animation }) => (
   <div className={styles.wrapper} data-animation={animation}>
+    {/* biome-ignore lint/performance/noImgElement: prerender static export uses native img by design */}
     <img
       className={styles.image}
       src={src}

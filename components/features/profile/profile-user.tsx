@@ -3,8 +3,8 @@ import Container from "../../ui/container"
 import Display from "../../ui/display"
 import Flex from "../../ui/flex"
 import Section from "../../ui/section"
-import Thumbnail from "./thumbnail"
 import styles from "./profile-user.module.css"
+import Thumbnail from "./thumbnail"
 
 interface Props {
   profileImage?: string
