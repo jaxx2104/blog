@@ -303,7 +303,7 @@ export const posts = defineCollection({
 - `package.json` の `keywords` から `"nextjs"` を削除（Phase 4 で `next` 撤去済みのため）
 - バンドルサイズ / 初回ロード時間の Phase 2 比計測
 - **Gate 完了**: 2026-05-03 時点で
-  - `react` / `react-dom` を 18.3.1 → 19.2.5 に bump、`@types/react` を 18.3.23 → 19.2.14、`@types/react-dom` を 19.2.3 で新規追加（TanStack Start / TanStack Router / @vitejs/plugin-react 6 / react-share / @fortawesome/react-fontawesome すべて React 19 peer 範囲内で問題なく解決）
+  - `react` / `react-dom` の specifier を `18.3.1` → `19.2.5` に bump、`@types/react` を `^18.3.11` → `^19.2.14`、`@types/react-dom` を `^19.2.3` で新規追加（TanStack Start / TanStack Router / @vitejs/plugin-react 6 / react-share / @fortawesome/react-fontawesome すべて React 19 peer 範囲内で問題なく解決）
   - `package.json` の `description` を `"Simple starter for Gatsby"` → `"A static blog by jaxx2104"` に修正、`keywords` から `"nextjs"` を削除（"blog", "typescript" のみ残）
   - `build.sh` の Phase 1〜4 経過を引きずったコメントを post-Phase 4 の実態に整流。`CF_PAGES_BRANCH` 分岐ロジックは Phase 4 で削除済みのため、本フェーズはコメント簡潔化と dead な `branch` 変数の削除のみ
   - `tsc -p .` は Phase 4 時点で `.github/workflows/test.yml` の `- run: pnpm test` step として組込み済みであることを確認（追加変更なし）
