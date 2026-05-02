@@ -1,0 +1,11 @@
+.header {
+  background-color: var(--color-main);
+  position: sticky;
+  margin-bottom: 1rem;
+  top: 0;
+  z-index: 1;
+}
+
+.header a {
+  text-decoration: none;
+}

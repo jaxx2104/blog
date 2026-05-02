@@ -1,16 +1,15 @@
 import type React from "react"
-import styled from "styled-components"
 import NaviLogo from "@/components/layout/navi-logo"
 import NaviMenu from "@/components/layout/navi-menu"
 import Container from "@/components/ui/container"
 import Flex from "@/components/ui/flex"
 import { useTheme } from "@/lib/ThemeContext"
+import styles from "./navi.module.css"
 
 const Navi: React.FC = () => {
   const { theme, toggleTheme } = useTheme()
-
   return (
-    <Header>
+    <header className={styles.header}>
       <Container>
         <Flex>
           <NaviLogo title="jaxx2104.info" />
@@ -23,20 +22,8 @@ const Navi: React.FC = () => {
           />
         </Flex>
       </Container>
-    </Header>
+    </header>
   )
 }
 
 export default Navi
-
-const Header = styled.header`
-  background-color: ${(props) => props.theme.colorMain};
-  position: sticky;
-  margin-bottom: 1rem;
-  top: 0;
-  z-index: 1;
-
-  a {
-    text-decoration: none;
-  }
-`
