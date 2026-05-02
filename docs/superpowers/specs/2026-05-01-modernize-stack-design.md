@@ -265,14 +265,18 @@ export const posts = defineCollection({
 - styled-components の SSR collection は意図的に省略（FOUC 許容、Phase 3 の CSS Modules 化で解消）。SSR の `styled.x is not a function` interop hole は `environments.ssr.resolve.noExternal: ["styled-components"]` で回避
 - **Gate 完了**: PR #683 の Cloudflare Pages Preview で home / profile / 既知 5 記事を現行 Next.js 本番と目視比較し、表示と OGP が同等であることを確認 (cm 上で確認済みは CI smoke のみ。視覚同等性の最終判定はレビュアー目視待ち)
 
-### Phase 3: スタイル全面置換（3〜5 日、最大）
-- `styles/theme/tokens.css` に CSS variables を定義
-- `<html data-theme>` 切替、`ThemeContext` は localforage 永続化を維持
-- `components/**/*.tsx` の styled-components を `*.module.css` に置換
-  - 移行は機能単位で進める: `ui/` → `layout/` → `features/article/` → `features/profile/`
-  - 1 コンポーネントずつ手動目視確認
-- `lib/registry.tsx` 削除、`styled-components` 依存除去
-- **Gate**: 視覚回帰なし（手動チェック、必要なら scratch でスクリーンショット差分）
+### Phase 3: スタイル全面置換（3〜5 日、最大）（完了: 2026-05-02）
+
+- `styles/tokens.css` に CSS variables（`--color-*` / `--font-size-*` / `--font-weight-*` / `--content-width` / `--line-height`）を `:root, [data-theme="light"]` と `[data-theme="dark"]` の 2 セットで定義
+- `styles/global.css` に `body` / `a` / `ul,ol,li` / `.content` 配下と `.link-card*` のグローバルスタイルを移植
+- `lib/ThemeContext.tsx` を styled-components の `ThemeProvider` 経由から `<html data-theme>` 直接書き換え + localStorage 永続化に作り直し
+- `components/**/*.tsx` 23 ファイルを styled-components → `*.module.css` に置換（ui/ → icons/ → layout/ → features/article/ → features/profile/ の順、1 file = 1 commit）
+- Boolean prop は `data-*` 属性 + CSS attribute selector、数値 prop は `style={{ "--var": ... }}` の CSS variable 経由で表現
+- `next/image` を `<img>` に置換（`thumbnail.tsx`、`slide-image.tsx`）
+- `styled-components` / `@types/styled-components` dep を削除
+- `styles/global-style.ts` / `styles/theme.ts` / `lib/useDarkMode.ts` / `lib/storage.ts` を削除
+- CI smoke を「`data-styled` ランタイム DOM が prerender HTML に無い」「hashed CSS asset が `<link rel=stylesheet>` で参照されている」の 2 条件で拡張
+- **Gate 完了**: PR #683 の Cloudflare Pages Preview で home / profile / 既知記事を Phase 2 完了時と Chrome DevTools で比較し、styled-components ランタイム DOM ゼロ、CSS variables 経由のテーマ切替動作、視覚回帰なしを確認
 
 ### Phase 4: 旧依存撤去（半日）
 - `next`, `@next/mdx`, `react-helmet`, `react-lazyload`, `font-awesome`(4.x), `styled-components`, `@types/styled-components`, `@types/react-helmet` を削除
@@ -316,6 +320,7 @@ export const posts = defineCollection({
 - **改訂（2026-05-01）**: Phase 0 は既存ランタイムに一切手を触れない純粋な追加であり、CI の継続的な健全性チェックを早期に得られる利点が大きいため、単独で main にマージする方針に変更した。Phase 1 以降は当初方針通り 1 本のブランチで進める可能性が高いが、各 Phase の完了時点で同様の判断（独立 merge できるか）を行う。
 - **Phase 1 完了時点の判断（2026-05-01）**: 本フェーズは Next.js を残したまま TanStack Start ひな型を追加するのみで、Cloudflare Pages Preview のみ Vite 成果物に切替えている。main の本番ビルドには影響しないが、Phase 2 で記事描画を loader に移すまで Vite 成果物には実コンテンツが無いため、**Phase 1 単独では main にマージしない**。Phase 2 と束ねて Preview レビューを受けたうえで判断する。なお Phase 1 完了時点で `build.sh` のみ main に直接 push 済み（Cloudflare Pages dashboard が `bash build.sh` を呼ぶための無害な土台で、main の挙動は実質変わらない）。
 - **Phase 2 完了時点の判断（2026-05-02）**: Phase 1 + Phase 2 が同一ブランチで揃い、Cloudflare Pages Preview に現行 Next.js 本番と表示同等の Vite 成果物が出る状態（`dist/client/` 配下に 111 件以上）。ただし styled-components のランタイム実行が残るため初期描画に FOUC があり、視覚的同等性は完全ではない。Phase 3 で CSS Modules + CSS variables に置換するまでは main にマージしない方針を維持し、Phase 3 完了後にまとめて main に渡す。`build.sh` は branch 分岐を撤廃し、各ブランチの `package.json` の `pnpm build` がブランチ固有の挙動を持つ形に整理（main: `next build`、本ブランチ: `velite build && vite build`）。
+- **Phase 3 完了時点の判断 (2026-05-02)**: Phase 1 + Phase 2 + Phase 3 が同一ブランチで揃い、Cloudflare Pages Preview に「styled-components ランタイムを持たない、CSS variables ベースで dark テーマ切替が動く」Vite 成果物が出る状態に。Chrome DevTools で確認した結果、`[data-styled]` 要素ゼロ、`<link rel="stylesheet" href="/assets/*.css">` で hashed CSS asset がリンクされ、`<html data-theme>` 切替で `--color-background` / `--color-text` が即座に反映される。FOUC は解消、視覚的同等性も確保。残るは Phase 4（旧依存撤去）と Phase 5（React 19 + 仕上げ）のみ。`pnpm build` の出力サイズと初回ロード時間が Phase 2 比でどれだけ縮んだかは Phase 5 完了時に計測する。
 
 ### ロールバック
 - 移行ブランチでの大変更のため、main を Next.js のままキープ
@@ -341,13 +346,13 @@ export const posts = defineCollection({
 1. **slug の階層構造**: 全 109 件が `/<single-segment>/` 形式（slash 数 1）。splat ルート `$.tsx` で問題なくカバー可能。ただし 4 件は slug と `frontmatter.path` が一致しない（歴史的リネーム）: `2017-08-04-listening-book → /readme-siri`、`2018-11-15-smarthome-ph2 → /smarthome-xiaomi`、`2019-05-07-googlehome-app-debut → /dialogflow-raspberrypi`、`2025-01-23-syntax-highlight-test → /2025-01-23-syntax-highlight-test`。Phase 1 のルーター設計では slug ではなく `permalink`（`frontmatter.path`）でルックアップする方針で確定。
 2. **Velite と既存 getAllPosts の整合**: Phase 1 Task 1 で 2 件の dead-image content gap を解消した結果、Velite と Legacy がともに 109 件で一致（`pnpm verify:velite` の `OK: counts and titles match`）。
 3. **画像コピー先**: Velite の `output.assets` を `public/images/posts/`、`output.base` を `/images/posts/` にすることで既存 URL 形状（`/images/posts/<slug>/<file>`）と整合。`clean: true` 設定下でも `public/images/posts/` 配下の既存サブディレクトリは保持されることを確認済み。
-4. **歴史的リネームスラッグ 4 件**: section 5「Permalink ルックアップ」を参照。`permalink` を一次キーとして loader でルックアップする方針を Phase 1 で確定。実装は Phase 2 で `app/routes/$.tsx` に。
-5. **2 件の dead-image content gap** (`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`): Phase 1 Task 1 で content 側の dead 参照を削除済み。Velite 出力 109 件に揃った。
+4. **`react-share` の styled-components 依存**: Phase 3 Task 1 で `node_modules/react-share/` を grep し、styled-components 依存ゼロを確認（v5.2.2 使用）。`icon-share.tsx` での利用は継続、CSS Module 化のみ実施。runtime に `<style>` 注入される心配なし。
+5. **歴史的リネームスラッグ 4 件**: section 5「Permalink ルックアップ」を参照。`permalink` を一次キーとして loader でルックアップする方針を Phase 1 で確定。実装は Phase 2 で `app/routes/$.tsx` に。
+6. **2 件の dead-image content gap** (`2013-09-05-iphoto-photobook`、`2024-06-10-jaxx-keycaps`): Phase 1 Task 1 で content 側の dead 参照を削除済み。Velite 出力 109 件に揃った。
 
-### 残課題（Phase 3 以降で解消）
+### 残課題（Phase 4 以降で解消）
 
 - **OGP 画像の生成パイプライン**: Phase 2 で再確認。現行 Next.js の挙動（本文先頭画像 → `DEFAULT_THUMBNAIL` のフォールバック）を `lib/posts.ts:deriveThumbnail` で再現。`/images/ogp-default.png` は既存 static asset をそのまま使う。Phase 3 以降に cover frontmatter フィールドの optional 追加を検討する案はあるが、現状の自動抽出で 109 件すべて OGP 画像が出ているため YAGNI。
-- **`react-share` の利用箇所と styled-components 依存の有無**は Phase 3 着手時に再確認。
 - **`velite.config.ts` の tsconfig exclude と `@ts-expect-error`** は Phase 4 で `lib/posts.ts` と一緒に再評価する。
 - **prerender の `crawlLinks` 戦略**: Phase 2 で `crawlLinks: false` + 明示 `pages` 配列に切り替え（OGP リンクカードの protocol-relative URL を crawler が誤追従する事故を回避）。home が全 permalink を線形列挙している前提に依存しているため、ページネーション等で home の link graph が痩せる場合は別途エントリ注入を検討する。
 - **styled-components の SSR FOUC**: Phase 2 で SSR collection を意図的に省略。Phase 3 の CSS Modules + CSS variables 移行で根治予定。FOUC 期間は Cloudflare Pages Preview のレビュー対象から外して判定。
