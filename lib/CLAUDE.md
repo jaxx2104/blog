@@ -15,13 +15,7 @@ getPostBySlug()    // スラッグから記事を取得
 
 - `/content/posts/[slug]/index.md` から記事を読み込み
 - gray-matter で frontmatter をパース
-- 画像は base64 data URI に変換（`image-utils.ts` 使用）
-
-### `image-utils.ts` - Image Processing
-記事内の画像を base64 data URI に変換。
-
-- 静的エクスポート互換性のため
-- ローカル画像パスを検出して変換
+- 画像は Velite が `public/images/posts/<name>-<hash>.<ext>` のフラット URL に書き出し（`velite.config.ts` の `assets` / `base` / `name` 設定）、本文 HTML 内ではそのまま参照
 
 ### `ThemeContext.tsx` - Theme Context
 ダーク/ライトモードのテーマ管理。`<html data-theme="...">` 属性を直接書き換え、`localStorage` で永続化する。
