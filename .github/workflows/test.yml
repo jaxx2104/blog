@@ -48,3 +48,13 @@ jobs:
           grep -a -F -q 'og:image' dist/client/php-replace-lf/index.html
           grep -a -F -q 'og:type' dist/client/php-replace-lf/index.html
           grep -a -F -q 'rel="canonical"' dist/client/php-replace-lf/index.html
+          # Phase 3: ensure styled-components runtime DOM is gone.
+          # The `data-styled` attribute is styled-components v6's marker;
+          # if we still see it, some component slipped through the css modules
+          # migration and is rehydrating styles client-side.
+          if grep -rF 'data-styled' dist/client/ ; then
+            echo "FAIL: found styled-components runtime DOM in prerendered HTML"
+            exit 1
+          fi
+          # Hashed css asset must be linked from the home page.
+          grep -E '<link[^>]*rel="stylesheet"[^>]*assets/[^"]+\.css' dist/client/index.html

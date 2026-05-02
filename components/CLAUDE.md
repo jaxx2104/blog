@@ -6,7 +6,6 @@ React コンポーネントを機能別に整理したディレクトリ。
 
 ```
 components/
-├── Providers.tsx          # Context providers (theme, styled-components)
 ├── features/              # Feature-specific components
 │   ├── article/           # Blog post display
 │   └── profile/           # Profile page
