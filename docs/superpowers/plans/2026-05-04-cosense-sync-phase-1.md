@@ -1539,15 +1539,33 @@ async function readLocalStateAt(postsRoot: string): Promise<LocalPostState[]> {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = parseArgs(process.argv.slice(2))
   const env = envSchema.parse(process.env)
-  const seed = await readSeed()
-  await runSync({
-    client: new CosenseClient({ project: env.COSENSE_PROJECT, sid: env.COSENSE_SID }),
-    postsRoot: POSTS_ROOT,
-    redirectsPath: REDIRECTS_PATH,
-    seed,
-    maxDeleteRatio: env.MAX_DELETE_RATIO,
-    dryRun: args.dryRun,
-  }).catch((err) => { console.error(err); process.exit(1) })
+  readSeed()
+    .then((seed) =>
+      runSync({
+        client: new CosenseClient({
+          project: env.COSENSE_PROJECT,
+          sid: env.COSENSE_SID,
+        }),
+        postsRoot: POSTS_ROOT,
+        redirectsPath: REDIRECTS_PATH,
+        seed,
+        maxDeleteRatio: env.MAX_DELETE_RATIO,
+        dryRun: args.dryRun,
+      }),
+    )
+    .then(async ({ plan }) => {
+      console.log(`plan: ${plan.actions.map((a) => a.kind).join(",")}`)
+      if (args.dryRun) {
+        await writeFile(
+          resolve(process.cwd(), ".sync-plan.json"),
+          JSON.stringify(plan, null, 2),
+        )
+      }
+    })
+    .catch((err) => {
+      console.error(err)
+      process.exit(1)
+    })
 }
 ```
 
@@ -1557,7 +1575,7 @@ Add `mkdir` to the existing `node:fs/promises` import. Remove the previous `main
 
 ```ts
 // scripts/sync-cosense.test.ts
-import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs"
+import { mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs"
 import { mkdir } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
@@ -1575,9 +1593,18 @@ let root: string
 beforeEach(() => { root = mkdtempSync(join(tmpdir(), "sync-int-")) })
 afterEach(() => { rmSync(root, { recursive: true, force: true }) })
 
-const stubClient = (detail = detailJson) => ({
+const stubClient = () => ({
   listPages: vi.fn().mockResolvedValue(listJson),
-  getPage: vi.fn().mockResolvedValue(detail),
+  getPage: vi.fn().mockImplementation((title: string) => {
+    const page = listJson.pages.find((p: { title: string }) => p.title === title)
+    // Return a full page detail whose id matches the list entry so each post
+    // lands in its own directory on disk. Fall back to the fixture for unknown titles.
+    return Promise.resolve(
+      page
+        ? { ...detailJson, id: page.id, title: page.title }
+        : detailJson,
+    )
+  }),
 })
 
 test("dry-run produces a plan without touching disk", async () => {
@@ -1596,13 +1623,14 @@ test("dry-run produces a plan without touching disk", async () => {
 })
 
 test("real run creates post directories and is idempotent", async () => {
-  const c = stubClient()
+  const c1 = stubClient()
   const fetchStub = vi.fn().mockResolvedValue(
     new Response(new Uint8Array([1]), { status: 200 }),
   )
   await mkdir(join(root, "posts"), { recursive: true })
+
   await runSync({
-    client: c,
+    client: c1,
     postsRoot: join(root, "posts"),
     redirectsPath: join(root, "_redirects"),
     seed: [],
@@ -1611,12 +1639,16 @@ test("real run creates post directories and is idempotent", async () => {
     fetch: fetchStub,
   })
   const id = listJson.pages[0].id
-  expect(readFileSync(join(root, "posts", id, "index.md"), "utf8")).toContain(`path: /${id}`)
+  const dest = join(root, "posts", id, "index.md")
+  expect(readFileSync(dest, "utf8")).toContain(`path: /${id}`)
+  const mtime1 = statSync(dest).mtimeMs
+  const getPageCallsAfterFirst = c1.getPage.mock.calls.length
 
-  // second run is a no-op
-  c.getPage.mockClear()
+  // Second run with a fresh stub (mtime check below is the actual idempotency proof).
+  await new Promise((r) => setTimeout(r, 20))
+  const c2 = stubClient()
   await runSync({
-    client: stubClient(),
+    client: c2,
     postsRoot: join(root, "posts"),
     redirectsPath: join(root, "_redirects"),
     seed: [],
@@ -1624,7 +1656,12 @@ test("real run creates post directories and is idempotent", async () => {
     dryRun: false,
     fetch: fetchStub,
   })
-  // both pages now appear unchanged based on frontmatter updated_at
+  // No second-run getPage calls because both pages are now "unchanged".
+  expect(c2.getPage).not.toHaveBeenCalled()
+  // Initial run did call getPage twice (once per fixture page).
+  expect(getPageCallsAfterFirst).toBe(listJson.pages.length)
+  // mtime unchanged — fs-writer.writePost short-circuited the no-op.
+  expect(statSync(dest).mtimeMs).toBe(mtime1)
 })
 
 test("aborts when deletes exceed ratio", async () => {
@@ -1784,6 +1821,7 @@ Verify in the GitHub Actions UI that "Sync from Cosense" appears under workflows
 - The integration test in Task 13 stubs the client object directly rather than spawning a subprocess. Do not be tempted to spawn `tsx scripts/sync-cosense.ts` — it adds 2-3 s per test for no signal gain.
 - If the Scrapbox notation table grows past ~15 rows, split the table tests into thematic `describe` blocks but keep the data-driven structure.
 - `lib/sync/redirects-seed.json` is intentionally absent from this plan. Phase 2 creates it.
+- **Phase 1 uses a regex instead of `gray-matter` to parse `updated_at` from existing frontmatter.** `gray-matter@4` calls `js-yaml.safeLoad` internally, which was removed in `js-yaml@4`. This repo overrides `js-yaml` to `>=4.x`, so importing `gray-matter` for frontmatter parsing would throw at runtime. The `UPDATED_AT_RE` regex in `scripts/sync-cosense.ts` is an intentional workaround — do not replace it with `gray-matter` unless `js-yaml` is pinned to `^3.x` first.
 
 ### Deliberate deviations from the spec
 
