@@ -55,6 +55,12 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&family=Permanent+Marker&display=swap",
       },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: SITE_TITLE,
+        href: "/feed.xml",
+      },
     ],
   }),
   component: RootComponent,
