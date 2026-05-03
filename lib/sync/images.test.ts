@@ -63,3 +63,18 @@ test("propagates fetch failure", async () => {
     ),
   ).rejects.toThrow(/404/)
 })
+
+test("does not leave a .tmp file when fetch succeeds", async () => {
+  const fetchMock = vi.fn().mockResolvedValue(
+    new Response(new Uint8Array([5]), { status: 200 }),
+  )
+  await downloadImages(
+    [{ url: "https://gyazo.com/c.png", filename: "c.png" }],
+    dir,
+    { fetch: fetchMock },
+  )
+  expect(Buffer.from(readFileSync(join(dir, "c.png")))).toEqual(
+    Buffer.from([5]),
+  )
+  expect(() => statSync(join(dir, "c.png.tmp"))).toThrow()
+})

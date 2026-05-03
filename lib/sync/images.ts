@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs"
-import { writeFile } from "node:fs/promises"
+import { rename, unlink, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 import type { ImageRef } from "./types"
 
@@ -19,6 +19,13 @@ export async function downloadImages(
     const r = await fetcher(ref.url)
     if (!r.ok) throw new Error(`image fetch ${ref.url} -> ${r.status}`)
     const buf = new Uint8Array(await r.arrayBuffer())
-    await writeFile(dest, buf)
+    const tmp = `${dest}.tmp`
+    await writeFile(tmp, buf)
+    try {
+      await rename(tmp, dest)
+    } catch (err) {
+      await unlink(tmp).catch(() => {})
+      throw err
+    }
   }
 }
