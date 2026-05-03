@@ -28,6 +28,7 @@ jobs:
       - name: Build content layer + tanstack start prerender
         run: pnpm build
       - run: pnpm test
+      - run: pnpm test:unit
       # Phase 2 smoke: prerender must emit home + profile + every velite
       # post (>= 111). Spot-check OGP meta on a known post — both an
       # original-slug post (php-replace-lf) and a renamed-slug post
