@@ -20,6 +20,15 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    ignore:
+      # TypeScript major bumps: hold until Velite/TanStack/Biome confirm support.
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
+      # @types/node should track the Node version pinned in .node-version (22 LTS).
+      - dependency-name: "@types/node"
+        update-types:
+          - "version-update:semver-major"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
