@@ -1,0 +1,11 @@
+{
+  "id": "0123456789abcdef01234567",
+  "title": "First Post",
+  "created": 1714521600,
+  "updated": 1714694400,
+  "lines": [
+    { "id": "l1", "text": "First Post",  "userId": "u1", "created": 1714521600, "updated": 1714521600 },
+    { "id": "l2", "text": "Intro line.", "userId": "u1", "created": 1714521600, "updated": 1714521600 },
+    { "id": "l3", "text": "[* highlight]","userId": "u1", "created": 1714521600, "updated": 1714521600 }
+  ]
+}
