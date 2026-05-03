@@ -81,6 +81,11 @@ export async function runSync(
   return { plan }
 }
 
+// Coupled to lib/sync/frontmatter.ts:emitFrontmatter — single-quoted ISO
+// string. gray-matter@4 is the obvious tool for this but it calls
+// js-yaml.safeLoad which was removed in js-yaml@4 (and the repo overrides
+// js-yaml to >=4.x). Do not switch to gray-matter without first pinning
+// js-yaml to ^3.x.
 const UPDATED_AT_RE = /^updated_at:\s*'([^']+)'/m
 
 async function readLocalStateAt(postsRoot: string): Promise<LocalPostState[]> {
@@ -102,27 +107,33 @@ async function readLocalStateAt(postsRoot: string): Promise<LocalPostState[]> {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  try {
-    const args = parseArgs(process.argv.slice(2))
-    const env = envSchema.parse(process.env)
-    const seed = await readSeed()
-    const { plan } = await runSync({
-      client: new CosenseClient({ project: env.COSENSE_PROJECT, sid: env.COSENSE_SID }),
-      postsRoot: POSTS_ROOT,
-      redirectsPath: REDIRECTS_PATH,
-      seed,
-      maxDeleteRatio: env.MAX_DELETE_RATIO,
-      dryRun: args.dryRun,
+  const args = parseArgs(process.argv.slice(2))
+  const env = envSchema.parse(process.env)
+  readSeed()
+    .then((seed) =>
+      runSync({
+        client: new CosenseClient({
+          project: env.COSENSE_PROJECT,
+          sid: env.COSENSE_SID,
+        }),
+        postsRoot: POSTS_ROOT,
+        redirectsPath: REDIRECTS_PATH,
+        seed,
+        maxDeleteRatio: env.MAX_DELETE_RATIO,
+        dryRun: args.dryRun,
+      }),
+    )
+    .then(async ({ plan }) => {
+      console.log(`plan: ${plan.actions.map((a) => a.kind).join(",")}`)
+      if (args.dryRun) {
+        await writeFile(
+          resolve(process.cwd(), ".sync-plan.json"),
+          JSON.stringify(plan, null, 2),
+        )
+      }
     })
-    console.log(`plan: ${plan.actions.map((a) => a.kind).join(",")}`)
-    if (args.dryRun) {
-      await writeFile(
-        resolve(process.cwd(), ".sync-plan.json"),
-        JSON.stringify(plan, null, 2),
-      )
-    }
-  } catch (err) {
-    console.error(err)
-    process.exit(1)
-  }
+    .catch((err) => {
+      console.error(err)
+      process.exit(1)
+    })
 }

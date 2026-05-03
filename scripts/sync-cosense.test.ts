@@ -1,5 +1,5 @@
 // scripts/sync-cosense.test.ts
-import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs"
+import { mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs"
 import { mkdir } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
@@ -21,9 +21,18 @@ afterEach(() => {
   rmSync(root, { recursive: true, force: true })
 })
 
-const stubClient = (detail = detailJson) => ({
+const stubClient = () => ({
   listPages: vi.fn().mockResolvedValue(listJson),
-  getPage: vi.fn().mockResolvedValue(detail),
+  getPage: vi.fn().mockImplementation((title: string) => {
+    const page = listJson.pages.find((p: { title: string }) => p.title === title)
+    // Return a full page detail whose id matches the list entry so each post
+    // lands in its own directory on disk. Fall back to the fixture for unknown titles.
+    return Promise.resolve(
+      page
+        ? { ...detailJson, id: page.id, title: page.title }
+        : detailJson,
+    )
+  }),
 })
 
 test("dry-run produces a plan without touching disk", async () => {
@@ -41,14 +50,15 @@ test("dry-run produces a plan without touching disk", async () => {
   expect(readdirSync(root)).toEqual([])
 })
 
-test("real run creates post directories", async () => {
-  const c = stubClient()
+test("real run creates post directories and is idempotent", async () => {
+  const c1 = stubClient()
   const fetchStub = vi.fn().mockResolvedValue(
     new Response(new Uint8Array([1]), { status: 200 }),
   )
   await mkdir(join(root, "posts"), { recursive: true })
+
   await runSync({
-    client: c,
+    client: c1,
     postsRoot: join(root, "posts"),
     redirectsPath: join(root, "_redirects"),
     seed: [],
@@ -57,7 +67,29 @@ test("real run creates post directories", async () => {
     fetch: fetchStub,
   })
   const id = listJson.pages[0].id
-  expect(readFileSync(join(root, "posts", id, "index.md"), "utf8")).toContain(`path: /${id}`)
+  const dest = join(root, "posts", id, "index.md")
+  expect(readFileSync(dest, "utf8")).toContain(`path: /${id}`)
+  const mtime1 = statSync(dest).mtimeMs
+  const getPageCallsAfterFirst = c1.getPage.mock.calls.length
+
+  // Second run with a fresh stub (mtime check below is the actual idempotency proof).
+  await new Promise((r) => setTimeout(r, 20))
+  const c2 = stubClient()
+  await runSync({
+    client: c2,
+    postsRoot: join(root, "posts"),
+    redirectsPath: join(root, "_redirects"),
+    seed: [],
+    maxDeleteRatio: 0.5,
+    dryRun: false,
+    fetch: fetchStub,
+  })
+  // No second-run getPage calls because both pages are now "unchanged".
+  expect(c2.getPage).not.toHaveBeenCalled()
+  // Initial run did call getPage twice (once per fixture page).
+  expect(getPageCallsAfterFirst).toBe(listJson.pages.length)
+  // mtime unchanged — fs-writer.writePost short-circuited the no-op.
+  expect(statSync(dest).mtimeMs).toBe(mtime1)
 })
 
 test("aborts when deletes exceed ratio", async () => {
