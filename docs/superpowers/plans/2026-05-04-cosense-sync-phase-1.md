@@ -665,6 +665,14 @@ describe("CosenseClient", () => {
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
     await expect(c.listPages()).rejects.toThrow(/503/)
   })
+
+  test("listPages aborts when count > pages.length (pagination needed)", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify({ count: 1500, pages: listJson.pages }), { status: 200 }),
+    )
+    const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
+    await expect(c.listPages()).rejects.toThrow(/pagination is not yet implemented/)
+  })
 })
 ```
 
@@ -707,7 +715,13 @@ export class CosenseClient {
     const url = `${BASE}/${encodeURIComponent(this.project)}?limit=1000&skip=0`
     const r = await this.fetcher(url, { headers: this.headers() })
     if (!r.ok) throw new Error(`Cosense list failed: ${r.status}`)
-    return cosenseListResponseSchema.parse(await r.json())
+    const parsed = cosenseListResponseSchema.parse(await r.json())
+    if (parsed.count > parsed.pages.length) {
+      throw new Error(
+        `Cosense project has ${parsed.count} pages but client only fetched ${parsed.pages.length}; pagination is not yet implemented`,
+      )
+    }
+    return parsed
   }
 
   async getPage(title: string): Promise<CosensePage> {
@@ -719,7 +733,7 @@ export class CosenseClient {
 }
 ```
 
-Run: `pnpm test:unit lib/sync/cosense-client.test.ts` → green.
+Run: `pnpm test:unit lib/sync/cosense-client.test.ts` → green (6/6 tests).
 
 - [ ] **Step 4: Commit**
 
@@ -1693,6 +1707,7 @@ Verify in the GitHub Actions UI that "Sync from Cosense" appears under workflows
 
 ### Deliberate deviations from the spec
 
+- **Pagination is asserted, not implemented.** Phase 1 aborts loudly if a project exceeds 1000 pages; Phase 2 must add `skip`-loop pagination before the cron is enabled.
 - **Per-page error tolerance is deferred.** The spec describes a `.sync-errors.json` file and a "skip page, continue" policy for parse / image / schema failures. Phase 1's orchestrator throws on the first per-page failure, which aborts the whole run. This is acceptable while the workflow is `workflow_dispatch` only (operator sees the failure immediately and re-runs). Phase 2 must add the per-page tolerance before the cron is enabled, otherwise a single broken page will block all subsequent syncs.
 - **Pre-write `postSchema` validation is not implemented.** Phase 1 relies on the existing `pnpm build` (run by Cloudflare Pages or in CI) to catch schema drift. This is fine because Phase 1 doesn't run sync against `main` automatically.
 - **Cron schedule is not enabled.** `sync.yml` ships with `workflow_dispatch:` only. Phase 2 adds `schedule:` after migration data lands.
