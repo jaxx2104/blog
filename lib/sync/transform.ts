@@ -5,6 +5,8 @@ const HASHTAG_RE = /(?:^|\s)#([\p{L}\p{N}_-]+)/gu
 const GYAZO_RE = /\[https:\/\/gyazo\.com\/([a-zA-Z0-9]+)(\.[a-z]+)?\]/g
 const SCRAPBOX_FILE_RE = /\[https:\/\/scrapbox\.io\/files\/([a-zA-Z0-9]+\.[a-z]+)\]/g
 
+const DESCRIPTION_MAX = 160
+
 function extractTags(text: string): string[] {
   const out = new Set<string>()
   for (const m of text.matchAll(HASHTAG_RE)) out.add(m[1])
@@ -31,14 +33,18 @@ function firstProseLine(bodyLines: string[]): string {
     const trimmed = l.trim()
     if (trimmed.length === 0) continue
     if (trimmed.startsWith("#")) continue // hashtag-only line
-    if (trimmed.startsWith("[")) continue // image / heading line
-    return trimmed.length > 160 ? trimmed.slice(0, 160) : trimmed
+    if (trimmed.startsWith("[")) continue // image / heading / link line
+    if (trimmed.startsWith("code:")) continue // fenced-code opener
+    if (trimmed.startsWith(">")) continue // blockquote
+    if (l !== trimmed && trimmed.length > 0) continue // indented line (code content)
+    return trimmed.length > DESCRIPTION_MAX ? trimmed.slice(0, DESCRIPTION_MAX) : trimmed
   }
   return ""
 }
 
 export function transformPage(page: CosensePage): Post {
-  const bodyLines = page.lines.slice(1).map((l) => l.text)
+  const skipTitle = page.lines[0]?.text === page.title ? 1 : 0
+  const bodyLines = page.lines.slice(skipTitle).map((l) => l.text)
   const rawBody = bodyLines.join("\n")
   return {
     id: page.id,

@@ -33,3 +33,43 @@ test("description falls back to empty string when body has no prose", () => {
   const post = transformPage({ ...page, lines: [page.lines[0]] })
   expect(post.description).toBe("")
 })
+
+test("description skips code: and blockquote lines", () => {
+  const post = transformPage({
+    ...page,
+    lines: [
+      page.lines[0],
+      { id: "x", text: "code:hello.ts", userId: "u", created: 1, updated: 1 },
+      { id: "y", text: " const x = 1", userId: "u", created: 1, updated: 1 },
+      { id: "z", text: "> quoted", userId: "u", created: 1, updated: 1 },
+      { id: "w", text: "real prose here", userId: "u", created: 1, updated: 1 },
+    ],
+  })
+  expect(post.description).toBe("real prose here")
+})
+
+test("does not eat first body line when title differs from lines[0]", () => {
+  const post = transformPage({
+    ...page,
+    title: "Renamed",
+    lines: [
+      { id: "l1", text: "Original Body Line", userId: "u", created: 1, updated: 1 },
+      { id: "l2", text: "Second", userId: "u", created: 1, updated: 1 },
+    ],
+  })
+  expect(post.description).toBe("Original Body Line")
+  expect(post.body).toContain("Original Body Line")
+})
+
+test("hashtag dedup + scrapbox file image", () => {
+  const post = transformPage({
+    ...page,
+    lines: [
+      page.lines[0],
+      { id: "a", text: "see #blog and #blog again", userId: "u", created: 1, updated: 1 },
+      { id: "b", text: "[https://scrapbox.io/files/abc.jpg]", userId: "u", created: 1, updated: 1 },
+    ],
+  })
+  expect(post.tags).toEqual(["blog"])
+  expect(post.images).toEqual([{ url: "https://scrapbox.io/files/abc.jpg", filename: "abc.jpg" }])
+})
