@@ -2,6 +2,7 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: var(--color-background);
   color: var(--color-text);
+  font-family: var(--font-family-base);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   transition:
@@ -78,7 +79,7 @@ li {
   overflow-x: auto;
   font-size: var(--font-size-small);
   line-height: 1.6;
-  font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+  font-family: var(--font-family-mono);
 }
 
 /* Inline code styles */
@@ -87,7 +88,7 @@ li {
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: var(--font-size-small);
-  font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+  font-family: var(--font-family-mono);
 }
 
 /* Link card styles */

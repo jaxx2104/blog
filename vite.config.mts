@@ -124,6 +124,11 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  resolve: {
+    alias: {
+      "@": __dirname,
+    },
+  },
   // Bundle all CSS modules into a single asset. With code-split CSS,
   // SPA navigation between routes drops the previous route's stylesheet
   // (incl. shared layout/* chunks), leaving the navi/footer unstyled
