@@ -25,7 +25,7 @@
     "@biomejs/biome": "2.4.14",
     "@tanstack/router-plugin": "^1.167.32",
     "@types/hast": "^3.0.4",
-    "@types/node": "^22.7.5",
+    "@types/node": "^22.19.17",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
@@ -37,7 +37,7 @@
     "textlint-rule-preset-ja-spacing": "2.4.3",
     "textlint-rule-preset-japanese": "10.0.4",
     "tsx": "^4",
-    "typescript": "5.8.2",
+    "typescript": "5.9.3",
     "velite": "^0.3",
     "vite": "^8.0.10"
   },
