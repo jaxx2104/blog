@@ -1,4 +1,4 @@
-const PAGE_ID_RE = /^[a-f0-9]{24}$/
+import { PAGE_ID_RE } from "./types"
 
 export function slugForPageId(pageId: string): string {
   if (!PAGE_ID_RE.test(pageId)) {

@@ -1,8 +1,11 @@
 import { z } from "zod"
 
+/** Cosense page id format: 24 lowercase hex characters. */
+export const PAGE_ID_RE = /^[a-f0-9]{24}$/
+
 /** Cosense page object as returned by /api/pages/<project>/<title>. */
 export const cosensePageSchema = z.object({
-  id: z.string().regex(/^[a-f0-9]{24}$/),
+  id: z.string().regex(PAGE_ID_RE),
   title: z.string().min(1),
   created: z.number().int().nonnegative(),
   updated: z.number().int().nonnegative(),
@@ -20,7 +23,7 @@ export type CosensePage = z.infer<typeof cosensePageSchema>
 
 /** Cosense list entry as returned by /api/pages/<project>. */
 export const cosenseListEntrySchema = z.object({
-  id: z.string().regex(/^[a-f0-9]{24}$/),
+  id: z.string().regex(PAGE_ID_RE),
   title: z.string().min(1),
   updated: z.number().int().nonnegative(),
 })
