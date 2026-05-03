@@ -918,7 +918,7 @@ git commit -m "Add Cosense page -> IR transform"
 - Create: `lib/sync/images.test.ts`
 - Create: `lib/sync/images.ts`
 
-Idempotent: if the file already exists with matching size, do not refetch. Errors are surfaced (caller decides to skip the page).
+Idempotent: if the file already exists, do not refetch (writes are atomic via tmp + rename). Errors are surfaced (caller decides to skip the page).
 
 - [ ] **Step 1: Write the failing test**
 
@@ -975,6 +975,21 @@ test("propagates fetch failure", async () => {
     ),
   ).rejects.toThrow(/404/)
 })
+
+test("does not leave a .tmp file when fetch succeeds", async () => {
+  const fetchMock = vi.fn().mockResolvedValue(
+    new Response(new Uint8Array([5]), { status: 200 }),
+  )
+  await downloadImages(
+    [{ url: "https://gyazo.com/c.png", filename: "c.png" }],
+    dir,
+    { fetch: fetchMock },
+  )
+  expect(Buffer.from(readFileSync(join(dir, "c.png")))).toEqual(
+    Buffer.from([5]),
+  )
+  expect(() => statSync(join(dir, "c.png.tmp"))).toThrow()
+})
 ```
 
 Run: `pnpm test:unit lib/sync/images.test.ts` → red.
@@ -984,7 +999,7 @@ Run: `pnpm test:unit lib/sync/images.test.ts` → red.
 ```ts
 // lib/sync/images.ts
 import { existsSync } from "node:fs"
-import { writeFile } from "node:fs/promises"
+import { rename, unlink, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 import type { ImageRef } from "./types"
 
@@ -1004,7 +1019,14 @@ export async function downloadImages(
     const r = await fetcher(ref.url)
     if (!r.ok) throw new Error(`image fetch ${ref.url} -> ${r.status}`)
     const buf = new Uint8Array(await r.arrayBuffer())
-    await writeFile(dest, buf)
+    const tmp = `${dest}.tmp`
+    await writeFile(tmp, buf)
+    try {
+      await rename(tmp, dest)
+    } catch (err) {
+      await unlink(tmp).catch(() => {})
+      throw err
+    }
   }
 }
 ```
