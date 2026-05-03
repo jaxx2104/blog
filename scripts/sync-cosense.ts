@@ -1,7 +1,6 @@
 // scripts/sync-cosense.ts
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises"
 import { join, resolve } from "node:path"
-import matter from "gray-matter"
 import { z } from "zod"
 import { CosenseClient } from "@/lib/sync/cosense-client"
 import { computePlan, type LocalPostState } from "@/lib/sync/diff"
@@ -31,25 +30,6 @@ function parseArgs(argv: string[]): Args {
   }
 }
 
-async function readLocalState(): Promise<LocalPostState[]> {
-  let entries: string[]
-  try {
-    entries = await readdir(POSTS_ROOT)
-  } catch {
-    return []
-  }
-  const out: LocalPostState[] = []
-  for (const id of entries) {
-    if (!/^[a-f0-9]{24}$/.test(id)) continue
-    const front = matter(
-      await readFile(join(POSTS_ROOT, id, "index.md"), "utf8"),
-    ).data
-    if (typeof front.updated_at !== "string") continue
-    out.push({ id, updatedAt: new Date(front.updated_at) })
-  }
-  return out
-}
-
 async function readSeed(): Promise<RedirectSeedEntry[]> {
   try {
     return JSON.parse(await readFile(SEED_PATH, "utf8"))
@@ -58,52 +38,91 @@ async function readSeed(): Promise<RedirectSeedEntry[]> {
   }
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2))
-  const env = envSchema.parse(process.env)
+export interface RunOptions {
+  client: Pick<CosenseClient, "listPages" | "getPage">
+  postsRoot: string
+  redirectsPath: string
+  seed: RedirectSeedEntry[]
+  maxDeleteRatio: number
+  dryRun: boolean
+  fetch?: typeof globalThis.fetch
+}
 
-  const client = new CosenseClient({
-    project: env.COSENSE_PROJECT,
-    sid: env.COSENSE_SID,
-  })
-  const list = await client.listPages()
-  const local = await readLocalState()
+export async function runSync(
+  opts: RunOptions,
+): Promise<{ plan: ReturnType<typeof computePlan> }> {
+  const list = await opts.client.listPages()
+  const local = await readLocalStateAt(opts.postsRoot)
   const plan = computePlan(list.pages, local)
 
   const deletions = plan.actions.filter((a) => a.kind === "delete").length
-  if (plan.localCount > 0 && deletions / plan.localCount > env.MAX_DELETE_RATIO) {
+  if (plan.localCount > 0 && deletions / plan.localCount > opts.maxDeleteRatio) {
     throw new Error(`abort: would delete ${deletions}/${plan.localCount} posts`)
   }
 
-  console.log(`plan: ${plan.actions.map((a) => a.kind).join(",")}`)
-
-  if (args.dryRun) {
-    await writeFile(
-      resolve(process.cwd(), ".sync-plan.json"),
-      JSON.stringify(plan, null, 2),
-    )
-    return
-  }
+  if (opts.dryRun) return { plan }
 
   for (const action of plan.actions) {
     if (action.kind === "delete") {
-      await deletePost(action.id, POSTS_ROOT)
+      await deletePost(action.id, opts.postsRoot)
       continue
     }
     if (action.kind === "unchanged") continue
-    const page = await client.getPage(action.page.title)
+    const page = await opts.client.getPage(action.page.title)
     const post = transformPage(page)
-    const postDir = join(POSTS_ROOT, post.id)
+    const postDir = join(opts.postsRoot, post.id)
     await mkdir(postDir, { recursive: true })
-    await downloadImages(post.images, postDir)
-    await writePost(post, POSTS_ROOT)
+    await downloadImages(post.images, postDir, { fetch: opts.fetch })
+    await writePost(post, opts.postsRoot)
   }
 
-  const redirects = emitRedirects(await readSeed())
-  if (redirects.length > 0) await writeFile(REDIRECTS_PATH, redirects)
+  const redirects = emitRedirects(opts.seed)
+  if (redirects.length > 0) await writeFile(opts.redirectsPath, redirects)
+  return { plan }
 }
 
-main().catch((err) => {
-  console.error(err)
-  process.exit(1)
-})
+const UPDATED_AT_RE = /^updated_at:\s*'([^']+)'/m
+
+async function readLocalStateAt(postsRoot: string): Promise<LocalPostState[]> {
+  let entries: string[]
+  try {
+    entries = await readdir(postsRoot)
+  } catch {
+    return []
+  }
+  const out: LocalPostState[] = []
+  for (const id of entries) {
+    if (!/^[a-f0-9]{24}$/.test(id)) continue
+    const text = await readFile(join(postsRoot, id, "index.md"), "utf8")
+    const m = UPDATED_AT_RE.exec(text)
+    if (!m) continue
+    out.push({ id, updatedAt: new Date(m[1]) })
+  }
+  return out
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  try {
+    const args = parseArgs(process.argv.slice(2))
+    const env = envSchema.parse(process.env)
+    const seed = await readSeed()
+    const { plan } = await runSync({
+      client: new CosenseClient({ project: env.COSENSE_PROJECT, sid: env.COSENSE_SID }),
+      postsRoot: POSTS_ROOT,
+      redirectsPath: REDIRECTS_PATH,
+      seed,
+      maxDeleteRatio: env.MAX_DELETE_RATIO,
+      dryRun: args.dryRun,
+    })
+    console.log(`plan: ${plan.actions.map((a) => a.kind).join(",")}`)
+    if (args.dryRun) {
+      await writeFile(
+        resolve(process.cwd(), ".sync-plan.json"),
+        JSON.stringify(plan, null, 2),
+      )
+    }
+  } catch (err) {
+    console.error(err)
+    process.exit(1)
+  }
+}
