@@ -16,10 +16,10 @@
     "open-graph-scraper": "^6.11.0",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "react-share": "5.2.2",
+    "react-share": "5.3.0",
     "rehype-pretty-code": "^0.14.3",
     "shiki": "^4.0.2",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.14",
