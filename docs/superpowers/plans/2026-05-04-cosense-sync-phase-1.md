@@ -1103,6 +1103,12 @@ test("deletePost removes the directory", async () => {
   expect(() => statSync(join(root, post.id))).toThrow()
   expect(readFileSync(join(root, "to-delete.md"), "utf8")).toBe("x")
 })
+
+test("does not leave a .tmp file when write succeeds", async () => {
+  await writePost(post, root)
+  const dest = join(root, post.id, "index.md")
+  expect(() => statSync(`${dest}.tmp`)).toThrow()
+})
 ```
 
 Run: `pnpm test:unit lib/sync/fs-writer.test.ts` → red.
@@ -1112,7 +1118,7 @@ Run: `pnpm test:unit lib/sync/fs-writer.test.ts` → red.
 ```ts
 // lib/sync/fs-writer.ts
 import { existsSync } from "node:fs"
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
+import { mkdir, readFile, rename, rm, unlink, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 import { emitFrontmatter } from "./frontmatter"
 import type { Post } from "./types"
@@ -1132,23 +1138,29 @@ export async function writePost(post: Post, postsRoot: string): Promise<void> {
     const cur = await readFile(dest, "utf8")
     if (cur === next) return
   }
-  await writeFile(dest, next)
+  const tmp = `${dest}.tmp`
+  await writeFile(tmp, next)
+  try {
+    await rename(tmp, dest)
+  } catch (err) {
+    await unlink(tmp).catch(() => {})
+    throw err
+  }
 }
 
 export async function deletePost(id: string, postsRoot: string): Promise<void> {
   const dir = join(postsRoot, id)
-  if (!existsSync(dir)) return
   await rm(dir, { recursive: true, force: true })
 }
 ```
 
-Run: `pnpm test:unit lib/sync/fs-writer.test.ts` → green.
+Run: `pnpm test:unit lib/sync/fs-writer.test.ts` → green (5/5 tests).
 
 - [ ] **Step 3: Commit**
 
 ```bash
 git add lib/sync/fs-writer.ts lib/sync/fs-writer.test.ts
-git commit -m "Add idempotent post writer + deletePost"
+git commit -m "fs-writer: atomic write via tmp + rename, drop redundant existsSync in deletePost"
 ```
 
 ---
