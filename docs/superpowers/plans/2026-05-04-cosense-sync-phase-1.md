@@ -399,7 +399,7 @@ test("emits keys in a stable order", () => {
   expect(emitFrontmatter(post)).toBe(
     [
       "---",
-      "title: Sample Post",
+      "title: 'Sample Post'",
       "created_at: '2026-05-01T00:00:00.000Z'",
       "updated_at: '2026-05-04T12:34:56.000Z'",
       "path: /0123456789abcdef01234567",
@@ -422,6 +422,18 @@ test("escapes single quotes in title", () => {
   const out = emitFrontmatter({ ...post, title: "Don't break" })
   expect(out).toContain("title: \"Don't break\"")
 })
+
+test("rejects scalars with embedded newlines", () => {
+  expect(() =>
+    emitFrontmatter({ ...post, description: "first\nsecond" }),
+  ).toThrow(/newline/)
+})
+
+test("escapes backslash before quote in mixed-quote case", () => {
+  const out = emitFrontmatter({ ...post, title: "It's \\n literal" })
+  // Title quoted with double quotes; backslash doubled, then \n preserved.
+  expect(out).toContain(`title: "It's \\\\n literal"`)
+})
 ```
 
 - [ ] **Step 2: Run, confirm red**
@@ -432,29 +444,29 @@ Expected: FAIL with module-not-found.
 - [ ] **Step 3: Implement the emitter**
 
 ```ts
-// lib/sync/frontmatter.ts
 import type { Post } from "./types"
 
-function quoteIfNeeded(s: string): string {
-  // YAML: single-quote strings unless they themselves contain single quotes.
-  if (s.includes("'")) return `"${s.replace(/"/g, '\\"')}"`
+function quoteScalar(s: string): string {
+  if (/[\n\r]/.test(s)) {
+    throw new Error(`frontmatter scalar must not contain newlines: ${JSON.stringify(s)}`)
+  }
+  // YAML: single-quote unless the value itself contains a single quote.
+  // In that case use double quotes and escape backslashes (first) and
+  // double quotes (second). Order matters — if we escaped " before \,
+  // the inserted backslashes would get doubled too.
+  if (s.includes("'")) {
+    return `"${s.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`
+  }
   return `'${s}'`
-}
-
-function plainOrQuoted(s: string): string {
-  // Strings that look "safe" (no special chars, no leading whitespace) can
-  // go unquoted. Frontmatter consumers (gray-matter via Velite) accept both.
-  if (/^[A-Za-z0-9 _.-]+$/.test(s) && s.trim() === s) return s
-  return quoteIfNeeded(s)
 }
 
 export function emitFrontmatter(post: Post): string {
   const lines: string[] = ["---"]
-  lines.push(`title: ${plainOrQuoted(post.title)}`)
+  lines.push(`title: ${quoteScalar(post.title)}`)
   lines.push(`created_at: '${post.createdAt.toISOString()}'`)
   lines.push(`updated_at: '${post.updatedAt.toISOString()}'`)
   lines.push(`path: /${post.id}`)
-  lines.push(`description: ${quoteIfNeeded(post.description)}`)
+  lines.push(`description: ${quoteScalar(post.description)}`)
   if (post.tags.length > 0) {
     lines.push("tags:")
     for (const tag of post.tags) lines.push(`  - ${tag}`)
@@ -467,7 +479,7 @@ export function emitFrontmatter(post: Post): string {
 - [ ] **Step 4: Run, confirm green**
 
 Run: `pnpm test:unit lib/sync/frontmatter.test.ts`
-Expected: all 3 tests pass.
+Expected: all 5 tests pass.
 
 - [ ] **Step 5: Commit**
 
