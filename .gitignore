@@ -59,6 +59,9 @@ public/images/posts
 # Git worktrees (used by superpowers subagent workflow)
 .worktrees/
 
+# Superpowers brainstorm session artifacts
+.superpowers/
+
 # Local Claude Code permission settings (per-machine, not project state)
 .claude/
 
