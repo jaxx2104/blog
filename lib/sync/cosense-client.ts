@@ -31,7 +31,13 @@ export class CosenseClient {
     const url = `${BASE}/${encodeURIComponent(this.project)}?limit=1000&skip=0`
     const r = await this.fetcher(url, { headers: this.headers() })
     if (!r.ok) throw new Error(`Cosense list failed: ${r.status}`)
-    return cosenseListResponseSchema.parse(await r.json())
+    const parsed = cosenseListResponseSchema.parse(await r.json())
+    if (parsed.count > parsed.pages.length) {
+      throw new Error(
+        `Cosense project has ${parsed.count} pages but client only fetched ${parsed.pages.length}; pagination is not yet implemented`,
+      )
+    }
+    return parsed
   }
 
   async getPage(title: string): Promise<CosensePage> {

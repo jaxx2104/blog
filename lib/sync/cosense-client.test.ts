@@ -56,4 +56,12 @@ describe("CosenseClient", () => {
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
     await expect(c.listPages()).rejects.toThrow(/503/)
   })
+
+  test("listPages aborts when count > pages.length (pagination needed)", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify({ count: 1500, pages: listJson.pages }), { status: 200 }),
+    )
+    const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
+    await expect(c.listPages()).rejects.toThrow(/pagination is not yet implemented/)
+  })
 })
