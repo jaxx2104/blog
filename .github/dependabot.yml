@@ -1,6 +1,12 @@
 # Dependency update config for Dependabot.
-# Replaces renovate.json (monthly schedule, group dev deps, automerge non-major).
 # Automerge of non-major PRs is handled by .github/workflows/dependabot-automerge.yml.
+#
+# Strategy:
+# - Group related packages (fortawesome / textlint / tanstack) so peer-dep
+#   sets land in a single PR even on major bumps.
+# - Group every GitHub Actions update into one PR.
+# - Ignore major bumps for core toolchain that needs planned upgrades
+#   (TypeScript, Velite, Vite, Biome, React, TanStack).
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -8,8 +14,19 @@ updates:
     schedule:
       interval: "monthly"
       timezone: "Asia/Tokyo"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
     groups:
+      fortawesome:
+        patterns:
+          - "@fortawesome/*"
+      textlint:
+        patterns:
+          - "textlint"
+          - "textlint-*"
+          - "@textlint/*"
+      tanstack:
+        patterns:
+          - "@tanstack/*"
       dev-dependencies:
         dependency-type: "development"
         update-types:
@@ -29,8 +46,38 @@ updates:
       - dependency-name: "@types/node"
         update-types:
           - "version-update:semver-major"
+      # Velite generates .d.ts files consumed by tsconfig; major bumps need manual verification.
+      - dependency-name: "velite"
+        update-types:
+          - "version-update:semver-major"
+      # Vite major bumps tend to ripple through the TanStack Start build.
+      - dependency-name: "vite"
+        update-types:
+          - "version-update:semver-major"
+      # Biome major bumps change lint defaults; do these intentionally.
+      - dependency-name: "@biomejs/biome"
+        update-types:
+          - "version-update:semver-major"
+      # React core: planned upgrades only.
+      - dependency-name: "react"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "react-dom"
+        update-types:
+          - "version-update:semver-major"
+      # TanStack Router / Start: tightly coupled to the routing build.
+      - dependency-name: "@tanstack/react-router"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "@tanstack/react-start"
+        update-types:
+          - "version-update:semver-major"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
       timezone: "Asia/Tokyo"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
