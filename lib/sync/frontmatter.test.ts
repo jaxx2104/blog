@@ -38,7 +38,7 @@ test("omits tags entirely when empty", () => {
 
 test("escapes single quotes in title", () => {
   const out = emitFrontmatter({ ...post, title: "Don't break" })
-  expect(out).toContain("title: \"Don't break\"")
+  expect(out).toContain('title: "Don\'t break"')
 })
 
 test("rejects scalars with embedded newlines", () => {

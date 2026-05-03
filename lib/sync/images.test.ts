@@ -65,9 +65,9 @@ test("propagates fetch failure", async () => {
 })
 
 test("does not leave a .tmp file when fetch succeeds", async () => {
-  const fetchMock = vi.fn().mockResolvedValue(
-    new Response(new Uint8Array([5]), { status: 200 }),
-  )
+  const fetchMock = vi
+    .fn()
+    .mockResolvedValue(new Response(new Uint8Array([5]), { status: 200 }))
   await downloadImages(
     [{ url: "https://gyazo.com/c.png", filename: "c.png" }],
     dir,

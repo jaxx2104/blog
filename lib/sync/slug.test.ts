@@ -13,5 +13,7 @@ test("rejects non-id input", () => {
 })
 
 test("slugForPageId throws with descriptive message on invalid input", () => {
-  expect(() => slugForPageId("not-a-page-id")).toThrow(/invalid Cosense page id/)
+  expect(() => slugForPageId("not-a-page-id")).toThrow(
+    /invalid Cosense page id/,
+  )
 })

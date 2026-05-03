@@ -1,11 +1,8 @@
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { describe, expect, test, vi } from "vitest"
-import {
-  cosenseListResponseSchema,
-  cosensePageSchema,
-} from "./types"
 import { CosenseClient } from "./cosense-client"
+import { cosenseListResponseSchema, cosensePageSchema } from "./types"
 
 const listJson = JSON.parse(
   readFileSync(resolve(__dirname, "__fixtures__/pages-list.json"), "utf8"),
@@ -25,9 +22,11 @@ describe("schemas accept captured fixtures", () => {
 
 describe("CosenseClient", () => {
   test("listPages hits /api/pages/<project> and parses response", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(
-      new Response(JSON.stringify(listJson), { status: 200 }),
-    )
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify(listJson), { status: 200 }),
+      )
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
     const result = await c.listPages()
     expect(result.pages).toHaveLength(2)
@@ -40,9 +39,11 @@ describe("CosenseClient", () => {
   })
 
   test("getPage URL-encodes the title", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(
-      new Response(JSON.stringify(detailJson), { status: 200 }),
-    )
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify(detailJson), { status: 200 }),
+      )
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
     await c.getPage("Hello World")
     expect(fetchMock).toHaveBeenCalledWith(
@@ -52,16 +53,22 @@ describe("CosenseClient", () => {
   })
 
   test("non-2xx throws", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(new Response("x", { status: 503 }))
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(new Response("x", { status: 503 }))
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
     await expect(c.listPages()).rejects.toThrow(/503/)
   })
 
   test("listPages aborts when count > pages.length (pagination needed)", async () => {
     const fetchMock = vi.fn().mockResolvedValue(
-      new Response(JSON.stringify({ count: 1500, pages: listJson.pages }), { status: 200 }),
+      new Response(JSON.stringify({ count: 1500, pages: listJson.pages }), {
+        status: 200,
+      }),
     )
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
-    await expect(c.listPages()).rejects.toThrow(/pagination is not yet implemented/)
+    await expect(c.listPages()).rejects.toThrow(
+      /pagination is not yet implemented/,
+    )
   })
 })

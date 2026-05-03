@@ -2,7 +2,9 @@ import type { Post } from "./types"
 
 function quoteScalar(s: string): string {
   if (/[\n\r]/.test(s)) {
-    throw new Error(`frontmatter scalar must not contain newlines: ${JSON.stringify(s)}`)
+    throw new Error(
+      `frontmatter scalar must not contain newlines: ${JSON.stringify(s)}`,
+    )
   }
   // YAML: single-quote unless the value itself contains a single quote.
   // In that case use double quotes and escape backslashes (first) and

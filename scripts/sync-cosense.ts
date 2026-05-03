@@ -25,8 +25,7 @@ interface Args {
 
 function parseArgs(argv: string[]): Args {
   return {
-    dryRun:
-      argv.includes("--dry-run") || process.env.SYNC_DRY_RUN === "true",
+    dryRun: argv.includes("--dry-run") || process.env.SYNC_DRY_RUN === "true",
   }
 }
 
@@ -56,7 +55,10 @@ export async function runSync(
   const plan = computePlan(list.pages, local)
 
   const deletions = plan.actions.filter((a) => a.kind === "delete").length
-  if (plan.localCount > 0 && deletions / plan.localCount > opts.maxDeleteRatio) {
+  if (
+    plan.localCount > 0 &&
+    deletions / plan.localCount > opts.maxDeleteRatio
+  ) {
     throw new Error(`abort: would delete ${deletions}/${plan.localCount} posts`)
   }
 

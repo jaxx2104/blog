@@ -3,7 +3,8 @@ import type { CosensePage, ImageRef, Post } from "./types"
 
 const HASHTAG_RE = /(?:^|\s)#([\p{L}\p{N}_-]+)/gu
 const GYAZO_RE = /\[https:\/\/gyazo\.com\/([a-zA-Z0-9]+)(\.[a-z]+)?\]/g
-const SCRAPBOX_FILE_RE = /\[https:\/\/scrapbox\.io\/files\/([a-zA-Z0-9]+\.[a-z]+)\]/g
+const SCRAPBOX_FILE_RE =
+  /\[https:\/\/scrapbox\.io\/files\/([a-zA-Z0-9]+\.[a-z]+)\]/g
 
 const DESCRIPTION_MAX = 160
 
@@ -17,7 +18,10 @@ function extractImages(text: string): ImageRef[] {
   const out: ImageRef[] = []
   for (const m of text.matchAll(GYAZO_RE)) {
     const ext = m[2] ?? ".png"
-    out.push({ url: `https://gyazo.com/${m[1]}${ext}`, filename: `${m[1]}${ext}` })
+    out.push({
+      url: `https://gyazo.com/${m[1]}${ext}`,
+      filename: `${m[1]}${ext}`,
+    })
   }
   for (const m of text.matchAll(SCRAPBOX_FILE_RE)) {
     out.push({
@@ -37,7 +41,9 @@ function firstProseLine(bodyLines: string[]): string {
     if (trimmed.startsWith("code:")) continue // fenced-code opener
     if (trimmed.startsWith(">")) continue // blockquote
     if (l !== trimmed && trimmed.length > 0) continue // indented line (code content)
-    return trimmed.length > DESCRIPTION_MAX ? trimmed.slice(0, DESCRIPTION_MAX) : trimmed
+    return trimmed.length > DESCRIPTION_MAX
+      ? trimmed.slice(0, DESCRIPTION_MAX)
+      : trimmed
   }
   return ""
 }

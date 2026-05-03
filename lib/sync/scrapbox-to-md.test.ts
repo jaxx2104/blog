@@ -3,22 +3,30 @@ import { scrapboxToMarkdown } from "./scrapbox-to-md"
 
 describe("scrapboxToMarkdown", () => {
   const cases: Array<[label: string, input: string, expected: string]> = [
-    ["plain line",     "hello world",                    "hello world"],
-    ["bold via [* ]",  "[* very important]",              "**very important**"],
-    ["heading h3 [** ]", "[** medium]",                   "### medium"],
-    ["heading h2 [*** ]", "[*** big]",                    "## big"],
-    ["heading h1 [**** ]", "[**** huge]",                 "# huge"],
-    ["inline code",    "use `pnpm sync` daily",           "use `pnpm sync` daily"],
-    ["external url",   "[https://example.com Example]",   "[Example](https://example.com)"],
-    ["bare url",       "[https://example.com]",           "<https://example.com>"],
-    ["hashtag stays inline", "see #blog for more",        "see #blog for more"],
-    ["gyazo image",    "[https://gyazo.com/abc123]",      "![](abc123.png)"],
+    ["plain line", "hello world", "hello world"],
+    ["bold via [* ]", "[* very important]", "**very important**"],
+    ["heading h3 [** ]", "[** medium]", "### medium"],
+    ["heading h2 [*** ]", "[*** big]", "## big"],
+    ["heading h1 [**** ]", "[**** huge]", "# huge"],
+    ["inline code", "use `pnpm sync` daily", "use `pnpm sync` daily"],
+    [
+      "external url",
+      "[https://example.com Example]",
+      "[Example](https://example.com)",
+    ],
+    ["bare url", "[https://example.com]", "<https://example.com>"],
+    ["hashtag stays inline", "see #blog for more", "see #blog for more"],
+    ["gyazo image", "[https://gyazo.com/abc123]", "![](abc123.png)"],
     ["scrapbox image", "[https://scrapbox.io/files/xyz.png]", "![](xyz.png)"],
-    ["internal link",  "[Other Page]",                    "**Other Page**"],
-    ["blockquote",     "> quoted",                         "> quoted"],
-    ["heading clamps 5+ stars to h1", "[***** mega]",     "# mega"],
-    ["whitespace-only bracket stays as-is", "[   ]",      "[   ]"],
-    ["bare url with trailing period", "[https://example.com.]", "<https://example.com>."],
+    ["internal link", "[Other Page]", "**Other Page**"],
+    ["blockquote", "> quoted", "> quoted"],
+    ["heading clamps 5+ stars to h1", "[***** mega]", "# mega"],
+    ["whitespace-only bracket stays as-is", "[   ]", "[   ]"],
+    [
+      "bare url with trailing period",
+      "[https://example.com.]",
+      "<https://example.com>.",
+    ],
   ]
   for (const [label, input, expected] of cases) {
     test(label, () => {

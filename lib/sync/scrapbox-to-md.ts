@@ -18,20 +18,36 @@ const CODE_OPEN_RE = /^code:([^\s]+)$/
 function transformInline(line: string): string {
   // Whole-line wrappers handled first.
   let m: RegExpMatchArray | null
-  if ((m = line.match(GYAZO_RE))) return `![](${m[1]}.png)`
-  if ((m = line.match(SCRAPBOX_FILE_RE))) return `![](${m[1]})`
-  if ((m = line.match(URL_TITLE_RE))) return `[${m[2]}](${m[1]})`
-  if ((m = line.match(URL_BARE_RE))) return `<${m[1]}>${m[2]}`
-  if ((m = line.match(STAR_RE))) {
+
+  m = line.match(GYAZO_RE)
+  if (m) return `![](${m[1]}.png)`
+
+  m = line.match(SCRAPBOX_FILE_RE)
+  if (m) return `![](${m[1]})`
+
+  m = line.match(URL_TITLE_RE)
+  if (m) return `[${m[2]}](${m[1]})`
+
+  m = line.match(URL_BARE_RE)
+  if (m) return `<${m[1]}>${m[2]}`
+
+  m = line.match(STAR_RE)
+  if (m) {
     const stars = m[1].length
     const text = m[2]
     return stars === 1
       ? `**${text}**`
       : `${HEADING_LEVELS[stars as 2 | 3 | 4] ?? "#"} ${text}`
   }
-  if ((m = line.match(INTERNAL_RE)) && !m[1].startsWith("http")) {
+
+  m = line.match(INTERNAL_RE)
+  if (m && !m[1].startsWith("http")) {
     const content = m[1]
-    if (content.length > 0 && !/^\s/.test(content) && content.trim().length > 0) {
+    if (
+      content.length > 0 &&
+      !/^\s/.test(content) &&
+      content.trim().length > 0
+    ) {
       return `**${content}**`
     }
   }
@@ -54,7 +70,7 @@ export function scrapboxToMarkdown(input: string): string {
         code.push(lines[i].slice(1))
         i++
       }
-      out.push("```" + ext)
+      out.push(`\`\`\`${ext}`)
       out.push(...code)
       out.push("```")
       continue
