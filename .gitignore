@@ -8,14 +8,8 @@ node_modules/
 !.yarn/sdks
 !.yarn/versions
 
-# Next.js
-.next/
-out/
-build/
+# Build artifacts
 dist/
-
-# Production
-/build
 
 # Misc
 .DS_Store
@@ -31,12 +25,8 @@ yarn-error.log*
 .env*.local
 .env
 
-# Vercel
-.vercel
-
 # TypeScript
 *.tsbuildinfo
-next-env.d.ts
 
 # IDE
 .vscode/
@@ -54,7 +44,7 @@ coverage/
 *.log
 tmp/
 
-# Build output
+# Velite-generated image assets (build output, not tracked)
 public/images/posts
 
 # Image optimization backups
