@@ -28,6 +28,7 @@
     "scripts/**/*.ts",
     "styles/**/*.ts",
     "styles/**/*.tsx",
+    "vitest.config.ts",
     "vite.config.mts"
   ],
   "exclude": [
