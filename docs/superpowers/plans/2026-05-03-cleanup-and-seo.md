@@ -42,10 +42,17 @@
 **Files:**
 - Modify: `.gitignore`
 
-- [ ] **Step 1: Verify `public/images/posts` is tracked, not ignored**
+- [ ] **Step 1: Confirm `public/images/posts/` ignore status**
 
 Run: `git ls-files public/images/posts | head -3`
-Expected: at least 3 paths printed (Velite output is committed). If empty, stop and reassess — the spec assumed these are tracked.
+Expected: empty output. The Velite output directory is intentionally
+ignored (Phase 0 commit `69101c5` — "The assets directory
+(public/images/posts/) is gitignored; legacy hashless files are not
+tracked"). The `public/images/posts` ignore line MUST stay in the
+rewritten `.gitignore`.
+
+(An earlier draft of this plan removed the line; it was corrected after
+this verification step caught the mistake.)
 
 - [ ] **Step 2: Edit `.gitignore`**
 
@@ -98,6 +105,9 @@ coverage/
 *.log
 tmp/
 
+# Velite-generated image assets (build output, not tracked)
+public/images/posts
+
 # Image optimization backups
 *.original
 
@@ -119,7 +129,9 @@ app/routeTree.gen.ts
 .tanstack/
 ```
 
-Removed: `.next/`, `next-env.d.ts`, `out/`, `build/`, `/build`, `.vercel`, `public/images/posts`, `# Next.js` / `# Production` / `# Vercel` headings.
+Removed: `.next/`, `next-env.d.ts`, `out/`, `build/`, `/build`, `.vercel`, `# Next.js` / `# Production` / `# Vercel` headings.
+
+Kept (with a clearer comment): `public/images/posts`.
 
 - [ ] **Step 3: Verify nothing newly ignored or unignored**
 
@@ -161,7 +173,7 @@ Expected: file staged for deletion.
 
 - [ ] **Step 3: Verify the new file is reachable through the build**
 
-Run: `rm -rf dist/ && pnpm build`
+Run: `pnpm build` (no `rm -rf dist/` — Vite handles re-emit cleanly)
 Expected: build succeeds.
 
 Run: `cat dist/client/robots.txt`
@@ -186,7 +198,7 @@ git commit -m "feat: serve robots.txt from public/ with sitemap pointer"
 - Delete: `static/img/profile.jpg`
 - Delete: `static/` (after the directory becomes empty)
 
-- [ ] **Step 1: Diff each file against the `public/images/` equivalent**
+- [ ] **Step 1: Diff each file against the `public/images/` equivalent (informational)**
 
 Run:
 ```bash
@@ -194,7 +206,19 @@ for f in favicon.ico apple-touch-icon.png android-chrome-192x192.png android-chr
   diff -q "static/img/$f" "public/images/$f" || echo "DIFFER: $f"
 done
 ```
-Expected: no `DIFFER:` lines and no diff output. If anything differs, stop, investigate, and update the plan before proceeding.
+
+Expected today: 4 of 5 files report `DIFFER` (only `profile.jpg` is
+byte-identical). The `static/img/` versions are dated 2025-10-08
+(pre-migration); the `public/images/` versions are dated 2026-05-01
+(post-migration, optimized) and are the only ones referenced from code
+(`app/routes/__root.tsx`, `public/manifest.json`). `static/` is not
+served by Vite. `grep -RIn "static/img" app components lib styles
+scripts vite.config.mts velite.config.ts build.sh wrangler.toml
+package.json` returns zero matches.
+
+Decision: delete `static/img/` regardless of the byte differences — it
+is genuinely stale, replaced by the newer assets in `public/images/`.
+This step is now informational only; do not block on `DIFFER` output.
 
 - [ ] **Step 2: Delete the duplicates**
 
@@ -504,7 +528,7 @@ Write `public/_headers`:
 
 - [ ] **Step 2: Verify it ships through the build**
 
-Run: `rm -rf dist/ && pnpm build`
+Run: `pnpm build` (no `rm -rf dist/` — Vite handles re-emit cleanly)
 Expected: build succeeds.
 
 Run: `cat dist/client/_headers`
@@ -731,7 +755,7 @@ Expected: `string`. If it prints `object`, change `created_at` / `updated_at` ty
 
 - [ ] **Step 4: Build and verify the artifacts**
 
-Run: `rm -rf dist/ && pnpm build`
+Run: `pnpm build` (no `rm -rf dist/` — Vite handles re-emit cleanly)
 Expected: build succeeds.
 
 Run: `ls dist/client/sitemap.xml dist/client/feed.xml`
@@ -792,7 +816,7 @@ Expected: both pass.
 
 - [ ] **Step 3: Build and verify the link is emitted**
 
-Run: `rm -rf dist/ && pnpm build`
+Run: `pnpm build` (no `rm -rf dist/` — Vite handles re-emit cleanly)
 Expected: build succeeds.
 
 Run: `grep -l 'application/rss+xml' dist/client/index.html`
