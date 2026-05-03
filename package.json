@@ -6,7 +6,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "7.2.0",
     "@fortawesome/free-brands-svg-icons": "7.2.0",
-    "@fortawesome/react-fontawesome": "0.2.6",
+    "@fortawesome/react-fontawesome": "3.3.1",
     "@tanstack/react-router": "^1.169.1",
     "@tanstack/react-start": "^1.167.61",
     "date-fns": "^4.1.0",
