@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url"
 import { defineConfig } from "vitest/config"
 
 export default defineConfig({
@@ -8,6 +9,8 @@ export default defineConfig({
     pool: "forks",
   },
   resolve: {
-    alias: { "@": new URL(".", import.meta.url).pathname.replace(/\/$/, "") },
+    alias: {
+      "@": fileURLToPath(new URL(".", import.meta.url)).replace(/[\\/]$/, ""),
+    },
   },
 })
