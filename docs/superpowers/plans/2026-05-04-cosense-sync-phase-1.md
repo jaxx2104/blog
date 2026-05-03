@@ -792,6 +792,46 @@ test("description falls back to empty string when body has no prose", () => {
   const post = transformPage({ ...page, lines: [page.lines[0]] })
   expect(post.description).toBe("")
 })
+
+test("description skips code: and blockquote lines", () => {
+  const post = transformPage({
+    ...page,
+    lines: [
+      page.lines[0],
+      { id: "x", text: "code:hello.ts", userId: "u", created: 1, updated: 1 },
+      { id: "y", text: " const x = 1", userId: "u", created: 1, updated: 1 },
+      { id: "z", text: "> quoted", userId: "u", created: 1, updated: 1 },
+      { id: "w", text: "real prose here", userId: "u", created: 1, updated: 1 },
+    ],
+  })
+  expect(post.description).toBe("real prose here")
+})
+
+test("does not eat first body line when title differs from lines[0]", () => {
+  const post = transformPage({
+    ...page,
+    title: "Renamed",
+    lines: [
+      { id: "l1", text: "Original Body Line", userId: "u", created: 1, updated: 1 },
+      { id: "l2", text: "Second", userId: "u", created: 1, updated: 1 },
+    ],
+  })
+  expect(post.description).toBe("Original Body Line")
+  expect(post.body).toContain("Original Body Line")
+})
+
+test("hashtag dedup + scrapbox file image", () => {
+  const post = transformPage({
+    ...page,
+    lines: [
+      page.lines[0],
+      { id: "a", text: "see #blog and #blog again", userId: "u", created: 1, updated: 1 },
+      { id: "b", text: "[https://scrapbox.io/files/abc.jpg]", userId: "u", created: 1, updated: 1 },
+    ],
+  })
+  expect(post.tags).toEqual(["blog"])
+  expect(post.images).toEqual([{ url: "https://scrapbox.io/files/abc.jpg", filename: "abc.jpg" }])
+})
 ```
 
 Run: `pnpm test:unit lib/sync/transform.test.ts` → red.
@@ -806,6 +846,8 @@ import type { CosensePage, ImageRef, Post } from "./types"
 const HASHTAG_RE = /(?:^|\s)#([\p{L}\p{N}_-]+)/gu
 const GYAZO_RE = /\[https:\/\/gyazo\.com\/([a-zA-Z0-9]+)(\.[a-z]+)?\]/g
 const SCRAPBOX_FILE_RE = /\[https:\/\/scrapbox\.io\/files\/([a-zA-Z0-9]+\.[a-z]+)\]/g
+
+const DESCRIPTION_MAX = 160
 
 function extractTags(text: string): string[] {
   const out = new Set<string>()
@@ -833,14 +875,18 @@ function firstProseLine(bodyLines: string[]): string {
     const trimmed = l.trim()
     if (trimmed.length === 0) continue
     if (trimmed.startsWith("#")) continue          // hashtag-only line
-    if (trimmed.startsWith("[")) continue          // image / heading line
-    return trimmed.length > 160 ? trimmed.slice(0, 160) : trimmed
+    if (trimmed.startsWith("[")) continue          // image / heading / link line
+    if (trimmed.startsWith("code:")) continue      // fenced-code opener
+    if (trimmed.startsWith(">")) continue          // blockquote
+    if (l !== trimmed && trimmed.length > 0) continue // indented line (code content)
+    return trimmed.length > DESCRIPTION_MAX ? trimmed.slice(0, DESCRIPTION_MAX) : trimmed
   }
   return ""
 }
 
 export function transformPage(page: CosensePage): Post {
-  const bodyLines = page.lines.slice(1).map((l) => l.text)
+  const skipTitle = page.lines[0]?.text === page.title ? 1 : 0
+  const bodyLines = page.lines.slice(skipTitle).map((l) => l.text)
   const rawBody = bodyLines.join("\n")
   return {
     id: page.id,
