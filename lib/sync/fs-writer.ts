@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs"
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
+import { mkdir, readFile, rename, rm, unlink, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 import { emitFrontmatter } from "./frontmatter"
 import type { Post } from "./types"
@@ -19,11 +19,17 @@ export async function writePost(post: Post, postsRoot: string): Promise<void> {
 		const cur = await readFile(dest, "utf8")
 		if (cur === next) return
 	}
-	await writeFile(dest, next)
+	const tmp = `${dest}.tmp`
+	await writeFile(tmp, next)
+	try {
+		await rename(tmp, dest)
+	} catch (err) {
+		await unlink(tmp).catch(() => {})
+		throw err
+	}
 }
 
 export async function deletePost(id: string, postsRoot: string): Promise<void> {
 	const dir = join(postsRoot, id)
-	if (!existsSync(dir)) return
 	await rm(dir, { recursive: true, force: true })
 }

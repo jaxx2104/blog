@@ -53,3 +53,9 @@ test("deletePost removes the directory", async () => {
 	expect(() => statSync(join(root, post.id))).toThrow()
 	expect(readFileSync(join(root, "to-delete.md"), "utf8")).toBe("x")
 })
+
+test("does not leave a .tmp file when write succeeds", async () => {
+	await writePost(post, root)
+	const dest = join(root, post.id, "index.md")
+	expect(() => statSync(`${dest}.tmp`)).toThrow()
+})
