@@ -5,7 +5,8 @@ on:
       dry_run:
         description: "Dry-run only (writes .sync-plan.json, no commit)"
         required: false
-        default: "false"
+        type: boolean
+        default: false
 
 jobs:
   sync:
@@ -21,12 +22,12 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - name: Run sync
-        run: pnpm sync ${{ inputs.dry_run == 'true' && '--dry-run' || '' }}
+        run: pnpm sync ${{ inputs.dry_run && '--dry-run' || '' }}
         env:
           COSENSE_PROJECT: ${{ secrets.COSENSE_PROJECT }}
           COSENSE_SID:     ${{ secrets.COSENSE_SID }}
       - name: Commit & push (skipped on dry-run)
-        if: inputs.dry_run != 'true'
+        if: ! inputs.dry_run
         run: |
           if [ -n "$(git status --porcelain content public)" ]; then
             git config user.name  "blog-sync[bot]"
@@ -36,7 +37,7 @@ jobs:
             git push origin main
           fi
       - name: Upload dry-run plan
-        if: inputs.dry_run == 'true' && hashFiles('.sync-plan.json') != ''
+        if: inputs.dry_run && hashFiles('.sync-plan.json') != ''
         uses: actions/upload-artifact@v4
         with:
           name: sync-plan

@@ -1693,7 +1693,7 @@ test("aborts when deletes exceed ratio", async () => {
 - [ ] **Step 3: Run, then fix any small refactor issues**
 
 Run: `pnpm test:unit scripts/sync-cosense.test.ts`
-Expected: green. If a test fails because the orchestrator imports `gray-matter` (already a project dep, see `package.json`), that's expected to work — it's used elsewhere in the build.
+Expected: green. The orchestrator parses the `updated_at:` line with a regex (see `UPDATED_AT_RE` and the comment above it in `scripts/sync-cosense.ts`); `gray-matter@4` is unusable because of the project's `js-yaml@4` overrides.
 
 - [ ] **Step 4: Commit**
 
@@ -1816,7 +1816,7 @@ Verify in the GitHub Actions UI that "Sync from Cosense" appears under workflows
 
 ## Self-review notes (for the implementer)
 
-- The orchestrator imports `gray-matter` — that's an existing dep used by Velite's content layer, so it's safe to use.
+- The orchestrator parses the `updated_at:` line with a regex (see `UPDATED_AT_RE` and the comment above it in `scripts/sync-cosense.ts`); `gray-matter@4` is unusable because of the project's `js-yaml@4` overrides.
 - `import.meta.url === \`file://${process.argv[1]}\`` is the standard "is this script run directly under tsx?" idiom; if it doesn't trigger when run via `pnpm sync`, fall back to gating with `process.env.NODE_ENV !== "test"` and call `runSync(...)` from the script body unconditionally outside tests.
 - The integration test in Task 13 stubs the client object directly rather than spawning a subprocess. Do not be tempted to spawn `tsx scripts/sync-cosense.ts` — it adds 2-3 s per test for no signal gain.
 - If the Scrapbox notation table grows past ~15 rows, split the table tests into thematic `describe` blocks but keep the data-driven structure.
