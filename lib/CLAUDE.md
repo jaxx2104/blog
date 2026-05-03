@@ -5,17 +5,19 @@
 ## Files
 
 ### `posts.ts` - Blog Post Data
-ブログ記事の取得・処理を担当。
+Velite の出力（`.velite/posts.ts`）をラップして、ルートから使いやすい形に整える。
 
 ```typescript
 // 主要な関数
-getAllPosts()      // 全記事を日付降順で取得
-getPostBySlug()    // スラッグから記事を取得
+getAllPosts()           // 全記事を日付降順で PostMeta[] として返す
+getPostByPermalink()    // permalink から記事本文付き PostFull を引く
+getAllPermalinks()      // 日付降順の permalink 一覧（prerender 用）
 ```
 
-- `/content/posts/[slug]/index.md` から記事を読み込み
-- gray-matter で frontmatter をパース
+- `.velite/posts.ts` をソース（`getAllPosts` / `getPostByPermalink` / `getAllPermalinks`）にしている
+- frontmatter は Velite + Zod (`lib/content/schema.ts`) でパース済み
 - 画像は Velite が `public/images/posts/<name>-<hash>.<ext>` のフラット URL に書き出し（`velite.config.ts` の `assets` / `base` / `name` 設定）、本文 HTML 内ではそのまま参照
+- thumbnail は本文 HTML から最初の `<img src="/images/posts/...">` を抽出して `PostMeta.thumbnail` に詰める
 
 ### `ThemeContext.tsx` - Theme Context
 ダーク/ライトモードのテーマ管理。`<html data-theme="...">` 属性を直接書き換え、`localStorage` で永続化する。
