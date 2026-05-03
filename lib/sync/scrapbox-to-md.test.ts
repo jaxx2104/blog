@@ -16,6 +16,9 @@ describe("scrapboxToMarkdown", () => {
     ["scrapbox image", "[https://scrapbox.io/files/xyz.png]", "![](xyz.png)"],
     ["internal link",  "[Other Page]",                    "**Other Page**"],
     ["blockquote",     "> quoted",                         "> quoted"],
+    ["heading clamps 5+ stars to h1", "[***** mega]",     "# mega"],
+    ["whitespace-only bracket stays as-is", "[   ]",      "[   ]"],
+    ["bare url with trailing period", "[https://example.com.]", "<https://example.com>."],
   ]
   for (const [label, input, expected] of cases) {
     test(label, () => {

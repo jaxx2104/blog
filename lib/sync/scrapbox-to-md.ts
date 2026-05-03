@@ -4,13 +4,13 @@
 // the test table covers. New notation discovered in real Cosense
 // content adds a row to the table FIRST, then is implemented here.
 
-const HEADING_LEVELS: Record<number, string> = { 4: "#", 3: "##", 2: "###" }
+const HEADING_LEVELS: Record<2 | 3 | 4, string> = { 4: "#", 3: "##", 2: "###" }
 
 const GYAZO_RE = /^\[https:\/\/gyazo\.com\/([a-zA-Z0-9]+)(?:\.[a-z]+)?\]$/
 const SCRAPBOX_FILE_RE =
   /^\[https:\/\/scrapbox\.io\/files\/([a-zA-Z0-9]+\.[a-z]+)\]$/
 const URL_TITLE_RE = /^\[(https?:\/\/\S+)\s+(.+)\]$/
-const URL_BARE_RE = /^\[(https?:\/\/\S+)\]$/
+const URL_BARE_RE = /^\[(https?:\/\/[^\s\]]+?)([.,;:!?]?)\]$/
 const STAR_RE = /^\[(\*+)\s+(.+)\]$/
 const INTERNAL_RE = /^\[([^\]]+)\]$/
 const CODE_OPEN_RE = /^code:([^\s]+)$/
@@ -21,16 +21,19 @@ function transformInline(line: string): string {
   if ((m = line.match(GYAZO_RE))) return `![](${m[1]}.png)`
   if ((m = line.match(SCRAPBOX_FILE_RE))) return `![](${m[1]})`
   if ((m = line.match(URL_TITLE_RE))) return `[${m[2]}](${m[1]})`
-  if ((m = line.match(URL_BARE_RE))) return `<${m[1]}>`
+  if ((m = line.match(URL_BARE_RE))) return `<${m[1]}>${m[2]}`
   if ((m = line.match(STAR_RE))) {
     const stars = m[1].length
     const text = m[2]
     return stars === 1
       ? `**${text}**`
-      : `${HEADING_LEVELS[stars] ?? "###"} ${text}`
+      : `${HEADING_LEVELS[stars as 2 | 3 | 4] ?? "#"} ${text}`
   }
   if ((m = line.match(INTERNAL_RE)) && !m[1].startsWith("http")) {
-    return `**${m[1]}**`
+    const content = m[1]
+    if (content.length > 0 && !/^\s/.test(content) && content.trim().length > 0) {
+      return `**${content}**`
+    }
   }
   return line
 }
