@@ -24,11 +24,7 @@ function setFmField(fm: string, key: string, value: string): string {
   return `${fm.trimEnd()}\n${key}: ${value}`
 }
 
-function mergeIntoExisting(
-  cur: string,
-  post: Post,
-  indexPath: string,
-): string {
+function mergeIntoExisting(cur: string, post: Post, indexPath: string): string {
   const m = cur.match(FRONTMATTER_RE)
   if (!m) throw new FrontmatterParseError(indexPath)
   let fm = m[1]

@@ -63,7 +63,7 @@ cosense_id: deadbeefdeadbeefdeadbeef
     // Existing posts may have title: "Use \\\"escapes\\\""; we deliberately
     // do not interpret YAML escapes — strip only the outer quote pair.
     const text = `---
-title: "Use \\\"escapes\\\""
+title: "Use \\"escapes\\""
 ---
 `
     expect(parseFrontmatter(text).title).toBe('Use \\"escapes\\"')
