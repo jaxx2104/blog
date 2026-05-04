@@ -9,7 +9,7 @@ import { mkdir } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, beforeEach, expect, test } from "vitest"
-import { updatePost } from "./fs-writer"
+import { createPost, deletePost, updatePost } from "./fs-writer"
 import type { Post } from "./types"
 
 let root: string
@@ -136,4 +136,58 @@ test("throws clear error when stub frontmatter is malformed", async () => {
 test("throws when stub index.md does not exist", async () => {
   const dir = join(root, "missing")
   await expect(updatePost(post, dir)).rejects.toThrow(/ENOENT|no such file/i)
+})
+
+test("createPost: writes a fresh index.md with full frontmatter", async () => {
+  const dir = join(root, "antigravity")
+  await mkdir(dir, { recursive: true })
+  await createPost(post, dir)
+  const out = readFileSync(join(dir, "index.md"), "utf8")
+  expect(out).toContain('title: "Sample"')
+  expect(out).toContain("created_at: '2026-05-01T00:00:00.000Z'")
+  expect(out).toContain("updated_at: '2026-05-04T00:00:00.000Z'")
+  expect(out).toContain("cosense_id: 0123456789abcdef01234567")
+  expect(out).toContain("\n\nHello body.\n")
+})
+
+test("createPost: throws when index.md already exists", async () => {
+  const dir = join(root, "antigravity")
+  await mkdir(dir, { recursive: true })
+  writeFileSync(join(dir, "index.md"), "existing")
+  await expect(createPost(post, dir)).rejects.toThrow(/already exists/i)
+})
+
+test("createPost: throws when blogDir does not exist", async () => {
+  const dir = join(root, "missing")
+  await expect(createPost(post, dir)).rejects.toThrow(/ENOENT|no such file/i)
+})
+
+test("createPost: does not leave a .tmp file when the write succeeds", async () => {
+  const dir = join(root, "antigravity")
+  await mkdir(dir, { recursive: true })
+  await createPost(post, dir)
+  expect(() => statSync(join(dir, "index.md.tmp"))).toThrow()
+})
+
+test("createPost: title is JSON-quoted (handles embedded quotes)", async () => {
+  const dir = join(root, "quoted")
+  await mkdir(dir, { recursive: true })
+  const tricky = { ...post, title: 'Has "quotes" and \\backslash' }
+  await createPost(tricky, dir)
+  const out = readFileSync(join(dir, "index.md"), "utf8")
+  expect(out).toContain('title: "Has \\"quotes\\" and \\\\backslash"')
+})
+
+test("deletePost: removes the directory recursively", async () => {
+  const dir = join(root, "to-delete")
+  await mkdir(dir, { recursive: true })
+  writeFileSync(join(dir, "index.md"), "stuff")
+  writeFileSync(join(dir, "image.png"), "binary")
+  await deletePost(dir)
+  expect(() => statSync(dir)).toThrow()
+})
+
+test("deletePost: ENOENT is a no-op (idempotent)", async () => {
+  const dir = join(root, "never-existed")
+  await expect(deletePost(dir)).resolves.toBeUndefined()
 })
