@@ -74,8 +74,12 @@ describe("CosenseClient", () => {
     }
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce(new Response(JSON.stringify(page1), { status: 200 }))
-      .mockResolvedValueOnce(new Response(JSON.stringify(page2), { status: 200 }))
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(page1), { status: 200 }),
+      )
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(page2), { status: 200 }),
+      )
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
     const result = await c.listPages()
     expect(result.pages).toHaveLength(3)
@@ -100,8 +104,12 @@ describe("CosenseClient", () => {
     const page2 = { count: 100, pages: [] }
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce(new Response(JSON.stringify(page1), { status: 200 }))
-      .mockResolvedValueOnce(new Response(JSON.stringify(page2), { status: 200 }))
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(page1), { status: 200 }),
+      )
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(page2), { status: 200 }),
+      )
     const c = new CosenseClient({ project: "demo", sid: "s", fetch: fetchMock })
     const result = await c.listPages()
     expect(result.pages).toHaveLength(1)

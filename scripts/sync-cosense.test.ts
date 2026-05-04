@@ -1,8 +1,8 @@
 // scripts/sync-cosense.test.ts
 import {
   mkdtempSync,
-  readFileSync,
   readdirSync,
+  readFileSync,
   rmSync,
   statSync,
   writeFileSync,
@@ -84,10 +84,7 @@ test("dry-run produces a plan without touching disk", async () => {
     errorsPath,
     dryRun: true,
   })
-  expect(r.plan.actions.map((a) => a.kind).sort()).toEqual([
-    "update",
-    "update",
-  ])
+  expect(r.plan.actions.map((a) => a.kind).sort()).toEqual(["update", "update"])
   expect(r.plan.stubCount).toBe(2)
   expect(c.getPage).not.toHaveBeenCalled()
   // Stubs unchanged
