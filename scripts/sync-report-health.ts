@@ -207,9 +207,9 @@ const defaultRunGh: GhRunner = (args, stdin) => {
       if (err) rejectP(err)
       else resolveP(stdout)
     })
-    if (stdin && child.stdin) {
-      child.stdin.write(stdin)
-      child.stdin.end()
+    if (stdin) {
+      child.stdin?.on("error", rejectP)
+      child.stdin?.end(stdin)
     }
   })
 }
@@ -222,18 +222,19 @@ const envSchema = z.object({
 const ERRORS_PATH = resolve(process.cwd(), ".sync-errors.json")
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const env = envSchema.parse(process.env)
-  reportHealth({
-    status: env.SYNC_STATUS,
-    runUrl: env.WORKFLOW_RUN_URL,
-    errorsPath: ERRORS_PATH,
-    runGh: defaultRunGh,
-  })
-    .then(({ action }) => {
+  ;(async () => {
+    try {
+      const env = envSchema.parse(process.env)
+      const { action } = await reportHealth({
+        status: env.SYNC_STATUS,
+        runUrl: env.WORKFLOW_RUN_URL,
+        errorsPath: ERRORS_PATH,
+        runGh: defaultRunGh,
+      })
       console.log(`sync-report-health: ${action}`)
-    })
-    .catch((err) => {
+    } catch (err) {
       console.error(err)
       process.exit(1)
-    })
+    }
+  })()
 }
