@@ -117,7 +117,7 @@ test("real run updates matched stubs into their existing dirs", async () => {
   expect(aOut).not.toContain("old body")
 })
 
-test("Cosense pages with no matching stub are skipped without error", async () => {
+test("Cosense pages with no matching stub become create actions without error", async () => {
   await makeStub("a-stub", "A")
   // no stub for B
   const c = stubClient()
@@ -128,8 +128,8 @@ test("Cosense pages with no matching stub are skipped without error", async () =
     dryRun: false,
   })
   const kinds = r.plan.actions.map((a) => a.kind).sort()
-  expect(kinds).toEqual(["skip", "update"])
-  expect(c.getPage).toHaveBeenCalledTimes(1) // only A was fetched
+  expect(kinds).toEqual(["create", "update"])
+  expect(c.getPage).toHaveBeenCalledTimes(1) // only A was fetched (create not yet implemented in orchestrator)
   expect(r.errors).toHaveLength(0)
 })
 
