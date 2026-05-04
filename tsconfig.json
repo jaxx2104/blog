@@ -42,7 +42,6 @@
     ".next",
     "app/routeTree.gen.ts",
     "**/*.old/**/*",
-    "**/*.bak/**/*",
-    "scripts/sync-cosense.test.ts"
+    "**/*.bak/**/*"
   ]
 }
