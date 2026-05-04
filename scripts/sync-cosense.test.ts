@@ -340,6 +340,10 @@ test("delete: stub with cosense_id absent from remote is removed", async () => {
     fetch: vi
       .fn()
       .mockResolvedValue(new Response(new Uint8Array([1]), { status: 200 })),
+    // 1 delete / 1 cosense-sourced stub = ratio 1.0 in this tiny fixture.
+    // Production has ~50 stubs so a single delete is ~0.02. Disable the
+    // ratio gate here to exercise basic delete behaviour, not threshold tuning.
+    maxDeleteRatio: 1.0,
   })
   expect(r.errors).toHaveLength(0)
   const dirs = readdirSync(postsRoot).sort()

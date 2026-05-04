@@ -14,7 +14,7 @@ const envSchema = z.object({
   COSENSE_PROJECT: z.string().min(1),
   COSENSE_SID: z.string().min(1),
   MAX_DELETE_ABS: z.coerce.number().int().nonnegative().default(5),
-  MAX_DELETE_RATIO: z.coerce.number().nonnegative().default(1.0),
+  MAX_DELETE_RATIO: z.coerce.number().nonnegative().default(0.05),
 })
 
 const POSTS_ROOT = resolve(process.cwd(), "content/posts")
@@ -83,7 +83,7 @@ export async function runSync(opts: RunOptions): Promise<RunResult> {
 
   // --- Threshold check (BEFORE any side effects) ---
   const maxAbs = opts.maxDeleteAbs ?? 5
-  const maxRatio = opts.maxDeleteRatio ?? 1.0
+  const maxRatio = opts.maxDeleteRatio ?? 0.05
   const deleteCount = plan.actions.filter((a) => a.kind === "delete").length
   const cosenseSourced = local.filter((s) => s.cosenseId).length
   const ratio = cosenseSourced > 0 ? deleteCount / cosenseSourced : 0
