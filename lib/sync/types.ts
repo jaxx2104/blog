@@ -55,13 +55,12 @@ export interface ImageRef {
 
 /** Output of diff stage. */
 export type SyncAction =
-  | { kind: "create"; page: CosenseListEntry }
-  | { kind: "update"; page: CosenseListEntry }
-  | { kind: "delete"; id: string }
+  | { kind: "update"; page: CosenseListEntry; blogDir: string }
   | { kind: "unchanged"; id: string }
+  | { kind: "skip"; title: string; reason: "no-stub" }
 
 export interface SyncPlan {
   actions: SyncAction[]
-  /** Number of currently existing local post directories before sync. */
-  localCount: number
+  /** Number of stub directories scanned in `content/posts/`. */
+  stubCount: number
 }
