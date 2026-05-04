@@ -64,6 +64,7 @@
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",
     "sync": "tsx scripts/sync-cosense.ts",
+    "sync:report-health": "tsx scripts/sync-report-health.ts",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "test": "tsc -p ./tsconfig.json"
