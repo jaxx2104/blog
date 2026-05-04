@@ -1,18 +1,20 @@
 // scripts/sync-cosense.ts
-import { readdir, readFile, writeFile } from "node:fs/promises"
+import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises"
 import { join, resolve } from "node:path"
 import { z } from "zod"
 import { CosenseClient } from "@/lib/sync/cosense-client"
 import { computePlan, type LocalPostState } from "@/lib/sync/diff"
-import { updatePost } from "@/lib/sync/fs-writer"
+import { createPost, deletePost, updatePost } from "@/lib/sync/fs-writer"
 import { downloadImages } from "@/lib/sync/images"
 import { parseFrontmatter } from "@/lib/sync/parse-frontmatter"
 import { transformPage } from "@/lib/sync/transform"
-import type { SyncPlan } from "@/lib/sync/types"
+import { DeleteThresholdError, type SyncPlan } from "@/lib/sync/types"
 
 const envSchema = z.object({
   COSENSE_PROJECT: z.string().min(1),
   COSENSE_SID: z.string().min(1),
+  MAX_DELETE_ABS: z.coerce.number().int().nonnegative().default(5),
+  MAX_DELETE_RATIO: z.coerce.number().nonnegative().default(1.0),
 })
 
 const POSTS_ROOT = resolve(process.cwd(), "content/posts")
@@ -40,11 +42,36 @@ export interface RunOptions {
   errorsPath: string
   dryRun: boolean
   fetch?: typeof globalThis.fetch
+  maxDeleteAbs?: number
+  maxDeleteRatio?: number
 }
 
 export interface RunResult {
   plan: SyncPlan
   errors: SyncError[]
+}
+
+async function dirExists(p: string): Promise<boolean> {
+  try {
+    await stat(p)
+    return true
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") return false
+    throw err
+  }
+}
+
+async function resolveCreateSlug(
+  postsRoot: string,
+  preferredSlug: string,
+  pageId: string,
+): Promise<string> {
+  if (!(await dirExists(join(postsRoot, preferredSlug)))) return preferredSlug
+  const withSuffix = `${preferredSlug}-${pageId.slice(0, 6)}`
+  if (!(await dirExists(join(postsRoot, withSuffix)))) return withSuffix
+  throw new Error(
+    `slug collision: both ${preferredSlug}/ and ${withSuffix}/ already exist`,
+  )
 }
 
 export async function runSync(opts: RunOptions): Promise<RunResult> {
@@ -54,18 +81,68 @@ export async function runSync(opts: RunOptions): Promise<RunResult> {
 
   if (opts.dryRun) return { plan, errors: [] }
 
+  // --- Threshold check (BEFORE any side effects) ---
+  const maxAbs = opts.maxDeleteAbs ?? 5
+  const maxRatio = opts.maxDeleteRatio ?? 1.0
+  const deleteCount = plan.actions.filter((a) => a.kind === "delete").length
+  const cosenseSourced = local.filter((s) => s.cosenseId).length
+  const ratio = cosenseSourced > 0 ? deleteCount / cosenseSourced : 0
+  if (deleteCount > maxAbs) {
+    throw new DeleteThresholdError(
+      `delete count ${deleteCount} exceeds MAX_DELETE_ABS=${maxAbs}`,
+    )
+  }
+  if (ratio > maxRatio) {
+    throw new DeleteThresholdError(
+      `delete ratio ${ratio.toFixed(3)} exceeds MAX_DELETE_RATIO=${maxRatio.toFixed(3)}`,
+    )
+  }
+
+  // Ensure postsRoot exists before any create actions.
+  await mkdir(opts.postsRoot, { recursive: true })
+
   const errors: SyncError[] = []
   for (const action of plan.actions) {
-    if (action.kind !== "update") continue
     try {
-      const page = await opts.client.getPage(action.page.title)
-      const post = transformPage(page)
-      const dir = join(opts.postsRoot, action.blogDir)
-      await downloadImages(post.images, dir, { fetch: opts.fetch })
-      await updatePost(post, dir)
+      if (action.kind === "update") {
+        const page = await opts.client.getPage(action.page.title)
+        const post = transformPage(page)
+        const dir = join(opts.postsRoot, action.blogDir)
+        await downloadImages(post.images, dir, { fetch: opts.fetch })
+        await updatePost(post, dir)
+      } else if (action.kind === "create") {
+        const page = await opts.client.getPage(action.page.title)
+        const post = transformPage(page)
+        const finalSlug = await resolveCreateSlug(
+          opts.postsRoot,
+          action.slug,
+          page.id,
+        )
+        const dir = join(opts.postsRoot, finalSlug)
+        await mkdir(dir, { recursive: false })
+        try {
+          await downloadImages(post.images, dir, { fetch: opts.fetch })
+          await createPost(post, dir)
+        } catch (innerErr) {
+          // Rollback an empty/partial dir so the next tick is clean.
+          await deletePost(dir).catch(() => {})
+          throw innerErr
+        }
+      } else if (action.kind === "delete") {
+        await deletePost(join(opts.postsRoot, action.blogDir))
+      }
+      // unchanged: nothing to do
     } catch (err) {
+      let title: string
+      if (action.kind === "delete") {
+        title = `(delete cosense_id ${action.cosenseId})`
+      } else if (action.kind === "create" || action.kind === "update") {
+        title = action.page.title
+      } else {
+        title = `(unknown action: ${action.kind})`
+      }
       errors.push({
-        title: action.page.title,
+        title,
         error: err instanceof Error ? err.message : String(err),
       })
     }
@@ -106,15 +183,17 @@ async function readLocalStateAt(postsRoot: string): Promise<LocalPostState[]> {
 }
 
 function summarise(plan: SyncPlan, errors: SyncError[]): string {
+  let create = 0
   let update = 0
   let unchanged = 0
-  let skip = 0
+  let del = 0
   for (const a of plan.actions) {
-    if (a.kind === "update") update++
+    if (a.kind === "create") create++
+    else if (a.kind === "update") update++
     else if (a.kind === "unchanged") unchanged++
-    else skip++
+    else if (a.kind === "delete") del++
   }
-  return `plan: ${update} update, ${unchanged} unchanged, ${skip} skip(no-stub), ${errors.length} errors (stubs: ${plan.stubCount})`
+  return `plan: ${create} create, ${update} update, ${unchanged} unchanged, ${del} delete, ${errors.length} errors (stubs: ${plan.stubCount})`
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -128,6 +207,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     postsRoot: POSTS_ROOT,
     errorsPath: ERRORS_PATH,
     dryRun: args.dryRun,
+    maxDeleteAbs: env.MAX_DELETE_ABS,
+    maxDeleteRatio: env.MAX_DELETE_RATIO,
   })
     .then(async ({ plan, errors }) => {
       console.log(summarise(plan, errors))
