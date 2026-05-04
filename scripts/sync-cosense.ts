@@ -1,23 +1,23 @@
 // scripts/sync-cosense.ts
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises"
+import { readdir, readFile, writeFile } from "node:fs/promises"
 import { join, resolve } from "node:path"
 import { z } from "zod"
 import { CosenseClient } from "@/lib/sync/cosense-client"
 import { computePlan, type LocalPostState } from "@/lib/sync/diff"
-import { deletePost, writePost } from "@/lib/sync/fs-writer"
+import { updatePost } from "@/lib/sync/fs-writer"
 import { downloadImages } from "@/lib/sync/images"
-import { emitRedirects, type RedirectSeedEntry } from "@/lib/sync/redirects"
+import { parseFrontmatter } from "@/lib/sync/parse-frontmatter"
 import { transformPage } from "@/lib/sync/transform"
+import type { SyncPlan } from "@/lib/sync/types"
 
 const envSchema = z.object({
   COSENSE_PROJECT: z.string().min(1),
   COSENSE_SID: z.string().min(1),
-  MAX_DELETE_RATIO: z.coerce.number().min(0).max(1).default(0.5),
 })
 
 const POSTS_ROOT = resolve(process.cwd(), "content/posts")
-const REDIRECTS_PATH = resolve(process.cwd(), "public/_redirects")
-const SEED_PATH = resolve(process.cwd(), "lib/sync/redirects-seed.json")
+const PLAN_PATH = resolve(process.cwd(), ".sync-plan.json")
+const ERRORS_PATH = resolve(process.cwd(), ".sync-errors.json")
 
 interface Args {
   dryRun: boolean
@@ -29,66 +29,53 @@ function parseArgs(argv: string[]): Args {
   }
 }
 
-async function readSeed(): Promise<RedirectSeedEntry[]> {
-  try {
-    return JSON.parse(await readFile(SEED_PATH, "utf8"))
-  } catch {
-    return []
-  }
+export interface SyncError {
+  title: string
+  error: string
 }
 
 export interface RunOptions {
   client: Pick<CosenseClient, "listPages" | "getPage">
   postsRoot: string
-  redirectsPath: string
-  seed: RedirectSeedEntry[]
-  maxDeleteRatio: number
+  errorsPath: string
   dryRun: boolean
   fetch?: typeof globalThis.fetch
 }
 
-export async function runSync(
-  opts: RunOptions,
-): Promise<{ plan: ReturnType<typeof computePlan> }> {
+export interface RunResult {
+  plan: SyncPlan
+  errors: SyncError[]
+}
+
+export async function runSync(opts: RunOptions): Promise<RunResult> {
   const list = await opts.client.listPages()
   const local = await readLocalStateAt(opts.postsRoot)
   const plan = computePlan(list.pages, local)
 
-  const deletions = plan.actions.filter((a) => a.kind === "delete").length
-  if (
-    plan.localCount > 0 &&
-    deletions / plan.localCount > opts.maxDeleteRatio
-  ) {
-    throw new Error(`abort: would delete ${deletions}/${plan.localCount} posts`)
-  }
+  if (opts.dryRun) return { plan, errors: [] }
 
-  if (opts.dryRun) return { plan }
-
+  const errors: SyncError[] = []
   for (const action of plan.actions) {
-    if (action.kind === "delete") {
-      await deletePost(action.id, opts.postsRoot)
-      continue
+    if (action.kind !== "update") continue
+    try {
+      const page = await opts.client.getPage(action.page.title)
+      const post = transformPage(page)
+      const dir = join(opts.postsRoot, action.blogDir)
+      await downloadImages(post.images, dir, { fetch: opts.fetch })
+      await updatePost(post, dir)
+    } catch (err) {
+      errors.push({
+        title: action.page.title,
+        error: err instanceof Error ? err.message : String(err),
+      })
     }
-    if (action.kind === "unchanged") continue
-    const page = await opts.client.getPage(action.page.title)
-    const post = transformPage(page)
-    const postDir = join(opts.postsRoot, post.id)
-    await mkdir(postDir, { recursive: true })
-    await downloadImages(post.images, postDir, { fetch: opts.fetch })
-    await writePost(post, opts.postsRoot)
   }
 
-  const redirects = emitRedirects(opts.seed)
-  if (redirects.length > 0) await writeFile(opts.redirectsPath, redirects)
-  return { plan }
+  if (errors.length > 0) {
+    await writeFile(opts.errorsPath, JSON.stringify(errors, null, 2))
+  }
+  return { plan, errors }
 }
-
-// Coupled to lib/sync/frontmatter.ts:emitFrontmatter — single-quoted ISO
-// string. gray-matter@4 is the obvious tool for this but it calls
-// js-yaml.safeLoad which was removed in js-yaml@4 (and the repo overrides
-// js-yaml to >=4.x). Do not switch to gray-matter without first pinning
-// js-yaml to ^3.x.
-const UPDATED_AT_RE = /^updated_at:\s*'([^']+)'/m
 
 async function readLocalStateAt(postsRoot: string): Promise<LocalPostState[]> {
   let entries: string[]
@@ -98,40 +85,54 @@ async function readLocalStateAt(postsRoot: string): Promise<LocalPostState[]> {
     return []
   }
   const out: LocalPostState[] = []
-  for (const id of entries) {
-    if (!/^[a-f0-9]{24}$/.test(id)) continue
-    const text = await readFile(join(postsRoot, id, "index.md"), "utf8")
-    const m = UPDATED_AT_RE.exec(text)
-    if (!m) continue
-    out.push({ id, updatedAt: new Date(m[1]) })
+  for (const dir of entries) {
+    let text: string
+    try {
+      text = await readFile(join(postsRoot, dir, "index.md"), "utf8")
+    } catch {
+      // Not a post directory (no index.md, or not a directory at all).
+      continue
+    }
+    const fm = parseFrontmatter(text)
+    if (!fm.title) continue
+    out.push({
+      blogDir: dir,
+      title: fm.title,
+      cosenseId: fm.cosense_id,
+      updatedAt: fm.updated_at ? new Date(fm.updated_at) : new Date(0),
+    })
   }
   return out
+}
+
+function summarise(plan: SyncPlan, errors: SyncError[]): string {
+  let update = 0
+  let unchanged = 0
+  let skip = 0
+  for (const a of plan.actions) {
+    if (a.kind === "update") update++
+    else if (a.kind === "unchanged") unchanged++
+    else skip++
+  }
+  return `plan: ${update} update, ${unchanged} unchanged, ${skip} skip(no-stub), ${errors.length} errors (stubs: ${plan.stubCount})`
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = parseArgs(process.argv.slice(2))
   const env = envSchema.parse(process.env)
-  readSeed()
-    .then((seed) =>
-      runSync({
-        client: new CosenseClient({
-          project: env.COSENSE_PROJECT,
-          sid: env.COSENSE_SID,
-        }),
-        postsRoot: POSTS_ROOT,
-        redirectsPath: REDIRECTS_PATH,
-        seed,
-        maxDeleteRatio: env.MAX_DELETE_RATIO,
-        dryRun: args.dryRun,
-      }),
-    )
-    .then(async ({ plan }) => {
-      console.log(`plan: ${plan.actions.map((a) => a.kind).join(",")}`)
+  runSync({
+    client: new CosenseClient({
+      project: env.COSENSE_PROJECT,
+      sid: env.COSENSE_SID,
+    }),
+    postsRoot: POSTS_ROOT,
+    errorsPath: ERRORS_PATH,
+    dryRun: args.dryRun,
+  })
+    .then(async ({ plan, errors }) => {
+      console.log(summarise(plan, errors))
       if (args.dryRun) {
-        await writeFile(
-          resolve(process.cwd(), ".sync-plan.json"),
-          JSON.stringify(plan, null, 2),
-        )
+        await writeFile(PLAN_PATH, JSON.stringify(plan, null, 2))
       }
     })
     .catch((err) => {
