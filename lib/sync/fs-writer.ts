@@ -1,42 +1,49 @@
-import { existsSync } from "node:fs"
-import {
-  mkdir,
-  readFile,
-  rename,
-  rm,
-  unlink,
-  writeFile,
-} from "node:fs/promises"
+import { readFile, rename, unlink, writeFile } from "node:fs/promises"
 import { join } from "node:path"
-import { emitFrontmatter } from "./frontmatter"
 import type { Post } from "./types"
 
-function render(post: Post): string {
-  const front = emitFrontmatter(post)
-  const body = post.body.endsWith("\n") ? post.body : `${post.body}\n`
-  return `${front}\n${body}`
+const FRONTMATTER_RE = /^---\n([\s\S]*?)\n---\n?([\s\S]*)$/
+
+export class FrontmatterParseError extends Error {
+  constructor(path: string) {
+    super(`malformed frontmatter in ${path}: missing --- delimiters`)
+    this.name = "FrontmatterParseError"
+  }
 }
 
-export async function writePost(post: Post, postsRoot: string): Promise<void> {
-  const dir = join(postsRoot, post.id)
-  await mkdir(dir, { recursive: true })
-  const dest = join(dir, "index.md")
-  const next = render(post)
-  if (existsSync(dest)) {
-    const cur = await readFile(dest, "utf8")
-    if (cur === next) return
+function setFmField(fm: string, key: string, value: string): string {
+  const re = new RegExp(`^${key}:[ \\t]*.*$`, "m")
+  if (re.test(fm)) {
+    return fm.replace(re, `${key}: ${value}`)
   }
-  const tmp = `${dest}.tmp`
+  return `${fm.trimEnd()}\n${key}: ${value}`
+}
+
+function mergeIntoExisting(
+  cur: string,
+  post: Post,
+  indexPath: string,
+): string {
+  const m = cur.match(FRONTMATTER_RE)
+  if (!m) throw new FrontmatterParseError(indexPath)
+  let fm = m[1]
+  fm = setFmField(fm, "updated_at", `'${post.updatedAt.toISOString()}'`)
+  fm = setFmField(fm, "cosense_id", post.id)
+  const body = post.body.endsWith("\n") ? post.body : `${post.body}\n`
+  return `---\n${fm}\n---\n\n${body}`
+}
+
+export async function updatePost(post: Post, blogDir: string): Promise<void> {
+  const indexPath = join(blogDir, "index.md")
+  const cur = await readFile(indexPath, "utf8")
+  const next = mergeIntoExisting(cur, post, indexPath)
+  if (cur === next) return
+  const tmp = `${indexPath}.tmp`
   await writeFile(tmp, next)
   try {
-    await rename(tmp, dest)
+    await rename(tmp, indexPath)
   } catch (err) {
     await unlink(tmp).catch(() => {})
     throw err
   }
-}
-
-export async function deletePost(id: string, postsRoot: string): Promise<void> {
-  const dir = join(postsRoot, id)
-  await rm(dir, { recursive: true, force: true })
 }
