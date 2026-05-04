@@ -54,3 +54,4 @@ jobs:
             .sync-plan.json
             .sync-errors.json
           if-no-files-found: ignore
+          include-hidden-files: true
