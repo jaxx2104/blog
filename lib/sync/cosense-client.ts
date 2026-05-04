@@ -1,4 +1,5 @@
 import {
+  type CosenseListEntry,
   type CosensePage,
   cosenseListResponseSchema,
   cosensePageSchema,
@@ -27,17 +28,22 @@ export class CosenseClient {
     return { Cookie: `connect.sid=${this.sid}` }
   }
 
-  async listPages() {
-    const url = `${BASE}/${encodeURIComponent(this.project)}?limit=1000&skip=0`
-    const r = await this.fetcher(url, { headers: this.headers() })
-    if (!r.ok) throw new Error(`Cosense list failed: ${r.status}`)
-    const parsed = cosenseListResponseSchema.parse(await r.json())
-    if (parsed.count > parsed.pages.length) {
-      throw new Error(
-        `Cosense project has ${parsed.count} pages but client only fetched ${parsed.pages.length}; pagination is not yet implemented`,
-      )
+  async listPages(): Promise<{ count: number; pages: CosenseListEntry[] }> {
+    const limit = 1000
+    const all: CosenseListEntry[] = []
+    let skip = 0
+    let count = Number.POSITIVE_INFINITY
+    while (all.length < count) {
+      const url = `${BASE}/${encodeURIComponent(this.project)}?limit=${limit}&skip=${skip}`
+      const r = await this.fetcher(url, { headers: this.headers() })
+      if (!r.ok) throw new Error(`Cosense list failed: ${r.status}`)
+      const parsed = cosenseListResponseSchema.parse(await r.json())
+      if (parsed.pages.length === 0) break
+      all.push(...parsed.pages)
+      count = parsed.count
+      skip += parsed.pages.length
     }
-    return parsed
+    return { count, pages: all }
   }
 
   async getPage(title: string): Promise<CosensePage> {
