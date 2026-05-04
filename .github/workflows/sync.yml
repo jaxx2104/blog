@@ -1,0 +1,44 @@
+name: Sync from Cosense
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry-run only (writes .sync-plan.json, no commit)"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - run: corepack enable
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: ./.node-version
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - name: Run sync
+        run: pnpm sync ${{ inputs.dry_run && '--dry-run' || '' }}
+        env:
+          COSENSE_PROJECT: ${{ secrets.COSENSE_PROJECT }}
+          COSENSE_SID:     ${{ secrets.COSENSE_SID }}
+      - name: Commit & push (skipped on dry-run)
+        if: ! inputs.dry_run
+        run: |
+          if [ -n "$(git status --porcelain content public)" ]; then
+            git config user.name  "blog-sync[bot]"
+            git config user.email "blog-sync@users.noreply.github.com"
+            git add content public
+            git commit -m "sync: pull from Cosense"
+            git push origin main
+          fi
+      - name: Upload dry-run plan
+        if: inputs.dry_run && hashFiles('.sync-plan.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: sync-plan
+          path: .sync-plan.json

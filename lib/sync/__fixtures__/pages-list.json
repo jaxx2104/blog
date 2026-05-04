@@ -1,0 +1,17 @@
+{
+  "count": 2,
+  "pages": [
+    {
+      "id": "0123456789abcdef01234567",
+      "title": "First Post",
+      "created": 1714521600,
+      "updated": 1714694400
+    },
+    {
+      "id": "fedcba9876543210fedcba98",
+      "title": "Second Post",
+      "created": 1714521600,
+      "updated": 1714694400
+    }
+  ]
+}
