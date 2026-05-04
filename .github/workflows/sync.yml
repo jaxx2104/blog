@@ -1,5 +1,7 @@
 name: Sync from Cosense
 on:
+  schedule:
+    - cron: "*/30 * * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -27,18 +29,28 @@ jobs:
           COSENSE_PROJECT: ${{ secrets.COSENSE_PROJECT }}
           COSENSE_SID:     ${{ secrets.COSENSE_SID }}
       - name: Commit & push (skipped on dry-run)
-        if: ! inputs.dry_run
+        if: ${{ !inputs.dry_run }}
         run: |
-          if [ -n "$(git status --porcelain content public)" ]; then
+          if [ -n "$(git status --porcelain content)" ]; then
             git config user.name  "blog-sync[bot]"
             git config user.email "blog-sync@users.noreply.github.com"
-            git add content public
+            git add content
             git commit -m "sync: pull from Cosense"
             git push origin main
           fi
-      - name: Upload dry-run plan
-        if: inputs.dry_run && hashFiles('.sync-plan.json') != ''
+      - name: Surface skipped/errored pages
+        if: always() && hashFiles('.sync-errors.json') != ''
+        run: |
+          echo "### Per-page sync errors" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          jq . .sync-errors.json >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+      - name: Upload sync artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sync-plan
-          path: .sync-plan.json
+          name: sync-output
+          path: |
+            .sync-plan.json
+            .sync-errors.json
+          if-no-files-found: ignore
