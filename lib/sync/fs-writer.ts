@@ -11,6 +11,11 @@ export class FrontmatterParseError extends Error {
   }
 }
 
+// Only safe for single-line scalar values. Replacing a multi-line YAML
+// construct (block scalar `|`/`>`, block sequence under the key, quoted
+// multiline string) would orphan the trailing lines. Sync only writes
+// `updated_at` and `cosense_id`, both single-line — do not extend this
+// to category/tags/description without a YAML-aware rewrite.
 function setFmField(fm: string, key: string, value: string): string {
   const re = new RegExp(`^${key}:[ \\t]*.*$`, "m")
   if (re.test(fm)) {
