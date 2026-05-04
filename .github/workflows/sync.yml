@@ -29,8 +29,10 @@ jobs:
         continue-on-error: true
         run: pnpm sync ${{ inputs.dry_run && '--dry-run' || '' }}
         env:
-          COSENSE_PROJECT: ${{ secrets.COSENSE_PROJECT }}
-          COSENSE_SID:     ${{ secrets.COSENSE_SID }}
+          COSENSE_PROJECT:  ${{ secrets.COSENSE_PROJECT }}
+          COSENSE_SID:      ${{ secrets.COSENSE_SID }}
+          MAX_DELETE_ABS:   '5'
+          MAX_DELETE_RATIO: '0.05'
       - name: Commit & push (skipped on dry-run)
         if: ${{ !inputs.dry_run }}
         run: |

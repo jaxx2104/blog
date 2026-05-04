@@ -1,4 +1,11 @@
-import { readFile, rename, unlink, writeFile } from "node:fs/promises"
+import {
+  access,
+  readFile,
+  rename,
+  rm,
+  unlink,
+  writeFile,
+} from "node:fs/promises"
 import { join } from "node:path"
 import type { Post } from "./types"
 
@@ -47,4 +54,40 @@ export async function updatePost(post: Post, blogDir: string): Promise<void> {
     await unlink(tmp).catch(() => {})
     throw err
   }
+}
+
+function renderNewIndex(post: Post): string {
+  const fm = [
+    `title: ${JSON.stringify(post.title)}`,
+    `created_at: '${post.createdAt.toISOString()}'`,
+    `updated_at: '${post.updatedAt.toISOString()}'`,
+    `cosense_id: ${post.id}`,
+  ].join("\n")
+  const body = post.body.endsWith("\n") ? post.body : `${post.body}\n`
+  return `---\n${fm}\n---\n\n${body}`
+}
+
+export async function createPost(post: Post, blogDir: string): Promise<void> {
+  // blogDir must already exist (orchestrator's job); ENOENT surfaces
+  // through the writeFile below if it does not.
+  const indexPath = join(blogDir, "index.md")
+  // index.md must NOT exist; throw a clear message if it does.
+  try {
+    await access(indexPath)
+    throw new Error(`index.md already exists at ${indexPath}`)
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err
+  }
+  const tmp = `${indexPath}.tmp`
+  await writeFile(tmp, renderNewIndex(post))
+  try {
+    await rename(tmp, indexPath)
+  } catch (err) {
+    await unlink(tmp).catch(() => {})
+    throw err
+  }
+}
+
+export async function deletePost(blogDir: string): Promise<void> {
+  await rm(blogDir, { recursive: true, force: true })
 }

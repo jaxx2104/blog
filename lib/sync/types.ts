@@ -55,12 +55,25 @@ export interface ImageRef {
 
 /** Output of diff stage. */
 export type SyncAction =
+  | { kind: "create"; page: CosenseListEntry; slug: string }
   | { kind: "update"; page: CosenseListEntry; blogDir: string }
   | { kind: "unchanged"; id: string }
-  | { kind: "skip"; title: string; reason: "no-stub" }
+  | { kind: "delete"; blogDir: string; cosenseId: string }
 
 export interface SyncPlan {
   actions: SyncAction[]
   /** Number of stub directories scanned in `content/posts/`. */
   stubCount: number
+}
+
+/**
+ * Thrown by the sync orchestrator when the count or ratio of `delete` actions
+ * in a single run exceeds configured thresholds. Treated as a workflow
+ * crash by Phase 3's health reporter (which opens a `sync-broken` issue).
+ */
+export class DeleteThresholdError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = "DeleteThresholdError"
+  }
 }
