@@ -26,7 +26,6 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Run sync
         id: sync
-        continue-on-error: true
         run: pnpm sync ${{ inputs.dry_run && '--dry-run' || '' }}
         env:
           COSENSE_PROJECT:  ${{ secrets.COSENSE_PROJECT }}
@@ -34,7 +33,7 @@ jobs:
           MAX_DELETE_ABS:   '5'
           MAX_DELETE_RATIO: '0.05'
       - name: Commit & push (skipped on dry-run)
-        if: ${{ !inputs.dry_run }}
+        if: ${{ !inputs.dry_run && success() }}
         run: |
           if [ -n "$(git status --porcelain content)" ]; then
             git config user.name  "blog-sync[bot]"
@@ -64,11 +63,7 @@ jobs:
       - name: Report sync health
         if: ${{ always() && !inputs.dry_run }}
         env:
-          SYNC_STATUS: ${{ steps.sync.outcome }}
+          SYNC_STATUS: ${{ job.status == 'success' && 'success' || 'failure' }}
           WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm sync:report-health
-
-      - name: Fail job if sync failed
-        if: ${{ steps.sync.outcome == 'failure' }}
-        run: exit 1
