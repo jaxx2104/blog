@@ -31,7 +31,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "sharp": "^0.34.5",
-    "textlint": "15.6.0",
+    "textlint": "15.7.1",
     "textlint-filter-rule-comments": "^1.3.0",
     "textlint-rule-no-mix-dearu-desumasu": "^6.0.4",
     "textlint-rule-preset-ai-writing": "1.1.0",
