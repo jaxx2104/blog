@@ -18,8 +18,10 @@ function extractImages(text: string): ImageRef[] {
   const out: ImageRef[] = []
   for (const m of text.matchAll(GYAZO_RE)) {
     const ext = m[2] ?? ".png"
+    // The raw image lives on the i.gyazo.com CDN; gyazo.com/<id>.png is the
+    // permalink page and 404s when fetched as an image.
     out.push({
-      url: `https://gyazo.com/${m[1]}${ext}`,
+      url: `https://i.gyazo.com/${m[1]}${ext}`,
       filename: `${m[1]}${ext}`,
     })
   }
