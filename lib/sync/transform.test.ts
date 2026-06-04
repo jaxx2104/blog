@@ -40,7 +40,7 @@ test("strips title line and emits IR", () => {
   expect(post.body).not.toContain("First Post\n")
   expect(post.images).toEqual([
     {
-      url: "https://i.gyazo.com/ABCDEF123456.png",
+      url: "https://gyazo.com/ABCDEF123456/raw",
       filename: "ABCDEF123456.png",
     },
   ])
