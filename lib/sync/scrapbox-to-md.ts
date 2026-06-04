@@ -56,7 +56,12 @@ function transformInline(line: string): string {
 
 export function scrapboxToMarkdown(input: string): string {
   const lines = input.split("\n")
-  const out: string[] = []
+  // Each Scrapbox line is an independent block. Cosense stores consecutive
+  // lines with a single "\n", but Markdown treats that as a soft wrap and
+  // collapses them into one paragraph — losing the author's line breaks.
+  // Emit a blank line between blocks so each line renders on its own; empty
+  // source lines are dropped because the block join reinstates the spacing.
+  const blocks: string[] = []
   let i = 0
   while (i < lines.length) {
     const raw = lines[i]
@@ -70,13 +75,13 @@ export function scrapboxToMarkdown(input: string): string {
         code.push(lines[i].slice(1))
         i++
       }
-      out.push(`\`\`\`${ext}`)
-      out.push(...code)
-      out.push("```")
+      blocks.push([`\`\`\`${ext}`, ...code, "```"].join("\n"))
       continue
     }
-    out.push(transformInline(raw))
+    if (raw.trim() !== "") {
+      blocks.push(transformInline(raw))
+    }
     i++
   }
-  return out.join("\n")
+  return blocks.join("\n\n")
 }
