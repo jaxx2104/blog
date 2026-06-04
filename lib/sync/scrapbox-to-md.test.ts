@@ -41,6 +41,13 @@ describe("scrapboxToMarkdown", () => {
     )
   })
 
+  test("consecutive lines become separate blocks (preserve line breaks)", () => {
+    const input = "first paragraph\nsecond paragraph\nthird paragraph"
+    expect(scrapboxToMarkdown(input)).toBe(
+      "first paragraph\n\nsecond paragraph\n\nthird paragraph",
+    )
+  })
+
   test("fenced code block: 'code:filename.ts' followed by indented lines", () => {
     const input = "code:hello.ts\n const x = 1\n const y = 2"
     expect(scrapboxToMarkdown(input)).toBe(
