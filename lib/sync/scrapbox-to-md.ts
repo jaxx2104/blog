@@ -14,6 +14,7 @@ const URL_BARE_RE = /^\[(https?:\/\/[^\s\]]+?)([.,;:!?]?)\]$/
 const STAR_RE = /^\[(\*+)\s+(.+)\]$/
 const INTERNAL_RE = /^\[([^\]]+)\]$/
 const CODE_OPEN_RE = /^code:([^\s]+)$/
+const LIST_ITEM_RE = /^([ \t]+)(\S.*)$/
 
 function transformInline(line: string): string {
   // Whole-line wrappers handled first.
@@ -76,6 +77,22 @@ export function scrapboxToMarkdown(input: string): string {
         i++
       }
       blocks.push([`\`\`\`${ext}`, ...code, "```"].join("\n"))
+      continue
+    }
+    // Indented lines are Scrapbox bullet items (1 whitespace char per
+    // nesting level). Group consecutive items into one list block; depth
+    // maps to 2-space Markdown nesting so 4+ levels never become an
+    // indented code block.
+    if (LIST_ITEM_RE.test(raw)) {
+      const items: string[] = []
+      while (i < lines.length) {
+        const item = lines[i].match(LIST_ITEM_RE)
+        if (!item) break
+        const depth = item[1].length
+        items.push(`${"  ".repeat(depth - 1)}- ${transformInline(item[2])}`)
+        i++
+      }
+      blocks.push(items.join("\n"))
       continue
     }
     if (raw.trim() !== "") {

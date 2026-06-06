@@ -7,21 +7,16 @@ cosense_id: 6a20ba0db14916af2bcb5407
 
 TL;DR:
 
- 最初はメリットがわからなかったけど、数日触って見方が変わった
-
- コスパ: OpenClaw でオーバースペックだった部分が ESP32 で安価に済む
-
- 将来性: ルールが書けない探索段階でこそ実行時判断が効く。書けるなら書いた方がいい
+- 最初はメリットがわからなかったけど、数日触って見方が変わった
+- コスパ: OpenClaw でオーバースペックだった部分が ESP32 で安価に済む
+- 将来性: ルールが書けない探索段階でこそ実行時判断が効く。書けるなら書いた方がいい
 
 使っているもの
 
- ESP-Claw: https://github.com/espressif/esp-claw
-
- ボード: M5Stack CoreS3
-
- LLM: Opus4.6
-
- MCP: Homeassistant
+- ESP-Claw: https://github.com/espressif/esp-claw
+- ボード: M5Stack CoreS3
+- LLM: Opus4.6
+- MCP: Homeassistant
 
 コスパ面
 

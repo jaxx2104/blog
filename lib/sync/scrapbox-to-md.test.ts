@@ -27,6 +27,28 @@ describe("scrapboxToMarkdown", () => {
       "[https://example.com.]",
       "<https://example.com>.",
     ],
+    ["bulleted list", " item1\n item2", "- item1\n- item2"],
+    [
+      "nested list",
+      " parent\n  child\n   grandchild",
+      "- parent\n  - child\n    - grandchild",
+    ],
+    ["tab-indented list", "\titem1\n\titem2", "- item1\n- item2"],
+    [
+      "list item with inline notation",
+      " [https://example.com Example]",
+      "- [Example](https://example.com)",
+    ],
+    [
+      "paragraph followed by list",
+      "TL;DR:\n first\n second",
+      "TL;DR:\n\n- first\n- second",
+    ],
+    [
+      "lists separated by a plain line stay separate",
+      " a\nplain\n b",
+      "- a\n\nplain\n\n- b",
+    ],
   ]
   for (const [label, input, expected] of cases) {
     test(label, () => {
