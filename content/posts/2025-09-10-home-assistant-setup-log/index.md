@@ -1,13 +1,15 @@
 ---
 title: Home Assistant セットアップログ
 created_at: '2025-09-10T16:38:06.000Z'
-updated_at: '2025-09-10T16:40:03.000Z'
+updated_at: '2026-06-06T00:00:00.000Z'
 path: /home-assistant-setup-log
 category: Scrapbox
 tags:
   - imported
   - scrapbox
 ---
+2026-06 時点の構成は [Home Assistant セットアップログ 2026](/home-assistant-setup-log-2026) にまとめました。以下は 2025-09 時点の記録です。
+
 はじめに
 2025 年のスマートホーム環境を構築するにあたり、Home Assistant を選択しました。選定理由は以下の通りです：
 - オープンソース：コミュニティが活発で、カスタマイズ性が高い
