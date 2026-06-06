@@ -3,6 +3,10 @@ title: Home Assistant セットアップログ 2026
 created_at: '2026-06-06T00:00:00.000Z'
 updated_at: '2026-06-06T00:00:00.000Z'
 path: /home-assistant-setup-log-2026
+category: 開発環境
+tags:
+  - homeassistant
+  - smarthome
 ---
 [2025-09 のセットアップログ](/home-assistant-setup-log)から構成が大きく変わったので、2026-06 時点の構成を別エントリーとしてまとめました。
 
@@ -94,6 +98,19 @@ automation:
         id: start
 ```
 
+## Claude Code 側の設定
+
+リポジトリには HA の設定だけでなく、エージェント向けの設定も一緒に入れています。
+
+- CLAUDE.md はルートだけでなく `packages/` `esphome/` `zigbee2mqtt/` の各ディレクトリにも置いて、その階層の規約 (命名・記法・reload 方法・踏んだ罠) を書く。エージェントは触るディレクトリの CLAUDE.md を読んでから作業する
+- 定型作業は `.claude/skills/` に skill (Markdown の手順書) として置く
+  - `/deploy` — commit → push → HA 側 fetch + reset → `ha core check` → 変更ファイルから reload 種別を判定して反映
+  - `/add-automation` —「○○したら△△して」の要望から automation YAML を生成して `/deploy` まで回す
+  - `/triage` — 動かないときにログとエンティティ状態から原因を切り分ける
+- [Home Assistant の MCP server](https://www.home-assistant.io/integrations/mcp_server/) も繋いであって、エージェントが entity の現在状態を直接読める。`/add-automation` は YAML を書く前に対象 entity の実在を MCP で確認するので、存在しない entity を参照する事故が起きない
+
+「こういう automation 足して」と言うだけで済む状態の実体は、この CLAUDE.md + skill + MCP の 3 点セットです。
+
 ## entity_id の日本語問題
 
 一番のハマりどころでした。HA は日本語名から entity_id を生成するとき、漢字を中国語ピンインに変換します。
@@ -156,7 +173,7 @@ bluetooth_proxy:
 - [Zigbee2MQTT](https://www.zigbee2mqtt.io/): Zigbee デバイスのハブ
 - [SwitchBot](https://www.home-assistant.io/integrations/switchbot/): シーリングライトは Hub 経由の Cloud をやめて BLE 直結 (Pro) にした。レイテンシと API 制限回避のため
 - エアコン: [ECHONET Lite](https://github.com/scottyphillips/echonetlite_homeassistant) と [Panasonic Eolia](https://github.com/avolmensky/panasonic_eolia) (クラウド) の併用
-- テレビ (LG webOS): 画面が消えると webostv からは電源オンできないので、wake_on_lan switch を噛ませている
+- テレビ (LG webOS): 画面が消えると [webostv](https://www.home-assistant.io/integrations/webostv/) からは電源オンできないので、wake_on_lan switch を噛ませている
 
 Zigbee2MQTT は設定も git 管理していますが、`!secret` はダブルクォート必須という罠があります。Z2M の `!secret` は YAML タグではなく正規表現ベースの文字列パースなので、クォートなしだと js-yaml が未知タグ扱いで例外を出して addon が起動しません。
 
@@ -204,7 +221,7 @@ adaptive_lighting:
 
 ## 公開対象は expose ラベルで一元管理
 
-Matter Bridge と音声アシスタントへの公開対象が増えるままになっていたので、HA のラベル機能で opt-in 管理に変えました。
+[Matter](https://www.home-assistant.io/integrations/matter/) Bridge と音声アシスタントへの公開対象が増えるままになっていたので、HA のラベル機能で opt-in 管理に変えました。
 
 - `expose` ラベルを付けた entity だけを Matter / Voice に公開する
 - Matter 公開数は 221 → 51 になった。tailscale や battery sensor みたいなノイズ、SwitchBot の Cloud と BLE の二重登録が大半だった
