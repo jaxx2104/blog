@@ -54,7 +54,7 @@ export const Route = createRootRoute({
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Permanent+Marker&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Permanent+Marker&display=swap",
       },
       {
         rel: "alternate",
