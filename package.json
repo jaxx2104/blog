@@ -41,8 +41,7 @@
     "tsx": "^4",
     "typescript": "5.9.3",
     "velite": "^0.4",
-    "vite": "^8.1.2",
-    "vitest": "^4.1.9"
+    "vite": "^8.1.2"
   },
   "keywords": [
     "blog",
@@ -64,10 +63,6 @@
     "lint:ci": "biome ci .",
     "lint:text": "textlint content/**/index.md",
     "lint:textfix": "textlint --fix content/**/index.md",
-    "sync": "tsx scripts/sync-cosense.ts",
-    "sync:report-health": "tsx scripts/sync-report-health.ts",
-    "test:unit": "vitest run",
-    "test:unit:watch": "vitest",
     "test": "tsc -p ./tsconfig.json"
   },
   "packageManager": "pnpm@9.15.9",
