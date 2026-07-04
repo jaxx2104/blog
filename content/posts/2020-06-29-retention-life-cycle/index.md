@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-![](./retention-lifecycle.png)
+![User Retention / Customer Retention のライフサイクル図](./retention-lifecycle.png)
 

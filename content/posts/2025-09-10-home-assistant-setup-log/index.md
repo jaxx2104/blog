@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-2026-06 時点の構成は [Home Assistant セットアップログ 2026](/home-assistant-setup-log-2026) にまとめました。以下は 2025-09 時点の記録です。
+2026-06 時点の構成は[Home Assistant セットアップログ 2026](/home-assistant-setup-log-2026)にまとめました。以下は 2025-09 時点の記録です。
 
 はじめに
 2025 年のスマートホーム環境を構築するにあたり、Home Assistant を選択しました。選定理由は以下の通りです：
@@ -66,19 +66,16 @@ scene: !include scenes.yaml
 
 必須アドオンの導入
 
-HACS (Home Assistant Community Store)
+[HACS](https://hacs.xyz/) (Home Assistant Community Store)
 HACS は、Home Assistant の公式ストアでは提供されていないコミュニティ製のカスタムコンポーネントを管理するストアです。統合、カード、テーマなどを追加でき、機能を拡張できます。ただし非公式なコンポーネントのため利用は自己責任です。
-```bash
-# Get HACSアドオンのインストール
-# バージョン: 1.3.1
-```
+バージョン: 1.3.1
 
 File editor
 設定ファイルの編集に必須のアドオンです。
 バージョン: 5.8.0
 VSCode 風のエディタで YAML 編集が快適
 
-Tailscale VPN
+[Tailscale](https://tailscale.com/) VPN
 Tailscale は、複雑な設定なしで、デバイス間に安全なプライベートネットワークを構築する VPN サービスです。WireGuard プロトコルをベースにしており、ポート開放をすることなく、外出先から自宅の Home Assistant へ安全にアクセスできます。
 バージョン: 0.25.0
 ポート開放不要で安全な接続を実現
@@ -86,7 +83,7 @@ Tailscale は、複雑な設定なしで、デバイス間に安全なプライ�
 
 ESPHome でのデバイス構築
 
-ESPHome の基本
+[ESPHome](https://esphome.io/)の基本
 ESPHome は、ESP32 や ESP8266 を使って YAML 形式の設定ファイルでカスタムスマートデバイスを作成できるフレームワークです。プログラミング知識不要で、Home Assistant との連携もスムーズです。OTA（無線）でのアップデートも可能です。
 ESPHome アドオン（v2025.8.3）により、ESP32/ESP8266 デバイスを簡単に Home Assistant に統合できます。
 基本的な YAML 構成：
@@ -159,7 +156,7 @@ wifi:
   # WiFi接続失敗時のフォールバック
   ap:
     ssid: "M5Stack-Atom3-Lite"
-    password: "JXL6mq9J6ulb"
+    password: !secret fallback_ap_password
 
 captive_portal:
 ```
@@ -473,4 +470,4 @@ ESPHome デバイスの接続問題
 - HACS: 3000 以上のカスタムコンポーネント
 - 継続的な改善と新機能の追加により、より快適なスマートホーム環境を構築していきます。
 
-このセットアップログが、これから Home Assistant を始める方の参考になれば幸いです。質問やフィードバックはお気軽にコメントください。
+このセットアップログが、これから Home Assistant を始める方の参考になれば幸いです。
