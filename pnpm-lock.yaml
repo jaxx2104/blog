@@ -6823,7 +6823,7 @@ snapshots:
 
   textlint-rule-prh@6.1.0:
     dependencies:
-      '@babel/parser': 7.29.3
+      '@babel/parser': 7.29.7
       prh: 5.4.4
       textlint-rule-helper: 2.5.0
 
