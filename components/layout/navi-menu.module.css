@@ -1,6 +1,7 @@
 .menu {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .item {
@@ -8,9 +9,9 @@
   cursor: pointer;
   margin-right: 1rem;
   font-size: var(--font-size);
+  transition: color 0.2s ease-out;
 }
 
 .item:hover {
-  color: var(--color-accent);
-  transition: color 0.2s ease-out;
+  color: rgba(255, 255, 255, 0.75);
 }

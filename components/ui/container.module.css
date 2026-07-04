@@ -3,3 +3,7 @@
   padding: 0 1rem;
   max-width: var(--content-width);
 }
+
+.container[data-narrow] {
+  max-width: var(--content-width-narrow);
+}

@@ -11,18 +11,45 @@ body {
   line-height: var(--line-height);
 }
 
+::selection {
+  background-color: var(--color-main);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-main);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: global reduced-motion kill switch must beat component transitions */
+    animation-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: same as above */
+    animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: same as above */
+    transition-duration: 0.01ms !important;
+  }
+}
+
 a {
   color: var(--color-main);
   text-decoration: none;
 }
 
+a:hover {
+  color: var(--color-main-strong);
+}
+
 ul,
 ol {
-  padding-inline-start: 1rem;
+  padding-inline-start: 1.5rem;
 }
 
 li {
-  list-style-position: inside;
   margin: 0.25rem 0;
 }
 
@@ -37,11 +64,29 @@ li {
 .content h4,
 .content h5,
 .content h6 {
-  font-size: var(--font-size);
+  color: var(--color-title);
   font-weight: var(--font-weight-bold);
-  margin: 2rem 0 1rem;
-  line-height: 1.2;
-  letter-spacing: -0.025rem;
+  font-feature-settings: "palt";
+  margin: 2.5rem 0 1rem;
+  line-height: var(--line-height-heading);
+  letter-spacing: 0.01em;
+}
+
+.content h1,
+.content h2 {
+  font-size: var(--font-size-h2);
+  border-inline-start: 4px solid var(--color-main);
+  padding-inline-start: 0.75rem;
+}
+
+.content h3 {
+  font-size: var(--font-size-h3);
+}
+
+.content h4,
+.content h5,
+.content h6 {
+  font-size: var(--font-size);
 }
 
 .content p {
@@ -49,9 +94,20 @@ li {
   margin: 1rem 0;
 }
 
+.content a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-main) 40%, transparent);
+  text-underline-offset: 0.25em;
+}
+
+.content a:hover {
+  text-decoration-color: var(--color-main-strong);
+}
+
 .content blockquote {
-  background-color: var(--color-background);
-  border-left: 5px solid var(--color-border);
+  background-color: var(--color-surface);
+  border-inline-start: 3px solid var(--color-border);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
   color: var(--color-sub);
   padding: 0.25em 1.5em;
   margin: 1.5rem 0;
@@ -68,12 +124,41 @@ li {
 
 .content img {
   width: 100%;
+  height: auto;
+  border-radius: var(--radius-m);
   margin: 1.5rem 0;
+}
+
+.content hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2.5rem 0;
+}
+
+.content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: var(--font-size-small);
+}
+
+.content th,
+.content td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+}
+
+.content th {
+  background-color: var(--color-surface);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Code block styles - レイアウトのみ（色は rehype-pretty-code のテーマが適用） */
 .content pre {
-  border-radius: 8px;
+  border-radius: var(--radius-m);
   padding: 1rem;
   margin: 1.5rem 0;
   overflow-x: auto;
@@ -84,9 +169,10 @@ li {
 
 /* Inline code styles */
 .content code:not(pre code) {
-  background-color: var(--color-border);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   padding: 0.2em 0.4em;
-  border-radius: 4px;
+  border-radius: var(--radius-s);
   font-size: var(--font-size-small);
   font-family: var(--font-family-mono);
 }
@@ -96,7 +182,7 @@ li {
   display: flex;
   align-items: stretch;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-m);
   overflow: hidden;
   margin: 1.5rem 0;
   text-decoration: none;
@@ -115,7 +201,7 @@ li {
   flex-shrink: 0;
   width: 120px;
   min-height: 100px;
-  background-color: var(--color-border);
+  background-color: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,6 +212,7 @@ li {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 0;
   margin: 0;
 }
 
@@ -145,6 +232,7 @@ li {
 }
 
 .content .link-card-title {
+  color: var(--color-title);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size);
   line-height: 1.4;

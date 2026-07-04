@@ -1,20 +1,24 @@
 .badge {
-  background-color: var(--color-sub);
-  border-radius: 4px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
   box-sizing: border-box;
-  color: rgb(255, 255, 255);
-  display: inline;
+  color: var(--color-sub);
+  display: inline-block;
   font-size: var(--font-size-small);
-  line-height: var(--font-size-small);
+  line-height: 1;
   font-weight: var(--font-weight);
   outline-style: none;
   margin: auto 0;
   text-decoration-line: none;
-  padding: calc(var(--font-size-small) / 2) var(--font-size-small);
+  padding: 0.375em 0.875em;
   text-align: center;
   white-space: nowrap;
 }
 
 .badge[data-primary] {
-  background-color: var(--color-main);
+  background-color: var(--color-main-soft);
+  border-color: transparent;
+  color: var(--color-main);
+  font-weight: var(--font-weight-bold);
 }
