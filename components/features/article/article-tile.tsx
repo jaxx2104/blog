@@ -19,23 +19,25 @@ const ArticleTile: React.FC<Props> = ({
   thumbnail,
 }) => (
   <Link href={path} className={styles.tileLink}>
-    <article className={styles.container}>
+    <article className={styles.cell}>
       {thumbnail && (
-        <img
-          className={styles.thumbnail}
-          src={thumbnail}
-          alt=""
-          loading="lazy"
-        />
+        <div className={styles.media}>
+          <img
+            className={styles.thumbnail}
+            src={thumbnail}
+            alt=""
+            loading="lazy"
+          />
+        </div>
       )}
-      <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
-        {!thumbnail && excerpt && <p className={styles.excerpt}>{excerpt}</p>}
+      <div className={styles.body}>
         {created_at && (
-          <div className={styles.date}>
+          <p className={styles.eyebrow}>
             <Time created_at={created_at} />
-          </div>
+          </p>
         )}
+        <h2 className={styles.title}>{title}</h2>
+        {excerpt && !thumbnail && <p className={styles.excerpt}>{excerpt}</p>}
       </div>
     </article>
   </Link>

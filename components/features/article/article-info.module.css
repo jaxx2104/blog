@@ -1,21 +1,26 @@
 .wrap {
   display: flex;
-  margin: 2rem 0 1rem;
   flex-direction: column;
-  justify-content: center;
+  gap: 0.875rem;
+  margin: 1.5rem 0 1rem;
   word-break: break-word;
 }
 
 .headingLink {
-  text-decoration: none;
   display: block;
-  margin: 0.5rem 0;
+  text-decoration: none;
+}
+
+.headingLink:hover {
+  text-decoration: none;
 }
 
 .meta {
-  margin: 0.5rem 0;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+  color: var(--color-sub);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
 }

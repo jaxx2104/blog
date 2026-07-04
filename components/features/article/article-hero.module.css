@@ -1,0 +1,122 @@
+.hero {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3.5rem) 1rem clamp(2.5rem, 6vw, 5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.eyebrow {
+  color: var(--color-sub);
+  font-family: var(--font-family-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.title {
+  color: var(--color-title);
+  font-family: var(--font-family-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 400;
+  font-feature-settings: "palt";
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.14;
+  margin: 0;
+}
+
+.titleLink {
+  color: inherit;
+}
+
+.titleLink:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+.excerpt {
+  color: var(--color-sub);
+  max-width: 36em;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.cta {
+  background-color: var(--color-main);
+  border: 1px solid var(--color-border);
+  color: var(--color-background);
+  display: inline-block;
+  font-family: var(--font-family-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  padding: 0.75em 1.5em;
+  margin-top: 0.5rem;
+  transition:
+    background-color 0.15s ease-out,
+    color 0.15s ease-out;
+}
+
+.cta:hover {
+  background-color: transparent;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/*
+ * The engraved burst: strokes inherit --color-border via currentColor;
+ * the ::after scanlines slice the artwork with stripes of the canvas
+ * color — the "etching put through a scanner" signature.
+ */
+.art {
+  position: relative;
+  color: var(--color-border);
+}
+
+.art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 3px,
+    color-mix(in srgb, var(--color-background) 55%, transparent) 3px,
+    color-mix(in srgb, var(--color-background) 55%, transparent) 4px
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .art {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}

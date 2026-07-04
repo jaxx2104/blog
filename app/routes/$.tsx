@@ -3,6 +3,8 @@ import Article, {
   type SiteMetaType,
 } from "@/components/features/article/article"
 import Layout from "@/components/layout/layout"
+import Container from "@/components/ui/container"
+import Heading from "@/components/ui/heading"
 import { getPostByPermalink } from "@/lib/posts"
 import {
   DEFAULT_OGP_IMAGE,
@@ -80,10 +82,10 @@ function PostPage() {
 function NotFoundComponent() {
   return (
     <Layout>
-      <main>
-        <h1>404 — Not Found</h1>
+      <Container>
+        <Heading>404 — Not found</Heading>
         <p>This permalink does not match any post.</p>
-      </main>
+      </Container>
     </Layout>
   )
 }

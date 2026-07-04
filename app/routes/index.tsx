@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+import ArticleHero from "@/components/features/article/article-hero"
 import ArticleTile from "@/components/features/article/article-tile"
 import Layout from "@/components/layout/layout"
 import TileGrid from "@/components/ui/tile-grid"
@@ -20,10 +21,19 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const { posts } = Route.useLoaderData()
+  const [latest, ...rest] = posts
   return (
     <Layout>
-      <TileGrid>
-        {posts.map((post) => (
+      {latest && (
+        <ArticleHero
+          path={latest.permalink}
+          title={latest.title}
+          created_at={latest.created_at}
+          excerpt={latest.excerpt}
+        />
+      )}
+      <TileGrid label={`Archive — ${rest.length} entries`}>
+        {rest.map((post) => (
           <ArticleTile
             key={post.permalink}
             path={post.permalink}

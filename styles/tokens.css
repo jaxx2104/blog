@@ -1,56 +1,73 @@
+/*
+ * Duotone system: vivid pink #e91e63 x pure white #ffffff.
+ * data-theme="light" = POSTER (pink canvas, white ink)
+ * data-theme="dark"  = PAPER  (white canvas, pink ink)
+ * --color-brand / --color-brand-deep / --color-paper are theme-invariant:
+ * use them for surfaces that must not flip (article plate, code blocks).
+ */
 :root,
 [data-theme="light"] {
-  /* brand: テーマに依らずブランドピンクで塗る面 (header 等) */
   --color-brand: #e91e63;
-  --color-main: #e91e63;
-  --color-main-strong: #c2185b;
-  --color-main-soft: rgba(233, 30, 99, 0.09);
-  --color-sub: #868e96;
-  --color-accent: #343a40;
-  --color-text: #495057;
-  --color-title: #212529;
-  --color-background: #ffffff;
-  --color-surface: #f6f7f9;
-  --color-border: #e9ecef;
-  --color-shadow: rgba(33, 37, 41, 0.08);
+  --color-brand-deep: #c2185b;
+  --color-paper: #ffffff;
 
-  --content-width: 900px;
-  --content-width-narrow: 720px;
+  --color-main: #ffffff;
+  --color-main-strong: #ffffff;
+  --color-main-soft: rgba(255, 255, 255, 0.14);
+  --color-sub: rgba(255, 255, 255, 0.82);
+  --color-accent: #ffffff;
+  --color-text: #ffffff;
+  --color-title: #ffffff;
+  --color-background: #e91e63;
+  --color-surface: rgba(255, 255, 255, 0.1);
+  --color-border: #ffffff;
+  --color-shadow: transparent;
 
-  --radius-s: 4px;
-  --radius-m: 10px;
+  --content-width: 1080px;
+  --content-width-narrow: 760px;
 
+  /* brutalist: no rounded corners anywhere */
+  --radius-s: 0;
+  --radius-m: 0;
+
+  --font-family-display:
+    "Bodoni Moda", "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-family-base:
-    "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-family-mono:
-    "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+    "Space Mono", "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono",
+    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", monospace;
 
-  --font-size-small: 0.875rem;
+  --letter-spacing-display: 0.06em;
+  --letter-spacing-label: 0.16em;
+
+  --font-size-small: 0.8125rem;
   --font-size: 1rem;
   --font-size-large: 1.125rem;
   --font-size-h3: 1.125rem;
-  --font-size-h2: 1.375rem;
-  --font-size-h1: 1.75rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h1: clamp(1.75rem, 4vw, 2.625rem);
   --font-size-jumbo: 2rem;
+  --font-size-masthead: clamp(2.75rem, 9vw, 5.5rem);
 
   --font-weight: 400;
   --font-weight-bold: 700;
 
-  --line-height: 1.8;
-  --line-height-heading: 1.4;
+  --line-height: 1.9;
+  --line-height-heading: 1.25;
 }
 
 [data-theme="dark"] {
-  --color-main: #ff6b93;
-  --color-main-strong: #ff8fae;
-  --color-main-soft: rgba(255, 107, 147, 0.14);
-  --color-sub: #9aa2ad;
-  --color-accent: #f3f4f7;
-  --color-text: #dfe2e8;
-  --color-title: #f3f4f7;
-  --color-background: #282c35;
-  --color-surface: #31353f;
-  --color-border: #3f4450;
-  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-main: #e91e63;
+  --color-main-strong: #c2185b;
+  --color-main-soft: rgba(233, 30, 99, 0.08);
+  --color-sub: #c2185b;
+  --color-accent: #e91e63;
+  --color-text: #c2185b;
+  --color-title: #e91e63;
+  --color-background: #ffffff;
+  --color-surface: rgba(233, 30, 99, 0.06);
+  --color-border: #e91e63;
+  --color-shadow: transparent;
 }

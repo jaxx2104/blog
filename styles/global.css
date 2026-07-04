@@ -12,14 +12,14 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-main);
-  color: #ffffff;
+  background-color: var(--color-text);
+  color: var(--color-background);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-main);
+  outline: 2px solid currentColor;
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -41,7 +41,8 @@ a {
 }
 
 a:hover {
-  color: var(--color-main-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 }
 
 ul,
@@ -53,9 +54,23 @@ li {
   margin: 0.25rem 0;
 }
 
+main {
+  padding: 2rem 0 4rem;
+}
+
+/*
+ * Article body: a theme-invariant white plate ("classic document").
+ * Everything inside uses the invariant trio (--color-brand /
+ * --color-brand-deep / --color-paper) — never theme-scoped tokens,
+ * because the plate stays white in both POSTER and PAPER modes.
+ * #c2185b is the reading ink: white/#e91e63 misses AA for body sizes.
+ */
 .content {
-  margin: 0;
-  padding: 0;
+  background-color: var(--color-paper);
+  color: var(--color-brand-deep);
+  border: 1px solid var(--color-brand);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  margin: 2rem 0 2.5rem;
 }
 
 .content h1,
@@ -64,29 +79,36 @@ li {
 .content h4,
 .content h5,
 .content h6 {
-  color: var(--color-title);
-  font-weight: var(--font-weight-bold);
+  color: var(--color-brand);
   font-feature-settings: "palt";
-  margin: 2.5rem 0 1rem;
+  margin: 2.75rem 0 1rem;
   line-height: var(--line-height-heading);
-  letter-spacing: 0.01em;
 }
 
 .content h1,
 .content h2 {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-h2);
-  border-inline-start: 4px solid var(--color-main);
-  padding-inline-start: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-display);
+  border-top: 4px double var(--color-brand);
+  padding-top: 0.75rem;
 }
 
 .content h3 {
-  font-size: var(--font-size-h3);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-label);
 }
 
 .content h4,
 .content h5,
 .content h6 {
   font-size: var(--font-size);
+  font-weight: var(--font-weight-bold);
 }
 
 .content p {
@@ -95,20 +117,24 @@ li {
 }
 
 .content a {
+  color: var(--color-brand);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-main) 40%, transparent);
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--color-brand) 45%,
+    transparent
+  );
   text-underline-offset: 0.25em;
 }
 
 .content a:hover {
-  text-decoration-color: var(--color-main-strong);
+  text-decoration-color: var(--color-brand);
 }
 
 .content blockquote {
-  background-color: var(--color-surface);
-  border-inline-start: 3px solid var(--color-border);
-  border-radius: 0 var(--radius-s) var(--radius-s) 0;
-  color: var(--color-sub);
+  background-color: color-mix(in srgb, var(--color-brand) 5%, transparent);
+  border-inline-start: 3px solid var(--color-brand);
+  color: var(--color-brand-deep);
   padding: 0.25em 1.5em;
   margin: 1.5rem 0;
 }
@@ -125,13 +151,13 @@ li {
 .content img {
   width: 100%;
   height: auto;
-  border-radius: var(--radius-m);
+  border: 1px solid var(--color-brand);
   margin: 1.5rem 0;
 }
 
 .content hr {
   border: 0;
-  border-top: 1px solid var(--color-border);
+  border-top: 4px double var(--color-brand);
   margin: 2.5rem 0;
 }
 
@@ -146,19 +172,22 @@ li {
 
 .content th,
 .content td {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-brand);
   padding: 0.5rem 0.75rem;
   white-space: nowrap;
 }
 
 .content th {
-  background-color: var(--color-surface);
+  background-color: var(--color-brand);
+  color: var(--color-paper);
+  font-family: var(--font-family-mono);
   font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 /* Code block styles - レイアウトのみ（色は rehype-pretty-code のテーマが適用） */
 .content pre {
-  border-radius: var(--radius-m);
   padding: 1rem;
   margin: 1.5rem 0;
   overflow-x: auto;
@@ -167,12 +196,18 @@ li {
   font-family: var(--font-family-mono);
 }
 
+/* modern-normalize sets its own mono stack on `code`; re-inherit ours so
+ * Japanese comments fall back to the JP webfont instead of tofu */
+.content pre code {
+  font-family: inherit;
+}
+
 /* Inline code styles */
 .content code:not(pre code) {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background-color: color-mix(in srgb, var(--color-brand) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 30%, transparent);
+  color: var(--color-brand-deep);
   padding: 0.2em 0.4em;
-  border-radius: var(--radius-s);
   font-size: var(--font-size-small);
   font-family: var(--font-family-mono);
 }
@@ -181,27 +216,23 @@ li {
 .content .link-card {
   display: flex;
   align-items: stretch;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-m);
+  border: 1px solid var(--color-brand);
   overflow: hidden;
   margin: 1.5rem 0;
   text-decoration: none;
   color: inherit;
-  transition:
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+  transition: background-color 0.15s ease-out;
 }
 
 .content .link-card:hover {
-  border-color: var(--color-main);
-  box-shadow: 0 2px 8px var(--color-shadow);
+  background-color: var(--color-brand);
 }
 
 .content .link-card-image {
   flex-shrink: 0;
   width: 120px;
   min-height: 100px;
-  background-color: var(--color-surface);
+  background-color: color-mix(in srgb, var(--color-brand) 8%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,14 +243,19 @@ li {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;
+  border: 0;
   margin: 0;
 }
 
 .content .link-card-no-image span {
   font-size: 2rem;
+  font-family: var(--font-family-display);
   font-weight: bold;
-  color: var(--color-sub);
+  color: var(--color-brand);
+}
+
+.content .link-card:hover .link-card-no-image span {
+  color: var(--color-paper);
 }
 
 .content .link-card-content {
@@ -232,7 +268,7 @@ li {
 }
 
 .content .link-card-title {
-  color: var(--color-title);
+  color: var(--color-brand-deep);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size);
   line-height: 1.4;
@@ -245,7 +281,7 @@ li {
 
 .content .link-card-description {
   font-size: var(--font-size-small);
-  color: var(--color-sub);
+  color: var(--color-brand-deep);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -256,7 +292,16 @@ li {
 
 .content .link-card-site {
   font-size: var(--font-size-small);
-  color: var(--color-sub);
+  font-family: var(--font-family-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.content .link-card:hover .link-card-title,
+.content .link-card:hover .link-card-description,
+.content .link-card:hover .link-card-site {
+  color: var(--color-paper);
 }
 
 @media (max-width: 480px) {

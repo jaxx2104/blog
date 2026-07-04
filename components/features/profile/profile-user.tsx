@@ -1,7 +1,6 @@
 import type React from "react"
 import Container from "../../ui/container"
 import Display from "../../ui/display"
-import Flex from "../../ui/flex"
 import Section from "../../ui/section"
 import styles from "./profile-user.module.css"
 import Thumbnail from "./thumbnail"
@@ -10,24 +9,38 @@ interface Props {
   profileImage?: string
 }
 
+const career = [
+  { term: "2013 — 2017", place: "J-CAST" },
+  { term: "2017 — 2020", place: "Recruit" },
+  { term: "2020 —", place: "freee" },
+]
+
 const ProfileUser: React.FC<Props> = ({
   profileImage = "/images/profile.jpg",
 }) => (
   <Section>
     <Container>
-      <Flex>
-        <div>
+      <div className={styles.layout}>
+        <div className={styles.intro}>
+          <p className={styles.handle}>jaxx2104</p>
           <Display>Futoshi Iwashita</Display>
-          <strong>jaxx2104</strong>
-          <p>I&apos;m a front-end engineer in Japan 🗼</p>
-          <li>2013 ~ 2017: J-CAST</li>
-          <li>2017 ~ 2020: Recruit</li>
-          <li>2020 ~ : freee</li>
+          <p className={styles.bio}>
+            I&apos;m a front-end engineer in Japan 🗼
+          </p>
+          <ul className={styles.timeline}>
+            {career.map((item) => (
+              <li key={item.place} className={styles.entry}>
+                <span className={styles.term}>{item.term}</span>
+                <span className={styles.place}>{item.place}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className={styles.user}>
-          <Thumbnail src={profileImage} title="jaxx2104" size={160} circle />
-        </div>
-      </Flex>
+        <figure className={styles.portrait}>
+          <Thumbnail src={profileImage} title="jaxx2104" size={180} />
+          <figcaption className={styles.caption}>Tokyo, JP</figcaption>
+        </figure>
+      </div>
     </Container>
   </Section>
 )

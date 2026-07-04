@@ -21,14 +21,14 @@ const ArticleInfo: React.FC<Props> = ({
   tags,
 }) => (
   <div className={styles.wrap}>
-    <Link className={styles.headingLink} href={path}>
-      <Heading>{title}</Heading>
-    </Link>
     <div className={styles.meta}>
       <Time created_at={created_at} />
       <Badges items={categories} primary />
       <Badges items={tags} />
     </div>
+    <Link className={styles.headingLink} href={path}>
+      <Heading>{title}</Heading>
+    </Link>
   </div>
 )
 

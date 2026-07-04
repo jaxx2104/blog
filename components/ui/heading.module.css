@@ -1,14 +1,11 @@
 .heading {
   color: var(--color-title);
+  font-family: var(--font-family-display);
   font-size: var(--font-size-h1);
-  font-weight: var(--font-weight-bold);
+  font-weight: 400;
   font-feature-settings: "palt";
-  letter-spacing: 0.01em;
+  letter-spacing: var(--letter-spacing-display);
+  text-transform: uppercase;
   line-height: var(--line-height-heading);
   margin: 0;
-  transition: color 0.2s ease-out;
-}
-
-.heading:hover {
-  color: var(--color-main);
 }

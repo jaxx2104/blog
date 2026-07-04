@@ -1,38 +1,37 @@
 import type React from "react"
 import Container from "../../ui/container"
 import Display from "../../ui/display"
-import Flex from "../../ui/flex"
 import Section from "../../ui/section"
+import styles from "./profile-link.module.css"
+
+interface LinkItem {
+  label: string
+  href: string
+}
+
+const links: LinkItem[] = [
+  { label: "Github", href: "https://github.com/jaxx2104" },
+  { label: "Twitter", href: "https://twitter.com/jaxx2104" },
+  { label: "npm", href: "https://www.npmjs.com/~jaxx2104" },
+  { label: "SpeakerDeck", href: "https://speakerdeck.com/jaxx2104" },
+  { label: "Qiita", href: "https://qiita.com/jaxx2104" },
+  { label: "Note", href: "https://note.com/jaxx2104" },
+  { label: "Connpass", href: "https://www.npmjs.com/~jaxx2104" },
+]
 
 const ProfileLink: React.FC = () => (
   <Section>
     <Container>
       <Display>Links</Display>
-      <Flex>
-        <div>
-          <li>
-            <a href="https://github.com/jaxx2104">Github</a>
+      <ul className={styles.list}>
+        {links.map((link) => (
+          <li key={link.label} className={styles.item}>
+            <a className={styles.link} href={link.href}>
+              {link.label}
+            </a>
           </li>
-          <li>
-            <a href="https://twitter.com/jaxx2104">Twitter</a>
-          </li>
-          <li>
-            <a href="https://www.npmjs.com/~jaxx2104">npm</a>
-          </li>
-          <li>
-            <a href="https://speakerdeck.com/jaxx2104">SpeakerDeck</a>
-          </li>
-          <li>
-            <a href="https://qiita.com/jaxx2104">Qiita</a>
-          </li>
-          <li>
-            <a href="https://note.com/jaxx2104">Note</a>
-          </li>
-          <li>
-            <a href="https://www.npmjs.com/~jaxx2104">Connpass</a>
-          </li>
-        </div>
-      </Flex>
+        ))}
+      </ul>
     </Container>
   </Section>
 )

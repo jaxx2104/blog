@@ -1,7 +1,6 @@
 import type React from "react"
 import Container from "../../ui/container"
 import Display from "../../ui/display"
-import Flex from "../../ui/flex"
 import Section from "../../ui/section"
 import SlideImage from "../../ui/slide-image"
 import styles from "./profile-work.module.css"
@@ -52,19 +51,14 @@ const defaultWorkItems: WorkItem[] = [
 const ProfileWork: React.FC<Props> = ({ workItems = defaultWorkItems }) => (
   <Section>
     <Container>
-      <Display $uppercase>Work</Display>
-      <Flex $center>
-        {workItems.map((item, index) => (
-          <a key={index} href={item.href} className={styles.anchor}>
-            <SlideImage
-              src={item.src}
-              alt={item.title}
-              title={item.title}
-              animation="fadeIn"
-            />
+      <Display>Work</Display>
+      <div className={styles.grid}>
+        {workItems.map((item) => (
+          <a key={item.href} href={item.href} className={styles.anchor}>
+            <SlideImage src={item.src} alt={item.title} title={item.title} />
           </a>
         ))}
-      </Flex>
+      </div>
     </Container>
   </Section>
 )

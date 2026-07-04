@@ -1,10 +1,5 @@
 import type React from "react"
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-} from "react-share"
+import { FacebookShareButton, TwitterShareButton } from "react-share"
 import styles from "./icon-share.module.css"
 
 interface Props {
@@ -14,11 +9,20 @@ interface Props {
 
 const Share: React.FC<Props> = ({ url, title }) => (
   <div className={styles.share}>
-    <TwitterShareButton url={url} title={title}>
-      <TwitterIcon size={32} round={true} />
+    <TwitterShareButton
+      url={url}
+      title={title}
+      className={styles.button}
+      resetButtonStyle={false}
+    >
+      Share — X
     </TwitterShareButton>
-    <FacebookShareButton url={url}>
-      <FacebookIcon size={32} round={true} />
+    <FacebookShareButton
+      url={url}
+      className={styles.button}
+      resetButtonStyle={false}
+    >
+      Share — Facebook
     </FacebookShareButton>
   </div>
 )

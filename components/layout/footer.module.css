@@ -1,6 +1,31 @@
 .footer {
-  padding: 2rem 0 3rem;
+  border-top: 6px double var(--color-border);
   text-align: center;
+  padding: 2.5rem 1rem 3rem;
+  margin-top: 0;
+}
+
+.inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.epigraph {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-large);
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem;
+}
+
+.colophon {
+  font-family: var(--font-family-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
   color: var(--color-sub);
-  font-size: var(--font-size-small);
+  margin: 0;
+}
+
+.colophon a {
+  color: var(--color-text);
 }

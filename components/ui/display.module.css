@@ -1,14 +1,12 @@
 .display {
-  font-size: var(--display-size, var(--font-size-jumbo));
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-jumbo);
+  font-weight: 400;
   line-height: var(--line-height-heading);
-  letter-spacing: 0.01em;
-  font-feature-settings: "palt";
-  color: var(--color-main);
-  padding: 0;
-  text-transform: none;
-}
-
-.display[data-uppercase] {
+  letter-spacing: var(--letter-spacing-display);
   text-transform: uppercase;
+  font-feature-settings: "palt";
+  color: var(--color-title);
+  margin: 0 0 1.5rem;
+  padding: 0;
 }

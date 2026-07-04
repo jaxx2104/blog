@@ -1,35 +1,15 @@
 .section {
-  padding: 2rem 0 4rem;
-  position: relative;
-  margin: 0 auto;
+  border-top: 4px double var(--color-border);
+  padding: 2.5rem 0 3rem;
   text-align: left;
-  color: var(--color-accent);
-  background: inherit;
+  color: var(--color-text);
+}
+
+/* the masthead hairline already separates the first section */
+.section:first-child {
+  border-top: 0;
 }
 
 .section[data-center] {
   text-align: center;
-}
-
-.section[data-variant="primary"] {
-  color: white;
-  background: var(--color-brand);
-}
-
-.section[data-variant="dark"] {
-  color: white;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.75),
-    rgba(1, 1, 1, 0.25) 50%
-  );
-}
-
-.section a {
-  color: var(--color-accent);
-}
-
-.section[data-variant="primary"] a,
-.section[data-variant="dark"] a {
-  color: white;
 }
