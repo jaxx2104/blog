@@ -8,8 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-Mac の Photos アプリを家族アルバムとして使っていた
-が 2TB を超えたあたりで限界になって写真管理を Windows マシンに移行したので備忘録
+Mac の Photos アプリを家族アルバムとして使っていたが 2TB を超えたあたりで限界になって写真管理を Windows マシンに移行したので備忘録
 
 ![](./cf426f4c05881b4db3f87fa8bf683848.jpg)
 
@@ -26,9 +25,9 @@ Mac の Photos アプリを家族アルバムとして使っていた
 どんな構成だったか
 - iPhone、一眼で写真や動画を撮る
 - Mac の Photos で保存
-- 毎回、外付けの SSD2TB に保存（1 次保管）
-- 毎月、ホームサーバー40TB に保存（2 次保管）
-- 毎月、Google Photo へ圧縮画像を自動アップロード（共有用）
+- 毎回、外付けの SSD 2TB に保存（1 次保管）
+- 毎月、ホームサーバー 40TB に保存（2 次保管）
+- 毎月、Google Photos へ圧縮画像を自動アップロード（共有用）
 - 毎月、AWS S3 へ自動アップロード（クラウドバックアップ）
 - ちなみに iCloud は 2TB になるとお高いので使っていない
 
@@ -45,19 +44,19 @@ SSD の故障きっかけで見直したこと
   - 写真の整理機能も不足していた。近似値での重複検出や選別、不要な Live Photos の一括削除、RAW+JPEG の JPEG 削除などがなく、ファイルサイズが増える一方だった。
 
 移行
-- Mac Photos から Windows の Capture One https://www.captureone.com/ja への乗り換え（GPU の恩恵も受けることが出来る）
+- Mac Photos から Windows の [Capture One](https://www.captureone.com/ja)への乗り換え（GPU の恩恵も受けられる）
   - Live Photos さえ諦めれば、写真選別機能やこまかい絞り込み機能など便利な点が多い
-  - 移行時は Mac Photos の書き出しを介す必要があり不便だったが、osxphotos という OSS を発見した。Live Photos をスキップ、RAW のみ移行、リトライ機構など細かく設定できて便利だった。
+  - 移行時は Mac Photos の書き出しを介す必要があり不便だったが、[osxphotos](https://github.com/RhetTbull/osxphotos)という OSS を発見した。Live Photos をスキップ、RAW のみ移行、リトライ機構など細かく設定できて便利だった。
 
 写真なら
 ```shell
-osxphotos export /Volumes/Share/20241201 --only-photos --post-command-error continue --export-by-date  --year 2023 --skip-edited --retry 3 --sidecar XMP --sidecar-drop-ext --library /Volumes/Share/20241118/写真\ Library.photoslibrary
+osxphotos export /Volumes/Share/20241201 --only-photos --post-command-error continue --export-by-date --year 2023 --skip-edited --retry 3 --sidecar XMP --sidecar-drop-ext --library /Volumes/Share/20241118/写真\ Library.photoslibrary
 ```
 
 動画なら
 
 ```shell
-osxphotos export /Volumes/Share/20241201 --only-movies --post-command-error continue --min-size 6MB --export-by-date  --year 2023 --skip-edited --retry 3 --sidecar XMP --sidecar-drop-ext --library /Volumes/Share/20241118/写真\ Library.photoslibrary
+osxphotos export /Volumes/Share/20241201 --only-movies --post-command-error continue --min-size 6MB --export-by-date --year 2023 --skip-edited --retry 3 --sidecar XMP --sidecar-drop-ext --library /Volumes/Share/20241118/写真\ Library.photoslibrary
 ```
 
 

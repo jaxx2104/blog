@@ -8,5 +8,5 @@ tags:
   - imported
   - scrapbox
 ---
-![](https://yushakobo.jp/wp-content/uploads/2020/01/45JilIH.png)
+![GMK Future Funk keycaps](https://yushakobo.jp/wp-content/uploads/2020/01/45JilIH.png)
 https://geekhack.org/index.php?topic=101597.0

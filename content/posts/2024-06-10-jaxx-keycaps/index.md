@@ -11,8 +11,8 @@ tags:
 
 ![](./b90c460e84614e8f41f768c80530e279.jpg)
 
-必要なもの
-- キーボードの原型メルカリで買った
+## 必要なもの
+- キーボードの原型はメルカリで買った
 - Zbutt https://www.zappycappys.com/pages/z-butt
 - シリコン https://amzn.asia/d/jlNhE6s
 - クリスタルレジン https://www.monotaro.com/p/7205/4746/
@@ -22,12 +22,12 @@ tags:
 - エプロン
 
 
-手順
+## 手順
 https://github.com/imyownyear/Z-Butt/wiki
 
 ![](./b5e27baca4b6dc8f4d2bab723deea9cf.jpg)
 
-コツ
+## コツ
 レジンは湯煎すると粘度が下がって気泡が抜けるよ
 - ただし粘度が下がるので装飾は沈みやすい
 1 時間まつ
@@ -41,32 +41,31 @@ https://github.com/imyownyear/Z-Butt/wiki
 最後にレジンを追加すると軸が強くなる
 
 
-デザイン
+## デザイン
 名刺やステッカー、SNS のアイコンなどは以下
 https://www.figma.com/file/s8UXaaxl0hZDOWgTfYNmBZ/JaxxKeycaps?node-id=0%3A1
 
-マーケティング
-Twitter
-- 日本の人が多い
-- 普段の雑談っぽいことを投稿しても良さそう
-Instagram
-- 海外の人が多い
-- トレンドを追ったものやおしゃれな投稿のほうが良い
-- プロフィールにブースのサイト掲載
-- 買い物アカウント
-- 1 万人超えないとショップやリンク貼れない！
-- https://help.instagram.com/337910740093030/
-- とりあえずフォロワー取得目標
-- (メロンズキーキャップ参考)
-- 製作過程
-- アンケート(どっちが好き？）
-- 投稿
-- 販売キーキャップ（購入はプロフィールから）
-Reddit
-- https://www.reddit.com/r/MechanicalKeyboards/s/Tm4RwJpoUM
-- 
+## マーケティング
+- Twitter
+  - 日本の人が多い
+  - 普段の雑談っぽいことを投稿しても良さそう
+- Instagram
+  - 海外の人が多い
+  - トレンドを追ったものやおしゃれな投稿のほうが良い
+  - プロフィールにブースのサイト掲載
+  - 買い物アカウント
+  - 1 万人超えないとショップやリンク貼れない！
+  - https://help.instagram.com/337910740093030/
+  - とりあえずフォロワー取得目標
+  - (メロンズキーキャップ参考)
+  - 製作過程
+  - アンケート(どっちが好き？）
+  - 投稿
+  - 販売キーキャップ（購入はプロフィールから）
+- Reddit
+  - https://www.reddit.com/r/MechanicalKeyboards/s/Tm4RwJpoUM
 
-販売
+## 販売
 写真を取る
 Lightroom で加工・補正する
 Google Drive のこのディレクトリにアップする
@@ -82,7 +81,7 @@ Facebook カタログに登録する（Instagram でリンク貼れる）
 - https://www.facebook.com/products/catalogs/314995313215228/products
 - Instagram の商品タグを追加できる
 
-実店舗
+## 実店舗
 
 遊舎工房の Artisan Keycaps 委託販売
 https://yushakobo.jp/news/2019/09/06/artisan/
@@ -93,7 +92,7 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 - 最低設定価格：3,000 円（税別）
 - 委託料：20%
 
-配送
+## 配送
 クリックポストを利用して住所と氏名を入力して決済を済ませる
 - https://www.post.japanpost.jp/service/clickpost/
 印刷用紙を PDF でダウンロードしてネットプリント
@@ -105,7 +104,7 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 - メッセージカード
 郵便局かポスト
 
-追加で購入したもの
+## 追加で購入したもの
 レジンだけでなくスカルピーにも挑戦した
 - スカルピー
 - ヒートガン
@@ -114,18 +113,10 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 
 写真を綺麗に撮る用途で一眼レンズ（マクロ）も購入した
 
-
-
-以下は将来
+## 以下は将来
 
 Google Form の方法
 - https://github.com/imyownyear/Z-Butt/wiki/Making-Money
 - https://github.com/imyownyear/Z-Butt/wiki/Google-Forms-raffle-setup
 
 Paypal の決済方法がわかってない
-
-
-
-
-
-
