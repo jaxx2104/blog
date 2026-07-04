@@ -20,11 +20,11 @@ TL;DR:
 
 ## 日々整備が続いている理由は 2 つ
 
-1 つめはマシンの数です。WSL と mac 2 台（私用・会社）の計 3 環境を同じ chezmoi ソースから apply しています。全マシンのセットアップを終えると、どこかで直した設定を別のマシンで pull する、という動作が毎日発生します。pull する流れで気になったところを直して push する。この往復が習慣の土台になりました。
+1 つめはマシンの数です。WSL と Mac 2 台（私用・会社）の計 3 環境を同じ chezmoi ソースから apply しています。全マシンのセットアップを終えると、どこかで直した設定を別のマシンで pull する、という動作が毎日発生します。pull する流れで気になったところを直して push する。この往復が習慣の土台になった気がします。
 
 2 つめは [Claude Code](https://claude.com/claude-code) です。設定ファイルを開いて「この構成、今ならどうするのがモダン？」と聞くと、改善ネタが尽きません。提案された変更をその場で適用して、`chezmoi diff` で確認して commit する。1 回の会話が 1〜数 commits になります。
 
-この 2 つが揃ってから、commit が止まらなくなりました。
+この 2 つが揃った結果が、冒頭の commit ペースです。
 
 ## 整備ループの実例
 
@@ -32,7 +32,7 @@ TL;DR:
 
 ### 一気に入れる: modern unix CLI 一式
 
-「ターミナル周りで今どきの定番ツールを揃えたい」と聞いて、いわゆる modern unix 系の CLI を一気に導入しました。[mise](https://mise.jdx.dev/) の config には今もこのときのセクションがそのまま残っています。
+「ターミナル周りで今どきの定番ツールを揃えたい」と聞いて、いわゆる [modern unix](https://github.com/ibraheemdev/modern-unix) 系の CLI を一気に導入しました。[mise](https://mise.jdx.dev/) の config には今もこのときのセクションがそのまま残っています。
 
 ```toml
 # modern unix
@@ -46,13 +46,13 @@ jq = "latest"
 yq = "latest"
 ```
 
-このとき良かったのは、ツールを入れるだけで終わらず配線まで会話で進んだことです。`ls` / `tree` を [eza](https://github.com/eza-community/eza) の alias に、`MANPAGER` を [bat](https://github.com/sharkdp/bat) に、[fzf](https://github.com/junegunn/fzf) の検索ソースを [fd](https://github.com/sharkdp/fd) に、git の pager を [delta](https://github.com/dandavison/delta) に。さらに `push.autoSetupRemote` や `rerere` といった modern git defaults まで、1 つの流れでまとめて入りました。
+このとき良かったのは、ツールを入れるだけで終わらず alias や pager の設定まで会話で進んだことです。`ls` / `tree` を [eza](https://github.com/eza-community/eza) の alias に、`MANPAGER` を [bat](https://github.com/sharkdp/bat) に、[fzf](https://github.com/junegunn/fzf) の検索ソースを [fd](https://github.com/sharkdp/fd) に、git の pager を [delta](https://github.com/dandavison/delta) に。さらに `push.autoSetupRemote` や `rerere` といった modern git defaults まで、1 つの流れでまとめて入りました。
 
 ### 役割分担を聞く: brew か mise か
 
 パッケージをどこで管理するかは何度か引っ越しました。最初は [Homebrew](https://brew.sh/) に寄せていました。その後 Claude に相談したら「単体バイナリで完結する CLI は mise の方が向いている」という整理を提案され、納得して brew → mise に移しました。chezmoi の external 機能で入れていたツールも mise に寄せました。
 
-このとき出会った罠は、config のコメントとしてそのまま資産化しています。
+このとき出会った [tealdeer](https://github.com/tealdeer-rs/tealdeer) や [btop](https://github.com/aristocratos/btop) の罠は、config のコメントとして残しています。
 
 ```toml
 # dbrgn/tealdeer ships only completions/licenses on GitHub releases, no binaries.
@@ -68,7 +68,7 @@ btop = "latest"
 
 次に同じところで悩んだとき、コメントを読めば（自分も Claude も）同じ失敗を繰り返さずに済むはずです。
 
-### 細かく磨く: 気になったその日に 1 commit
+### 細かく直す: 気になったその日に 1 commit
 
 大きな導入だけでなく、日々の小さな引っかかりもその日のうちに直します。
 
@@ -77,11 +77,25 @@ btop = "latest"
 
 どれも単体では数行の変更ですが、「気になる → 聞く → 直る」のサイクルが短いので、引っかかりを放置しなくなりました。
 
-副産物として、キャッチアップが進みます。mise のバックエンドの仕組み、`op inject` という CLI の使い方、chezmoi の `run_onchange` スクリプト、modern git defaults。どれも自分から調べに行ったというより、整備の会話の中で「そういうのがあるのか」と知ったものです。
+副産物として、キャッチアップが勝手に進む気がします。mise のバックエンドの仕組み、`op inject` という CLI の使い方、chezmoi の `run_onchange` スクリプト、modern git defaults。どれも自分から調べに行ったというより、整備の会話の中で「そういうのがあるのか」と知ったものです。
 
-## 構成の最小マップ
+## 構成のポイント
 
 chezmoi のテクニック自体は、作者の [twpayne/dotfiles](https://github.com/twpayne/dotfiles) と[公式ドキュメント](https://www.chezmoi.io/)を参考にしました。自分の構成から、複数マシン運用で効いているところだけ紹介します。
+
+ソースリポジトリの構造は、ここで触れるものだけ抜き出すとこの形です。
+
+```text
+~/.local/share/chezmoi/          # リポジトリ (.chezmoiroot で home/ に寄せている)
+└── home/
+    ├── .chezmoi.toml.tmpl       # マシン属性の自動判定
+    ├── .chezmoiignore           # マシンごとの配布制御
+    ├── .chezmoiscripts/         # run_onchange_after_mise-install.sh.tmpl など
+    ├── dot_Brewfile.tmpl        # → ~/.Brewfile
+    ├── dot_claude/              # → ~/.claude
+    ├── private_dot_config/      # → ~/.config (fish / mise / git / atuin ...)
+    └── windows/                 # WSL 用 (Windows Terminal 設定)
+```
 
 ### マシン属性の自動判定
 
@@ -101,7 +115,7 @@ chezmoi のテクニック自体は、作者の [twpayne/dotfiles](https://githu
 
 ### Brewfile を single source of truth に
 
-mac のパッケージは Brewfile を唯一の正として、`chezmoi apply` のたびに `run_onchange` スクリプトで同期しています。
+Mac のパッケージは Brewfile を唯一の正として、`chezmoi apply` のたびに `run_onchange` スクリプトで同期しています。
 
 1. `brew bundle` — Brewfile にあるものをインストール
 2. `brew bundle cleanup --force` — Brewfile にないものをアンインストール
