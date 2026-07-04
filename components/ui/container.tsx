@@ -1,8 +1,15 @@
 import type React from "react"
 import styles from "./container.module.css"
 
-const Container: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-  <div className={styles.container}>{children}</div>
+interface Props {
+  children?: React.ReactNode
+  narrow?: boolean
+}
+
+const Container: React.FC<Props> = ({ children, narrow }) => (
+  <div className={styles.container} data-narrow={narrow ? "" : undefined}>
+    {children}
+  </div>
 )
 
 export default Container

@@ -6,9 +6,9 @@
   letter-spacing: -0.05rem;
   text-transform: uppercase;
   margin-right: 1rem;
+  transition: color 0.2s ease-out;
 }
 
 .logo:hover {
-  color: var(--color-accent);
-  transition: color 0.2s ease-out;
+  color: rgba(255, 255, 255, 0.75);
 }

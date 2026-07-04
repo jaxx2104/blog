@@ -26,6 +26,7 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#e91e63" },
     ],
     links: [
       {
@@ -53,7 +54,7 @@ export const Route = createRootRoute({
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&family=Permanent+Marker&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Permanent+Marker&display=swap",
       },
       {
         rel: "alternate",

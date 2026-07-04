@@ -28,6 +28,7 @@ function HomePage() {
             key={post.permalink}
             path={post.permalink}
             title={post.title}
+            created_at={post.created_at}
             excerpt={post.excerpt}
             thumbnail={post.thumbnail}
           />

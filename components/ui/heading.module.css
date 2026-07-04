@@ -1,13 +1,14 @@
 .heading {
-  color: var(--color-main);
-  font-size: 1.5rem;
+  color: var(--color-title);
+  font-size: var(--font-size-h1);
   font-weight: var(--font-weight-bold);
-  letter-spacing: -0.025rem;
-  line-height: 1.2;
+  font-feature-settings: "palt";
+  letter-spacing: 0.01em;
+  line-height: var(--line-height-heading);
   margin: 0;
+  transition: color 0.2s ease-out;
 }
 
 .heading:hover {
-  transition: color 0.2s ease-out;
-  color: var(--color-sub);
+  color: var(--color-main);
 }

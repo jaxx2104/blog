@@ -1,8 +1,9 @@
 .display {
   font-size: var(--display-size, var(--font-size-jumbo));
   font-weight: var(--font-weight-bold);
-  line-height: var(--font-size-large);
-  letter-spacing: -0.05rem;
+  line-height: var(--line-height-heading);
+  letter-spacing: 0.01em;
+  font-feature-settings: "palt";
   color: var(--color-main);
   padding: 0;
   text-transform: none;

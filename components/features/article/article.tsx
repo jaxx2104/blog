@@ -31,7 +31,7 @@ const Article: React.FC<Props> = ({
   site,
 }: Props) => {
   return (
-    <Container>
+    <Container narrow>
       <ArticleInfo
         path={path}
         title={title}

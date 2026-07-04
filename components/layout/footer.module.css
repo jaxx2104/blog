@@ -1,3 +1,6 @@
 .footer {
-  padding: 2rem 0;
+  padding: 2rem 0 3rem;
+  text-align: center;
+  color: var(--color-sub);
+  font-size: var(--font-size-small);
 }

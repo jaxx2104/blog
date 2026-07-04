@@ -13,7 +13,7 @@
 
 .section[data-variant="primary"] {
   color: white;
-  background: var(--color-main);
+  background: var(--color-brand);
 }
 
 .section[data-variant="dark"] {

@@ -15,5 +15,7 @@
 .meta {
   margin: 0.5rem 0;
   display: flex;
-  column-gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
