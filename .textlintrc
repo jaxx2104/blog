@@ -32,6 +32,9 @@
       "preferInList": "ですます",
       "strict": false
     },
-    "preset-ai-writing": true
+    "preset-ai-writing": true,
+    "prh": {
+      "rulePaths": ["./prh.yml"]
+    }
   }
 }

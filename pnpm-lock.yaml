@@ -127,6 +127,9 @@ importers:
       textlint-rule-preset-japanese:
         specifier: 10.0.4
         version: 10.0.4
+      textlint-rule-prh:
+        specifier: 6.1.0
+        version: 6.1.0
       tsx:
         specifier: ^4
         version: 4.22.4
@@ -1605,6 +1608,9 @@ packages:
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
+  commandpost@1.4.0:
+    resolution: {integrity: sha512-aE2Y4MTFJ870NuB/+2z1cXBhSBBzRydVVjzhFC4gtenEhpnj15yu0qptWGJsO9YGrcPZ3ezX8AWb1VA391MKpQ==}
+
   content-disposition@1.1.0:
     resolution: {integrity: sha512-5jRCH9Z/+DRP7rkvY83B+yGIGX96OYdJmzngqnw2SBSxqCFPd0w2km3s5iawpGX8krnwSGmF0FW5Nhr0Hfai3g==}
     engines: {node: '>=18'}
@@ -1700,6 +1706,10 @@ packages:
 
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
+
+  diff@4.0.4:
+    resolution: {integrity: sha512-X07nttJQkwkfKfvTPG/KSnE2OMdcUCao6+eXF3wmnIQRn2aPAHH3VxDbDOdegkd6JbPsXqShpvEOHfAT+nCNwQ==}
+    engines: {node: '>=0.3.1'}
 
   diff@8.0.4:
     resolution: {integrity: sha512-DPi0FmjiSU5EvQV0++GFDOJ9ASQUVFh5kD+OzOnYdi7n3Wpm9hWWGfB/O2blfHcMVTL5WkQXSnRiK9makhrcnw==}
@@ -2643,6 +2653,10 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
+  prh@5.4.4:
+    resolution: {integrity: sha512-UATF+R/2H8owxwPvF12Knihu9aYGTuZttGHrEEq5NBWz38mREh23+WvCVKX3fhnIZIMV7ye6E1fnqAl+V6WYEw==}
+    hasBin: true
+
   property-information@5.6.0:
     resolution: {integrity: sha512-YUHSPk+A30YPv+0Qf8i9Mbfe/C0hdPXk1s1jPVToV8pk8BQtpw10ct89Eo7OWkutrwqvT0eicAxlOg3dOAu8JA==}
 
@@ -3057,6 +3071,9 @@ packages:
 
   textlint-rule-preset-japanese@10.0.4:
     resolution: {integrity: sha512-xoQvGKhHCm2ZQqZAlSCgaeJI0cFSO4jleki1e8s/3FscuIr6SWcB3dB2tA+1TkOTd6X6MawC8Wah9+Z7+xaqrQ==}
+
+  textlint-rule-prh@6.1.0:
+    resolution: {integrity: sha512-KrchADHw1/LZ/tAQ2XwL/XdUhunKCvlNmwgp+6hdyzuWX7uojOkDdJWWV0KAN4XWsK6Te5w/SZcYwQ7X6i3B0A==}
 
   textlint-rule-sentence-length@5.2.1:
     resolution: {integrity: sha512-z4HylabPy+e1I5DcuzDmcT65hvyytTlsD+uM49JkCBTSJBWqzQQ3kCGk4b1cF+kANS2HifWNnpTG/jfSOeavIw==}
@@ -4790,6 +4807,8 @@ snapshots:
 
   commander@2.20.3: {}
 
+  commandpost@1.4.0: {}
+
   content-disposition@1.1.0: {}
 
   content-type@1.0.5: {}
@@ -4866,6 +4885,8 @@ snapshots:
   devlop@1.1.0:
     dependencies:
       dequal: 2.0.3
+
+  diff@4.0.4: {}
 
   diff@8.0.4: {}
 
@@ -6137,6 +6158,12 @@ snapshots:
 
   prettier@3.8.4: {}
 
+  prh@5.4.4:
+    dependencies:
+      commandpost: 1.4.0
+      diff: 4.0.4
+      js-yaml: 4.2.0
+
   property-information@5.6.0:
     dependencies:
       xtend: 4.0.2
@@ -6793,6 +6820,12 @@ snapshots:
       textlint-rule-no-nfd: 2.0.2
       textlint-rule-no-zero-width-spaces: 1.0.1
       textlint-rule-sentence-length: 5.2.1
+
+  textlint-rule-prh@6.1.0:
+    dependencies:
+      '@babel/parser': 7.29.7
+      prh: 5.4.4
+      textlint-rule-helper: 2.5.0
 
   textlint-rule-sentence-length@5.2.1:
     dependencies:

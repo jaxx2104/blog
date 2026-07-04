@@ -1,0 +1,24 @@
+version: 1
+
+rules:
+  # 表記ゆれ: 固有名詞は公式表記に揃える。
+  # おおげさ語 (資産化・配線など) は文脈依存で自動修正が壊れるため
+  # ここには入れない。jaxx-writing-blog skill のレビュー基準側が担当。
+  #
+  # ASCII 語は明示的に \b 付き regex を書く。prh のデフォルト展開は
+  # 単語境界を保証せず SMACSS / emacs 内の mac に誤爆する。
+  - expected: Mac
+    pattern: /\b(mac|MAC)\b/
+    specs:
+      - from: mac
+        to: Mac
+      - from: MAC
+        to: Mac
+      - from: SMACSS
+        to: SMACSS
+      - from: emacs
+        to: emacs
+      - from: MacBook
+        to: MacBook
+      - from: macOS
+        to: macOS
