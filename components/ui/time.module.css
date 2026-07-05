@@ -1,8 +1,9 @@
 .time {
-  color: var(--color-sub);
+  color: inherit;
   display: inline-block;
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-small);
-  font-weight: var(--font-weight);
-  text-align: center;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
   vertical-align: baseline;
 }

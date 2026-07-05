@@ -1,6 +1,28 @@
 .footer {
-  padding: 2rem 0 3rem;
-  text-align: center;
-  color: var(--color-sub);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding: 2.4rem 0 3.4rem;
+  border-top: 1px solid var(--color-page-line);
+}
+
+.word {
+  font-family: var(--font-family-display);
+  font-size: 1.35rem;
+  color: var(--color-on-page);
+  transition: opacity 0.15s ease-out;
+}
+
+.word:hover {
+  opacity: 0.78;
+}
+
+.meta {
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-small);
+  letter-spacing: 0.12em;
+  color: var(--color-on-page-dim);
 }

@@ -2,16 +2,21 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 1.25rem;
 }
 
 .item {
-  color: white;
+  color: var(--color-on-page);
+  opacity: 0.8;
   cursor: pointer;
-  margin-right: 1rem;
-  font-size: var(--font-size);
-  transition: color 0.2s ease-out;
+  margin: 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: opacity 0.15s ease-out;
 }
 
 .item:hover {
-  color: rgba(255, 255, 255, 0.75);
+  opacity: 1;
 }

@@ -1,57 +1,92 @@
 :root,
 [data-theme="light"] {
-  /* brand: テーマに依らずブランドピンクで塗る面 (header 等) */
-  --color-brand: #e91e63;
-  --color-main: #e91e63;
-  --color-main-strong: #c2185b;
-  --color-main-soft: rgba(233, 30, 99, 0.09);
-  --color-sub: #868e96;
-  --color-accent: #343a40;
-  --color-text: #495057;
-  --color-title: #212529;
-  --color-background: #ffffff;
-  --color-surface: #f6f7f9;
-  --color-border: #e9ecef;
-  --color-shadow: rgba(33, 37, 41, 0.08);
+  /* brand: 朱寄りピンク（テーマ非依存のアクセント / ライトではページ地） */
+  --color-brand: #ea2552;
+  --color-brand-strong: #c41d49;
+  --color-main: #ea2552;
+  --color-main-strong: #c41d49;
+  --color-main-soft: rgba(234, 37, 82, 0.1);
 
-  --content-width: 900px;
+  /* immersive page（色面）: ライトはブランド色でベタ塗り */
+  --color-page: #ea2552;
+  --color-on-page: #fff0f2;
+  --color-on-page-dim: rgba(255, 240, 242, 0.74);
+  --color-page-line: rgba(255, 240, 242, 0.26);
+
+  /* white reading panel（記事本文の白いシート） */
+  --color-panel: #ffffff;
+  --color-ink: #16130f;
+  --color-muted: #7c766e;
+  --color-line: #ece7df;
+
+  /* legacy aliases（未改修参照のフォールバック） */
+  --color-text: var(--color-ink);
+  --color-title: var(--color-ink);
+  --color-sub: var(--color-muted);
+  --color-accent: var(--color-ink);
+  --color-background: var(--color-panel);
+  --color-surface: #f4f2ee;
+  --color-border: var(--color-line);
+  --color-shadow: rgba(20, 16, 12, 0.12);
+
+  --content-width: 1000px;
   --content-width-narrow: 720px;
 
-  --radius-s: 4px;
-  --radius-m: 10px;
+  /* sharp corners が基本。inline code 等の小面のみ radius-s */
+  --radius-s: 3px;
+  --radius-m: 0px;
 
+  /* type: ハイコントラスト・セリフ見出し × 本文セリフ × モノスペース */
+  --font-family-display:
+    "Playfair Display", "Didot", "Bodoni 72", "Noto Serif JP",
+    "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;
   --font-family-base:
-    "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+    "Noto Serif JP", "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
   --font-family-mono:
-    "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+    "Roboto Mono", "SF Mono", ui-monospace, Menlo, Consolas,
+    "Hiragino Kaku Gothic ProN", monospace;
 
-  --font-size-small: 0.875rem;
-  --font-size: 1rem;
-  --font-size-large: 1.125rem;
-  --font-size-h3: 1.25rem;
-  --font-size-h2: 1.625rem;
-  --font-size-h1: 2.25rem;
-  --font-size-jumbo: 2rem;
+  --font-size-small: 0.8125rem;
+  --font-size: 1.0625rem;
+  --font-size-large: 1.1875rem;
+  --font-size-h3: 1.375rem;
+  --font-size-h2: 1.75rem;
+  --font-size-h1: 2.5rem;
+  --font-size-jumbo: 2.25rem;
 
   --font-weight: 400;
-  --font-weight-bold: 700;
-  --font-weight-black: 900;
+  --font-weight-bold: 600;
+  --font-weight-black: 700;
 
-  --line-height: 1.8;
-  --line-height-heading: 1.4;
+  --line-height: 1.78;
+  --line-height-heading: 1.12;
 }
 
 [data-theme="dark"] {
-  --color-main: #ff6b93;
-  --color-main-strong: #ff8fae;
-  --color-main-soft: rgba(255, 107, 147, 0.14);
-  --color-sub: #9aa2ad;
-  --color-accent: #f3f4f7;
-  --color-text: #dfe2e8;
-  --color-title: #f3f4f7;
-  --color-background: #282c35;
-  --color-surface: #31353f;
-  --color-border: #3f4450;
-  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-brand: #fc637a;
+  --color-brand-strong: #ff8494;
+  --color-main: #fc637a;
+  --color-main-strong: #ff8494;
+  --color-main-soft: rgba(252, 99, 122, 0.14);
+
+  /* dark: 全面ベタは眩しいため、濃いニュートラル地＋ブランドアクセント */
+  --color-page: #0e0c0b;
+  --color-on-page: #f1ebe0;
+  --color-on-page-dim: rgba(241, 235, 224, 0.72);
+  --color-page-line: rgba(241, 235, 224, 0.16);
+
+  --color-panel: #17130f;
+  --color-ink: #f1ebe0;
+  --color-muted: #9a9188;
+  --color-line: #2a251f;
+
+  --color-text: var(--color-ink);
+  --color-title: var(--color-ink);
+  --color-sub: var(--color-muted);
+  --color-accent: var(--color-ink);
+  --color-background: var(--color-panel);
+  --color-surface: #221e18;
+  --color-border: var(--color-line);
+  --color-shadow: rgba(0, 0, 0, 0.5);
 }

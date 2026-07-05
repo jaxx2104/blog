@@ -1,10 +1,10 @@
 .section {
-  padding: 2rem 0 4rem;
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
   position: relative;
   margin: 0 auto;
   text-align: left;
-  color: var(--color-accent);
-  background: inherit;
+  color: var(--color-on-page);
+  background: transparent;
 }
 
 .section[data-center] {
@@ -12,12 +12,12 @@
 }
 
 .section[data-variant="primary"] {
-  color: white;
-  background: var(--color-brand);
+  color: var(--color-on-page);
+  background: transparent;
 }
 
 .section[data-variant="dark"] {
-  color: white;
+  color: #ffffff;
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 0.75),
@@ -26,10 +26,20 @@
 }
 
 .section a {
-  color: var(--color-accent);
+  color: var(--color-on-page);
+  text-decoration: underline;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--color-on-page) 45%,
+    transparent
+  );
+  text-underline-offset: 0.2em;
 }
 
-.section[data-variant="primary"] a,
+.section a:hover {
+  text-decoration-color: var(--color-on-page);
+}
+
 .section[data-variant="dark"] a {
-  color: white;
+  color: #ffffff;
 }

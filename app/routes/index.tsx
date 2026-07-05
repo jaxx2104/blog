@@ -30,7 +30,7 @@ function HomePage() {
             title={post.title}
             created_at={post.created_at}
             excerpt={post.excerpt}
-            thumbnail={post.thumbnail}
+            category={post.category}
           />
         ))}
       </TileGrid>
