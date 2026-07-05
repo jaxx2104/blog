@@ -22,8 +22,6 @@ TL;DR:
 
 ## 日々整備が続いている理由は 2 つ
 
-![1つの source から WSL / Mac (private) / Mac (work) へ同期する図](./sync-loop.svg)
-
 1 つめはマシンの数です。WSL と Mac 2 台（私用・会社）の計 3 環境を同じ chezmoi ソースから apply しています。全マシンのセットアップを終えると、どこかで直した設定を別のマシンで pull する、という動作が毎日発生します。pull する流れで気になったところを直して push する。この往復が習慣の土台になった気がします。
 
 2 つめは [Claude Code](https://claude.com/claude-code) です。設定ファイルを開いて「この構成、今ならどうするのがモダン？」と聞くと、改善ネタが尽きません。提案された変更をその場で適用して、`chezmoi diff` で確認して commit する。1 回の会話が 1〜数 commits になります。
@@ -135,5 +133,3 @@ Mac のパッケージは Brewfile を唯一の正として、`chezmoi apply` �
 導入手順は[公式ドキュメント](https://www.chezmoi.io/)が丁寧なので、そちらを見るのが早いです。構成の実例は [twpayne/dotfiles](https://github.com/twpayne/dotfiles) が参考になります。
 
 最初から全部を管理しようとしなくても、1 ファイルを `chezmoi add` するところから始められます。あとは気になったら Claude へ「この構成、今ならどうする？」と聞く。自分の場合はこのやり方で 4 ヶ月半続いています。
-
-![聞く → 直す → commit → pull のループ図](./habit-loop.svg)
