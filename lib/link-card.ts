@@ -10,9 +10,18 @@ export interface OgpData {
 
 const ogpCache = new Map<string, OgpData>()
 
+const IMAGE_EXT_RE = /\.(jpe?g|png|gif|webp|svg|ico|bmp)(\?.*)?$/i
+
 export async function fetchOgp(url: string): Promise<OgpData | null> {
   if (ogpCache.has(url)) {
     return ogpCache.get(url)!
+  }
+
+  // Direct image URLs never return OGP metadata -- skip the fetch.
+  if (IMAGE_EXT_RE.test(url)) {
+    const fallback = fallbackOgpData(url)
+    ogpCache.set(url, fallback)
+    return fallback
   }
 
   try {
@@ -38,20 +47,24 @@ export async function fetchOgp(url: string): Promise<OgpData | null> {
       ogpCache.set(url, ogpData)
       return ogpData
     }
-  } catch (error) {
-    console.warn(`Failed to fetch OGP for ${url}:`, error)
+  } catch (_error) {
+    // OGP fetch failed — fallback uses domain/path info from URL
   }
 
   // Fallback: return basic data from URL
-  const fallbackData: OgpData = {
+  const fallback = fallbackOgpData(url)
+  ogpCache.set(url, fallback)
+  return fallback
+}
+
+function fallbackOgpData(url: string): OgpData {
+  return {
     title: extractTitleFromUrl(url),
     description: "",
     image: "",
     url,
     siteName: extractDomain(url),
   }
-  ogpCache.set(url, fallbackData)
-  return fallbackData
 }
 
 function extractDomain(url: string): string {
