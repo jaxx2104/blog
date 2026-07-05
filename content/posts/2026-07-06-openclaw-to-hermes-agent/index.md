@@ -1,5 +1,5 @@
 ---
-title: "OpenClaw から hermes agent へと移行した"
+title: "OpenClaw から Hermes Agent へと移行した"
 created_at: '2026-07-06T00:00:00.000Z'
 updated_at: '2026-07-06T00:00:00.000Z'
 path: /openclaw-to-hermes-agent
@@ -37,11 +37,11 @@ hermes skills install official/migration/openclaw-migration --yes
 hermes claw migrate
 ```
 
-これで人格 (SOUL.md)・ユーザープロフィール (USER.md)・長期記憶 (MEMORY.md)・日次メモリ・モデル設定・MCP サーバー定義が一括で移ります。嬉しい誤算だったのは自動要約で、220 行あった USER.md を Hermes 側の文字数上限(約 1,375 字)に合わせて勝手に圧縮してくれました。手動で削る作業を覚悟していたので、これは助かりました。
+これで人格 (SOUL.md)・ユーザープロフィール (USER.md)・長期記憶 (MEMORY.md)・日次メモリ・モデル設定・MCP サーバー定義が一括で移ります。嬉しい誤算だったのは自動要約で、220 行あった USER.md を Hermes 側の文字数上限(約 1,375 字)に合わせて勝手に圧縮してくれました。
 
 罠も 2 つ踏んでいます。1 つは secret の扱いで、migrate は OpenClaw の SecretRef を展開して Home Assistant の JWT を config.yaml に生値で焼き込みます。`~/.hermes/.env`に移して`Authorization: Bearer ${MCP_HOME_ASSISTANT_API_KEY}`の環境変数参照に書き換えました。もう 1 つはモデル指定の形式です。OpenClaw の`openrouter/deepseek/deepseek-v3.2`という 1 本の文字列がそのまま`model.default`に入り、"not a valid model ID" で 400 になります。Hermes は provider と model を分離する設計なので、手で直しました。
 
-チャネルは Telegram bot と Slack app のトークンをそのまま流用できました。Hermes はトークンが存在するチャネルを自動で有効にする方式で、owner 限定にするには`TELEGRAM_ALLOWED_USERS`/`SLACK_ALLOWED_USERS`を置きます。切り替え自体は systemd のサービスを入れ替えるだけです。
+チャネルは Telegram bot と Slack app のトークンをそのまま流用できました。Hermes はトークンが存在するチャネルを自動で有効にする方式で、owner 限定にするには`TELEGRAM_ALLOWED_USERS`/`SLACK_ALLOWED_USERS`を置きます。
 
 ## いちばんの機能差は定期タスク: heartbeat から cron へ
 
@@ -57,7 +57,7 @@ OpenClaw の定期タスクは heartbeat という仕組みでした。60 分ご
 今日の日付と一致していれば実行済み＝スキップ。実行したら今日の日付を書き込む。
 ```
 
-時間窓の判定も重複防止の state ファイルも、LLM に読ませるプロンプトとして自前実装するわけです。窓を 1 時間に設計しておかないと 60 分間隔の tick から漏れる、といった暗黙の結合もあります。しかも該当タスクがない tick でも LLM は毎回起動するので、空振りにもトークンを払います。
+時間窓の判定も重複防止の state ファイルも、LLM に読ませるプロンプトとして自前実装するわけです。窓を 1 時間に設計しておかないと 60 分間隔の tick から漏れる、といった暗黙の結合もあります。
 
 Hermes は普通の cron でした。
 
@@ -114,10 +114,10 @@ Ollama の OpenAI 互換 API は num_ctx をリクエストで受けないので
 | Web UI | tailnet ゲートのみ(パスワード無しで公開できた) | 非 loopback では basic 認証が強制 |
 | サンドボックス | 非 main セッションを Docker で隔離 | cron も main context で実行(コマンド承認で制御) |
 
-Web UI の認証強制はひと手間増えますが、`--insecure`フラグすら no-op 化されていて、逃げ道を残さない方針が徹底しています。逆にサンドボックスは OpenClaw の方が手厚く、Hermes では実行コマンドの承認ポリシーで縛る方式になります。
+Web UI の認証強制はひと手間増えますが、`--insecure`フラグすら no-op 化されていて、逃げ道を残さない方針が徹底しています。サンドボックスだけは逆に OpenClaw の方が手厚いです。
 
 ## OpenClaw はまだ消さない
 
-移行はカットオーバー済みですが、OpenClaw は停止しただけで`~/.openclaw`ごと残してあります。チャネルのトークンを共有しているので、systemd のサービスを入れ替えれば数分でロールバックできる状態です。cron 4 本が 2 週連続で定時配信に成功する、fallback の実績が 1 回以上ある、といった退役条件をチェックリストにして、満たしたら片付けます。
+OpenClaw は停止しただけで`~/.openclaw`ごと残してあります。チャネルのトークンを共有しているので、systemd のサービスを入れ替えれば数分でロールバックできる状態です。cron 4 本が 2 週連続で定時配信に成功する、fallback の実績が 1 回以上ある、といった退役条件をチェックリストにして、満たしたら片付けます。
 
 機能面だけ見れば、定期タスクの cron 化とメモリ上限の設計だけでも移行した甲斐がありました。当初の目的だったローカル LLM の primary 化は宿題として残っているので、16GB VRAM で日本語が実用になる 64k コンテキストのモデルが出てきたら、また構成を見直すつもりです。
