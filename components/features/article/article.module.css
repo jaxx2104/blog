@@ -1,14 +1,14 @@
 .cardwrap {
-  padding: clamp(1rem, 4vw, 3rem) clamp(1rem, 4vw, 2.5rem)
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 3rem)
     clamp(2rem, 5vw, 3.5rem);
 }
 
 .card {
-  max-width: var(--content-width-narrow);
-  margin: 0 auto;
   background: var(--color-panel);
   color: var(--color-ink);
-  padding: clamp(1.75rem, 5vw, 3.75rem);
+  padding: clamp(1.75rem, 5vw, 3rem);
 }
 
 .back {
