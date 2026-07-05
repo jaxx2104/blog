@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" width="640" height="520" font-family="'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#868e96" fill-opacity="0.7"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="639" height="519" rx="16" fill="#f6f7f9" stroke="#e9ecef" stroke-width="1"/>
+  <path d="M 320.0 85.0 C 405.6 20.8, 625.6 185.8, 540.0 250.0" fill="none" stroke="#868e96" stroke-width="1.5" stroke-opacity="0.55" marker-end="url(#arrow)"/>
+  <path d="M 540.0 250.0 C 625.6 314.2, 405.6 479.2, 320.0 415.0" fill="none" stroke="#868e96" stroke-width="1.5" stroke-opacity="0.55" marker-end="url(#arrow)"/>
+  <path d="M 320.0 415.0 C 234.4 479.2, 14.4 314.2, 100.0 250.0" fill="none" stroke="#868e96" stroke-width="1.5" stroke-opacity="0.55" marker-end="url(#arrow)"/>
+  <path d="M 100.0 250.0 C 14.4 185.8, 234.4 20.8, 320.0 85.0" fill="none" stroke="#868e96" stroke-width="1.5" stroke-opacity="0.55" marker-end="url(#arrow)"/>
+  
+  <circle cx="342.9" cy="73.8" r="2.9" fill="#e91e63" fill-opacity="0.65"/>
+  <circle cx="360.7" cy="70.7" r="2.3" fill="#e91e63" fill-opacity="0.80"/>
+  <circle cx="394.4" cy="73.0" r="3.7" fill="#e91e63" fill-opacity="0.52"/>
+  <circle cx="423.4" cy="80.9" r="2.7" fill="#e91e63" fill-opacity="0.82"/>
+  <circle cx="464.8" cy="100.1" r="2.2" fill="#e91e63" fill-opacity="0.41"/>
+  <circle cx="493.6" cy="119.0" r="2.7" fill="#e91e63" fill-opacity="0.37"/>
+  <circle cx="526.4" cy="148.1" r="4.1" fill="#e91e63" fill-opacity="0.49"/>
+  <circle cx="545.4" cy="172.3" r="3.2" fill="#e91e63" fill-opacity="0.42"/>
+  <circle cx="557.1" cy="197.6" r="3.4" fill="#e91e63" fill-opacity="0.79"/>
+  <circle cx="559.2" cy="218.1" r="3.2" fill="#e91e63" fill-opacity="0.55"/>
+  <circle cx="554.9" cy="232.8" r="3.4" fill="#e91e63" fill-opacity="0.72"/>
+  <circle cx="554.9" cy="267.2" r="4.0" fill="#e91e63" fill-opacity="0.77"/>
+  <circle cx="558.6" cy="278.0" r="3.0" fill="#e91e63" fill-opacity="0.67"/>
+  <circle cx="558.0" cy="298.7" r="3.2" fill="#e91e63" fill-opacity="0.63"/>
+  <circle cx="548.7" cy="322.1" r="3.3" fill="#e91e63" fill-opacity="0.81"/>
+  <circle cx="530.6" cy="347.2" r="3.4" fill="#e91e63" fill-opacity="0.81"/>
+  <circle cx="504.4" cy="372.6" r="3.1" fill="#e91e63" fill-opacity="0.41"/>
+  <circle cx="477.5" cy="392.2" r="2.5" fill="#e91e63" fill-opacity="0.39"/>
+  <circle cx="448.8" cy="408.4" r="2.4" fill="#e91e63" fill-opacity="0.85"/>
+  <circle cx="412.2" cy="422.7" r="2.6" fill="#e91e63" fill-opacity="0.51"/>
+  <circle cx="384.3" cy="428.6" r="2.3" fill="#e91e63" fill-opacity="0.54"/>
+  <circle cx="359.9" cy="429.2" r="3.8" fill="#e91e63" fill-opacity="0.70"/>
+  <circle cx="342.9" cy="426.2" r="2.7" fill="#e91e63" fill-opacity="0.60"/>
+  <circle cx="297.1" cy="426.2" r="3.8" fill="#e91e63" fill-opacity="0.75"/>
+  <circle cx="272.4" cy="429.5" r="3.8" fill="#e91e63" fill-opacity="0.68"/>
+  <circle cx="244.8" cy="426.9" r="2.3" fill="#e91e63" fill-opacity="0.84"/>
+  <circle cx="213.6" cy="418.0" r="4.0" fill="#e91e63" fill-opacity="0.60"/>
+  <circle cx="175.9" cy="400.3" r="3.9" fill="#e91e63" fill-opacity="0.39"/>
+  <circle cx="148.9" cy="382.9" r="2.8" fill="#e91e63" fill-opacity="0.42"/>
+  <circle cx="114.4" cy="352.8" r="2.8" fill="#e91e63" fill-opacity="0.49"/>
+  <circle cx="100.5" cy="336.3" r="4.0" fill="#e91e63" fill-opacity="0.41"/>
+  <circle cx="84.5" cy="307.4" r="3.1" fill="#e91e63" fill-opacity="0.70"/>
+  <circle cx="81.3" cy="278.6" r="2.3" fill="#e91e63" fill-opacity="0.47"/>
+  <circle cx="85.1" cy="267.2" r="2.2" fill="#e91e63" fill-opacity="0.53"/>
+  <circle cx="85.1" cy="232.8" r="3.2" fill="#e91e63" fill-opacity="0.48"/>
+  <circle cx="80.7" cy="216.1" r="3.7" fill="#e91e63" fill-opacity="0.42"/>
+  <circle cx="84.4" cy="193.0" r="2.1" fill="#e91e63" fill-opacity="0.46"/>
+  <circle cx="100.0" cy="164.4" r="2.8" fill="#e91e63" fill-opacity="0.62"/>
+  <circle cx="129.9" cy="132.3" r="3.4" fill="#e91e63" fill-opacity="0.57"/>
+  <circle cx="166.2" cy="105.5" r="3.3" fill="#e91e63" fill-opacity="0.54"/>
+  <circle cx="205.6" cy="85.1" r="3.2" fill="#e91e63" fill-opacity="0.37"/>
+  <circle cx="230.4" cy="76.5" r="3.2" fill="#e91e63" fill-opacity="0.73"/>
+  <circle cx="280.6" cy="70.8" r="2.7" fill="#e91e63" fill-opacity="0.67"/>
+  <circle cx="297.1" cy="73.8" r="3.2" fill="#e91e63" fill-opacity="0.85"/>
+  
+  <circle cx="320.0" cy="85.0" r="24" fill="#fff" stroke="#e91e63" stroke-width="2.5"/>
+  <text x="320.0" y="55.0" font-size="16" font-weight="700" fill="#495057" text-anchor="middle">聞く</text>
+  <circle cx="540.0" cy="250.0" r="24" fill="#fff" stroke="#e91e63" stroke-width="2.5"/>
+  <text x="586.0" y="255.0" font-size="16" font-weight="700" fill="#495057" text-anchor="middle">直す</text>
+  <circle cx="320.0" cy="415.0" r="24" fill="#fff" stroke="#e91e63" stroke-width="2.5"/>
+  <text x="320.0" y="449.0" font-size="16" font-weight="700" fill="#495057" text-anchor="middle">commit</text>
+  <circle cx="100.0" cy="250.0" r="24" fill="#fff" stroke="#e91e63" stroke-width="2.5"/>
+  <text x="54.0" y="255.0" font-size="16" font-weight="700" fill="#495057" text-anchor="middle">pull</text>
+  
+</svg>

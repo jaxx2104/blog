@@ -136,4 +136,4 @@ Mac のパッケージは Brewfile を唯一の正として、`chezmoi apply` �
 
 最初から全部を管理しようとしなくても、1 ファイルを `chezmoi add` するところから始められます。あとは気になったら Claude へ「この構成、今ならどうする？」と聞く。自分の場合はこのやり方で 4 ヶ月半続いています。
 
-![chezmoi, 2026](./quiet-ledger.svg)
+![聞く → 直す → commit → pull のループ図](./habit-loop.svg)
