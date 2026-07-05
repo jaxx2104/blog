@@ -20,9 +20,11 @@ const ProfileUser: React.FC<Props> = ({
           <Display>Futoshi Iwashita</Display>
           <strong>jaxx2104</strong>
           <p>I&apos;m a front-end engineer in Japan 🗼</p>
-          <li>2013 ~ 2017: J-CAST</li>
-          <li>2017 ~ 2020: Recruit</li>
-          <li>2020 ~ : freee</li>
+          <ul className={styles.career}>
+            <li>2013 ~ 2017: J-CAST</li>
+            <li>2017 ~ 2020: Recruit</li>
+            <li>2020 ~ : freee</li>
+          </ul>
         </div>
         <div className={styles.user}>
           <Thumbnail src={profileImage} title="jaxx2104" size={160} circle />

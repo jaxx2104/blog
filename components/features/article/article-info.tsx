@@ -21,14 +21,22 @@ const ArticleInfo: React.FC<Props> = ({
   tags,
 }) => (
   <div className={styles.wrap}>
+    <div className={styles.kicker}>
+      <Time created_at={created_at} />
+      {categories?.map((c) => (
+        <span key={c} className={styles.cat}>
+          {c}
+        </span>
+      ))}
+    </div>
     <Link className={styles.headingLink} href={path}>
       <Heading>{title}</Heading>
     </Link>
-    <div className={styles.meta}>
-      <Time created_at={created_at} />
-      <Badges items={categories} primary />
-      <Badges items={tags} />
-    </div>
+    {tags && tags.length > 0 && (
+      <div className={styles.tags}>
+        <Badges items={tags} />
+      </div>
+    )}
   </div>
 )
 

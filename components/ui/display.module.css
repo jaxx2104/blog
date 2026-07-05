@@ -1,14 +1,16 @@
 .display {
-  font-size: var(--display-size, var(--font-size-jumbo));
+  font-family: var(--font-family-display);
+  font-size: var(--display-size, clamp(1.9rem, 5vw, 2.75rem));
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading);
-  letter-spacing: 0.01em;
-  font-feature-settings: "palt";
-  color: var(--color-main);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-on-page);
   padding: 0;
+  margin: 0 0 0.75rem;
   text-transform: none;
 }
 
 .display[data-uppercase] {
   text-transform: uppercase;
+  letter-spacing: 0.01em;
 }

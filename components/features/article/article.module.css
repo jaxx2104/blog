@@ -1,0 +1,28 @@
+.cardwrap {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 3rem)
+    clamp(2rem, 5vw, 3.5rem);
+}
+
+.card {
+  background: var(--color-panel);
+  color: var(--color-ink);
+  padding: clamp(1.75rem, 5vw, 3rem);
+}
+
+.back {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--color-main-strong);
+}
+
+.share {
+  margin-top: 2.5rem;
+}

@@ -1,7 +1,8 @@
 import type React from "react"
 import ArticleInfo from "@/components/features/article/article-info"
 import Share from "@/components/icons/icon-share"
-import Container from "@/components/ui/container"
+import Link from "@/lib/router-link"
+import styles from "./article.module.css"
 
 export interface SiteMetaType {
   title: string
@@ -31,22 +32,29 @@ const Article: React.FC<Props> = ({
   site,
 }: Props) => {
   return (
-    <Container narrow>
-      <ArticleInfo
-        path={path}
-        title={title}
-        created_at={created_at}
-        categories={categories}
-        tags={tags}
-      />
-      <div
-        className="content"
-        dangerouslySetInnerHTML={{
-          __html: html,
-        }}
-      />
-      <Share url={`${site.siteUrl}${path}`} title={title || ""} />
-    </Container>
+    <div className={styles.cardwrap}>
+      <article className={styles.card}>
+        <Link href="/" className={styles.back}>
+          ← WRITING
+        </Link>
+        <ArticleInfo
+          path={path}
+          title={title}
+          created_at={created_at}
+          categories={categories}
+          tags={tags}
+        />
+        <div
+          className="content"
+          dangerouslySetInnerHTML={{
+            __html: html,
+          }}
+        />
+        <div className={styles.share}>
+          <Share url={`${site.siteUrl}${path}`} title={title || ""} />
+        </div>
+      </article>
+    </div>
   )
 }
 

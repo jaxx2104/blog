@@ -1,8 +1,21 @@
-.grid {
-  margin: 0 auto;
-  padding: 0 1rem;
+.wrap {
   max-width: var(--content-width);
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 3rem)
+    clamp(2rem, 5vw, 3.5rem);
+}
+
+.eyebrow {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.14em;
+  color: var(--color-on-page-dim);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-page-line);
+}
+
+.list {
+  display: block;
 }

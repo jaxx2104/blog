@@ -1,21 +1,34 @@
 .wrap {
   display: flex;
-  margin: 2.5rem 0 1.5rem;
   flex-direction: column;
-  justify-content: center;
+  margin: 1.5rem 0 0;
   word-break: break-word;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.1em;
+  color: var(--color-brand-strong);
+}
+
+.cat {
+  text-transform: uppercase;
 }
 
 .headingLink {
   text-decoration: none;
   display: block;
-  margin: 0 0 0.75rem;
+  margin: 0.6rem 0 0;
 }
 
-.meta {
-  margin: 0.5rem 0;
+.tags {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: 1.5rem;
 }

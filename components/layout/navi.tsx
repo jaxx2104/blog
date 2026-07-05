@@ -2,7 +2,6 @@ import type React from "react"
 import NaviLogo from "@/components/layout/navi-logo"
 import NaviMenu from "@/components/layout/navi-menu"
 import Container from "@/components/ui/container"
-import Flex from "@/components/ui/flex"
 import { useTheme } from "@/lib/ThemeContext"
 import styles from "./navi.module.css"
 
@@ -11,8 +10,8 @@ const Navi: React.FC = () => {
   return (
     <header className={styles.header}>
       <Container>
-        <Flex>
-          <NaviLogo title="jaxx2104.info" />
+        <div className={styles.inner}>
+          <NaviLogo title="jaxx2104" />
           <NaviMenu
             items={[
               { text: "Home", to: "/" },
@@ -20,7 +19,7 @@ const Navi: React.FC = () => {
               { text: theme === "light" ? "🌅" : "🌃", action: toggleTheme },
             ]}
           />
-        </Flex>
+        </div>
       </Container>
     </header>
   )

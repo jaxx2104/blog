@@ -1,3 +1,13 @@
 .user {
   margin: 3rem auto 2rem;
 }
+
+.career {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+.career li {
+  margin: 0.3rem 0;
+}

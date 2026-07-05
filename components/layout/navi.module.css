@@ -1,10 +1,13 @@
 .header {
-  background-color: var(--color-brand);
-  position: sticky;
-  margin-bottom: 2rem;
-  top: 0;
-  z-index: 1;
-  box-shadow: 0 1px 4px var(--color-shadow);
+  padding: 1.6rem 0 1.1rem;
+}
+
+.inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .header a {

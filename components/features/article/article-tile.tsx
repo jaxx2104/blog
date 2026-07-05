@@ -8,7 +8,7 @@ interface Props {
   title: string
   created_at?: string
   excerpt?: string
-  thumbnail?: string
+  category?: string
 }
 
 const ArticleTile: React.FC<Props> = ({
@@ -16,28 +16,17 @@ const ArticleTile: React.FC<Props> = ({
   title,
   created_at,
   excerpt,
-  thumbnail,
+  category,
 }) => (
-  <Link href={path} className={styles.tileLink}>
-    <article className={styles.container}>
-      {thumbnail && (
-        <img
-          className={styles.thumbnail}
-          src={thumbnail}
-          alt=""
-          loading="lazy"
-        />
-      )}
-      <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
-        {!thumbnail && excerpt && <p className={styles.excerpt}>{excerpt}</p>}
-        {created_at && (
-          <div className={styles.date}>
-            <Time created_at={created_at} />
-          </div>
-        )}
-      </div>
-    </article>
+  <Link href={path} className={styles.row}>
+    <div className={styles.main}>
+      <span className={styles.title}>{title}</span>
+      {excerpt && <p className={styles.excerpt}>{excerpt}</p>}
+    </div>
+    <div className={styles.meta}>
+      {category && <span className={styles.cat}>{category}</span>}
+      {created_at && <Time created_at={created_at} />}
+    </div>
   </Link>
 )
 

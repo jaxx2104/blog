@@ -1,0 +1,26 @@
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+/* .section a より詳細度を上げて、白地に濃色・下線なしを確実に効かせる */
+.links .btn {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: #ffffff;
+  color: #16130f;
+  padding: 0.75rem 1.1rem;
+  border-radius: 0;
+  text-decoration: none;
+  transition: transform 0.15s ease-out;
+}
+
+.links .btn:hover {
+  color: #16130f;
+  text-decoration: none;
+  transform: translateY(-2px);
+}

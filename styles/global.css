@@ -1,7 +1,7 @@
 body {
   -webkit-font-smoothing: antialiased;
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--color-page);
+  color: var(--color-on-page);
   font-family: var(--font-family-base);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
@@ -17,7 +17,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-main);
+  outline: 2px solid currentColor;
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -36,12 +36,8 @@ body {
 }
 
 a {
-  color: var(--color-main);
+  color: inherit;
   text-decoration: none;
-}
-
-a:hover {
-  color: var(--color-main-strong);
 }
 
 ul,
@@ -53,9 +49,14 @@ li {
   margin: 0.25rem 0;
 }
 
+/* ============================================================
+   記事本文 .content — 白いパネルの中に置かれる前提で組む
+   （Velite 生成 HTML を dangerouslySetInnerHTML で注入）
+   ============================================================ */
 .content {
   margin: 0;
   padding: 0;
+  color: var(--color-ink);
 }
 
 .content h1,
@@ -64,19 +65,17 @@ li {
 .content h4,
 .content h5,
 .content h6 {
-  color: var(--color-title);
-  font-weight: var(--font-weight-black);
-  font-feature-settings: "palt";
-  margin: 3rem 0 1.25rem;
-  line-height: var(--line-height-heading);
-  letter-spacing: 0.01em;
+  color: var(--color-ink);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-bold);
+  margin: 2.4rem 0 1rem;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
 }
 
 .content h1,
 .content h2 {
   font-size: var(--font-size-h2);
-  border-inline-start: 4px solid var(--color-main);
-  padding-inline-start: 0.75rem;
 }
 
 .content h3 {
@@ -91,13 +90,14 @@ li {
 
 .content p {
   font-weight: var(--font-weight);
-  margin: 1rem 0;
+  margin: 1.1rem 0;
 }
 
 .content a {
+  color: var(--color-main-strong);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-main) 40%, transparent);
-  text-underline-offset: 0.25em;
+  text-decoration-color: color-mix(in srgb, var(--color-main) 45%, transparent);
+  text-underline-offset: 0.22em;
 }
 
 .content a:hover {
@@ -105,16 +105,18 @@ li {
 }
 
 .content blockquote {
-  background-color: var(--color-surface);
-  border-inline-start: 3px solid var(--color-border);
-  border-radius: 0 var(--radius-s) var(--radius-s) 0;
-  color: var(--color-sub);
-  padding: 0.25em 1.5em;
-  margin: 1.5rem 0;
+  border-inline-start: 2px solid var(--color-main);
+  color: var(--color-ink);
+  font-family: var(--font-family-display);
+  font-style: italic;
+  font-size: var(--font-size-large);
+  line-height: 1.4;
+  padding: 0.1em 0 0.1em 1.4em;
+  margin: 1.8rem 0;
 }
 
 .content blockquote p {
-  margin: 1rem 0;
+  margin: 0.6rem 0;
 }
 
 .content blockquote a {
@@ -125,13 +127,13 @@ li {
 .content img {
   width: 100%;
   height: auto;
-  border-radius: var(--radius-m);
-  margin: 1.5rem 0;
+  border-radius: 0;
+  margin: 1.8rem 0;
 }
 
 .content hr {
   border: 0;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-line);
   margin: 2.5rem 0;
 }
 
@@ -146,55 +148,77 @@ li {
 
 .content th,
 .content td {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-line);
   padding: 0.5rem 0.75rem;
   white-space: nowrap;
 }
 
 .content th {
   background-color: var(--color-surface);
+  font-family: var(--font-family-mono);
   font-weight: var(--font-weight-bold);
+  letter-spacing: 0.02em;
 }
 
-/* Code block styles - レイアウトのみ（色は rehype-pretty-code のテーマが適用） */
+/* Code block — レイアウトのみ（色は rehype-pretty-code のテーマ） */
+/* rehype-pretty-code は <figure> で囲む。figure 既定の左右マージン(40px)を
+   消して、コードブロックを本文と同じ横幅に揃える */
+.content figure[data-rehype-pretty-code-figure] {
+  margin: 1.8rem 0;
+}
+
+.content [data-rehype-pretty-code-title] {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+  border: 1px solid var(--color-line);
+  border-bottom: 0;
+  padding: 0.5rem 0.9rem;
+}
+
 .content pre {
-  border-radius: var(--radius-m);
-  padding: 1rem;
-  margin: 1.5rem 0;
+  border-radius: 0;
+  padding: 1.1rem 1.2rem;
+  margin: 1.8rem 0;
   overflow-x: auto;
   font-size: var(--font-size-small);
   line-height: 1.6;
   font-family: var(--font-family-mono);
 }
 
-/* Inline code styles */
+/* figure 内の pre は figure 側でマージンを持つので二重を避ける */
+.content figure[data-rehype-pretty-code-figure] pre {
+  margin: 0;
+}
+
+/* Inline code */
 .content code:not(pre code) {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  padding: 0.2em 0.4em;
+  background-color: var(--color-main-soft);
+  color: var(--color-main-strong);
+  padding: 0.12em 0.4em;
   border-radius: var(--radius-s);
-  font-size: var(--font-size-small);
+  font-size: 0.85em;
   font-family: var(--font-family-mono);
 }
 
-/* Link card styles */
+/* Link card — 角丸なしの枠線カード */
 .content .link-card {
   display: flex;
   align-items: stretch;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-m);
+  border: 1px solid var(--color-line);
+  border-radius: 0;
   overflow: hidden;
-  margin: 1.5rem 0;
+  margin: 1.8rem 0;
   text-decoration: none;
   color: inherit;
   transition:
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .content .link-card:hover {
   border-color: var(--color-main);
-  box-shadow: 0 2px 8px var(--color-shadow);
 }
 
 .content .link-card-image {
@@ -219,12 +243,12 @@ li {
 .content .link-card-no-image span {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--color-sub);
+  color: var(--color-muted);
 }
 
 .content .link-card-content {
   flex: 1;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -232,10 +256,11 @@ li {
 }
 
 .content .link-card-title {
-  color: var(--color-title);
+  color: var(--color-ink);
+  font-family: var(--font-family-display);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size);
-  line-height: 1.4;
+  line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -245,7 +270,7 @@ li {
 
 .content .link-card-description {
   font-size: var(--font-size-small);
-  color: var(--color-sub);
+  color: var(--color-muted);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -255,8 +280,10 @@ li {
 }
 
 .content .link-card-site {
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-small);
-  color: var(--color-sub);
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
 }
 
 @media (max-width: 480px) {
