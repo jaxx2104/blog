@@ -1,5 +1,6 @@
 {
   "name": "blog",
+  "type": "module",
   "description": "A static blog by jaxx2104",
   "version": "1.9.119",
   "author": "Futoshi Iwashita <jaxx2104@gmail.com>",
@@ -50,7 +51,7 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "dev": "vite dev",
+    "dev": "velite build && vite dev",
     "build": "pnpm velite:build && vite build",
     "start": "vite preview --port 4173",
     "deploy": "pnpm build",

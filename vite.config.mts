@@ -135,6 +135,23 @@ export default defineConfig({
   // until a hard reload. A single bundle avoids the per-route teardown.
   build: {
     cssCodeSplit: false,
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes(".velite")) return "posts"
+          if (id.includes("node_modules")) {
+            if (
+              id.includes("react-dom") ||
+              id.includes("@tanstack") ||
+              id.includes("seroval")
+            ) {
+              return "vendor"
+            }
+          }
+        },
+      },
+    },
   },
   environments: {
     ssr: {
