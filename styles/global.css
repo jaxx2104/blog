@@ -161,6 +161,22 @@ li {
 }
 
 /* Code block — レイアウトのみ（色は rehype-pretty-code のテーマ） */
+/* rehype-pretty-code は <figure> で囲む。figure 既定の左右マージン(40px)を
+   消して、コードブロックを本文と同じ横幅に揃える */
+.content figure[data-rehype-pretty-code-figure] {
+  margin: 1.8rem 0;
+}
+
+.content [data-rehype-pretty-code-title] {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+  border: 1px solid var(--color-line);
+  border-bottom: 0;
+  padding: 0.5rem 0.9rem;
+}
+
 .content pre {
   border-radius: 0;
   padding: 1.1rem 1.2rem;
@@ -169,6 +185,11 @@ li {
   font-size: var(--font-size-small);
   line-height: 1.6;
   font-family: var(--font-family-mono);
+}
+
+/* figure 内の pre は figure 側でマージンを持つので二重を避ける */
+.content figure[data-rehype-pretty-code-figure] pre {
+  margin: 0;
 }
 
 /* Inline code */
