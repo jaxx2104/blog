@@ -1,5 +1,5 @@
 ---
-title: "Rainy75 に ZMK を焼いて、ついでに上流に PR を出した"
+title: "Rainy75 を ZMK で動かすまで。ついでに PR も出した"
 created_at: '2026-07-05T00:00:00.000Z'
 updated_at: '2026-07-05T00:00:00.000Z'
 path: /rainy75-zmk
@@ -12,34 +12,39 @@ tags:
   - firmware
 ---
 
-自作キーボードのファームウェアをいじるのは久しぶりだった。普段は QMK の keymap リポジトリを細々と更新している程度で、新しい基板をゼロから焼くのは初めてに近い。
+自作キーボードのファームウェアをいじるのは久しぶりだった。普段は[QMK の keymap リポジトリ](https://github.com/jaxx2104/qmk-keymaps)を細々と更新している程度で、新しい基板をゼロから焼くのは初めてに近い。
 
-今回のターゲットは Wobkey Rainy 75 Pro。もともと独自ファームウェアで動いていて、ZMK の選択肢はなかった。それが scholzri/rainy75-zmk (https://github.com/scholzri/rainy75-zmk) でリバースエンジニアリングと移植が進み、誰でも焼ける状態になったと聞いて試してみた。
+TL;DR:
 
-## Rainy 75 とは
+- Wobkey Rainy 75 Pro に[scholzri/rainy75-zmk](https://github.com/scholzri/rainy75-zmk)の ZMK ファームウェアを焼いた
+- clone してすぐビルドしようとしたら 4 つの問題が重なって通らなかったので直した
+- その修正を[PR #2](https://github.com/scholzri/rainy75-zmk/pull/2)として出してマージされた
+- 焼けた瞬間はやっぱり嬉しい
+
+## Rainy 75 を選んだ理由
 
 Wobkey というメーカーの 75% メカニカルキーボード。ガスケットマウント、ポロン/PC プレート、工場潤滑済みスイッチ、そしてトップケースとボトムケースのどちらでもない「まわり込む」形のアクリルディフューザーが特徴。いわゆる中華ブランドの製品だけど、ビルドクオリティは高い。
 
 MCU は Telink TLSR9511 (RISC-V)。STM32 や RP2040 とはまったく違うアーキテクチャで、もともとのファームウェアはクローズド。キーマップの書き換え手段は公式ツールに限られていた。
 
-## ZMK って何
+## ZMK、QMK、そしてよくわからない人のために
 
-QMK は知ってるけど ZMK は知らない人、そもそも QMK も知らない人向けに整理する。
+この記事を読むのに必須の知識ではないけど、ZMK がどういう位置づけか知っておくと話がわかりやすいと思う。
 
-QMK は最も普及しているキーボードファームウェア。AVR や ARM で動き、make でビルドして dfu-programmer などで書き込む。基本は有線。対応キーボードの数は圧倒的。
+**QMK**は最も普及しているキーボードファームウェア。AVR や ARM で動き、`make`でビルドして`dfu-programmer`などで書き込む。基本は有線。対応キーボードの数は圧倒的。
 
-ZMK は Zephyr RTOS の上で動くキーボードファームウェア。QMK と大きく違う点:
+**ZMK**は[Zephyr RTOS](https://www.zephyrproject.org/)の上で動くキーボードファームウェア。QMK との違い:
 
-- ビルドシステムは make ではなく west。Zephyr のビルドシステムをそのまま使い、ボード定義 (DTS/Kconfig) も Zephyr の流儀に従う
-- BLE が標準。左右分割キーボードの無線接続がファームレベルでサポートされている。QMK にも実験的な BLE サポートはあるが、ZMK は設計の最初からワイヤレスが前提
-- キーマップは C 言語の keymap.c ではなく、Devicetree 形式の .keymap ファイルで書く。C のコードを書かずに設定だけで完結するケースが多い
-- QMK より後発で対応キーボードはまだ少ないが、新しめのワイヤレス対応キーボードは最初から ZMK を採用するものが増えている
+- ビルドシステムは`make`ではなく[`west`](https://docs.zephyrproject.org/latest/develop/west/index.html)。Zephyr のビルドシステムをそのまま使い、ボード定義 (DTS/Kconfig) も Zephyr の流儀に従う
+- BLE が標準。左右分割キーボードの無線接続がファームレベルでサポートされている
+- キーマップは C 言語の`keymap.c`ではなく、Devicetree 形式の`.keymap`ファイルで書く
+- QMK より後発だが、新しめのワイヤレス対応キーボードは最初から ZMK を採用するものが増えている
 
 つまり QMK は有線キーボードのデファクトスタンダード、ZMK はワイヤレスキーボードのこれからという立ち位置。
 
-## scholzri/rainy75-zmk のリバースエンジニアリング
+## リバースエンジニアリングの偉業
 
-scholzri/rainy75-zmk は単なる ZMK 移植プロジェクトではない。Ghidra を使ったリバースエンジニアリングの成果をベースに、Zephyr のボードサポートを新規作成している。
+[scholzri/rainy75-zmk](https://github.com/scholzri/rainy75-zmk)は単なる ZMK 移植プロジェクトではない。Ghidra を使ったリバースエンジニアリングの成果をベースに、Zephyr のボードサポートを新規作成している。
 
 リポジトリのトピックを見るとその守備範囲がわかる:
 
@@ -47,23 +52,23 @@ scholzri/rainy75-zmk は単なる ZMK 移植プロジェクトではない。Ghi
 
 Telink B91 というアーキテクチャは一般的なキーボード用 MCU とかけ離れている。そこに対して`zmk/boards/rainy75/`以下に DTS と Kconfig を新規追加し、`west build -b rainy75`でビルドできるようにしている。結構な労力だと思う。
 
-## ビルドしてみたら落ちた
+## いきなりビルドが通らない
 
 README に従って clone → `west update` → `west build`したら、ビルドが通らなかった。いくつか独立した問題が重なっていた。
 
-1 つ目は .gitignore。`zephyr/`というパターンがルートの zephyr/だけでなく`zmk/zephyr/`にもマッチし、ZMK の Zephyr module が git 管理対象から外れていた。そのため`zmk/zephyr/module.yml`がコミットされず、`west build`が "No board named 'rainy75'" で落ちる。
+1 つ目は`.gitignore`。`zephyr/`というパターンがルートの`zephyr/`だけでなく`zmk/zephyr/`にもマッチし、ZMK の Zephyr module が git 管理対象から外れていた。そのため`zmk/zephyr/module.yml`がコミットされず、`west build`が "No board named 'rainy75'" で落ちる。
 
-2 つ目は ZMK のコミット参照。upstream の zmkfirmware/zmk から到達できないコミットを指していたので`west update`が失敗する。公開リポジトリから到達可能な最新の ZMK main に差し替えた。
+2 つ目は ZMK のコミット参照。upstream の[zmkfirmware/zmk](https://github.com/zmkfirmware/zmk)から到達できないコミットを指していたので`west update`が失敗する。公開リポジトリから到達可能な最新の ZMK main に差し替えた。
 
-3 つ目は Kconfig。`CONFIG_ZMK_SLEEP`を有効にするには`HAS_POWEROFF`の select が不足していた。poweroff.c はすでに存在していたので、Kconfig に select を追加すれば解決する。
+3 つ目は Kconfig。`CONFIG_ZMK_SLEEP`を有効にするには`HAS_POWEROFF`の select が不足していた。`poweroff.c`はすでに存在していたので、Kconfig に select を追加すれば解決する。
 
 4 つ目は未定義の Kconfig オプション。`conf/app.conf`に`CONFIG_ZMK_USB_NO_VBUS_DETECT`が書いてあったが、これが未定義で Kconfig パース時に abort する。
 
 どれも 1 行か 2 行の修正だが、組み合わさると clone からビルドまで一直線に進めない。
 
-## PR #2: fix/buildable と焼けた感想
+## 修正して PR、実機へ
 
-修正をまとめて PR を出した。5 ファイル、+10/-3 のミニマルな変更。
+修正をまとめて[PR #2](https://github.com/scholzri/rainy75-zmk/pull/2)を出した。5 ファイル、+10/-3 のミニマルな変更。
 
 ```diff
 - .gitignore の zephyr/ を /zephyr/ にアンカー
@@ -77,4 +82,4 @@ PR の description には原因と修正を書いて、実機で USB HID + BLE +
 
 実機に書き込んでキーを押したら文字が届いた瞬間はやっぱり嬉しい。今回は自分が直したビルド修正を使って焼けたので、単なる consumer ではなくプロジェクトの一部として参加できた感じがある。OSS のファームウェアプロジェクトに PR を出して merge されるのは、キーボードの楽しみ方のひとつだと思う。
 
-当面はこの ZMK 設定をベースに、普段の QMK keymap と同じようにキーマップを育てていくつもり。scholzri/rainy75-zmk 自体も ZMK 本体のアップデート追従や RGB 設定がどこまで進むかというフェーズに入っていく。自分の fork も追従していく。
+当面はこの ZMK 設定をベースに、普段の[QMK keymap](https://github.com/jaxx2104/qmk-keymaps)と同じようにキーマップを育てていくつもり。scholzri/rainy75-zmk 自体も ZMK 本体のアップデート追従や RGB 設定がどこまで進むかというフェーズに入っていく。自分の[fork](https://github.com/jaxx2104/rainy75-zmk)も追従していく。
