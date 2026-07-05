@@ -12,6 +12,8 @@ tags:
 ---
 dotfiles を [chezmoi](https://www.chezmoi.io/) で管理し始めて約 4 ヶ月半になります。リポジトリの commit 数は 156、直近 2 ヶ月は月 30〜65 commits のペースで、ほぼ毎日なにかしら手を入れています。
 
+![総 commit 数 156、同期しているマシン 3 台、直近2ヶ月の月間ペース 30〜65](./kpi-stats.svg)
+
 TL;DR:
 
 - dotfiles が「たまに直すもの」から「毎日触るもの」に変わった
@@ -19,6 +21,8 @@ TL;DR:
 - 副産物として、ツールやエコシステムのキャッチアップが進む
 
 ## 日々整備が続いている理由は 2 つ
+
+![1つの source から WSL / Mac (private) / Mac (work) へ同期する図](./sync-loop.svg)
 
 1 つめはマシンの数です。WSL と Mac 2 台（私用・会社）の計 3 環境を同じ chezmoi ソースから apply しています。全マシンのセットアップを終えると、どこかで直した設定を別のマシンで pull する、という動作が毎日発生します。pull する流れで気になったところを直して push する。この往復が習慣の土台になった気がします。
 
@@ -131,3 +135,5 @@ Mac のパッケージは Brewfile を唯一の正として、`chezmoi apply` �
 導入手順は[公式ドキュメント](https://www.chezmoi.io/)が丁寧なので、そちらを見るのが早いです。構成の実例は [twpayne/dotfiles](https://github.com/twpayne/dotfiles) が参考になります。
 
 最初から全部を管理しようとしなくても、1 ファイルを `chezmoi add` するところから始められます。あとは気になったら Claude へ「この構成、今ならどうする？」と聞く。自分の場合はこのやり方で 4 ヶ月半続いています。
+
+![chezmoi, 2026](./quiet-ledger.svg)
