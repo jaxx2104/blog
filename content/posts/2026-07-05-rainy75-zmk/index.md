@@ -19,7 +19,7 @@ TL;DR:
 - Wobkey Rainy 75 Pro に[scholzri/rainy75-zmk](https://github.com/scholzri/rainy75-zmk)の ZMK ファームウェアを焼いた
 - clone してすぐビルドしようとしたら 4 つの問題が重なって通らなかったので直した
 - その修正を[PR #2](https://github.com/scholzri/rainy75-zmk/pull/2)として出してマージされた
-- 焼けた瞬間はやっぱり嬉しい
+- 焼けた
 
 ## Rainy 75 を選んだ理由
 
@@ -40,17 +40,17 @@ MCU は Telink TLSR9511 (RISC-V)。STM32 や RP2040 とはまったく違うア�
 - キーマップは C 言語の`keymap.c`ではなく、Devicetree 形式の`.keymap`ファイルで書く
 - QMK より後発だが、新しめのワイヤレス対応キーボードは最初から ZMK を採用するものが増えている
 
-つまり QMK は有線キーボードのデファクトスタンダード、ZMK はワイヤレスキーボードのこれからという立ち位置。
+つまり QMK は有線キーボードのデファクトスタンダード、ZMK はワイヤレスが前提の設計。
 
-## リバースエンジニアリングの偉業
+## リバースエンジニアリングとボード定義
 
-[scholzri/rainy75-zmk](https://github.com/scholzri/rainy75-zmk)は単なる ZMK 移植プロジェクトではない。Ghidra を使ったリバースエンジニアリングの成果をベースに、Zephyr のボードサポートを新規作成している。
+[scholzri/rainy75-zmk](https://github.com/scholzri/rainy75-zmk)は ZMK 移植プロジェクトであり、Ghidra を使ったリバースエンジニアリングの成果をベースに Zephyr のボードサポートを新規作成している。
 
 リポジトリのトピックを見るとその守備範囲がわかる:
 
 `b91`, `firmware`, `ghidra`, `keyboard`, `reverse-engineering`, `riscv`, `telink`, `tlsr9511`, `zephyr`, `zmk`
 
-Telink B91 というアーキテクチャは一般的なキーボード用 MCU とかけ離れている。そこに対して`zmk/boards/rainy75/`以下に DTS と Kconfig を新規追加し、`west build -b rainy75`でビルドできるようにしている。結構な労力だと思う。
+Telink B91 というアーキテクチャは一般的なキーボード用 MCU とかけ離れている。そこに対して`zmk/boards/rainy75/`以下に DTS と Kconfig を新規追加し、`west build -b rainy75`でビルドできるようにしている。
 
 ## いきなりビルドが通らない
 
@@ -80,6 +80,6 @@ README に従って clone → `west update` → `west build`したら、ビル�
 
 PR の description には原因と修正を書いて、実機で USB HID + BLE + deep-sleep が動くことを verification として添えた。この PR はマージされた。
 
-実機に書き込んでキーを押したら文字が届いた瞬間はやっぱり嬉しい。今回は自分が直したビルド修正を使って焼けたので、単なる consumer ではなくプロジェクトの一部として参加できた感じがある。OSS のファームウェアプロジェクトに PR を出して merge されるのは、キーボードの楽しみ方のひとつだと思う。
+実機に書き込んでキーを押したら文字が届いた。自分が直したビルド修正を使って焼けたので、プロジェクトの一部として参加できた感じがある。OSS のファームウェアプロジェクトに PR を出して merge されるのは、キーボードの楽しみ方のひとつだと思う。
 
 当面はこの ZMK 設定をベースに、普段の[QMK keymap](https://github.com/jaxx2104/qmk-keymaps)と同じようにキーマップを育てていくつもり。scholzri/rainy75-zmk 自体も ZMK 本体のアップデート追従や RGB 設定がどこまで進むかというフェーズに入っていく。自分の[fork](https://github.com/jaxx2104/rainy75-zmk)も追従していく。
