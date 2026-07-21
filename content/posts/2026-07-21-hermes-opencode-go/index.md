@@ -1,5 +1,5 @@
 ---
-title: "Hermes Agent を定額プランに移して、節約のための設計をやめた"
+title: "Hermes Agent を OpenCode Go という定額プランに移行した"
 created_at: '2026-07-21T00:00:00.000Z'
 updated_at: '2026-07-21T00:00:00.000Z'
 path: /hermes-opencode-go
