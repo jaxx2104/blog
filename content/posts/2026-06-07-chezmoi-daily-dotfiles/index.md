@@ -12,6 +12,8 @@ tags:
 ---
 dotfiles を [chezmoi](https://www.chezmoi.io/) で管理し始めて約 4 ヶ月半になります。リポジトリの commit 数は 156、直近 2 ヶ月は月 30〜65 commits のペースで、ほぼ毎日なにかしら手を入れています。
 
+![総 commit 数 156、同期しているマシン 3 台、直近2ヶ月の月間ペース 30〜65](./kpi-stats.svg)
+
 TL;DR:
 
 - dotfiles が「たまに直すもの」から「毎日触るもの」に変わった
