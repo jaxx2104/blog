@@ -2,8 +2,13 @@ version: 1
 
 rules:
   # 表記ゆれ: 固有名詞は公式表記に揃える。
-  # おおげさ語 (資産化・配線など) は文脈依存で自動修正が壊れるため
-  # ここには入れない。jaxx-writing-blog skill のレビュー基準側が担当。
+  # おおげさ語 (資産化・配線など) および身体感覚のメタファー (痛い・腰が重い等) は
+  # 文脈依存で自動修正が壊れるためここには入れない。
+  # jaxx-writing-blog skill のレビュー基準側 (review-prompt.md) が担当。
+  # textlint preset-ai-writing の no-ai-hype-expressions は
+  # 「革命的な」「究極の」等の極端な語しか登録されておらず、
+  # カスタムパターンの追加も API で提供されていないため、
+  # マイルドな比喩・誇張は LLM subagent レビューで拾う設計。
   #
   # ASCII 語は明示的に \b 付き regex を書く。prh のデフォルト展開は
   # 単語境界を保証せず SMACSS / emacs 内の mac に誤爆する。
