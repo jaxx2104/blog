@@ -23,7 +23,7 @@ TL;DR:
 - cron は 18 本あって、うちライフログの収集は 6 本。Google 側は google-workspace skill 経由で Gmail・Drive・Calendar を叩く
 - 結果、「これまで買った Apple 製品」も「次の買い替え時期」も、前置きなしで答えが返るようになった
 - 渡していない自分の記録が出てきた。持っていた覚えのない MacBook Air の売却メールなど
-- wiki のページを書いているのはエージェントで、自分は素材を置いているだけです
+- wiki のページを書いているのはエージェントで、自分は素材を置いているだけ
 
 ## 前置きを書くのが面倒になった
 
@@ -31,11 +31,11 @@ TL;DR:
 
 構成そのものは前に 2 本書いています。[OpenClaw から Hermes Agent へ移行した](/openclaw-to-hermes-agent)話と、[定額プランに移して節約のための設計をやめた](/hermes-opencode-go)話です。ざっくり言うと、NUC (Intel N95/8GB) の systemd user service で Hermes Agent が常駐しています。Telegram と Slack の DM で話しかけられて、cron で定期タスクを回します。
 
-その上に[Karpathy の LLM Wiki パターン](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)で作ったナレッジベースが載っています。生ソースを`raw/`に不変で置き、エージェントがそれを読んで`entities/` `concepts/` `comparisons/` `queries/`に相互リンク付きの Markdown を書きます。規約は SCHEMA.md に置いて、これは人間が持ちます。Hermes Agent には[llm-wiki skill](https://github.com/NousResearch/hermes-agent/tree/main/skills/research/llm-wiki)が同梱されているので、パターン自体は skill を有効にするだけで動きます。
+その上に[Karpathy の LLM Wiki パターン](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)で作ったナレッジベースが載っています。生ソースを`raw/`に不変で置き、エージェントがそれを読んで`entities/` `concepts/` `comparisons/` `queries/`に相互リンク付きの Markdown を書きます。規約を書いた SCHEMA.md だけは自分が手で持っています。Hermes Agent には[llm-wiki skill](https://github.com/NousResearch/hermes-agent/tree/main/skills/research/llm-wiki)が同梱されているので、パターン自体は skill を有効にするだけで動きます。
 
 ## 公式が想定していない raw/ を足す
 
-llm-wiki skill の SKILL.md を読むと、`raw/`の下は`articles/` `papers/` `transcripts/` `assets/`の 4 つが定義されています。記事・論文・議事録・添付ファイル。つまり人間が書いた散文を読ませる前提です。自分が見た範囲でも、公開されている実践記事は日記やブログ記事を投入しているものばかりでした。
+llm-wiki skill の SKILL.md を読むと、`raw/`の下は`articles/` `papers/` `transcripts/` `assets/`の 4 つが定義されています。記事・論文・議事録・添付ファイル。つまり人間が書いた散文を読ませる前提です。
 
 自分の wiki には、この 4 つに加えて 2 つあります。
 
@@ -62,9 +62,9 @@ sha256: ...
 ---
 ```
 
-今の中身は、`purchases/`が 2009-01-14 から 2026-07-30 までの 604 件で、うち 495 件は金額まで読み取れています。`home/`は毎日 06:00 に、[Home Assistant](https://www.home-assistant.io/)から取った室温・湿度・外気温・エアコン 3 台の積算電力・観葉植物の土壌水分が 1 行ずつ追記されます。
+今の中身は、`purchases/`が 2009-01-14 から 2026-07-30 までの 604 件で、うち 495 件は金額まで読み取れています。`home/`には毎日 06:00 に、[Home Assistant](https://www.home-assistant.io/)から取った室温・湿度・外気温・エアコン 3 台の積算電力・観葉植物の土壌水分が 1 行追記されます。
 
-収集を担当している cron は全部で 18 本です。ライフログに関係するのは 6 本。
+cron は全部で 18 本あります。ライフログの収集に関わるのは 6 本。
 
 | ジョブ | 頻度 | やること |
 | --- | --- | --- |
@@ -92,7 +92,7 @@ python google_api.py gmail search \
 
 ここで踏んだ罠を 2 つ書いておきます。
 
-1 つ目は OAuth クライアントの公開ステータスです。Testing のままだと refresh token が 7 日で強制失効します。7/23 に認証して、7/29 の実行までは成功し、7/30 の実行が`invalid_grant`で落ちました。毎朝動いているジョブが落ちるまで気づきませんでした。恒久対策は Google Cloud コンソールで In production に公開することですが、7 日上限はトークン発行時点のステータスで決まるので、公開しても既存のトークンには遡りません。公開したら再認証し直します。公開だけして満足すると 7 日後に同じ失効を踏みます。
+1 つ目は OAuth クライアントの公開ステータスです。Testing のままだと refresh token が 7 日で強制失効します。7/23 に認証して、7/29 の実行までは成功し、7/30 の実行が`invalid_grant`で落ちました。毎朝 07:15 の受信箱整理ジョブが落ちるまで気づきませんでした。恒久対策は Google Cloud コンソールで In production に公開することですが、7 日上限はトークン発行時点のステータスで決まるので、公開しても既存のトークンには遡りません。公開したら再認証し直します。公開だけして満足すると 7 日後に同じ失効を踏みます。
 
 もう 1 つは Takeout のサイズです。2026-07-22 のエクスポートは 24 個の zip で合計 29.72GB ありました。一方、実際に取り込むマップの保存場所と保存リストは、そのうち 2 個の part に入った合計 55KB です。最初のプロンプトは未処理の zip を全部ダウンロードしてから中身を見る作りだったので、写真のアーカイブを数 GB 落としては捨てていました。今は`drive get`で size を確認して、100MB を超える part はダウンロードしません。取り込む対象は最初から決まっているので、サイズを見てから落とす順にしておけば済んだ話でした。
 
@@ -110,7 +110,6 @@ Calendar は wiki には落とさず、毎朝 08:00 の morning-brief がその�
 | Apple Watch Series 2 | 2016-09 | disposed | → Series 7 |
 | iPhone 7 Plus | 2016-11 | disposed | → 13 mini |
 | MacBook Air M3 | 2024-12 | in-use | — |
-| ... | ... | ... | ... |
 
 長いので 4 行だけ抜きました。ここまでは集計です。面白いのはこの先で、買い替えが集中する時期まで書いてありました。2016〜2017 年に Watch・iPhone・MacBook Pro を 10 か月で一新し、2020〜2021 年に iPad Pro・M1 Air・13 mini でもう一度、2023〜2024 年に 3 度目。主要デバイスの更新は 3〜4 年おきに固まっていて、次は 2027 年前後だろう、と結んでいます。
 
@@ -147,7 +146,7 @@ Apple デバイスの遍歴ページも、買い替えが集中する時期の�
 
 ## 週末やりたいこと
 
-Cloudflare が 8 月に[Cloudflare Wallets](https://blog.cloudflare.com/wallets/)を発表しました。エージェントに使わせるための財布で、支払いには[x402](https://github.com/coinbase/x402)という HTTP 402 に乗せる規格を使います。人間が持つ Account Wallet に入金しておいて、エージェントが操作する Virtual Wallet へ権限を切って渡します。現時点で触れるのはハンドルの予約までで、Virtual Wallet の提供はこれからとされています。
+Cloudflare が 8 月に[Cloudflare Wallets](https://blog.cloudflare.com/wallets/)を発表しました。エージェントに使わせるための財布で、支払いには[x402](https://github.com/coinbase/x402)という HTTP 402 に乗せる規格を使います。人間が持つ Account Wallet に入金しておいて、エージェントが操作する Virtual Wallet へ権限を切って渡します。現時点で触れるのはハンドルの予約までで、Virtual Wallet はまだ使えません。
 
 やってみたいのは、これを繋いだ状態で買い物を任せることです。604 件の購入履歴と、家の温度と、所有物 107 件の棚卸しを持っているエージェントに、予算を渡したら何を買うのか。
 
