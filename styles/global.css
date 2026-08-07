@@ -131,6 +131,21 @@ li {
   margin: 1.8rem 0;
 }
 
+/* SVG の図はラベルを持つので、スマホ幅まで縮めると文字が読めなくなる。
+   カードの左右パディング分まで広げたうえで、横スクロールで実寸を保つ */
+@media (max-width: 620px) {
+  .content p:has(> img[src$=".svg"]) {
+    overflow-x: auto;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+  }
+
+  .content p > img[src$=".svg"] {
+    width: 820px;
+    max-width: none;
+  }
+}
+
 .content hr {
   border: 0;
   border-top: 1px solid var(--color-line);

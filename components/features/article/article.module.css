@@ -11,6 +11,19 @@
   padding: clamp(1.75rem, 5vw, 3rem);
 }
 
+/* スマホでは cardwrap と card の左右余白が二重にかかり、390px 幅で本文が
+   294px (75%) まで痩せる。カードの見た目は残したまま、外側の余白を
+   ヘッダーの Container (1rem) より狭くして本文に幅を回す */
+@media (max-width: 620px) {
+  .cardwrap {
+    padding-inline: 0.5rem;
+  }
+
+  .card {
+    padding: 1.5rem 1rem 2rem;
+  }
+}
+
 .back {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-small);
