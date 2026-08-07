@@ -3,7 +3,7 @@ title: "Hermes Agent にライフログを収集させてみる"
 created_at: '2026-08-07T00:00:00.000Z'
 updated_at: '2026-08-07T00:00:00.000Z'
 path: /hermes-lifelog
-description: "NUC 常駐の Hermes Agent が育てている LLM Wiki に、購入履歴・位置情報・室温・カレンダーを線引きせず流し込んだ。公式の skill が想定する raw/ は人間が書いた散文だが、機械が吐くログを入れると前提知識ゼロで答えが返るようになる。"
+description: "NUC 常駐の Hermes Agent が育てている LLM Wiki に、購入履歴・位置情報・室温・カレンダーを線引きせずに渡した。公式の skill が想定する raw/ は人間が書いた散文だが、機械が吐くログを足すと、前置きなしで買い替え時期まで返ってくる。"
 category: 開発環境
 tags:
   - hermes-agent
@@ -12,14 +12,13 @@ tags:
   - agent
 ---
 
-ChatGPT が出てきた頃、この道具から一番性能を引き出せるのは物書きの人だと思っていました。頭の中のものを言葉へ変える速度がそのまま成果を決める道具に見えたからです。自分は物書きではないので、単純に焦りました。
+ChatGPT が出てきた頃、この道具から一番性能を引き出せるのは物書きの人だと思っていました。文章を書ける人ほど有利な道具に見えたからです。自分は物書きではないので、単純に焦りました。
 
-それから何年か経って、自宅の NUC で[Hermes Agent](https://hermes-agent.nousresearch.com/)を常駐させ、購入履歴や位置情報や室温を渡すようになりました。今のところ、焦りは解消しつつあります。
+それから何年か経って、自宅の NUC で[Hermes Agent](https://hermes-agent.nousresearch.com/)を常駐させ、購入履歴や位置情報や室温を渡すようになりました。今のところ、焦りはだいぶ消えました。
 
 TL;DR:
 
-- 公式の llm-wiki skill が想定している`raw/`は`articles/` `papers/` `transcripts/` `assets/`の 4 つで、前提にあるのは人間が書いた散文だった
-- そこに`purchases/`と`home/`を足し、Gmail の注文確認メールと Home Assistant のセンサー値を機械的に流し込んでいる
+- 公式の llm-wiki skill が想定している`raw/`は`articles/` `papers/` `transcripts/` `assets/`の 4 つで、前提にあるのは人間が書いた散文。そこに`purchases/`と`home/`を足した
 - 収集は cron 18 本のうち 6 本。Google 側は google-workspace skill 経由で Gmail・Drive・Calendar を叩く
 - 結果、「これまで買った Apple 製品」も「次の買い替え時期」も、前置きなしで答えが返るようになった
 - 渡していない自分の記録が出てきた。持っていた覚えのない MacBook Air の売却メールなど
@@ -92,9 +91,9 @@ python google_api.py gmail search \
 
 ここで踏んだ罠を 2 つ書いておきます。
 
-1 つ目は OAuth クライアントの公開ステータスです。Testing のままだと refresh token が 7 日で強制失効します。7/23 に認証して、7/29 の実行までは成功し、7/30 の実行が`invalid_grant`で落ちました。上の表には無い受信箱整理のジョブが毎朝 07:15 に動いていて、それが落ちるまで気づきませんでした。
+1 つ目は OAuth クライアントの公開ステータスです。Testing のままだと refresh token が 7 日で強制失効します。7/23 に認証して、7/29 の実行までは成功し、7/30 の実行が`invalid_grant`で落ちました。上の表には無い inbox-triage という受信箱整理のジョブが毎朝 07:15 に動いていて、それが落ちるまで気づきませんでした。
 
-恒久対策は Google Cloud コンソールで In production に公開することです。ただし 7 日上限はトークン発行時点のステータスで決まるので、公開しても既存のトークンには遡りません。公開したら再認証し直します。公開だけして満足すると 7 日後に同じ失効を踏みます。
+恒久対策は[Google Cloud コンソール](https://console.cloud.google.com/auth/audience)で In production に公開することです。ただし 7 日上限はトークン発行時点のステータスで決まるので、公開しても既存のトークンには遡りません。公開したら再認証し直します。公開だけして満足すると 7 日後に同じ失効を踏みます。
 
 もう 1 つは Takeout のサイズです。2026-07-22 のエクスポートは 24 個の zip で合計 29.72GB ありました。一方、実際に取り込むマップの保存場所と保存リストは、そのうち 2 個の part に入った合計 55KB です。最初のプロンプトは未処理の zip を全部ダウンロードしてから中身を見る作りだったので、写真のアーカイブを数 GB 落としては捨てていました。今は`drive get`で size を確認して、100MB を超える part はダウンロードしません。取り込む対象は最初から決まっているので、サイズを見てから落とす順にしておけば済んだ話でした。
 
@@ -136,7 +135,7 @@ Calendar は wiki には落とさず、毎朝 08:00 の morning-brief がその�
 
 逆方向の間違いもあります。所有物 5 件の status をまとめて指定したときに、番号で処理したせいで iPad Pro 11 が「処分済み」になっていました。手元にあります。wiki 側にはその経緯が残っていて、status を複数ページに一括指定するときは番号ではなくページ名を 1 件ずつ確認すること、と書いてあります。書いたのはエージェントです。
 
-## 書いているのは自分ではない
+## 書いているのはエージェント
 
 冒頭の焦りに戻ります。
 
@@ -148,7 +147,7 @@ Apple デバイスの遍歴ページも、買い替えが集中する時期の�
 
 ## 次にやりたいこと
 
-Cloudflare が 2026 年 8 月に[Cloudflare Wallets](https://blog.cloudflare.com/wallets/)を発表しました。エージェントに使わせるための財布で、支払いには[x402](https://github.com/coinbase/x402)という HTTP 402 に乗せる規格を使います。人間が持つ Account Wallet に入金しておいて、エージェントが操作する Virtual Wallet へ権限を切って渡します。現時点で触れるのはハンドルの予約までで、Virtual Wallet はまだ使えません。
+Cloudflare が 2026 年 8 月に[Cloudflare Wallets](https://blog.cloudflare.com/wallets/)を発表しました。エージェントに使わせるための財布で、支払いには[x402](https://github.com/coinbase/x402)という HTTP 402 に乗せる規格を使います。人間が持つ Account Wallet に入金しておいて、エージェントが操作する Virtual Wallet へ権限を切って渡します。2026-08 時点で触れるのはハンドルの予約までで、Virtual Wallet はまだ使えません。
 
 やってみたいのは、これを繋いだ状態で買い物を任せることです。604 件の購入履歴と、家の温度と、所有物 107 件の棚卸しを持っているエージェントに、予算を渡したら何を買うのか。
 
