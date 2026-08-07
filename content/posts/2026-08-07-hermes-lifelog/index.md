@@ -110,7 +110,7 @@ python google_api.py gmail search \
 
 この 13 点と、そこから 1 ホップで繋がるページを図にするとこうなります。
 
-![Apple デバイス遍歴を中心にした wikilink の部分グラフ](./wikilink-graph.svg)
+![Apple デバイス遍歴を中心にした wikilink の部分グラフ](./wikilink-graph.png)
 
 内側の輪が Apple 製品ページで、時計回りに購入順です。ピンクの矢印が`superseded_by`、つまり買い替えを表します。外側にいるのが Apple 以外のページで、ドックやモニタのような周辺機器もあれば、子供用品遍歴やみてね GPS のように別ジャンルのハブもあります。
 
