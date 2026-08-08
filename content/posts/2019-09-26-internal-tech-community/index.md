@@ -17,6 +17,8 @@ tags:
 集団化しないと出来ない状況を諦める
 個人との濃い関わりを作る
 
+<!-- textlint-disable no-mix-dearu-desumasu -->
+
 わたしとあなたの関係おける
 意思の尊重
 - 対等です
@@ -34,3 +36,5 @@ tags:
 - 力場に偏りが生まれる発言
 - 力場が固まると抜け出すのは困難
 対立を知り、解消を図る
+
+<!-- textlint-enable no-mix-dearu-desumasu -->

@@ -46,7 +46,7 @@ iOS 7 で使われている色をチートシートにしているサイト
 
 iOS 7 とそれ以前の UI サイズ比較したチートシートにしているサイト
 
-デバッガで要素のサイズを 1 つずつ取得するより、一覧で見れるのでよいです。
+デバッガで要素のサイズを 1 つずつ取得するより、一覧で見られるのでよいです。
 
 > The iOS Design Cheat Sheet 7
 > http://ivomynttinen.com/blog/the-ios-7-design-cheat-sheet/
