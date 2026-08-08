@@ -9,6 +9,6 @@ tags:
   - scrapbox
 ---
 
-「5つの壁」の概念図
+「5 つの壁」の概念図
 
 ![](./0c5bac67528c89ef9abb097cfff91337.webp)
