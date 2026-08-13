@@ -15,14 +15,14 @@ dotfiles を [chezmoi](https://www.chezmoi.io/) で管理し始めて約 4 ヶ�
 TL;DR:
 
 - dotfiles が「たまに直すもの」から「毎日触るもの」に変わった
-- 変わった理由は 2 つ。Claude Code に現構成を見せて「今ならどうする？」と聞く習慣と、複数マシン運用で push / pull が日常動作になったこと
+- 変わった理由は 2 つ。Claude Code に現構成を見せて「今ならどうする？」と聞く習慣と、複数マシン運用で push/pull が日常動作になったこと
 - 副産物として、ツールやエコシステムのキャッチアップが進む
 
 ## 日々整備が続いている理由は 2 つ
 
 1 つめはマシンの数です。WSL と Mac 2 台（私用・会社）の計 3 環境を同じ chezmoi ソースから apply しています。全マシンのセットアップを終えると、どこかで直した設定を別のマシンで pull する、という動作が毎日発生します。pull する流れで気になったところを直して push する。この往復が習慣の土台になった気がします。
 
-2 つめは [Claude Code](https://claude.com/claude-code) です。設定ファイルを開いて「この構成、今ならどうするのがモダン？」と聞くと、改善ネタが尽きません。提案された変更をその場で適用して、`chezmoi diff` で確認して commit する。1 回の会話が 1〜数 commits になります。
+2 つめは [Claude Code](https://claude.com/claude-code) です。設定ファイルを開いて「この構成、今ならどうするのがモダン？」と聞くと、改善ネタが尽きません。提案された変更をその場で適用して、`chezmoi diff`で確認して commit する。1 回の会話が 1〜数 commits になります。
 
 この 2 つが揃った結果が、冒頭の commit ペースです。
 
@@ -46,7 +46,7 @@ jq = "latest"
 yq = "latest"
 ```
 
-このとき良かったのは、ツールを入れるだけで終わらず alias や pager の設定まで会話で進んだことです。`ls` / `tree` を [eza](https://github.com/eza-community/eza) の alias に、`MANPAGER` を [bat](https://github.com/sharkdp/bat) に、[fzf](https://github.com/junegunn/fzf) の検索ソースを [fd](https://github.com/sharkdp/fd) に、git の pager を [delta](https://github.com/dandavison/delta) に。さらに `push.autoSetupRemote` や `rerere` といった modern git defaults まで、1 つの流れでまとめて入りました。
+このとき良かったのは、ツールを入れるだけで終わらず alias や pager の設定まで会話で進んだことです。`ls`/`tree`を [eza](https://github.com/eza-community/eza) の alias に、`MANPAGER`を [bat](https://github.com/sharkdp/bat) に、[fzf](https://github.com/junegunn/fzf) の検索ソースを [fd](https://github.com/sharkdp/fd) に、git の pager を [delta](https://github.com/dandavison/delta) に。さらに`push.autoSetupRemote`や`rerere`といった modern git defaults まで、1 つの流れでまとめて入りました。
 
 ### 役割分担を聞く: brew か mise か
 
@@ -77,7 +77,7 @@ btop = "latest"
 
 どれも単体では数行の変更ですが、「気になる → 聞く → 直る」のサイクルが短いので、引っかかりを放置しなくなりました。
 
-副産物として、キャッチアップが勝手に進む気がします。mise のバックエンドの仕組み、`op inject` という CLI の使い方、chezmoi の `run_onchange` スクリプト、modern git defaults。どれも自分から調べに行ったというより、整備の会話の中で「そういうのがあるのか」と知ったものです。
+副産物として、キャッチアップが勝手に進む気がします。mise のバックエンドの仕組み、`op inject`という CLI の使い方、chezmoi の`run_onchange`スクリプト、modern git defaults。どれも自分から調べに行ったというより、整備の会話の中で「そういうのがあるのか」と知ったものです。
 
 ## 構成のポイント
 
@@ -99,7 +99,7 @@ chezmoi のテクニック自体は、作者の [twpayne/dotfiles](https://githu
 
 ### マシン属性の自動判定
 
-3 環境を 1 ソースで扱うため、`.chezmoi.toml.tmpl` でマシン属性（会社マシンか、WSL か、headless か）を hostname や環境変数から自動判定しています。会社マシンの判定に使う hostname の正規表現は環境変数経由で渡して、パターン自体はリポジトリに残しません。
+3 環境を 1 ソースで扱うため、`.chezmoi.toml.tmpl`でマシン属性（会社マシンか、WSL か、headless か）を hostname や環境変数から自動判定しています。会社マシンの判定に使う hostname の正規表現は環境変数経由で渡して、パターン自体はリポジトリに残しません。
 
 ```text
 {{- /* Work hostname: regex supplied via env to keep pattern out of the repo */ -}}
@@ -111,16 +111,16 @@ chezmoi のテクニック自体は、作者の [twpayne/dotfiles](https://githu
 {{- end -}}
 ```
 
-判定した属性は、テンプレートの分岐や `.chezmoiignore` での配布制御に使います。会社マシンにだけ証明書設定を配る、私用マシンにだけ特定の env を配る、といった出し分けがここで決まります。
+判定した属性は、テンプレートの分岐や`.chezmoiignore`での配布制御に使います。会社マシンにだけ証明書設定を配る、私用マシンにだけ特定の env を配る、といった出し分けがここで決まります。
 
 ### Brewfile を single source of truth に
 
-Mac のパッケージは Brewfile を唯一の正として、`chezmoi apply` のたびに `run_onchange` スクリプトで同期しています。
+Mac のパッケージは Brewfile を唯一の正として、`chezmoi apply`のたびに`run_onchange`スクリプトで同期しています。
 
 1. `brew bundle` — Brewfile にあるものをインストール
 2. `brew bundle cleanup --force` — Brewfile にないものをアンインストール
 
-手で `brew install` したものは、Brewfile に書かない限り次の apply で消えます。破壊的ですが、おかげで「リポジトリに書いてあるものがすべて」という状態が保たれて、マシン間の差分に悩まなくなりました。
+手で`brew install`したものは、Brewfile に書かない限り次の apply で消えます。破壊的ですが、おかげで「リポジトリに書いてあるものがすべて」という状態が保たれて、マシン間の差分に悩まなくなりました。
 
 ## 課題
 
@@ -130,4 +130,4 @@ Mac のパッケージは Brewfile を唯一の正として、`chezmoi apply` �
 
 導入手順は[公式ドキュメント](https://www.chezmoi.io/)が丁寧なので、そちらを見るのが早いです。構成の実例は [twpayne/dotfiles](https://github.com/twpayne/dotfiles) が参考になります。
 
-最初から全部を管理しようとしなくても、1 ファイルを `chezmoi add` するところから始められます。あとは気になったら Claude へ「この構成、今ならどうする？」と聞く。自分の場合はこのやり方で 4 ヶ月半続いています。
+最初から全部を管理しようとしなくても、1 ファイルを`chezmoi add`するところから始められます。あとは気になったら Claude へ「この構成、今ならどうする？」と聞く。自分の場合はこのやり方で 4 ヶ月半続いています。

@@ -57,3 +57,6 @@ pnpm lint:textfix   # 自動修正
 ### textlint Rules
 - `.textlintrc` で設定
 - 日本語の技術文書向けルール
+- CI（Lint workflow）で `pnpm lint:text` が走る。以前は Biome しか回っておらず、13記事に 161 件の違反が溜まっていた
+- `ja-space-around-link` だけ無効にしている。日本語文中のリンク前後のスペースを削るルールだが、リンク記法と裸の URL を区別しないため、`Docker 入れる https://...` のような行が `入れるhttps://...` になって読めなくなる。リンク記法のスペースは著者の判断に委ねる
+- `ai-writing` の指摘は info であり error ではないので CI は落ちない。文章の改善提案として読む

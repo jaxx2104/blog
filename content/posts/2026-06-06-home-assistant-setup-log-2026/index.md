@@ -12,32 +12,32 @@ tags:
 
 TL;DR:
 
-- 一番大きい変化は `/config` を git 管理にして Claude Code で運用するようになったこと
+- 一番大きい変化は`/config`を git 管理にして Claude Code で運用するようになったこと
 - 設定の方針は「判断は設定時に寄せて、実行時は決定論的なルールで固める」
 - 明るさ・色温度の制御は automation から Adaptive Lighting に委譲した
 
 ## ハードウェア
 
-Beelink EQ14 (Intel N100 / 16GB / 500GB NVMe) に [Home Assistant OS](https://www.home-assistant.io/installation/) を載せています。ここは初期から変わらず。静かで安定していて不満がないです。
+Beelink EQ14 (Intel N100/16GB/500GB NVMe) に [Home Assistant OS](https://www.home-assistant.io/installation/) を載せています。ここは初期から変わらず。静かで安定していて不満がないです。
 
 https://www.amazon.co.jp/dp/B0D5XNYVHN
 
 ## 構成管理: /config を git ミラーにした
 
-ここが今の運用の中心です。HA の `/config` をまるごと private リポジトリのミラーにして、手元で編集 → push、HA 側が pull → reload、というフローにしています。
+ここが今の運用の中心です。HA の`/config`をまるごと private リポジトリのミラーにして、手元で編集 → push、HA 側が pull → reload、というフローにしています。
 
-- 編集は手元の [Claude Code](https://claude.com/claude-code) でやる。`/deploy` skill が push から `ha core check`、変更ファイルに応じた reload 判定までやってくれる
+- 編集は手元の [Claude Code](https://claude.com/claude-code) でやる。`/deploy` skill が push から`ha core check`、変更ファイルに応じた reload 判定までやってくれる
 - HA UI 側で変更した分は、毎日 23:30 と HA 再起動前に automation が自動 commit & push してリポジトリに取り込む
 - secrets.yaml と実行時状態 (.storage, DB, ログ) は .gitignore で除外
 
 リポジトリの CLAUDE.md には絶対ルールを置いて、エージェントと人間の両方に守らせています。
 
-> 1. **平文認証情報禁止** — 認証情報は `secrets.yaml` に置き、参照は `!secret <key>`
-> 2. **`secrets.yaml` の commit 禁止** — `.gitignore` で除外済み
-> 3. **公開対象は `expose` ラベルで opt-in 一元管理**
+> 1. **平文認証情報禁止** — 認証情報は`secrets.yaml`に置き、参照は`!secret <key>`
+> 2. **`secrets.yaml`の commit 禁止** — `.gitignore`で除外済み
+> 3. **公開対象は`expose`ラベルで opt-in 一元管理**
 > 4. HA UI で設定を変更したら、後で git に取り込む
 
-UI 側の取り込みは `shell_command` + automation の素朴な作りです。
+UI 側の取り込みは`shell_command` + automation の素朴な作りです。
 
 ```yaml
 shell_command:
@@ -54,7 +54,7 @@ automation:
       - action: shell_command.push_to_github
 ```
 
-ハマりどころ: HA 側の pull は `git pull --ff-only` だと PR を squash merge したときに non fast-forward で失敗します。fetch + reset にしました。
+ハマりどころ: HA 側の pull は`git pull --ff-only`だと PR を squash merge したときに non fast-forward で失敗します。fetch + reset にしました。
 
 ```bash
 ssh homeassistant "cd /config && git fetch origin && git reset --hard origin/main"
@@ -62,18 +62,18 @@ ssh homeassistant "cd /config && git fetch origin && git reset --hard origin/mai
 
 ## packages 分割
 
-configuration.yaml には glue だけ残して、機能別の YAML は `packages/` に分けました。
+configuration.yaml には glue だけ残して、機能別の YAML は`packages/`に分けました。
 
 ```yaml
 homeassistant:
   packages: !include_dir_named packages
 ```
 
-- 1 機能 1 ファイル (`automation_presence.yaml`、`climate_eolia.yaml` など)
+- 1 機能 1 ファイル (`automation_presence.yaml`、`climate_eolia.yaml`など)
 - 書き方の規約はリポジトリの CLAUDE.md に書いて、エージェントに守らせる。一度書いておけば勝手に守ってくれるので、規約を文章化するコストはすぐ回収できた
-  - `time_pattern` での polling は禁止。`state` trigger + `for:` で push 化して、HA 再起動時は `homeassistant.event: start` trigger で現在状態を再評価する
-  - `device_id` 直接参照を避けて entity_id を使う。デバイスを再ペアリングすると id が変わって壊れるため
-  - `alias` は日本語、`description` は英語 1 行で「なぜ存在するか」を書く
+  - `time_pattern`での polling は禁止。`state` trigger + `for:`で push 化して、HA 再起動時は`homeassistant.event: start` trigger で現在状態を再評価する
+  - `device_id`直接参照を避けて entity_id を使う。デバイスを再ペアリングすると id が変わって壊れるため
+  - `alias`は日本語、`description`は英語 1 行で「なぜ存在するか」を書く
 
 規約に沿った automation はこういう形になります。書斎の在席検知の例。
 
@@ -102,12 +102,12 @@ automation:
 
 リポジトリには HA の設定だけでなく、エージェント向けの設定も一緒に入れています。
 
-- CLAUDE.md はルートだけでなく `packages/` `esphome/` `zigbee2mqtt/` の各ディレクトリにも置いて、その階層の規約 (命名・記法・reload 方法・踏んだ罠) を書く。エージェントは触るディレクトリの CLAUDE.md を読んでから作業する
-- 定型作業は `.claude/skills/` に skill (Markdown の手順書) として置く
+- CLAUDE.md はルートだけでなく`packages/` `esphome/` `zigbee2mqtt/`の各ディレクトリにも置いて、その階層の規約 (命名・記法・reload 方法・踏んだ罠) を書く。エージェントは触るディレクトリの CLAUDE.md を読んでから作業する
+- 定型作業は`.claude/skills/`に skill (Markdown の手順書) として置く
   - `/deploy` — commit → push → HA 側 fetch + reset → `ha core check` → 変更ファイルから reload 種別を判定して反映
-  - `/add-automation` —「○○したら△△して」の要望から automation YAML を生成して `/deploy` まで回す
+  - `/add-automation` —「○○したら△△して」の要望から automation YAML を生成して`/deploy`まで回す
   - `/triage` — 動かないときにログとエンティティ状態から原因を切り分ける
-- [Home Assistant の MCP server](https://www.home-assistant.io/integrations/mcp_server/) も繋いであって、エージェントが entity の現在状態を直接読める。`/add-automation` は YAML を書く前に対象 entity の実在を MCP で確認するので、存在しない entity を参照する事故が起きない
+- [Home Assistant の MCP server](https://www.home-assistant.io/integrations/mcp_server/) も繋いであって、エージェントが entity の現在状態を直接読める。`/add-automation`は YAML を書く前に対象 entity の実在を MCP で確認するので、存在しない entity を参照する事故が起きない
 
 「こういう automation 足して」と言うだけで済む状態の実体は、この CLAUDE.md + skill + MCP の 3 点セットです。
 
@@ -123,7 +123,7 @@ switch:
 ```
 
 - 放置していたら 194 件たまっていたので、WebSocket API でまとめて rename した
-- area slug も `shu_zhai` (書斎) みたいなピンインになっていたので 9 部屋を英語化
+- area slug も`shu_zhai` (書斎) みたいなピンインになっていたので 9 部屋を英語化
 - 今の方針: entity_id と area slug は英語 snake_case、friendly_name は日本語
 
 ## デバイス構成
@@ -175,7 +175,7 @@ bluetooth_proxy:
 - エアコン: [ECHONET Lite](https://github.com/scottyphillips/echonetlite_homeassistant) と [Panasonic Eolia](https://github.com/avolmensky/panasonic_eolia) (クラウド) の併用
 - テレビ (LG webOS): 画面が消えると [webostv](https://www.home-assistant.io/integrations/webostv/) からは電源オンできないので、wake_on_lan switch を噛ませている
 
-Zigbee2MQTT は設定も git 管理していますが、`!secret` はダブルクォート必須という罠があります。Z2M の `!secret` は YAML タグではなく正規表現ベースの文字列パースなので、クォートなしだと js-yaml が未知タグ扱いで例外を出して addon が起動しません。
+Zigbee2MQTT は設定も git 管理していますが、`!secret`はダブルクォート必須という罠があります。Z2M の`!secret`は YAML タグではなく正規表現ベースの文字列パースなので、クォートなしだと js-yaml が未知タグ扱いで例外を出して addon が起動しません。
 
 ```yaml
 # OK
@@ -190,7 +190,7 @@ password: !secret mqtt_password
 
 - automation は on/off だけ。明るさと色温度は太陽の位置に追従して AL が連続調整する
 - 就寝モードは 1900K まで落とす。22:00–07:00 を時刻 automation で切り替え
-- SwitchBot Pro は BLE 直結なのでコマンド連投で取りこぼす。`send_split_delay` と `skip_redundant_commands` で負荷を抑えた
+- SwitchBot Pro は BLE 直結なのでコマンド連投で取りこぼす。`send_split_delay`と`skip_redundant_commands`で負荷を抑えた
 
 ```yaml
 adaptive_lighting:
@@ -223,7 +223,7 @@ adaptive_lighting:
 
 [Matter](https://www.home-assistant.io/integrations/matter/) Bridge と音声アシスタントへの公開対象が増えるままになっていたので、HA のラベル機能で opt-in 管理に変えました。
 
-- `expose` ラベルを付けた entity だけを Matter / Voice に公開する
+- `expose`ラベルを付けた entity だけを Matter/Voice に公開する
 - Matter 公開数は 221 → 51 になった。tailscale や battery sensor みたいなノイズ、SwitchBot の Cloud と BLE の二重登録が大半だった
 
 Apple Home 側の一覧がスッキリしたのと、音声アシスタントが変な entity を拾う誤爆も減った気がします。

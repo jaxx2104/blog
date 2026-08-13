@@ -15,14 +15,14 @@ tags:
 
 夏休みの期間でやったこと、技術的な部分は Qiita にエントリーでも書きたいけど仕事復帰すると忘れてしまいそうなのでこのエントリーは一旦のメモです。（写真は 6 日目に行った蔵前のカフェ）
 
-- 1 日目: vue で styled-components をやってみる `@千葉`
+- 1 日目: vue で styled-components をやってみる`@千葉`
 - 2 日目: GCP の App Engine を触る
-- 3 日目: GCP の App Engine で API サーバー と cron をデプロイ `@銚子`
-- 4 日目: Go を触る `@銚子`
+- 3 日目: GCP の App Engine で API サーバー と cron をデプロイ`@銚子`
+- 4 日目: Go を触る`@銚子`
 - 5 日目: GCP の App Engine で Go をデプロイ
-- 6 日目: Firebase Cloud Functions を触る `@蔵前`
+- 6 日目: Firebase Cloud Functions を触る`@蔵前`
 - 7 日目: Firebase で SSR をやってみる
-- 8 日目: キーボードを購入する `@渋谷`
+- 8 日目: キーボードを購入する`@渋谷`
 - 9 日目: ひたすら寝る
 
 文字におこすとやった感ある。

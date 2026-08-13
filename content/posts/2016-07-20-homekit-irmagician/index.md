@@ -121,7 +121,7 @@ Homebridge を使ってコマンドをたたけるようにプラグインをイ
 $ sudo npm install -g homebridge-cmd
 ```
 
-`.homebridge/config.json` の設定ファイルを編集します。
+`.homebridge/config.json`の設定ファイルを編集します。
 
 ```json
 {
@@ -161,7 +161,7 @@ $ sudo npm install -g homebridge-cmd
 }
 ```
 
-`sudo service homebridge restart` で設定ファイルを反映します。
+`sudo service homebridge restart`で設定ファイルを反映します。
 
 ## iPhone から使ってみる
 

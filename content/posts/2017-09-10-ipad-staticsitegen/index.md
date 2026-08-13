@@ -40,7 +40,7 @@ Editorial には Workflow という簡易スクリプトの実行機能がある
 1.  Request Text Input
 2.  Set Variable (variable `title`)
 3.  Change Case (`lowercase`)
-4.  Find / Replace (`['"-=:!?@#$%&*()_+|;~<>,.]+` to `-`)
+4.  Find/Replace (`['"-=:!?@#$%&*()_+|;~<>,.]+` to `-`)
 5.  Set Variable (variable `slug`)
 6.  Create Document
 

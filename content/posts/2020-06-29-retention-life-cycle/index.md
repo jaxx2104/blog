@@ -10,5 +10,5 @@ tags:
 ---
 ![User Retention / Customer Retention のライフサイクル図](./retention-lifecycle.webp)
 
-User Retention / Customer Retention のライフサイクル図
+User Retention/Customer Retention のライフサイクル図
 

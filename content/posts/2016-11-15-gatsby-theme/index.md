@@ -59,17 +59,17 @@ localhost:8000 にアクセスするとページ確認できると思います�
 
 テーマなどによって微妙に違うかもしれませんが理解している範囲で。
 
-- `config.toml` 設定ファイル
+- `config.toml`設定ファイル
 
-- `/components` コンポーネントディレクトリ
+- `/components`コンポーネントディレクトリ
 
-- `_template.js` テンプレートファイル
+- `_template.js`テンプレートファイル
 
-- `index.js` インデックスファイル
+- `index.js`インデックスファイル
 
-- `/pages` データファイル（記事や固定ページ）
+- `/pages`データファイル（記事や固定ページ）
 
-- `/wrappers` 記事や固定ページの wrapper?
+- `/wrappers`記事や固定ページの wrapper?
 
 - `/static` css や fonts
 

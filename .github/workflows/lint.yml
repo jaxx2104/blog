@@ -23,3 +23,6 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
       - run: pnpm lint:ci
+      # Japanese prose in content/. This was not wired up before, so 161
+      # violations accumulated unnoticed across 13 posts.
+      - run: pnpm lint:text
