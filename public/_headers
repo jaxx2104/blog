@@ -8,3 +8,9 @@
 
 /images/posts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Self-hosted woff2 subsets (styles/global.css @font-face). Unlike /assets/*
+# these filenames carry no content hash, so replacing a face means renaming
+# the file — a plain overwrite would sit behind this cache for a year.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

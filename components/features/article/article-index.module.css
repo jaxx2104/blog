@@ -1,0 +1,8 @@
+/* Aligns the pager with TileGrid's column. The grid's own .wrap keeps the
+   width, but its bottom padding closes the section, so the pager needs its
+   own copy of the horizontal rhythm. */
+.pager {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem) clamp(2.5rem, 6vw, 4rem);
+}

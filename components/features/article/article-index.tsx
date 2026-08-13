@@ -1,41 +1,36 @@
 import type React from "react"
-import ArticleInfo from "@/components/features/article/article-info"
-import Container from "@/components/ui/container"
-
-export interface SiteMetaType {
-  title: string
-  description: string
-  siteUrl: string
-  author: string
-  twitter: string
-}
+import ArticleTile from "@/components/features/article/article-tile"
+import { pagePath } from "@/components/features/article/pagination"
+import Pager from "@/components/ui/pager"
+import TileGrid from "@/components/ui/tile-grid"
+import type { PostMeta } from "@/lib/posts"
+import styles from "./article-index.module.css"
 
 interface Props {
-  path: string
-  title: string
-  created_at: string
-  categories: string[] | null
-  tags: string[] | null
+  /** One page's worth of posts, already sliced by the route loader. */
+  posts: PostMeta[]
+  page: number
+  pageCount: number
 }
 
-const Article: React.FC<Props> = ({
-  path,
-  title,
-  created_at,
-  categories,
-  tags,
-}: Props) => {
-  return (
-    <Container>
-      <ArticleInfo
-        path={path}
-        title={title}
-        created_at={created_at}
-        categories={categories}
-        tags={tags}
-      />
-    </Container>
-  )
-}
+const ArticleIndex: React.FC<Props> = ({ posts, page, pageCount }) => (
+  <>
+    <TileGrid>
+      {posts.map((post) => (
+        <ArticleTile
+          key={post.permalink}
+          path={post.permalink}
+          title={post.title}
+          created_at={post.created_at}
+          excerpt={post.excerpt}
+          category={post.category}
+        />
+      ))}
+    </TileGrid>
+    <div className={styles.pager}>
+      <Pager page={page} pageCount={pageCount} hrefFor={pagePath} />
+    </div>
+  </>
+)
 
-export default Article
+export default ArticleIndex

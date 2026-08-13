@@ -3,7 +3,7 @@ import Article, {
   type SiteMetaType,
 } from "@/components/features/article/article"
 import Layout from "@/components/layout/layout"
-import { getPostByPermalink } from "@/lib/posts"
+import { getPostBody, getPostByPermalink } from "@/lib/posts"
 import {
   DEFAULT_OGP_IMAGE,
   SITE_AUTHOR,
@@ -22,16 +22,17 @@ const SITE_META: SiteMetaType = {
 }
 
 export const Route = createFileRoute("/$")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     // params._splat is the URL portion after the root (e.g. "php-replace-lf"
-    // for "/php-replace-lf/"). Velite stores permalinks with leading and
-    // trailing slashes, so we normalise both shapes before lookup.
-    const raw = params._splat ?? ""
-    const trimmed = raw.replace(/^\/+|\/+$/g, "")
-    const post =
-      getPostByPermalink(`/${trimmed}/`) ?? getPostByPermalink(`/${trimmed}`)
+    // for "/php-replace-lf/"). Permalinks are stored as "/<slug>/", so strip
+    // whatever slashes the URL carried and rebuild that shape.
+    const trimmed = (params._splat ?? "").replace(/^\/+|\/+$/g, "")
+    const post = getPostByPermalink(`/${trimmed}/`)
     if (!post) throw notFound()
-    return { post }
+    // Bodies live in their own chunks; only this post's body is fetched.
+    const body = await getPostBody(post.bodyId)
+    if (body === undefined) throw notFound()
+    return { post, body }
   },
   component: PostPage,
   head: ({ loaderData }) => {
@@ -61,7 +62,7 @@ export const Route = createFileRoute("/$")({
 })
 
 function PostPage() {
-  const { post } = Route.useLoaderData()
+  const { post, body } = Route.useLoaderData()
   return (
     <Layout>
       <Article
@@ -70,7 +71,7 @@ function PostPage() {
         created_at={post.created_at}
         categories={post.category ? [post.category] : null}
         tags={post.tags ?? null}
-        html={post.body}
+        html={body}
         site={SITE_META}
       />
     </Layout>
