@@ -4,22 +4,22 @@ import { fileURLToPath } from "node:url"
 import { tanstackStart } from "@tanstack/react-start/plugin/vite"
 import viteReact from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
+import { pageCount, pagePath } from "./components/features/article/pagination"
+import {
+  buildFeed,
+  buildSitemap,
+  latestPostDate,
+  type SeoPage,
+  type SeoPost,
+} from "./lib/seo/artifacts"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-type VelitePost = {
-  permalink: string
-  title: string
-  excerpt: string
-  created_at: string
-  updated_at: string
-}
-
-function loadPosts(): VelitePost[] {
+function loadPosts(): SeoPost[] {
   const veliteFile = resolve(__dirname, ".velite/posts.json")
   try {
     const raw = readFileSync(veliteFile, "utf8")
-    return JSON.parse(raw) as VelitePost[]
+    return JSON.parse(raw) as SeoPost[]
   } catch (err) {
     console.warn(
       `[vite.config] could not read ${veliteFile}: ${(err as Error).message}. Falling back to home-only.`,
@@ -28,89 +28,17 @@ function loadPosts(): VelitePost[] {
   }
 }
 
-const SITE_URL = "https://jaxx2104.info"
-const SITE_TITLE = "jaxx2104.info"
-const SITE_DESCRIPTION = "プログラムとバグが好き"
-const RSS_ITEM_LIMIT = 30
-
-function escapeXml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;")
-}
-
-function normalizePermalink(p: string): string {
-  return p.endsWith("/") ? p : `${p}/`
-}
-
-function buildSitemap(posts: VelitePost[]): string {
-  const buildDate = new Date().toISOString()
-  const urls: string[] = []
-  urls.push(
-    `  <url><loc>${SITE_URL}/</loc><lastmod>${buildDate}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>`,
-  )
-  urls.push(
-    `  <url><loc>${SITE_URL}/profile/</loc><lastmod>${buildDate}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`,
-  )
-  for (const post of posts) {
-    const loc = `${SITE_URL}${normalizePermalink(post.permalink)}`
-    const lastmod = new Date(post.updated_at).toISOString()
-    urls.push(
-      `  <url><loc>${escapeXml(loc)}</loc><lastmod>${lastmod}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`,
-    )
-  }
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.join("\n")}
-</urlset>
-`
-}
-
-function buildFeed(posts: VelitePost[]): string {
-  const sorted = [...posts].sort(
-    (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-  )
-  const latest = sorted.slice(0, RSS_ITEM_LIMIT)
-  const lastBuildDate = new Date().toUTCString()
-  const items = latest
-    .map((post) => {
-      const link = `${SITE_URL}${normalizePermalink(post.permalink)}`
-      const pubDate = new Date(post.created_at).toUTCString()
-      return `    <item>
-      <title>${escapeXml(post.title)}</title>
-      <link>${escapeXml(link)}</link>
-      <guid isPermaLink="true">${escapeXml(link)}</guid>
-      <pubDate>${pubDate}</pubDate>
-      <description>${escapeXml(post.excerpt)}</description>
-    </item>`
-    })
-    .join("\n")
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>${escapeXml(SITE_TITLE)}</title>
-    <link>${SITE_URL}/</link>
-    <description>${escapeXml(SITE_DESCRIPTION)}</description>
-    <language>ja</language>
-    <lastBuildDate>${lastBuildDate}</lastBuildDate>
-${items}
-  </channel>
-</rss>
-`
-}
-
-function seoArtifactsPlugin(posts: VelitePost[]): import("vite").Plugin {
+function seoArtifactsPlugin(
+  posts: SeoPost[],
+  pages: SeoPage[],
+): import("vite").Plugin {
   return {
     name: "blog-seo-artifacts",
     apply: "build",
     writeBundle(options) {
       const dir = options.dir
       if (!dir || !dir.endsWith("client")) return
-      writeFileSync(resolve(dir, "sitemap.xml"), buildSitemap(posts))
+      writeFileSync(resolve(dir, "sitemap.xml"), buildSitemap(posts, pages))
       writeFileSync(resolve(dir, "feed.xml"), buildFeed(posts))
     },
   }
@@ -118,7 +46,25 @@ function seoArtifactsPlugin(posts: VelitePost[]): import("vite").Plugin {
 
 const posts = loadPosts()
 const permalinks = posts.map((p) => p.permalink)
-const allPages = ["/", "/profile/", ...permalinks]
+// Pages 2..N of the paginated index ("/" is page 1). The page arithmetic is
+// imported rather than duplicated so the build and the router cannot disagree
+// about how many pages exist — with crawlLinks off, a page missing from this
+// list is simply never written.
+const indexPagePaths = Array.from(
+  { length: pageCount(posts.length) - 1 },
+  (_, i) => pagePath(i + 2),
+)
+const allPages = ["/", "/profile/", ...indexPagePaths, ...permalinks]
+
+// Every index page reshuffles when a post is added, so they share the newest
+// post date rather than the date of the posts they currently hold.
+const newestPostDate = latestPostDate(posts) || undefined
+const indexPageEntries: SeoPage[] = indexPagePaths.map((path) => ({
+  path,
+  lastmod: newestPostDate,
+  changefreq: "weekly",
+  priority: "0.5",
+}))
 
 export default defineConfig({
   server: {
@@ -139,6 +85,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id: string) {
+          // Article bodies must each keep their own chunk — folding them
+          // into "posts" would put all of them back into every page.
+          if (id.includes("/.velite/bodies/")) return
           if (id.includes(".velite")) return "posts"
           if (id.includes("node_modules")) {
             if (
@@ -180,6 +129,6 @@ export default defineConfig({
       },
     }),
     viteReact(),
-    seoArtifactsPlugin(posts),
+    seoArtifactsPlugin(posts, indexPageEntries),
   ],
 })

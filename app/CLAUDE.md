@@ -11,7 +11,8 @@ app/
 ├── router.tsx              # createRouter / getRouter（routeTree を組み立て）
 └── routes/
     ├── __root.tsx          # ルートレイアウト（meta / fonts / theme bootstrap script / global css import）
-    ├── index.tsx           # トップ（記事一覧、loader で getAllPosts）
+    ├── index.tsx           # トップ（記事一覧の1ページ目）
+    ├── page.$page.tsx      # 記事一覧の2ページ目以降（/page/2/ ...）
     ├── profile.tsx         # /profile/
     └── $.tsx               # 記事詳細（splat ルートで /<permalink>/ にマッチ）
 ```
@@ -29,6 +30,12 @@ app/
 - `tokens.css` / `global.css` を side-effect import
 
 ### Splat Route (`routes/$.tsx`)
-- `params._splat` から permalink を組み立て、`getPostByPermalink()` で記事を引く
+- `params._splat` から permalink を組み立て、`getPostByPermalink()` でメタデータを引く
+- 本文は `getPostBody(bodyId)` で別チャンクから非同期に取る（loader が async）
 - `head()` API で記事個別の OGP（title / description / og:image / canonical）を返す
 - 404 は `notFound()` + `notFoundComponent`
+
+### Paginated Index (`routes/index.tsx` / `routes/page.$page.tsx`)
+- ページ分割の算術は `components/features/article/pagination.ts` に集約。`vite.config.mts` も同じモジュールを import してプリレンダー対象の URL を組み立てる（`crawlLinks: false` なので、列挙し漏れたページは生成されない）
+- 1ページ目は `/` のみ。`/page/1/` は存在せず、`parsePageParam` がゼロ埋め・範囲外・非数値とあわせて弾く（canonical URL を1つに保つため）
+- 2ページ目以降は `<title>` を分けている（重複タイトル回避）

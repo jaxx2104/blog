@@ -19,7 +19,8 @@ components/
 ### `features/`
 機能固有のコンポーネント。他の機能との結合度が高い。
 
-- **article/**: 記事表示関連 (`article.tsx`, `article-tile.tsx`, `article-info.tsx`, `article-index.tsx`)
+- **article/**: 記事表示関連 (`article.tsx`, `article-tile.tsx`, `article-info.tsx`, `article-index.tsx`, `pagination.ts`)
+  - `pagination.ts` は依存ゼロの純関数群。`vite.config.mts` が config ロード時に import してプリレンダー対象のページ URL を数えるため、`.velite` の型すら参照してはいけない
 - **profile/**: プロフィールページ関連 (`profile-user.tsx`, `profile-work.tsx`, `profile-link.tsx`, `profile-others.tsx`, `thumbnail.tsx`)
 
 ### `layout/`
@@ -35,6 +36,7 @@ components/
 - `container.tsx`, `section.tsx`, `flex.tsx` - レイアウトユーティリティ
 - `heading.tsx`, `badge.tsx`, `time.tsx` - テキスト表示
 - `tile-grid.tsx`, `slide-image.tsx` - グリッド・画像表示
+- `pager.tsx` - ページ送り（URL の組み立ては `hrefFor` prop に外出しし、ルートに依存しない）
 - `meta.tsx` - メタタグ
 - `display.tsx`, `hr.tsx` - その他ユーティリティ
 

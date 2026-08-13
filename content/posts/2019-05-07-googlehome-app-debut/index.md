@@ -12,7 +12,7 @@ tags:
 
 3 月に 1 週間くらいかけて自作したので備忘録として書いておきます。
 
-![](./thumb.jpg)
+![](./thumb.webp)
 
 以下の機能がある定点カメラを作成しました。
 
@@ -58,7 +58,7 @@ tags:
 
 ## Dialogflow を設定する
 
-![](./dialogflow.png)
+![](./dialogflow.webp)
 
 **Agent を設定する**
 
@@ -104,13 +104,13 @@ Webhook 用の API に連携する設定です。API を作成したら入力し
 
 Action on Google でアプリケーション名を登録し、Simulator を使ってテストします。問題なく実行できていて、開発アカウントと実利用アカウントが同じであれば実機の Google Home でも動作するはずです。
 
-![](./actions.png)
+![](./actions.webp)
 
 <small>_「アプリケーション名につないで」「写真撮って」が通れば OK です_</small>
 
 ## Node-RED を設定する
 
-![](./nodered.png)
+![](./nodered.webp)
 
 IoT をやるときは Node-RED を使うようにしています。可視化でメンテがしやすく、ノードのつなぎ合わせによるトライアンドエラーがモノの開発に向いています。インストール方法と pm2 での起動は公式ドキュメントを参照してください。
 
@@ -119,7 +119,7 @@ IoT をやるときは Node-RED を使うようにしています。可視化で
 
 **Webhook 用の API を設定する**
 
-![](./nodered-p1.png)
+![](./nodered-p1.webp)
 
 function node に Dialogflow の Responses を設定します。ここでは固定にしていますが、動的に返すこともできます。
 
@@ -135,7 +135,7 @@ API 設定について、ここでは割愛しますが API の URL は SSL 化�
 
 **Cron job を作成する**
 
-![](./nodered-p2.png)
+![](./nodered-p2.webp)
 
 inject node の payload を「日時」に設定することで Cron として利用することが出来ます。
 自分の場合は朝夕の 1 時間を 15 分おきにスケジュールで撮影をしています。
@@ -157,7 +157,7 @@ Google Drive で設定をしましたが S3 や Dropbox など選択肢が多い
 
 毎日 Google Drive にアップされる写真。これで娘の成長を写真に収めることが出来る！
 
-![](./sample.gif)
+![](./sample.webp)
 
 **写真を撮ってみての感想**
 

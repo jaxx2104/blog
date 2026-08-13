@@ -13,14 +13,14 @@ tags:
 
 馬喰町になかなかナイスな場所があると知って行ってきた。
 
-![](./IMG_1532.jpg)
+![](./IMG_1532.webp)
 
 > 辛酸なめ子のギャラリー探訪記 「アガタ竹澤ビル」
 > http://www.artgene.net/labo/theme/cat243/post_45.php
 
 <!--more-->
 
-<img src="./IMG_1534.jpg" />
+<img src="./IMG_1534.webp" />
 
 > MARKTE
 > http://www.riddledesign.cc/f_top.html
@@ -32,7 +32,7 @@ tags:
 
 昔の雑居ビルをリノベーションしているので廊下の薄暗い雰囲気と、格好よさが好きだった。
 
-<img src="./IMG_1531.jpg" />
+<img src="./IMG_1531.webp" />
 
 > イズマイ
 > http://ismy.jp/

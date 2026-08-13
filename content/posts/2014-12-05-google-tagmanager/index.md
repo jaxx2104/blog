@@ -10,7 +10,7 @@ tags:
 
 GoogleAnalytics で離脱率や平均セッションを見ていて、ユーザーがページのどこまで目を通しているのか気になりました。
 
-![](./Google-Tag-Manager-1.png)
+![](./Google-Tag-Manager-1.webp)
 
 海外の技術ブログや GitHub でも評価のある、「Scroll Depth」というライブラリを使用します。要件として jQuery1.7 以上です。
 
@@ -29,7 +29,7 @@ GoogleAnalytics で離脱率や平均セッションを見ていて、ユーザ�
 
 読み込み完了イベントの「gtm.dom」を「Dom Event」として登録します。
 
-<img src="./Google-Tag-Manager1.png" />
+<img src="./Google-Tag-Manager1.webp" />
 
 ## Scroll Listener の設定
 
@@ -39,7 +39,7 @@ GoogleAnalytics で離脱率や平均セッションを見ていて、ユーザ�
 
 > robflaherty/jquery-scrolldepth\*\* > https://github.com/robflaherty/jquery-scrolldepth
 
-<img src="./Google-Tag-Manager2.png" />
+<img src="./Google-Tag-Manager2.webp" />
 
 タグの最後に実行タグを追記します。
 
@@ -63,7 +63,7 @@ $.scrollDepth({
 
 イベント名は「ScrollDistance」と入力します。
 
-<img src="./Google-Tag-Manager3.png" />
+<img src="./Google-Tag-Manager3.webp" />
 
 ## dataLayer の設定
 
@@ -71,19 +71,19 @@ $.scrollDepth({
 
 「eventCategory」
 
-<img src="./Google-Tag-Manager4.png" />
+<img src="./Google-Tag-Manager4.webp" />
 
 「eventAction」
 
-<img src="./Google-Tag-Manager5.png" />
+<img src="./Google-Tag-Manager5.webp" />
 
 「eventLabel」
 
-<img src="./Google-Tag-Manager6.png" />
+<img src="./Google-Tag-Manager6.webp" />
 
 「eventValue」
 
-<img src="./Google-Tag-Manager7.png" />
+<img src="./Google-Tag-Manager7.webp" />
 
 ## Scroll Event の設定
 
@@ -91,7 +91,7 @@ $.scrollDepth({
 
 各項目を入力すれば設定完了です。
 
-<img src="./Google_Tag_Manager8.png" />
+<img src="./Google_Tag_Manager8.webp" />
 
 デバッグモードで PC からでもスマートフォンからで取得できていれば完了です。
 

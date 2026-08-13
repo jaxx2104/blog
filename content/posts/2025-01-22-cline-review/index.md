@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](./c658c89fa8a2d28c79fa8d6c916f4af7.jpg)
+![](./c658c89fa8a2d28c79fa8d6c916f4af7.webp)
 
 いくつかのモデルに課金してみた
 

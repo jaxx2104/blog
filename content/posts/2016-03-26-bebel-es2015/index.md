@@ -9,7 +9,7 @@ tags:
   - ES2015
 ---
 
-![](./babel.png)
+![](./babel.webp)
 
 ## ES2015(ES6)について
 

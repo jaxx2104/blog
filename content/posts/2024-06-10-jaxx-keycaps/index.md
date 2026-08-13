@@ -9,7 +9,7 @@ tags:
   - scrapbox
 ---
 
-![](./b90c460e84614e8f41f768c80530e279.jpg)
+![](./b90c460e84614e8f41f768c80530e279.webp)
 
 ## 必要なもの
 - キーボードの原型はメルカリで買った
@@ -25,7 +25,7 @@ tags:
 ## 手順
 https://github.com/imyownyear/Z-Butt/wiki
 
-![](./b5e27baca4b6dc8f4d2bab723deea9cf.jpg)
+![](./b5e27baca4b6dc8f4d2bab723deea9cf.webp)
 
 ## コツ
 レジンは湯煎すると粘度が下がって気泡が抜けるよ
@@ -109,7 +109,7 @@ https://yushakobo.jp/news/2019/09/06/artisan/
 - スカルピー
 - ヒートガン
 3D プリンターも買った
-![](./a22965121d0a574990ecc7349b4d1deb.jpg)
+![](./a22965121d0a574990ecc7349b4d1deb.webp)
 
 写真を綺麗に撮る用途で一眼レンズ（マクロ）も購入した
 

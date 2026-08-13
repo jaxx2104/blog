@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![](./monokaipro.png)
+![](./monokaipro.webp)
 
 it’s also the name of a color palette
 https://monokai.nl/

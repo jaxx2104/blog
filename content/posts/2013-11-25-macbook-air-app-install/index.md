@@ -14,7 +14,7 @@ tags:
 
 今週末 Macbook Air 13 インチの梅買いました。 メモリ ４GB でも Xcode サクサクです。
 
-![](./IMG_1593.jpg)
+![](./IMG_1593.webp)
 
 ## 経緯
 

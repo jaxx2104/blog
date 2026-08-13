@@ -9,7 +9,7 @@ tags:
   - 旅行
 ---
 
-![](./IMG_0897.jpg)
+![](./IMG_0897.webp)
 
 <small>飛び出し坊や</small>
 

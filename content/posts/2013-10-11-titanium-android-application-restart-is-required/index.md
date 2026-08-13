@@ -25,7 +25,7 @@ Google Play の「開く」かアプリケーションのショートカット�
 
 <!--more-->
 
-<img src="./IMG_1495.jpg" />
+<img src="./IMG_1495.webp" />
 
 - Titanium SDK 3.1.3
 - GALAXY S2 Android 4.0.2

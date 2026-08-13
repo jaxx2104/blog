@@ -16,7 +16,7 @@ iOS の新プログラミング言語 Swift をゲームアプリケーション
 
 フレームワークは SpriteKit を使います。
 
-<img src="./swift-logo-hero-1.jpg" alt="swift-logo-hero-1" />
+<img src="./swift-logo-hero-1.webp" alt="swift-logo-hero-1" />
 
 ## プロジェクトの作成
 
@@ -26,13 +26,13 @@ next を押すとプロジェクトの保存場所を聞かれます。
 
 <!--more-->
 
-<img src="./861597b59102c894571b612d973661ad.png" />
+<img src="./861597b59102c894571b612d973661ad.webp" />
 
 プロジェクトができました。GameScene.Swift がアプリケーションの初期画面です。コードを少しだけ見てみましょう。
 
 <small>GameScene.Swift</small>
 
-<img src="./63480dac3b503da40037d59769614a18.png" />
+<img src="./63480dac3b503da40037d59769614a18.webp" />
 
 まず、**import SpriteKit** で SpriteKit を利用しています。
 
@@ -50,7 +50,7 @@ iOS シミュレーターでアプリケーション動かしてみましょう�
 
 デバイスを「iPhone6」選択し、再生アイコンを押します。
 
-<img src="./iOS-Simulator-Screen-Shot-2015.02.01-13.47.19.png" />
+<img src="./iOS-Simulator-Screen-Shot-2015.02.01-13.47.19.webp" />
 
 iOS シミュレーターが起動し、アプリケーションが実行されれば OK です。
 

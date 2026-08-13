@@ -11,7 +11,7 @@ tags:
   - Node.js
 ---
 
-![](./001.jpg)
+![](./001-jpg.webp)
 
 暑い季節になってきました。夏の自由研究ということで電子工作と IoT に挑戦したいと思います。
 
@@ -36,7 +36,7 @@ iOS の Homekit というものを使えば iPhone から Homekit 対応した�
 
 ## Raspberry Pi と irMagcian
 
-<img src="./002.jpg" alt="002" />
+<img src="./002.webp" alt="002" />
 
 <small>左が irMagcian、右が Raspberry Pi ３のモデル B</small>
 
@@ -50,7 +50,7 @@ iOS の Homekit というものを使えば iPhone から Homekit 対応した�
 > irMagcian
 > http://www.omiya-giken.com/?page_id=837
 
-<img src="./003.jpg" alt="003" />
+<img src="./003.webp" alt="003" />
 
 <small>ケースに入れて USB で接続</small>
 
@@ -65,7 +65,7 @@ Raspberry Pi はスマートホーム用サーバにする予定ですので、�
 - Raspberry Pi にマイクロ SD とマウス、キーボード、HDMI を接続する
 - microUSB ケーブルをつなぎ電源を入れる
 
-<img src="./004.jpg" alt="004" />
+<img src="./004.webp" alt="004" />
 
 <small>起動時</small>
 
@@ -77,7 +77,7 @@ OS「RASPBIAN」インストール後、言語や LAN など設定します。
 
 ローカル IP 固定とポート開放して認証鍵で Mac から ssh で接続できるようにします
 
-<img src="./005.jpg" alt="005" />
+<img src="./005.webp" alt="005" />
 
 <small>デスクトップ画面</small>
 
@@ -165,7 +165,7 @@ $ sudo npm install -g homebridge-cmd
 
 ## iPhone から使ってみる
 
-<img src="./001.gif" alt="001" />
+<img src="./001-gif.webp" alt="001" />
 
 HomeKit 対応アプリケーションから設定します。Insteon とういうアプリケーションが有名みたいですが、自分は iOS 10 ベータにアップデートして Home アプリケーションを使っています。
 Siri もしくは Home アプリケーションから登録した家電のコントロールができるようになりました。

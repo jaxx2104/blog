@@ -1,0 +1,89 @@
+/* Sits on the immersive page surface, so it uses the --color-on-page family
+   rather than the reading-panel ink. */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--color-page-line);
+  padding-top: 1.5rem;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.08em;
+}
+
+.step {
+  color: var(--color-on-page);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0.5em 0;
+}
+
+.step:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+
+.step[data-disabled] {
+  color: var(--color-on-page-dim);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  display: block;
+  min-width: 2.25em;
+  padding: 0.5em 0.35em;
+  border: 1px solid transparent;
+  color: var(--color-on-page-dim);
+  text-align: center;
+  text-decoration: none;
+}
+
+.page:hover {
+  color: var(--color-on-page);
+  border-color: var(--color-page-line);
+}
+
+.page[data-current] {
+  color: var(--color-on-page);
+  border-color: var(--color-on-page);
+  font-weight: var(--font-weight-bold);
+}
+
+.gap {
+  color: var(--color-on-page-dim);
+  padding: 0 0.25em;
+}
+
+@media (max-width: 620px) {
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pages {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+  }
+
+  .nav .step {
+    flex: 1;
+  }
+
+  .nav .step:last-child {
+    text-align: right;
+  }
+}
