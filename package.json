@@ -51,7 +51,7 @@
   "main": "n/a",
   "scripts": {
     "dev": "velite build && vite dev",
-    "build": "pnpm velite:build && vite build",
+    "build": "pnpm velite:build && vite build && tsx scripts/promote-404.ts",
     "start": "vite preview --port 4173",
     "deploy": "pnpm build",
     "velite": "velite",

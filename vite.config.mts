@@ -54,7 +54,7 @@ const indexPagePaths = Array.from(
   { length: pageCount(posts.length) - 1 },
   (_, i) => pagePath(i + 2),
 )
-const allPages = ["/", "/profile/", ...indexPagePaths, ...permalinks]
+const allPages = ["/", "/profile/", "/404", ...indexPagePaths, ...permalinks]
 
 // Every index page reshuffles when a post is added, so they share the newest
 // post date rather than the date of the posts they currently hold.

@@ -54,6 +54,16 @@ jobs:
           fi
           # Hashed css asset must be linked from the home page.
           grep -E '<link[^>]*rel="stylesheet"[^>]*assets/[^"]+\.css' dist/client/index.html
+          # Cloudflare Pages falls back to single-page-application behaviour
+          # when 404.html is absent, answering any missing path — including a
+          # missing /assets/* file — with index.html and a 200. Combined with
+          # the immutable Cache-Control in public/_headers, that pinned a
+          # broken stylesheet in the edge cache for a year once.
+          test -f dist/client/404.html || {
+            echo "FAIL: dist/client/404.html missing — Pages would fall back to serving index.html for missing assets"
+            exit 1
+          }
+          grep -a -F -q '404' dist/client/404.html
       # Article bodies must stay out of the chunk every page loads. They are
       # written to .velite/bodies/ and pulled in per-post by import.meta.glob
       # (lib/posts.ts); folding them back into posts.json or into the "posts"

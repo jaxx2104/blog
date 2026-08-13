@@ -89,6 +89,18 @@ project tsconfig, or anything that runs in CI.
   image leaves its old content hash behind forever — the directory had
   grown to 172 files for 88 referenced images. `velite.config.ts`'s
   `pruneStaleAssets` deletes whatever the current build did not emit.
+- `dist/client/404.html` must exist. Cloudflare Pages only returns a 404
+  when it finds one; otherwise it falls back to single-page-application
+  behaviour and answers *every* unmatched path with `index.html` and a
+  200 — including `/assets/*`. A request that lands in the window between
+  a deploy reporting success and its assets propagating therefore gets
+  HTML where CSS was expected, and `public/_headers` pins that response
+  in the edge cache for a year (`immutable`). This is not hypothetical:
+  it took the production stylesheet down and needed a manual cache purge.
+  `scripts/promote-404.ts` copies the prerendered `/404/` page into place
+  and CI fails if it is missing. It runs from the build script, not a
+  vite plugin — TanStack Start prerenders after vite's `closeBundle`, so
+  no plugin hook can see the file.
 - Do not resolve project paths from `import.meta.url` in a file that
   velite pulls into `velite.config.ts`. Velite bundles the config into a
   temp file and imports that, so the module's own URL points outside the
