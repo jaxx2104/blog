@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router"
 import Article, {
   type SiteMetaType,
 } from "@/components/features/article/article"
+import NotFound from "@/components/features/not-found"
 import Layout from "@/components/layout/layout"
 import { getPostBody, getPostByPermalink } from "@/lib/posts"
 import {
@@ -79,12 +80,5 @@ function PostPage() {
 }
 
 function NotFoundComponent() {
-  return (
-    <Layout>
-      <main>
-        <h1>404 — Not Found</h1>
-        <p>This permalink does not match any post.</p>
-      </main>
-    </Layout>
-  )
+  return <NotFound detail="This permalink does not match any post." />
 }

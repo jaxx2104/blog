@@ -6,6 +6,7 @@ import {
   pageSlice,
   parsePageParam,
 } from "@/components/features/article/pagination"
+import NotFound from "@/components/features/not-found"
 import Layout from "@/components/layout/layout"
 import { getAllPosts } from "@/lib/posts"
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site"
@@ -59,12 +60,5 @@ function IndexPage() {
 }
 
 function NotFoundComponent() {
-  return (
-    <Layout>
-      <main>
-        <h1>404 — Not Found</h1>
-        <p>This page number is outside the index.</p>
-      </main>
-    </Layout>
-  )
+  return <NotFound detail="This page number is outside the index." />
 }
