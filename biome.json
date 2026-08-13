@@ -14,7 +14,8 @@
       "types/**",
       "**/*.json",
       "scripts/**/*.ts",
-      "velite.config.ts"
+      "velite.config.ts",
+      "vitest.config.ts"
     ]
   },
   "formatter": {

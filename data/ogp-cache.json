@@ -1,0 +1,163 @@
+{
+  "http://brew.sh/": {
+    "title": "Homebrew",
+    "description": "The Package Manager for Everywhere.",
+    "image": "https://brew.sh/assets/img/homebrew-social-card.png",
+    "url": "https://brew.sh/",
+    "siteName": "Homebrew"
+  },
+  "http://www.google.co.jp/intl/ja/chrome/browser/canary.html": {
+    "title": "Chrome Canary のデベロッパー向け機能 - Google Chrome",
+    "description": "最先端のウェブを体験したい方は、毎日更新される上級デベロッパー向けビルド Chrome Canary をご活用ください。",
+    "image": "https://www.google.com/chrome/static/images/canary/chrome-canary-logo.svg",
+    "url": "https://www.google.com/intl/ja_ALL/chrome/canary/",
+    "siteName": "google.co.jp"
+  },
+  "http://www.iterm2.com/#/section/home": {
+    "title": "iTerm2 - macOS Terminal Replacement",
+    "description": "iTerm2 is a replacement for Terminal and the successor to iTerm",
+    "image": "",
+    "url": "http://www.iterm2.com/#/section/home",
+    "siteName": "iterm2.com"
+  },
+  "http://www.sublimetext.com/3": {
+    "title": "Sublime Text 3 - Sublime Text",
+    "description": "",
+    "image": "",
+    "url": "http://www.sublimetext.com/3",
+    "siteName": "sublimetext.com"
+  },
+  "https://cubedhost.com/mcpe-hosting": {
+    "title": "CubedHost - 2011-2021",
+    "description": "CubedHost - (No Longer) Game Server Hosting - 2011 - 2021",
+    "image": "",
+    "url": "https://cubedhost.com/mcpe-hosting",
+    "siteName": "cubedhost.com"
+  },
+  "https://dixiemech.com/gmkdracula": {
+    "title": "Luxury mechanical keyboards, keycaps, deskpads & accessories",
+    "description": "Omnitype has everything you need to make your desk setup one of a kind. We offer keyboards, switches, and keycaps that you can mix and match to build a custom keyboard curated to your taste. We also have a variety of deskpad designs that will transform your workspace, home office, or gaming desk. Make your #deskgoals.",
+    "image": "https://omnitype.com/cdn/shop/files/SocialShare.png?v=1686884217",
+    "url": "https://omnitype.com/",
+    "siteName": "Omnitype®"
+  },
+  "https://github.com/imyownyear/Z-Butt/wiki": {
+    "title": "Home",
+    "description": "Z-Butt: An artisan keycap creation platform. Contribute to imyownyear/Z-Butt development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/c2ece1af371cb0e3ab42ab9eb8aada2fc90ecfddb9c3850abf88887546b7faeb/imyownyear/Z-Butt",
+    "url": "https://github.com/imyownyear/Z-Butt/wiki/Home",
+    "siteName": "GitHub"
+  },
+  "https://ja.aliexpress.com/item/1005009507027327.html": {
+    "title": "Tuya スマートライフ Zigbee 土壌水分テスター温度湿度計メーター土壌センサー家庭菜園オートメーション灌漑 Z2M - AliExpress 1420",
+    "description": "Smarter Shopping, Better Living! Aliexpress.com",
+    "image": "https://ae-pic-a1.aliexpress-media.com/kf/Sdcc1f87185654a9c8b59e3abcf1f933fg.jpg",
+    "url": "//ja.aliexpress.com/item/1005009507027327.html?src=ibdm_d03p0558e02r02&sk=&aff_platform=&aff_trace_key=&af=&cv=&cn=&dp=&aff_short_key=",
+    "siteName": "aliexpress."
+  },
+  "https://ja.aliexpress.com/item/1005009658413745.html": {
+    "title": "Lenovo Xiaoxin Pad Pro GT Snapdragon 8 Gen 3搭載 タブレット 128GB/256GB ROM 11.1インチ 144Hz 3.2K画面 8860mAh 68W急速充電 Androidタブレット - AliExpress 7",
+    "description": "Smarter Shopping, Better Living! Aliexpress.com",
+    "image": "https://ae-pic-a1.aliexpress-media.com/kf/S8f30958cd63847aca5b66ea2e9d886653.jpg",
+    "url": "//ja.aliexpress.com/item/1005009658413745.html?src=ibdm_d03p0558e02r02&sk=&aff_platform=&aff_trace_key=&af=&cv=&cn=&dp=&aff_short_key=",
+    "siteName": "aliexpress."
+  },
+  "https://jp.store.bambulab.com/products/a1-mini": {
+    "title": "初心者向け A1 mini 3Dプリンター｜ Bambu Lab公式ストア",
+    "description": "Bambu Lab A1 miniが初心者に最適な3Dプリンターで、AMS liteを使えば最大4色のマルチカラー印刷も可能。全自動キャリブレーションや静音設計（サイレントモードで48dB以下）など、充実の機能を搭載。詳細はBambu Labストアで！",
+    "image": "https://store.bblcdn.com/s6/default/f6bf2b80f14e479cb8000531b69e69be/A1_mini-compressed.jpg",
+    "url": "https://jp.store.bambulab.com/products/a1-mini",
+    "siteName": "Bambu Lab JP ストア"
+  },
+  "https://lee.hpplus.jp/column/2758018/": {
+    "title": "子どもの「学校に行きたくない」への親の第一声、何て言うべき？不登校支援の専門家が解説 | LEE",
+    "description": "親の対応アドバイス編 子どもの“行き渋り”に直面した親たちの「とまどい」、どう対応すべき？",
+    "image": "https://lee.hpplus.jp/wp-content/uploads/2023/09/15/LEE2310_行き渋り07_アイ.jpg",
+    "url": "https://lee.hpplus.jp/column/2758018/",
+    "siteName": "LEE"
+  },
+  "https://raw.github.com/episko/iterm2-monokai/master/Monokai.itermcolors": {
+    "title": "Monokai.itermcolors",
+    "description": "",
+    "image": "",
+    "url": "https://raw.github.com/episko/iterm2-monokai/master/Monokai.itermcolors",
+    "siteName": "raw.github.com"
+  },
+  "https://store.steampowered.com/app/621060/PC_Building_Simulator/?l=japanese": {
+    "title": "Steam：PC Building Simulator",
+    "description": "PC診断、修理と構築を学びながら、自分だけのコンピュータ修理企業を成長させていきましょう。ライセンス許諾を受けた現実世界のコンポーネントや総合的なハードウェアおよびソフトウェアシミュレーションによって、僕の考えた最強のPCを実現できます。",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/621060/capsule_616x353_japanese.jpg?t=1653555111",
+    "url": "https://store.steampowered.com/app/621060/PC_Building_Simulator/",
+    "siteName": "store.steampowered.com"
+  },
+  "https://suzuri.jp/jaxx2104/1718688/t-shirt/s/white": {
+    "title": " Suica でサッと支払うTシャツ / jaxx2104のスタンダードTシャツ通販 ∞ SUZURI（スズリ）",
+    "description": "Suica でサッと支払うTシャツ（スタンダードTシャツ）の購入ページです。jaxx2104がつくったスタンダードTシャツ。色やサイズも選択可能です。お得なクーポンも配布中！",
+    "image": "https://og.suzuri.jp/products/3707974.webp?t=1554375081",
+    "url": "https://suzuri.jp/jaxx2104/1718688/t-shirt/s/white",
+    "siteName": "SUZURI"
+  },
+  "https://www.amazon.co.jp/dp/B0B766Y3ZQ": {
+    "title": "Inateck ガジェットポーチ 超強収納力 180°開口 大容量マルチポケット 黒 | PC周辺小物用、撥水加工、高耐久、5層仕組みバッグ、出張・旅行に便利",
+    "description": "高品質の素材、スタイリッシュなデザイン、コンパクトなレイアウト、十分な容量を備えたInateck多機能ポーチは、さまざまなサイズのものを簡単に収納できます。撥水生地を採用して、日常収納や旅行出張に適しています。 持ち手付き 上部の持ち手はバッグをはるかに持ち運びやすくし、どこにでも持ち運び、吊るすことができます。 ペンループ 2つのペンループは、ボールペンまたはPencil専用で、しっかりと固定でき、紛失する心配がありません。 ジッパーポケット このポケットは、パスポートやクレジットカードなどの貴重品や、紛失しがちの小物の保管に最適です。",
+    "image": "https://m.media-amazon.com/images/I/71K9jTFw8fL.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzBGMTExMSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPjQuMzwvc3Bhbj4=,60,875,420,420,0,0_PIRIOFOURANDHALF-medium-V2,TopLeft,190,885_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzU2NTk1OSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPigxLDE3Nik8L3NwYW4+,650,875,420,420,0,0_QL100_.jpg",
+    "url": "https://www.amazon.co.jp/dp/B0B766Y3ZQ",
+    "siteName": "amazon.co.jp"
+  },
+  "https://www.amazon.co.jp/dp/B0D3142WBV": {
+    "title": "new balance(ニューバランス) メンズ Fresh Foam X More v5 フレッシュフォーム モア 現行品ランニングシューズ",
+    "description": "シリーズ史上、最厚で最高のクッショニングモデル「FRESH FOAM X MORE V5」から、スポーツファッションとしても楽しみやすい新色が登場。Data to designに基づいたアウトソールの形状が、かかと周りやミッドソール全体の厚みを最適化し、足裏全体でクッショニングと安定感を感じられる構造に。厚いソールでも足との一体感を感じる、ランニングからオフシーンまでサポートする一足です。",
+    "image": "https://m.media-amazon.com/images/I/61XYmK7QTEL.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzBGMTExMSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPjQuMDwvc3Bhbj4=,60,875,420,420,0,0_PIRIOFOUR-medium-V2,TopLeft,190,885_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzU2NTk1OSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPigyMyk8L3NwYW4+,650,875,420,420,0,0_QL100_.jpg",
+    "url": "https://www.amazon.co.jp/dp/B0F5WDL99B",
+    "siteName": "amazon.co.jp"
+  },
+  "https://www.amazon.co.jp/dp/B0D5XNYVHN": {
+    "title": "Beelink EQ14 Mini PC、Intel 13th Twin Lake-N150 (最大3.6GHz、アップグレードN100)、16GB DDR4 RAM 500GB M.2 SSD、デュアルLANミニデスクトップコンピューターサポート4K@60Hzデュアルディスプレイ/WiFi 6/BT 5.2 ホーム/オフィス用",
+    "description": "Beelink EQ13 Mini PC",
+    "image": "https://m.media-amazon.com/images/I/710TY+bwxzL.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzBGMTExMSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPjQuNDwvc3Bhbj4=,60,875,420,420,0,0_PIRIOFOURANDHALF-medium-V2,TopLeft,190,885_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzU2NTk1OSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPigzNzYpPC9zcGFuPg==,650,875,420,420,0,0_QL100_.jpg",
+    "url": "https://www.amazon.co.jp/dp/B0D5XNYVHN",
+    "siteName": "amazon.co.jp"
+  },
+  "https://www.amazon.co.jp/dp/B0DPHFMN6V": {
+    "title": "Beelink MINI-S12 ミニPC、Intel N95、8GB+256GB Wake on LAN/PXE起動/時刻起動 | Windows 11 Home、7x24 時間動作、8GB DDR4 RAM 256GB SSD デスクトップ コンピュータ、WiFi 5、Bluetooth 5.0、デュアルHDMI、4K@60Hz、2.5GbE、USB3.0、TPM 2.0",
+    "description": "■ 製品概要 Beelink MINI S12（MINIS 12）は、手のひらサイズの小型デスクトップPC（ミニPC）です。 Intel Processor N100（Alder Lake‑N／4コア4スレッド／最大 3.4GHz）（構成により N95 の場合あり）と、プリインストールされた Windows 11 Pro（64bit）​ により、開梱→接続→電源投入で、そのまま日常PCとして使い始められます。 ■ 主な仕様（スペック） CPU：Intel Processor N100（Alder Lake‑N）4C/4T、最大 3.4GHz、6MB キャッシュ（構成により Intel P...",
+    "image": "https://m.media-amazon.com/images/I/71xtvMd1IfL.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzBGMTExMSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPjMuNjwvc3Bhbj4=,60,875,420,420,0,0_PIRIOTHREEANDHALF-medium-V2,TopLeft,190,885_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzU2NTk1OSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPigxNik8L3NwYW4+,650,875,420,420,0,0_QL100_.jpg",
+    "url": "https://www.amazon.co.jp/dp/B0BW5D3ZD9",
+    "siteName": "amazon.co.jp"
+  },
+  "https://www.amazon.co.jp/dp/B0DVBRYGSY": {
+    "title": "Seagate BarraCuda 3.5インチ 内蔵HDD 24TB PC用 ST24000DM001/EC",
+    "description": "さまざまな用途に対応可能な頼れるドライブのSeagate BarraCudaは、20年にわたる高信頼度ドライブファミリーの伝統に基づいて作られています。\n2.5\" と3.5\" が用意された購入しやすい価格のBarraCudaは、仕事、遊び、映画や音楽の保存など、ほぼあらゆる用途に適しています。\n\n・メーカーサポート対象は、『販売/出品』が『Amazon』である製品(「この商品は、Amazonが販売、発送します。」と表示されている製品)が対象です。\n他出品者や事業者が販売する同製品や中古品、類似型番の製品のサポートについては、各出品者様や販売事業者様にお問い合わせください。 \n\n\n  ",
+    "image": "https://m.media-amazon.com/images/I/71mbO+ujD8L.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzBGMTExMSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPjQuMDwvc3Bhbj4=,60,875,420,420,0,0_PIRIOFOUR-medium-V2,TopLeft,190,885_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzU2NTk1OSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPigyNTkpPC9zcGFuPg==,650,875,420,420,0,0_QL100_.jpg",
+    "url": "https://www.amazon.co.jp/dp/B0DVBRYGSY",
+    "siteName": "amazon.co.jp"
+  },
+  "https://www.amazon.co.jp/dp/B0DX791JB5": {
+    "title": "ASUS NVIDIA GeForce RTX 5070Ti ビデオカード 16GB GDDR7 PCI Express 5.0 / TUF-RTX5070TI-O16G-GAMING 国内正規代理店品",
+    "description": "グラフィックスコア : NVIDIA GeForce RTX 5070 Ti / バスインターフェース : PCI Express 5.0/ OpenGL : OpenGL 4.6\nコアクロック : OCモード : 2610MHz / デフォルトモード : 2588MHz (Boost Clock)\n搭載ポート:Yes x2(Native HDMI 2.1b),Yes x 3 (Native DisplayPort )YES:HDCP サポート(2.3)\nメモリスピード : 28 Gbps / メモリインターフェース: 256-bit / ビデオメモリ: 16GB GDDR7 / ストリ...",
+    "image": "https://m.media-amazon.com/images/I/81VDkudhELL.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzBGMTExMSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPjQuNDwvc3Bhbj4=,60,875,420,420,0,0_PIRIOFOURANDHALF-medium-V2,TopLeft,190,885_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzU2NTk1OSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPig0Myk8L3NwYW4+,650,875,420,420,0,0_QL100_.jpg",
+    "url": "https://www.amazon.co.jp/dp/B0DX791JB5",
+    "siteName": "amazon.co.jp"
+  },
+  "https://www.switch-science.com/products/6347": {
+    "title": "ATOM Voice - スマートスピーカー開発キット",
+    "description": "ATOMシリーズをベースに設計されたプログラマブルなスマートスピーカーモジュールです。サイズはわずか 24 x 24 x 17mmです。",
+    "image": "https://www.switch-science.com/cdn/shop/files/d56c20ad-53e9-4efa-b54c-59f3bd52ae4e_1200x1200.jpg?v=1775802620",
+    "url": "https://www.switch-science.com/products/6347",
+    "siteName": "スイッチサイエンス"
+  },
+  "https://www.switch-science.com/products/8778": {
+    "title": "ATOMS3 Lite",
+    "description": "無線通信機能のあるESP32-S3を搭載した24mm角のとても小さな開発モジュールです。",
+    "image": "https://www.switch-science.com/cdn/shop/files/846939ec-c57e-46b1-bae6-ca060021bc5f_1200x1200.jpg?v=1725605247",
+    "url": "https://www.switch-science.com/products/8778",
+    "siteName": "スイッチサイエンス"
+  },
+  "https://www.w3.org/TR/WCAG20/#relativeluminancedef": {
+    "title": "Web Content Accessibility Guidelines (WCAG)  2.0",
+    "description": "",
+    "image": "",
+    "url": "https://www.w3.org/TR/WCAG20/#relativeluminancedef",
+    "siteName": "w3.org"
+  }
+}

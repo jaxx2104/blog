@@ -27,6 +27,7 @@ jobs:
       # imports; without this step tsc fails with TS2307.
       - name: Build content layer + tanstack start prerender
         run: pnpm build
+      - run: pnpm test:types
       - run: pnpm test
       # Phase 2 smoke: prerender must emit home + profile + every velite
       # post (>= 111). Spot-check OGP meta on a known post — both an
@@ -53,3 +54,22 @@ jobs:
           fi
           # Hashed css asset must be linked from the home page.
           grep -E '<link[^>]*rel="stylesheet"[^>]*assets/[^"]+\.css' dist/client/index.html
+      # Article bodies must stay out of the chunk every page loads. They are
+      # written to .velite/bodies/ and pulled in per-post by import.meta.glob
+      # (lib/posts.ts); folding them back into posts.json or into the "posts"
+      # manualChunk sends all ~120 bodies to every visitor.
+      - name: Verify article bodies are not in the shared chunk
+        run: |
+          test -f .velite/bodies/php-replace-lf.json
+          if node -e 'process.exit(require("./.velite/posts.json").some(p => "body" in p) ? 1 : 0)'; then
+            echo "OK: posts.json carries metadata only"
+          else
+            echo "FAIL: posts.json still embeds article bodies" && exit 1
+          fi
+          size=$(find dist/client/assets -name 'posts-*.js' -printf '%s' -quit)
+          test -n "$size" || { echo "FAIL: no posts chunk emitted" && exit 1; }
+          test "$size" -lt 150000 || {
+            echo "FAIL: posts chunk is ${size}B (>150KB) — bodies are likely back in it"
+            exit 1
+          }
+          echo "posts chunk: ${size}B"

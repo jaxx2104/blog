@@ -10,7 +10,12 @@ pnpm dev         # Start Vite dev server (TanStack Start)
 pnpm build       # Run velite build + vite build (prerender to dist/client/)
 pnpm start       # Serve dist/ via vite preview
 pnpm deploy      # Alias for pnpm build
+pnpm optimize:images  # Re-encode content/posts images (pass --dry-run first)
 ```
+
+`pnpm build` reaches the network to fill `data/ogp-cache.json` for any link
+card URL it has not seen. Set `OGP_OFFLINE=1` to render fallback cards
+instead, or `OGP_OFFLINE=strict` to fail the build on a cache miss.
 
 ### Code Quality
 ```bash
@@ -18,7 +23,8 @@ pnpm lint                # Run Biome with --write
 pnpm lint:ci             # Run Biome ci (no fixes; fails on warnings/errors)
 pnpm lint:text           # Check Japanese text in blog posts (textlint)
 pnpm lint:textfix        # Auto-fix Japanese text issues
-pnpm test                # Run TypeScript type checking (tsc -p)
+pnpm test                # Run unit tests (vitest run)
+pnpm test:types          # Run TypeScript type checking (tsc -p)
 pnpm format              # Format code with Biome
 ```
 
@@ -31,6 +37,7 @@ pnpm format              # Format code with Biome
 - **Velite + Zod** content layer for `content/posts/**/index.md` (`.velite/` 出力)
 - **shiki + rehype-pretty-code** code syntax highlighting (via Velite)
 - **Biome 2.x** for lint + format
+- **Vitest 4.x** for unit tests (`vitest.config.ts`; specs live next to their source as `*.test.ts`)
 - **pnpm 9.x** as package manager
 
 ## Directory Structure
@@ -72,3 +79,19 @@ project tsconfig, or anything that runs in CI.
   excerpts. Velite's `s.path()` defaulting to `removeIndex: true` only
   became unambiguous after reading the dist source; one upstream-doc
   disagreement during review cost extra round-trips.
+- Velite's `output.clean` runs *between* parsing and writing, not at the
+  start of the build. Anything a schema writes to the output directory
+  during `transform` is deleted before the build ends. Emit side files
+  from the `complete` hook instead (`lib/content/schema.ts`'s
+  `flushBodies`).
+- `output.clean` covers the *data* directory only. `outputAssets` copies
+  files into `output.assets` and never removes anything, so re-encoding an
+  image leaves its old content hash behind forever — the directory had
+  grown to 172 files for 88 referenced images. `velite.config.ts`'s
+  `pruneStaleAssets` deletes whatever the current build did not emit.
+- Do not resolve project paths from `import.meta.url` in a file that
+  velite pulls into `velite.config.ts`. Velite bundles the config into a
+  temp file and imports that, so the module's own URL points outside the
+  project — the first attempt wrote 117 files into the repo's *parent*
+  directory. Derive paths from `context.config.configPath`, which is the
+  real config location.
