@@ -86,7 +86,7 @@ export default Counter;
 ```
 
 ## インラインコード
-通常のテキストの中に `const variable = "value"` のようなコードを含められます。
+通常のテキストの中に`const variable = "value"`のようなコードを含められます。
 
 ## Bash
 

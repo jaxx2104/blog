@@ -34,9 +34,9 @@ next を押すとプロジェクトの保存場所を聞かれます。
 
 <img src="./63480dac3b503da40037d59769614a18.webp" />
 
-まず、**import SpriteKit** で SpriteKit を利用しています。
+まず、**import SpriteKit**で SpriteKit を利用しています。
 
-クラスの GameScene の**SKScene** は 1 画面の役割です。
+クラスの GameScene の**SKScene**は 1 画面の役割です。
 
 `didMoveToView`は画面が呼ばれた際に実行されるメソッドです。初期状態では SKLabelNode で&#8221;Hello World&#8221;とセットしています。
 

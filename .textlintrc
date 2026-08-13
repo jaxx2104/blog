@@ -10,7 +10,8 @@
       "ja-no-space-around-parentheses": true,
       "ja-nakaguro-or-halfwidth-space-between-katakana": true,
       "ja-space-after-exclamation": false,
-      "ja-space-after-question": false
+      "ja-space-after-question": false,
+      "ja-space-around-link": false
     },
     "preset-japanese": {
       "sentence-length": {

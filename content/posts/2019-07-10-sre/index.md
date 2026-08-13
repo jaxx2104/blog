@@ -32,7 +32,7 @@ Measure everything
 Reduce organizational silos	
 - Share Ownership
 Accept failure as normal
-- Error Budget / Postmortem
+- Error Budget/Postmortem
 Implement gradual change
 - Canary Release
 Leverage tooling and automation

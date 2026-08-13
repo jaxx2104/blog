@@ -8,12 +8,12 @@ tags:
   - imported
   - scrapbox
 ---
-deploys / a day / a developer
+deploys/a day/a developer
 
 最近、エンジニアリング組織の健全さの指標に、
 d/d/d というのを用いてる。
 
-deploys / a day / a developer の略で
+deploys/a day/a developer の略で
 1 日あたりのデプロイ回数を開発者数で割ったもの。
 
 だいたい、0.1 以上なら健全と言える
