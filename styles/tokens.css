@@ -1,22 +1,29 @@
 :root,
 [data-theme="light"] {
-  /* brand: 朱寄りピンク（テーマ非依存のアクセント / ライトではページ地） */
+  /* brand: 朱寄りピンク。白いシートの上に置くアクセント専用。
+     ページ地は同じ hue をもう一段沈めた --color-page が持つ */
   --color-brand: #ea2552;
   --color-brand-strong: #c41d49;
   --color-main: #ea2552;
   --color-main-strong: #c41d49;
   --color-main-soft: rgba(234, 37, 82, 0.1);
 
-  /* immersive page（色面）: ライトはブランド色でベタ塗り */
-  --color-page: #ea2552;
+  /* immersive page（色面）: ライトはブランド色を一段沈めたベタ塗り。
+     #ea2552 のままだと純白ですら 4.30 しか出ず、13px の二次テキストを
+     WCAG AA (4.5:1) に載せられない。同じ hue (oklch 16°) を保ったまま
+     明度だけを落とし、白 → 淡ピンクの階調は --color-on-page-dim 側で作る。
+     比率は styles/tokens.test.ts が検証している */
+  --color-page: #ba003a;
   --color-on-page: #fff0f2;
-  --color-on-page-dim: rgba(255, 240, 242, 0.74);
-  --color-page-line: rgba(255, 240, 242, 0.26);
+  --color-on-page-dim: rgba(255, 240, 242, 0.86);
+  --color-page-line: rgba(255, 240, 242, 0.3);
 
   /* white reading panel（記事本文の白いシート） */
   --color-panel: #ffffff;
   --color-ink: #16130f;
-  --color-muted: #7c766e;
+  /* #7c766e は 4.49 で AA に 0.01 届かず、記事末尾の戻りリンクとタグ
+     バッジ（13px）が落ちていた。3/255 だけ沈めて 4.77 に乗せている */
+  --color-muted: #787268;
   --color-line: #ece7df;
 
   /* legacy aliases（未改修参照のフォールバック） */

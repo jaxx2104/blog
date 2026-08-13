@@ -5,18 +5,19 @@
   gap: 1.25rem;
 }
 
+/* 二次トーンは opacity ではなく dim トークンで出す。opacity は下地の
+   ピンクを透かして 2.90:1 まで落とすが、トークン側は AA を担保している */
 .item {
-  color: var(--color-on-page);
-  opacity: 0.8;
+  color: var(--color-on-page-dim);
   cursor: pointer;
   margin: 0;
   font-family: var(--font-family-mono);
   font-size: var(--font-size-small);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: opacity 0.15s ease-out;
+  transition: color 0.15s ease-out;
 }
 
 .item:hover {
-  opacity: 1;
+  color: var(--color-on-page);
 }

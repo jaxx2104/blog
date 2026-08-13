@@ -25,9 +25,10 @@
   text-decoration-thickness: 1px;
 }
 
+/* opacity で沈めると 1.37:1 まで落ちて読めなくなる。無効であることは
+   dim トーンと hover/underline が付かないことで示し、色は AA を保つ */
 .step[data-disabled] {
   color: var(--color-on-page-dim);
-  opacity: 0.4;
   pointer-events: none;
 }
 
