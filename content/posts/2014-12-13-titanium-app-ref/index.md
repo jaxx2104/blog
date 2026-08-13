@@ -11,7 +11,7 @@ tags:
 
 アプリケーションを作った際に、参考にしたサイトについて初心者目線ですが紹介したいと思います。
 
-![](./b0edb59d97976fb1c698b9997460f6e3.jpg)
+![](./b0edb59d97976fb1c698b9997460f6e3.webp)
 
 Titanium は以前に少しだけ触ったことがあって、その時は「Resources/app.js」に書く Classic なものでした。
 
@@ -32,7 +32,7 @@ iOS Developer Program に 7,800 円払ってしまったこと。
 
 > **Dash** > http://kapeli.com/dash
 
-<img src="./d9cdc0c81a52b1a3f646be6d5ebd04e1.png" />
+<img src="./d9cdc0c81a52b1a3f646be6d5ebd04e1.webp" />
 
 ## サンプル
 

@@ -12,7 +12,7 @@ tags:
 
 開発環境を移行したとき Emacs の設定ファイルの init.el が読み込めなくって、ちょっと困ったけどあっさり解決したので備忘録メモ。
 
-![](./emacs_initel.jpg)
+![](./emacs_initel.webp)
 
 .Emacs  と .Emacs.el が存在する場合は前者が優先的に読み込まれるので.Emacs を削除すればよい。
 

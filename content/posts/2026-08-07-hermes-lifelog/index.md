@@ -110,7 +110,7 @@ python google_api.py gmail search \
 
 図にするとこうなります。
 
-![Apple デバイス遍歴を中心にした wikilink の部分グラフ](./wikilink-graph.png)
+![Apple デバイス遍歴を中心にした wikilink の部分グラフ](./wikilink-graph.webp)
 
 内側の輪が Apple 製品ページで、時計回りに購入順です。ピンクの矢印が`superseded_by`、つまり買い替えを表します。外側にいるのが Apple 以外のページで、ドックやモニタのような周辺機器もあれば、子供用品遍歴やみてね GPS のように別ジャンルのハブもあります。
 
@@ -126,7 +126,7 @@ python google_api.py gmail search \
 
 リンクは 169 ページのあいだに 473 本あります。全体を描くとこうなります。
 
-![wiki 全体の wikilink グラフ](./wikilink-graph-full.png)
+![wiki 全体の wikilink グラフ](./wikilink-graph-full.webp)
 
 紫が 1 つ前の図で見た Apple まわりです。中心にいるのは所有物の棚卸し (36 本) と Home Assistant (30 本) で、Apple デバイス遍歴は 17 本。自作 PC や旅行遍歴と同じくらいで、特別に大きいわけではありません。
 

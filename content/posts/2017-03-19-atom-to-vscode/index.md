@@ -10,7 +10,7 @@ tags:
 
 いままでコードを書くとき Emacs か Atom で書いてました。
 
-![](./atom-to-vscode.png)
+![](./atom-to-vscode.webp)
 
 ローカルではもっぱら Atom を使っていたのですが自分の環境だとちょっと立ち上がりが重い。
 さすがに耐えられなくなって少し前から Visual Studio Code にエディタを移行してみています。

@@ -11,7 +11,7 @@ tags:
 
 ブログ書く枠で参加させていただいたのでレポート👨‍💻
 
-![](image.jpg)
+![](image.webp)
 
 - Connpass [Vue.js Tokyo v-meetup #8](https://vuejs-meetup.connpass.com/event/95678/)
 - ハッシュタグ [#vuejs_meetup8](https://twitter.com/hashtag/vuejs_meetup8)

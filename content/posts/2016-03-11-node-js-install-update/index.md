@@ -9,7 +9,7 @@ tags:
   - npm
 ---
 
-![](./nodejs-image-processing.png)
+![](./nodejs-image-processing.webp)
 
 Node.js と npm インストール
 

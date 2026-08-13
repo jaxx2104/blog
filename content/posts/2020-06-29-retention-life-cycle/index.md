@@ -8,7 +8,7 @@ tags:
   - imported
   - scrapbox
 ---
-![User Retention / Customer Retention のライフサイクル図](./retention-lifecycle.png)
+![User Retention / Customer Retention のライフサイクル図](./retention-lifecycle.webp)
 
 User Retention / Customer Retention のライフサイクル図
 

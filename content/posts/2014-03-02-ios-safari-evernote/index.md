@@ -11,7 +11,7 @@ tags:
 
 iPad や iPhone でも Web のクリップを手軽にしたいので、ブックマークレットを用意した、快適な Evernote Life を。
 
-![](./60008d9b64bb36ff4a6fd973c45bfcea.png)
+![](./60008d9b64bb36ff4a6fd973c45bfcea.webp)
 
 ## 使い方
 

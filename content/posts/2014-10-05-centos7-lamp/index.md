@@ -15,7 +15,7 @@ tags:
 
 さくら VPS を CentOS7 へアップデートしました。いろいろ変更点あったので備忘録としてメモしました。
 
-![](./centos.png)
+![](./centos.webp)
 
 ## CentOS7 アップデート
 
