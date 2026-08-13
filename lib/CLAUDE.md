@@ -17,6 +17,7 @@ getPostBody(bodyId)     // 記事本文 HTML を非同期で取る（記事ご�
 - メタデータのソースは `.velite/posts.json`、本文は `.velite/bodies/<bodyId>.json`
 - 本文を分離しているのはバンドルサイズのため。posts.json に本文を含めていた頃はエントリチャンクが全記事の本文（gzip 116KB）を抱えていた。`getPostBody` は `import.meta.glob` の遅延ローダーなので、記事1本ぶんだけが読み込まれる
 - 本文ファイルを書き出すのは `velite.config.ts` の `complete` フック。`output.clean` がパース後・書き出し前に `.velite` を消すため、schema のパース中には書けない（`lib/content/schema.ts` の `flushBodies` 参照）
+- プリレンダー済みページには本文が2回入る（描画済み DOM と、シリアライズされた loader ペイロード）。実測では記事1本が raw 11KB に対し gzip 3.7KB で、gzip が繰り返しを畳むため重複はほぼ効いていない。潰す価値はないと判断済み
 - frontmatter は Velite + Zod (`lib/content/schema.ts`) でパース済み。permalink / excerpt / thumbnail の正規化は `lib/content/normalize.ts` の純関数に切り出してあり、`normalize.test.ts` で固めている
 - permalink は `/<slug>/`（前後スラッシュあり）に正規化済み。ルート・sitemap・feed はこの形を前提にしてよい
 - 画像は Velite が `public/images/posts/<name>-<hash>.<ext>` のフラット URL に書き出し（`velite.config.ts` の `assets` / `base` / `name` 設定）、本文 HTML 内ではそのまま参照
