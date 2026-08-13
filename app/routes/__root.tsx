@@ -41,7 +41,9 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#ea2552" },
+      // Matches --color-page in the light theme, so the browser chrome does
+      // not sit at the old brighter pink next to the page surface.
+      { name: "theme-color", content: "#ba003a" },
     ],
     links: [
       {

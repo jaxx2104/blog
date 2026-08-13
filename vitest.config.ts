@@ -4,7 +4,7 @@ import { defineConfig } from "vitest/config"
 // Start plugin and prerender setup, which unit tests have no use for.
 export default defineConfig({
   test: {
-    include: ["{lib,components,app}/**/*.test.{ts,tsx}"],
+    include: ["{lib,components,app,styles}/**/*.test.{ts,tsx}"],
     environment: "node",
   },
 })
