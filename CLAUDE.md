@@ -119,3 +119,16 @@ the project tsconfig, or anything that runs in CI.
   project — the first attempt wrote 117 files into the repo's *parent*
   directory. Derive paths from `context.config.configPath`, which is the
   real config location.
+- Do not measure the built site through `pnpm start` (`vite preview`). It
+  keeps serving HTML from an earlier build, so the asset hashes in it 404
+  after a rebuild and the page renders with no CSS at all. Lighthouse then
+  scores that unstyled page — which passes colour-contrast (black on
+  white) and reports accessibility 100, so the failure looks like a
+  success. Serve `dist/client` with any plain static server instead; that
+  is also how Pages delivers it. Sanity check before trusting a number:
+  `curl -s localhost:PORT/ | grep -ao 'style-[^"]*\.css'` has to match
+  what is in `dist/client/assets/`.
+- Shiki writes its hex colours uppercase (`#6272A4`). Case-sensitive
+  greps over the rendered bodies (`public/content/posts/`) for a syntax
+  colour silently find nothing and read as "this colour is not used
+  anywhere".

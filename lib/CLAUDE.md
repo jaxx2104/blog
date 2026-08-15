@@ -18,6 +18,7 @@ getPost(permalink) // 記事1本のメタデータと本文（{ meta, body }）
   3. `import.meta.glob` に変えても、展開されたチャンク名（コンテンツハッシュ入り）がエントリチャンクに埋まるため、記事を1本直すたびに React と TanStack を含む 90KB (gzip) のバンドルのハッシュが変わっていた
   URL で取る限り、エントリチャンクはコンテンツの存在を知らない。CI の "Verify the entry chunk carries no content" がこれを固めている
 - プリレンダーには fetch する先の HTTP サーバがないので、サーバ側は同じファイルをディスクから読む。分岐は `import.meta.env.SSR`（ビルド時にリテラルへ置換されるので、`node:fs` の import はクライアントバンドルから消える）
+- プリレンダー済みページには本文が2回入る（描画済み DOM と、シリアライズされた loader ペイロード）。実測では記事1本が raw 11KB に対し gzip 3.7KB で、gzip が繰り返しを畳むため重複はほぼ効いていない。潰す価値はないと判断済み
 - `public/content/` はビルド生成物。gitignore 済み
 - frontmatter は Velite + Zod (`content/schema.ts`) でパースし、permalink / excerpt / thumbnail の正規化は `content/normalize.ts` の純関数が担う（`normalize.test.ts` で固めてある）。permalink は `/<slug>/`（前後スラッシュあり）に正規化済みなので、ルート・sitemap・feed はこの形を前提にしてよい
 - thumbnail は本文 HTML の最初の `<img src="/images/posts/...">` から取る（og:image に使う。本文はメタデータと一緒に運ばれないので、ビルド時に抜いておく必要がある）
