@@ -12,4 +12,14 @@
 
 ## global.css
 
-記事本文は Velite が生成した HTML を `dangerouslySetInnerHTML` で描くので、CSS Modules ではなく `.content` 配下のグローバルセレクタで当てる必要がある。欧文 2 書体の `@font-face` もここにある（self-host。日本語は容量が収まらず Google Fonts のまま `__root.tsx` が非同期に読む）。
+記事本文は Velite が生成した HTML を `dangerouslySetInnerHTML` で描くので、CSS Modules ではなく `.content` 配下のグローバルセレクタで当てる必要がある。
+
+## web フォントは配信しない
+
+`@font-face` は 1 つも無く、`tokens.css` のスタックは端末のインストール済みフォントで解決される。Playfair Display / Roboto Mono の self-host も、Noto Serif JP の Google Fonts 読み込みもやめた。戻す前に知っておくべきこと:
+
+- 記事 1 ページの転送量は 1147KB → 134KB になった。差の大半は Noto Serif JP で、CSS 89KB（`@font-face` 372 個。実際に指している woff2 は 124 本しかなく、3 ウェイトぶんが同一 URL を重複参照していた）+ サブセット woff2 34 本 851KB
+- 計測されたレイアウトシフトは全件が "Web font loaded" 由来だった。最近の記事で CLS 0.13（good の閾値 0.1 超え）が 0 になった。TBT 210ms → 0ms、LCP 2.7s → 1.8s
+- 和文サブセットの自前配信も検討した。全 117 記事のユニーク文字は 1,415 種類しかなく可変フォント woff2 1 本 408KB に収まるが、それでも 136KB 構成には勝てない。やるなら `local()` を先に並べて、和文明朝を持たない端末だけが落とす形にする
+- 端末側は macOS / iOS が Hiragino Mincho ProN、Windows が Yu Mincho に落ちる。Android は和文セリフを標準搭載していない可能性が高く、本文がゴシックになりうる。ここが全廃の唯一の代償
+- `public/_headers` の `font-src 'none'` と `style-src` は現状に合わせて締めてある。`@font-face` を戻すなら両方を広げる必要がある

@@ -12,21 +12,6 @@ import "@/styles/global.css"
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site"
 import { ThemeProvider } from "@/lib/ThemeContext"
 
-/**
- * 日本語だけは self-host できないので Google Fonts から読む。
- * `head()` の links に rel="stylesheet" を置くと TanStack の Asset が
- * React 19 の precedence="default" を自動で付けてしまい、React 管理の
- * render-blocking リソースになる。それを避けるため、この 1 枚だけは
- * RootDocument 内で media="print" のまま挿入し、読み込み完了後に
- * media="all" へ切り替えて適用する（font-display: swap は URL 側で維持）。
- */
-const NOTO_SERIF_JP_HREF =
-  "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&display=swap"
-
-const NOTO_SERIF_JP_LOADER = `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(
-  NOTO_SERIF_JP_HREF,
-)};l.media='print';l.onload=function(){l.onload=null;l.media='all';};document.head.appendChild(l);})();`
-
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -63,26 +48,6 @@ export const Route = createRootRoute({
         href: "/images/apple-touch-icon.png",
       },
       { rel: "manifest", href: "/manifest.json" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "",
-      },
-      {
-        rel: "preload",
-        as: "font",
-        type: "font/woff2",
-        href: "/fonts/playfair-display-latin.woff2",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "preload",
-        as: "font",
-        type: "font/woff2",
-        href: "/fonts/roboto-mono-latin.woff2",
-        crossOrigin: "anonymous",
-      },
       {
         rel: "alternate",
         type: "application/rss+xml",
@@ -111,15 +76,6 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
           dangerouslySetInnerHTML={{
             __html:
               "(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();",
-          }}
-        />
-        <script dangerouslySetInnerHTML={{ __html: NOTO_SERIF_JP_LOADER }} />
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<link rel="stylesheet" href="${NOTO_SERIF_JP_HREF.replace(
-              /&/g,
-              "&amp;",
-            )}">`,
           }}
         />
       </head>

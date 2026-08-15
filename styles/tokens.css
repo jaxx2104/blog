@@ -43,7 +43,10 @@
   --radius-s: 3px;
   --radius-m: 0px;
 
-  /* type: ハイコントラスト・セリフ見出し × 本文セリフ × モノスペース */
+  /* type: ハイコントラスト・セリフ見出し × 本文セリフ × モノスペース
+     web フォントは配信しないので、これらは端末が持っている書体だけで
+     解決される。先頭の 3 書体は「入っていれば使う」であって、無ければ
+     次の候補へ落ちる前提で並べてある。詳細は `styles/CLAUDE.md` */
   --font-family-display:
     "Playfair Display", "Didot", "Bodoni 72", "Noto Serif JP",
     "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;

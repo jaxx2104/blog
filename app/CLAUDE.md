@@ -11,7 +11,9 @@ TanStack Start のエントリポイントと、`routes/` のルート定義。
 ## Root Layout (`routes/__root.tsx`)
 
 - inline bootstrap script が `<html data-theme>` を localStorage / prefers-color-scheme から先行設定する（FOUC 防止）
-- 日本語フォントの stylesheet だけは `head()` の links に置かず、`media="print"` で挿入して onload で `media="all"` に切り替える。`head()` に置くと TanStack の Asset が React 19 の `precedence="default"` を付けて render-blocking にしてしまう
+- `head()` の links はバンドルに載り、ハイドレーション時に React が再挿入する。プリレンダー済み HTML から link タグを消しても取得は止まらない（web フォント全廃の計測中に、HTML から preload を削っただけの版が woff2 を落とし続けて判明した）。消すならここを直す
+- `head()` の links に `rel="stylesheet"` を置くと、TanStack の Asset が React 19 の `precedence="default"` を付けて render-blocking にしてしまう。非同期に読みたい stylesheet があるなら `head()` 以外の経路が要る
+- web フォントは配信していない。理由と戻すときの注意は `styles/CLAUDE.md`
 
 ## Routes
 
