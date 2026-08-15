@@ -21,13 +21,38 @@ export interface OgpData {
  */
 const CACHE_FILE = join(findRepoRoot(), "data", "ogp-cache.json")
 
+/**
+ * URLs that are known not to yield OGP metadata, kept by hand.
+ *
+ * Failures are deliberately not written to CACHE_FILE, so without this list a
+ * page that will never respond is retried on every single build — six of them
+ * were, at up to a 10s timeout each, including from CI. This file is the place
+ * to record "this one is not coming back" without pretending the fetch
+ * succeeded. Delete an entry to start retrying it.
+ */
+const UNFETCHABLE_FILE = join(findRepoRoot(), "data", "ogp-unfetchable.json")
+
 /** Delay before writing, so a burst of parallel fetches produces one write. */
 const FLUSH_DELAY_MS = 200
 
+/**
+ * How long a cached lookup is trusted before an online build re-checks it.
+ *
+ * Without this the cache is write-once: a page that changes its title keeps
+ * rendering the title it had the day it was first linked, forever. Ninety days
+ * means a handful of requests a few times a year rather than on every build,
+ * and only ever from a build that has the network anyway — `OGP_OFFLINE`
+ * builds (CI is one) use whatever is in the file regardless of its age.
+ */
+const CACHE_TTL_MS = 90 * 24 * 60 * 60 * 1000
+
 const IMAGE_EXT_RE = /\.(jpe?g|png|gif|webp|svg|ico|bmp)(\?.*)?$/i
 
+/** A cache entry: the card data plus when it was last confirmed. */
+type CacheEntry = OgpData & { fetchedAt?: string }
+
 /** Entries loaded from and written back to CACHE_FILE. Successes only. */
-const persistedCache = new Map<string, OgpData>()
+const persistedCache = new Map<string, CacheEntry>()
 
 /**
  * Fallback data for URLs that could not be fetched in this run, plus image
@@ -60,14 +85,34 @@ function readOfflineMode(): OfflineMode {
   return "fallback"
 }
 
+/** Past its TTL, or written before entries carried a timestamp at all. */
+export function isStale(entry: CacheEntry, now: number): boolean {
+  if (!entry.fetchedAt) return true
+  const fetchedAt = Date.parse(entry.fetchedAt)
+  return Number.isNaN(fetchedAt) || now - fetchedAt > CACHE_TTL_MS
+}
+
 export async function fetchOgp(url: string): Promise<OgpData | null> {
   loadCache()
 
-  const cached = persistedCache.get(url) ?? memoryCache.get(url)
-  if (cached) return cached
+  const fallback = memoryCache.get(url)
+  if (fallback) return fallback
+
+  const cached = persistedCache.get(url)
+  // An offline build takes the cache at face value: it has no way to refresh
+  // an entry, and a stale title beats a fallback card.
+  if (cached && (OFFLINE_MODE !== "off" || !isStale(cached, Date.now()))) {
+    return cached
+  }
 
   // Direct image URLs never return OGP metadata -- skip the fetch.
   if (IMAGE_EXT_RE.test(url)) {
+    return rememberFallback(url)
+  }
+
+  // Recorded as permanently unfetchable: do not spend a timeout on it, in any
+  // mode, and do not fail a strict build over it.
+  if (loadUnfetchable().has(url)) {
     return rememberFallback(url)
   }
 
@@ -75,7 +120,8 @@ export async function fetchOgp(url: string): Promise<OgpData | null> {
     if (OFFLINE_MODE === "strict") {
       throw new Error(
         `[link-card] no cached OGP data for ${url} and OGP_OFFLINE=strict. ` +
-          `Run a build with network access to refresh ${CACHE_FILE}.`,
+          `Run a build with network access to refresh ${CACHE_FILE}, or add ` +
+          `the URL to ${UNFETCHABLE_FILE} if it will never resolve.`,
       )
     }
     console.warn(
@@ -87,7 +133,7 @@ export async function fetchOgp(url: string): Promise<OgpData | null> {
   const pending = inFlight.get(url)
   if (pending) return pending
 
-  const request = fetchAndCache(url)
+  const request = fetchAndCache(url, cached)
   inFlight.set(url, request)
   try {
     return await request
@@ -96,7 +142,15 @@ export async function fetchOgp(url: string): Promise<OgpData | null> {
   }
 }
 
-async function fetchAndCache(url: string): Promise<OgpData> {
+/**
+ * `previous` is the expired entry being re-checked, if there was one. A failed
+ * refresh keeps it: the page was reachable once, and answering with a fallback
+ * card would be a visible downgrade caused by a network blip.
+ */
+async function fetchAndCache(
+  url: string,
+  previous?: CacheEntry,
+): Promise<OgpData> {
   try {
     const { result } = await ogs({
       url,
@@ -110,12 +164,13 @@ async function fetchAndCache(url: string): Promise<OgpData> {
     })
 
     if (result.success) {
-      const ogpData: OgpData = {
+      const ogpData: CacheEntry = {
         title: result.ogTitle || result.dcTitle || extractTitleFromUrl(url),
         description: result.ogDescription || result.dcDescription || "",
         image: result.ogImage?.[0]?.url || "",
         url: result.ogUrl || url,
         siteName: result.ogSiteName || extractDomain(url),
+        fetchedAt: new Date().toISOString(),
       }
       persistedCache.set(url, ogpData)
       cacheDirty = true
@@ -123,8 +178,10 @@ async function fetchAndCache(url: string): Promise<OgpData> {
       return ogpData
     }
   } catch (_error) {
-    // OGP fetch failed — fallback uses domain/path info from URL
+    // OGP fetch failed — fall through to the previous entry or a fallback.
   }
+
+  if (previous) return previous
 
   // Failures stay in memory only. Writing them to CACHE_FILE would make one
   // bad build permanent; keeping them out means the next build retries.
@@ -165,7 +222,35 @@ function loadCache(): void {
   }
 }
 
-function toOgpData(value: unknown): OgpData | null {
+let unfetchable: Set<string> | null = null
+
+function loadUnfetchable(): Set<string> {
+  if (unfetchable) return unfetchable
+  unfetchable = new Set()
+  if (!existsSync(UNFETCHABLE_FILE)) return unfetchable
+
+  try {
+    const parsed: unknown = JSON.parse(readFileSync(UNFETCHABLE_FILE, "utf8"))
+    if (
+      parsed === null ||
+      typeof parsed !== "object" ||
+      Array.isArray(parsed)
+    ) {
+      throw new Error("expected a JSON object of url -> reason")
+    }
+    for (const url of Object.keys(parsed)) unfetchable.add(url)
+  } catch (error) {
+    // Same stance as the cache: a broken list must not break the build.
+    console.warn(
+      `[link-card] ignoring unreadable list ${UNFETCHABLE_FILE}: ${
+        (error as Error).message
+      }`,
+    )
+  }
+  return unfetchable
+}
+
+function toOgpData(value: unknown): CacheEntry | null {
   if (value === null || typeof value !== "object") return null
   const record = value as Record<string, unknown>
   const fields = ["title", "description", "image", "url", "siteName"] as const
@@ -176,6 +261,10 @@ function toOgpData(value: unknown): OgpData | null {
     image: record.image as string,
     url: record.url as string,
     siteName: record.siteName as string,
+    // Absent in entries written before the TTL existed. `isStale` treats that
+    // as expired, so the next online build stamps them.
+    fetchedAt:
+      typeof record.fetchedAt === "string" ? record.fetchedAt : undefined,
   }
 }
 
@@ -187,7 +276,7 @@ function serializeCache(): string {
   const entries = [...persistedCache.entries()].sort(([a], [b]) =>
     a < b ? -1 : a > b ? 1 : 0,
   )
-  const sorted: Record<string, OgpData> = {}
+  const sorted: Record<string, CacheEntry> = {}
   for (const [url, ogp] of entries) {
     sorted[url] = {
       title: ogp.title,
@@ -195,6 +284,7 @@ function serializeCache(): string {
       image: ogp.image,
       url: ogp.url,
       siteName: ogp.siteName,
+      fetchedAt: ogp.fetchedAt,
     }
   }
   return `${JSON.stringify(sorted, null, 2)}\n`
