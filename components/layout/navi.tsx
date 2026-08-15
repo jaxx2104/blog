@@ -6,7 +6,7 @@ import { useTheme } from "@/lib/ThemeContext"
 import styles from "./navi.module.css"
 
 const Navi: React.FC = () => {
-  const { theme, toggleTheme } = useTheme()
+  const { toggleTheme } = useTheme()
   return (
     <header className={styles.header}>
       <Container>
@@ -16,7 +16,8 @@ const Navi: React.FC = () => {
             items={[
               { text: "Home", to: "/" },
               { text: "Profile", to: "/profile" },
-              { text: theme === "light" ? "🌅" : "🌃", action: toggleTheme },
+              // The glyph lives in navi-menu.module.css, keyed on data-theme.
+              { label: "テーマを切り替える", action: toggleTheme },
             ]}
           />
         </div>
