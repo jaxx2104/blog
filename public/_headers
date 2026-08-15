@@ -1,7 +1,22 @@
+# script-src keeps 'unsafe-inline': the theme bootstrap and the async
+# font loader in app/routes/__root.tsx are inline, and TanStack Start emits
+# its own inline hydration payload. Their content changes every build, so
+# hashes would have to be recomputed by the build, and a nonce is meaningless
+# on statically served files. The rest of the policy is still worth having:
+# frame-ancestors / object-src / base-uri / form-action close off clickjacking
+# and injected <base> or <form> targets regardless of the script rule.
+#
+# The permissive parts are all load-bearing:
+# - style-src 'unsafe-inline': components/features/profile/thumbnail.tsx sets
+#   a style attribute, and React writes inline styles during hydration.
+# - img-src https:: posts written between 2013 and 2020 hotlink images from
+#   Amazon, imgur, Google and others; they are listed in the markdown.
+# - frame-src youtube: two posts embed a video.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: interest-cohort=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: http:; media-src 'self'; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -14,3 +29,10 @@
 # the file — a plain overwrite would sit behind this cache for a year.
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Per-post and per-index-page JSON (lib/posts.ts fetches these). The filenames
+# are stable by design — they are derived from the permalink — so editing a
+# post rewrites the file in place. That rules out `immutable`: the client has
+# to revalidate, and Pages answers an unchanged file with a 304.
+/content/*
+  Cache-Control: public, max-age=0, must-revalidate

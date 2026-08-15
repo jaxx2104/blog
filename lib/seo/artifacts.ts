@@ -116,11 +116,15 @@ export function buildFeed(posts: SeoPost[]): string {
     </item>`
     })
     .join("\n")
+  // atom:link rel="self" is what tells a reader where the feed lives, so a
+  // copy of it found elsewhere still points back here. Validators flag its
+  // absence, and it is the one thing RSS 2.0 has no native element for.
   return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(SITE_TITLE)}</title>
     <link>${SITE_URL}/</link>
+    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
     <description>${escapeXml(SITE_DESCRIPTION)}</description>
     <language>ja</language>
 ${lastBuildDate}${items}

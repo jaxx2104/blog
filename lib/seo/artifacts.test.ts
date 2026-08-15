@@ -176,6 +176,13 @@ describe("buildFeed", () => {
     expect(odd).toContain("<description>a &lt; b</description>")
   })
 
+  it("points at itself so a copied feed still resolves", () => {
+    expect(xml).toContain('xmlns:atom="http://www.w3.org/2005/Atom"')
+    expect(xml).toContain(
+      '<atom:link href="https://jaxx2104.info/feed.xml" rel="self" type="application/rss+xml"/>',
+    )
+  })
+
   it("omits lastBuildDate rather than emitting an invalid date when empty", () => {
     const empty = buildFeed([])
     expect(empty).not.toContain("lastBuildDate")
