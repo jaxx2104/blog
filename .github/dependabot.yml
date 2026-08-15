@@ -2,7 +2,7 @@
 # Automerge of non-major PRs is handled by .github/workflows/dependabot-automerge.yml.
 #
 # Strategy:
-# - Group related packages (fortawesome / textlint / tanstack) so peer-dep
+# - Group related packages (textlint / tanstack / testing-library) so peer-dep
 #   sets land in a single PR even on major bumps.
 # - Group every GitHub Actions update into one PR.
 # - Ignore major bumps for core toolchain that needs planned upgrades
@@ -16,9 +16,9 @@ updates:
       timezone: "Asia/Tokyo"
     open-pull-requests-limit: 5
     groups:
-      fortawesome:
+      testing-library:
         patterns:
-          - "@fortawesome/*"
+          - "@testing-library/*"
       textlint:
         patterns:
           - "textlint"
