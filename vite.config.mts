@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url"
 import { tanstackStart } from "@tanstack/react-start/plugin/vite"
 import viteReact from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
-import { pageCount, pagePath } from "./components/features/article/pagination"
+import { pageCount, pagePath } from "./lib/pagination"
 import {
   buildFeed,
   buildSitemap,
@@ -75,32 +75,26 @@ export default defineConfig({
       "@": __dirname,
     },
   },
-  // Bundle all CSS modules into a single asset. With code-split CSS,
-  // SPA navigation between routes drops the previous route's stylesheet
-  // (incl. shared layout/* chunks), leaving the navi/footer unstyled
-  // until a hard reload. A single bundle avoids the per-route teardown.
+  // `cssCodeSplit: false` bundles all CSS modules into a single asset. With
+  // code-split CSS, SPA navigation between routes drops the previous route's
+  // stylesheet (incl. shared layout/* chunks), leaving the navi/footer
+  // unstyled until a hard reload. A single bundle avoids the per-route
+  // teardown.
+  //
+  // There is no manualChunks / advancedChunks, and that is deliberate.
+  //
+  // Vite 8 bundles with rolldown, and in this setup neither API splits
+  // node_modules: a `manualChunks` returning "vendor" for react-dom /
+  // @tanstack / seroval was measured returning that name 81 times during the
+  // client build while no vendor chunk was ever emitted, and rolldown's own
+  // `advancedChunks.groups` did not match them either. Project-local modules
+  // *are* honoured (renaming the velite group renamed the emitted chunk), so
+  // the mechanism works — the TanStack Start client entry simply keeps its
+  // dependencies. Content is kept out of the entry chunk by loading it
+  // through `import.meta.glob` in lib/posts.ts instead of by chunk config.
   build: {
     cssCodeSplit: false,
     chunkSizeWarningLimit: 600,
-    rollupOptions: {
-      output: {
-        manualChunks(id: string) {
-          // Article bodies must each keep their own chunk — folding them
-          // into "posts" would put all of them back into every page.
-          if (id.includes("/.velite/bodies/")) return
-          if (id.includes(".velite")) return "posts"
-          if (id.includes("node_modules")) {
-            if (
-              id.includes("react-dom") ||
-              id.includes("@tanstack") ||
-              id.includes("seroval")
-            ) {
-              return "vendor"
-            }
-          }
-        },
-      },
-    },
   },
   environments: {
     ssr: {

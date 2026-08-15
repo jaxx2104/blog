@@ -26,6 +26,13 @@ jobs:
       # vite build generates app/routeTree.gen.ts which app/router.tsx
       # imports; without this step tsc fails with TS2307.
       - name: Build content layer + tanstack start prerender
+        # No network during the build. Every link card has to resolve from
+        # data/ogp-cache.json or data/ogp-unfetchable.json, both committed, so
+        # CI cannot produce different HTML depending on whether some third
+        # party site answered. Adding a link to a post therefore fails here
+        # until the cache entry the author's local build wrote is committed.
+        env:
+          OGP_OFFLINE: strict
         run: pnpm build
       - run: pnpm test:types
       - run: pnpm test
@@ -64,22 +71,32 @@ jobs:
             exit 1
           }
           grep -a -F -q '404' dist/client/404.html
-      # Article bodies must stay out of the chunk every page loads. They are
-      # written to .velite/bodies/ and pulled in per-post by import.meta.glob
-      # (lib/posts.ts); folding them back into posts.json or into the "posts"
-      # manualChunk sends all ~120 bodies to every visitor.
-      - name: Verify article bodies are not in the shared chunk
+      # Content must stay out of the module graph entirely. lib/posts.ts
+      # fetches the per-post and per-page JSON by URL; the moment it is
+      # imported instead — statically, or through import.meta.glob, which
+      # inlines the names and content hashes of every emitted chunk — the
+      # entry chunk holding React and TanStack changes hash whenever any post
+      # changes, and every returning visitor re-downloads ~90KB gzip.
+      - name: Verify the entry chunk carries no content
         run: |
-          test -f .velite/bodies/php-replace-lf.json
+          test -f dist/client/content/pages/1.json
+          test -f dist/client/content/posts/php-replace-lf.json
           if node -e 'process.exit(require("./.velite/posts.json").some(p => "body" in p) ? 1 : 0)'; then
             echo "OK: posts.json carries metadata only"
           else
             echo "FAIL: posts.json still embeds article bodies" && exit 1
           fi
-          size=$(find dist/client/assets -name 'posts-*.js' -printf '%s' -quit)
-          test -n "$size" || { echo "FAIL: no posts chunk emitted" && exit 1; }
-          test "$size" -lt 150000 || {
-            echo "FAIL: posts chunk is ${size}B (>150KB) — bodies are likely back in it"
+          entry=$(find dist/client/assets -name 'index-*.js' -print -quit)
+          test -n "$entry" || { echo "FAIL: no entry chunk emitted" && exit 1; }
+          if grep -q 'php-replace-lf' "$entry"; then
+            echo "FAIL: $entry names a post — content is back in the bundle" && exit 1
+          fi
+          if find dist/client/assets -name 'posts-*.js' | grep -q .; then
+            echo "FAIL: a shared posts chunk is back" && exit 1
+          fi
+          size=$(stat -c%s "$entry")
+          echo "entry chunk: ${size}B"
+          test "$size" -lt 320000 || {
+            echo "FAIL: entry chunk is ${size}B (>320KB)"
             exit 1
           }
-          echo "posts chunk: ${size}B"

@@ -1,22 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router"
 import ArticleIndex from "@/components/features/article/article-index"
-import { pageCount, pageSlice } from "@/components/features/article/pagination"
 import Layout from "@/components/layout/layout"
-import { getAllPosts } from "@/lib/posts"
+import { getIndexPage } from "@/lib/posts"
 import { SITE_TITLE, SITE_URL } from "@/lib/site"
 
+const EMPTY_INDEX = { page: 1, pageCount: 1, posts: [] }
+
 export const Route = createFileRoute("/")({
-  loader: () => {
-    const all = getAllPosts()
-    // Only this page's slice. TanStack Start serialises the loader result into
-    // the prerendered HTML, so returning all 117 metas shipped the whole index
-    // twice — once as markup, once as JSON.
-    return {
-      posts: pageSlice(all, 1),
-      page: 1,
-      pageCount: pageCount(all.length),
-    }
-  },
+  // Only this page's slice, loaded from its own chunk. TanStack Start
+  // serialises the loader result into the prerendered HTML, so returning all
+  // 117 metas shipped the whole index twice — once as markup, once as JSON —
+  // and reading them from a statically imported module put them in the entry
+  // chunk on top of that.
+  loader: async () => (await getIndexPage(1)) ?? EMPTY_INDEX,
   component: HomePage,
   head: () => ({
     meta: [

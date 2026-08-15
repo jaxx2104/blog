@@ -1,14 +1,9 @@
 import { createFileRoute, notFound } from "@tanstack/react-router"
 import ArticleIndex from "@/components/features/article/article-index"
-import {
-  pageCount,
-  pagePath,
-  pageSlice,
-  parsePageParam,
-} from "@/components/features/article/pagination"
 import NotFound from "@/components/features/not-found"
 import Layout from "@/components/layout/layout"
-import { getAllPosts } from "@/lib/posts"
+import { pagePath, parsePageParam } from "@/lib/pagination"
+import { getIndexPage } from "@/lib/posts"
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site"
 
 /**
@@ -16,16 +11,14 @@ import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site"
  * the root splat in `$.tsx` — "/page/2/" reaches here, not the post lookup.
  */
 export const Route = createFileRoute("/page/$page")({
-  loader: ({ params }) => {
-    const all = getAllPosts()
-    // Rejects 0, negatives, out-of-range, non-numeric and "1" (that is "/").
-    const page = parsePageParam(params.page, all.length)
+  loader: async ({ params }) => {
+    // Rejects 0, negatives, non-numeric, zero-padded and "1" (that is "/").
+    const page = parsePageParam(params.page)
     if (page === null) throw notFound()
-    return {
-      posts: pageSlice(all, page),
-      page,
-      pageCount: pageCount(all.length),
-    }
+    // Past the last page there is no file, which is the range check.
+    const index = await getIndexPage(page)
+    if (!index) throw notFound()
+    return index
   },
   component: IndexPage,
   head: ({ loaderData }) => {

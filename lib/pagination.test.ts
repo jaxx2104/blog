@@ -47,19 +47,22 @@ describe("pagePath", () => {
 })
 
 describe("parsePageParam", () => {
-  it("accepts a page that was prerendered", () => {
-    expect(parsePageParam("2", TOTAL)).toBe(2)
-    expect(parsePageParam("6", TOTAL)).toBe(6)
+  it("accepts a page number", () => {
+    expect(parsePageParam("2")).toBe(2)
+    expect(parsePageParam("6")).toBe(6)
   })
 
-  it.each(["0", "-1", "abc", "", "7", "02", "2.0", " 2"])(
-    "rejects %o",
-    (raw) => {
-      expect(parsePageParam(raw, TOTAL)).toBeNull()
-    },
-  )
+  it.each(["0", "-1", "abc", "", "02", "2.0", " 2"])("rejects %o", (raw) => {
+    expect(parsePageParam(raw)).toBeNull()
+  })
 
   it("rejects 1, which is served at the site root instead", () => {
-    expect(parsePageParam("1", TOTAL)).toBeNull()
+    expect(parsePageParam("1")).toBeNull()
+  })
+
+  it("leaves the upper bound to the caller", () => {
+    // There is no file for page 999, and that is what makes the route 404.
+    // Duplicating the count here would be a second source of truth.
+    expect(parsePageParam(String(pageCount(TOTAL) + 1))).toBe(7)
   })
 })

@@ -6,18 +6,38 @@
 }
 
 /* 二次トーンは opacity ではなく dim トークンで出す。opacity は下地の
-   ピンクを透かして 2.90:1 まで落とすが、トークン側は AA を担保している */
+   ピンクを透かして 2.90:1 まで落とすが、トークン側は AA を担保している。
+   a と button の両方に当たるので、ブラウザ既定の余白・枠・書体は明示的に
+   打ち消す */
 .item {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
   color: var(--color-on-page-dim);
   cursor: pointer;
-  margin: 0;
   font-family: var(--font-family-mono);
   font-size: var(--font-size-small);
+  line-height: inherit;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-decoration: none;
   transition: color 0.15s ease-out;
 }
 
 .item:hover {
   color: var(--color-on-page);
+}
+
+/* テーマ切り替えのグリフは CSS が持つ。React state から描くと、light 固定で
+   走るプリレンダーの出力が常に 🌅 になり、dark の訪問者はハイドレーション
+   まで反対のアイコンを見る。data-theme は __root.tsx のインラインスクリプト
+   が first paint 前に確定させるので、CSS 側なら最初から正しい */
+.toggle::before {
+  content: "🌅";
+}
+
+:global([data-theme="dark"]) .toggle::before {
+  content: "🌃";
 }

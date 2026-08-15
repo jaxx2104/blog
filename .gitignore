@@ -47,6 +47,11 @@ tmp/
 # Velite-generated image assets (build output, not tracked)
 public/images/posts
 
+# Per-post / per-index-page JSON written by velite's complete hook. The client
+# fetches these by URL rather than importing them, which is what keeps the
+# content out of the entry chunk (lib/posts.ts).
+public/content/
+
 # Image optimization backups
 *.original
 
@@ -69,3 +74,9 @@ public/images/posts
 .netlify/
 app/routeTree.gen.ts
 .tanstack/
+
+# Chrome profiles left behind by the Lighthouse MCP server when it runs from
+# WSL: the Windows path is taken as a literal directory name, so the whole
+# `C:\Users\...` string becomes one directory in the repository root. Biome
+# then walks them and reports every lock file as a broken symlink.
+C:\\*
