@@ -132,3 +132,8 @@ the project tsconfig, or anything that runs in CI.
   greps over the rendered bodies (`public/content/posts/`) for a syntax
   colour silently find nothing and read as "this colour is not used
   anywhere".
+- Prerendered HTML contains three NUL bytes, from TanStack Router
+  serialising its route IDs. Browsers do not care (parsers substitute
+  U+FFFD), but grep treats the file as binary and prints nothing — which
+  is why the assertions in `.github/workflows/test.yml` need `grep -a`.
+  Anything else that greps `dist/client/*.html` needs it too.
