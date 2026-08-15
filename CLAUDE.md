@@ -14,8 +14,11 @@ pnpm optimize:images  # Re-encode content/posts images (pass --dry-run first)
 ```
 
 `pnpm build` reaches the network to fill `data/ogp-cache.json` for any link
-card URL it has not seen. Set `OGP_OFFLINE=1` to render fallback cards
-instead, or `OGP_OFFLINE=strict` to fail the build on a cache miss.
+card URL it has not seen, and to re-check entries older than 90 days. Set
+`OGP_OFFLINE=1` to render fallback cards instead, or `OGP_OFFLINE=strict` to
+fail the build on a cache miss. CI builds with `strict`, so a post that adds a
+link needs the cache entry your local build produced to be committed with it.
+A URL that will never resolve goes in `data/ogp-unfetchable.json` instead.
 
 ### Code Quality
 ```bash
@@ -28,40 +31,41 @@ pnpm test:types          # Run TypeScript type checking (tsc -p)
 pnpm format              # Format code with Biome
 ```
 
-## Tech Stack
+## Stack
 
-- **TanStack Start (Vite + React 18)** with prerender for static site generation (output to `dist/client/`)
-- **TanStack Router** for file-based routing under `app/routes/`
-- **TypeScript 5.8** with strict mode
-- **CSS Modules + CSS variables** for styling (light/dark via `<html data-theme>`); single bundled CSS asset (`build.cssCodeSplit: false`) to avoid SPA-navigation teardown
-- **Velite + Zod** content layer for `content/posts/**/index.md` (`.velite/` 出力)
-- **shiki + rehype-pretty-code** code syntax highlighting (via Velite)
-- **Biome 2.x** for lint + format
-- **Vitest 4.x** for unit tests (`vitest.config.ts`; specs live next to their source as `*.test.ts`)
-- **pnpm 9.x** as package manager
+A statically prerendered blog: TanStack Start (Vite + React) over a Velite +
+Zod content layer, CSS Modules, Biome, Vitest, pnpm, deployed to Cloudflare
+Pages. `package.json` is the source of truth for versions; what is worth
+knowing beyond it:
+
+- Vite 8 bundles with **rolldown**, not rollup. Chunking behaves differently —
+  see the pitfalls below before touching chunk configuration
+- CSS ships as one asset (`build.cssCodeSplit: false`). Code-split CSS drops
+  the previous route's stylesheet during SPA navigation, leaving the navi and
+  footer unstyled until a hard reload
+- Velite writes two things: `.velite/` for the build to read, and
+  `public/content/` for the client to fetch. Syntax highlighting (shiki +
+  rehype-pretty-code) happens there, so it never reaches the browser
+- Specs live next to their source as `*.test.ts` / `*.test.tsx`
 
 ## Directory Structure
 
-| Directory | Description | See |
-|-----------|-------------|-----|
-| `/app` | TanStack Start entrypoints + `routes/` definitions | `app/CLAUDE.md` |
-| `/components` | React components (features, layout, ui, icons) — CSS Modules | `components/CLAUDE.md` |
-| `/lib` | Velite-backed posts reader, ThemeContext, router-link shim | `lib/CLAUDE.md` |
-| `/styles` | `tokens.css` (CSS variables) + `global.css` (base + 記事本文) | `styles/CLAUDE.md` |
-| `/content` | Blog posts in Markdown (Velite source) | `content/CLAUDE.md` |
-| `/public` | Static assets (PWA manifest, icons, Velite-copied images) | - |
+| Directory | See |
+|-----------|-----|
+| `/app` | `app/CLAUDE.md` — entrypoints, routes, prerender |
+| `/components` | `components/CLAUDE.md` — conventions, component specs |
+| `/lib` | `lib/CLAUDE.md` — content reader, pagination, SEO artifacts, theme |
+| `/styles` | `styles/CLAUDE.md` — tokens and the contrast rules they encode |
+| `/content` | `content/CLAUDE.md` — posts, images, prose linting |
+| `/data` | Committed OGP cache and the unfetchable-URL list |
+| `/scripts` | Build and maintenance scripts, run with tsx |
 
-## Build Artifacts and Type Pitfalls
+## Pitfalls
 
-Hard-won lessons from the Velite migration (Phase 0). Read these before
-touching `velite.config.ts`, the generated `.velite/` content layer, the
-project tsconfig, or anything that runs in CI.
+Each of these cost a debugging session at least once. Read them before
+touching `velite.config.ts`, `vite.config.mts`, the generated content layer,
+the project tsconfig, or anything that runs in CI.
 
-- Do not seal a value with `as const` if it is going to be passed as a
-  function argument to an external SDK. SDK parameter types are almost
-  always mutable (`Array<T>`, plain object), and the `readonly` form
-  produced by `as const` fails to assign with TS2322. Velite's
-  `MarkdownOptions.rehypePlugins` is the canonical example in this repo.
 - For tools that emit a `.d.ts` next to their generated runtime (Velite,
   contentlayer, tRPC, zod-to-* and friends), add the source files those
   declarations re-import to tsconfig's `exclude`, not just remove them
@@ -74,16 +78,24 @@ project tsconfig, or anything that runs in CI.
   Local runs hide this failure because the previous build's artifact
   is still on disk — reproduce the CI environment with
   `rm -rf <output-dir> && pnpm test` before pushing.
-- When a young OSS dependency's documented behavior is unclear, grep
-  `node_modules/<lib>/dist/` directly instead of arguing from README
-  excerpts. Velite's `s.path()` defaulting to `removeIndex: true` only
-  became unambiguous after reading the dist source; one upstream-doc
-  disagreement during review cost extra round-trips.
 - Velite's `output.clean` runs *between* parsing and writing, not at the
   start of the build. Anything a schema writes to the output directory
   during `transform` is deleted before the build ends. Emit side files
   from the `complete` hook instead (`lib/content/schema.ts`'s
-  `flushBodies`).
+  `flushContent`).
+- Content is fetched by URL, never imported — see `lib/CLAUDE.md`. Making
+  the routes reach it through the module graph is the single easiest way to
+  undo the bundle work: a static import puts all 117 posts in the chunk
+  every page loads, and `import.meta.glob` inlines the name and content hash
+  of every emitted chunk into the entry chunk, so one post edit invalidates
+  the 90KB (gzip) bundle holding React and TanStack. CI asserts this.
+- Do not expect `manualChunks` or `advancedChunks` to split node_modules
+  here. Measured against Vite 8.1.5 + TanStack Start: a `manualChunks`
+  returning "vendor" for react-dom / @tanstack / seroval returned that name
+  81 times during the client build and no vendor chunk was emitted;
+  rolldown's `advancedChunks.groups` did not match them either. Renaming the
+  group used for project-local modules *did* rename the emitted chunk, so
+  the hook itself runs — the client entry simply keeps its dependencies.
 - `output.clean` covers the *data* directory only. `outputAssets` copies
   files into `output.assets` and never removes anything, so re-encoding an
   image leaves its old content hash behind forever — the directory had

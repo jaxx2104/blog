@@ -1,56 +1,20 @@
 # Components Directory
 
-React コンポーネントを機能別に整理したディレクトリ。
+`features/`（機能固有）、`layout/`（ページの骨格）、`ui/`（機能に依存しない汎用）、`icons/` の 4 つに分ける。
 
-## Structure
+## Conventions
 
-```
-components/
-├── features/              # Feature-specific components
-│   ├── article/           # Blog post display
-│   └── profile/           # Profile page
-├── layout/                # Layout components
-├── ui/                    # Reusable UI components
-└── icons/                 # Icon components
-```
+- CSS Modules (`*.module.css`) をコンポーネントの隣に置く
+- 色・余白・フォントは `styles/tokens.css` の CSS variables 経由でのみ参照する（生の値を書かない）
+- boolean prop は `data-*` 属性 + CSS attribute selector で表す（`data-primary` / `data-center` / `data-variant`）
+- 数値で動的に変わる値は CSS variable で渡す（`style={{ "--icon-size": "..." }}`）
+- テーマによる出し分けは `:global([data-theme="dark"]) .foo` と CSS 側で書く。React state から描くと、light 固定で走るプリレンダーの出力が dark の訪問者にとって誤りになる
+- URL の組み立てはコンポーネントに持たせない（`ui/pager.tsx` は `hrefFor` を prop で受ける）
 
-## Subdirectories
+## Testing
 
-### `features/`
-機能固有のコンポーネント。他の機能との結合度が高い。
+spec はコンポーネントの隣に `*.test.tsx` として置き、先頭に `@vitest-environment jsdom` の docblock を書く（`vitest.config.ts` の既定は node で、純関数の spec を jsdom で走らせないため）。`@/lib/router-link` はルーターの context を要求するので `vi.mock` で素の `<a>` に差し替える。`layout/navi-menu.test.tsx` と `ui/pager.test.tsx` が手本。
 
-- **article/**: 記事表示関連 (`article.tsx`, `article-tile.tsx`, `article-info.tsx`, `article-index.tsx`, `pagination.ts`)
-  - `pagination.ts` は依存ゼロの純関数群。`vite.config.mts` が config ロード時に import してプリレンダー対象のページ URL を数えるため、`.velite` の型すら参照してはいけない
-- **profile/**: プロフィールページ関連 (`profile-user.tsx`, `profile-work.tsx`, `profile-link.tsx`, `profile-others.tsx`, `thumbnail.tsx`)
+## Notes
 
-### `layout/`
-ページ全体のレイアウトを構成するコンポーネント。
-
-- `layout.tsx` - メインレイアウト
-- `navi.tsx`, `navi-logo.tsx`, `navi-menu.tsx` - ナビゲーション
-- `footer.tsx` - フッター
-
-### `ui/`
-再利用可能な汎用 UI コンポーネント。機能に依存しない。
-
-- `container.tsx`, `section.tsx`, `flex.tsx` - レイアウトユーティリティ
-- `heading.tsx`, `badge.tsx`, `time.tsx` - テキスト表示
-- `tile-grid.tsx`, `slide-image.tsx` - グリッド・画像表示
-- `pager.tsx` - ページ送り（URL の組み立ては `hrefFor` prop に外出しし、ルートに依存しない）
-- `meta.tsx` - メタタグ
-- `display.tsx`, `hr.tsx` - その他ユーティリティ
-
-### `icons/`
-FontAwesome ベースのアイコンコンポーネント。
-
-- `icon.tsx` - 基本アイコン
-- `icon-box.tsx` - ボックス付きアイコン
-- `icon-share.tsx` - シェアアイコン
-
-## Styling
-
-- **CSS Modules** (`*.module.css`) で各コンポーネントのスタイルを管理
-- 色・余白・フォントは `styles/tokens.css` の CSS variables (`var(--color-*)` / `var(--font-size-*)` / `var(--font-weight-*)` / `var(--content-width)`) のみ参照
-- ダークモードは `<html data-theme="dark">` で切替（`lib/ThemeContext.tsx` の `useTheme()` で API 提供）
-- Boolean prop は `data-*` 属性 + CSS attribute selector で表現（例: `data-primary` / `data-center` / `data-variant`）
-- 数値で動的に変わる値（size 等）は CSS variable 経由で `style={{ "--icon-size": "..." }}` として渡す
+`layout/navi-menu.tsx` の item はリンク (`{ text, to }`) かボタン (`{ label, action }`) の判別ユニオン。ボタンは `<button type="button">` + `aria-label` でテキストを持たず、グリフは CSS が `[data-theme]` を見て出す。以前は `<p onClick>` だったため、キーボードからもスクリーンリーダーからも操作できなかった。
