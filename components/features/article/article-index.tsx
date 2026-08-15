@@ -1,8 +1,8 @@
 import type React from "react"
 import ArticleTile from "@/components/features/article/article-tile"
-import { pagePath } from "@/components/features/article/pagination"
 import Pager from "@/components/ui/pager"
 import TileGrid from "@/components/ui/tile-grid"
+import { pagePath } from "@/lib/pagination"
 import type { PostMeta } from "@/lib/posts"
 import styles from "./article-index.module.css"
 

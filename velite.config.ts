@@ -2,7 +2,7 @@ import { readdir, rm } from "node:fs/promises"
 import { dirname, join, resolve } from "node:path"
 import { assets, defineCollection, defineConfig } from "velite"
 import { markdownConfig } from "./lib/content/markdown"
-import { flushBodies, postSchema } from "./lib/content/schema"
+import { flushContent, postSchema } from "./lib/content/schema"
 
 // NOTE: as of 2026-05-01, two posts are skipped during body processing
 // because of missing local images in content/posts/<slug>/. They are
@@ -48,14 +48,16 @@ export default defineConfig({
   },
   collections: { posts },
   // `complete` rather than `prepare`: output.clean wipes .velite between
-  // parsing and writing, so the bodies have to land after that.
+  // parsing and writing, so the per-post and per-page files have to land
+  // after that. (It also means the pre-existing .velite/bodies/ directory
+  // from the old layout disappears on the next build without extra work.)
   complete: async ({ posts }, { config }) => {
-    const bodyDir = resolve(dirname(config.configPath), ".velite/bodies")
+    // public/, so the client can fetch these by URL instead of importing them
+    // — see the note on flushContent. vite copies public/ into dist/client/
+    // verbatim, and public/content/ is gitignored build output.
+    const contentDir = resolve(dirname(config.configPath), "public/content")
     await Promise.all([
-      flushBodies(
-        bodyDir,
-        posts.map((p) => p.bodyId),
-      ),
+      flushContent(contentDir, posts),
       // `assets` is velite's in-memory map of the files this build emitted,
       // keyed by output filename.
       pruneStaleAssets(config.output.assets, new Set(assets.keys())),
