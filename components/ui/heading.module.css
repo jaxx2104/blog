@@ -1,11 +1,17 @@
+/* 記事タイトルは一覧（article-tile.module.css の .title）と詳細で同じ
+   文言が出るので、詰めと行送りを揃え、サイズだけ 1.25 倍にしてある。
+   clamp の 3 値すべてを 1.25 倍で置いているのがポイントで、min/max に
+   当たる幅が両者で一致する（どちらも 667px と 1111px）。片方だけ動かす
+   と折れ点がずれ、幅によって比が 1.25〜1.33 で揺れる。 */
 .heading {
   color: var(--color-ink);
   font-family: var(--font-family-display);
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.875rem, 4.5vw, 3.125rem);
   font-weight: var(--font-weight-bold);
-  letter-spacing: -0.02em;
-  line-height: 1;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
   margin: 0;
+  text-wrap: balance;
   transition: opacity 0.2s ease-out;
 }
 

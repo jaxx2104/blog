@@ -1,6 +1,6 @@
-# script-src keeps 'unsafe-inline': the theme bootstrap and the async
-# font loader in app/routes/__root.tsx are inline, and TanStack Start emits
-# its own inline hydration payload. Their content changes every build, so
+# script-src keeps 'unsafe-inline': the theme bootstrap in
+# app/routes/__root.tsx is inline, and TanStack Start emits its own inline
+# hydration payload. Their content changes every build, so
 # hashes would have to be recomputed by the build, and a nonce is meaningless
 # on statically served files. The rest of the policy is still worth having:
 # frame-ancestors / object-src / base-uri / form-action close off clickjacking
@@ -18,22 +18,20 @@
 #   the site, which did not get the injection either — says it is not there.
 #   The first policy shipped without it and the browser console was the only
 #   place that said so. Check a real browser after touching script-src.
+#
+# font-src 'none' and the absence of fonts.googleapis.com from style-src are
+# deliberate: the site ships no web fonts at all (styles/CLAUDE.md). Adding an
+# @font-face back means widening both again, or it fails in the console only.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: interest-cohort=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: http:; media-src 'self'; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://cloudflareinsights.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'none'; img-src 'self' data: https: http:; media-src 'self'; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://cloudflareinsights.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
 /images/posts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# Self-hosted woff2 subsets (styles/global.css @font-face). Unlike /assets/*
-# these filenames carry no content hash, so replacing a face means renaming
-# the file — a plain overwrite would sit behind this cache for a year.
-/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
 # Per-post and per-index-page JSON (lib/posts.ts fetches these). The filenames
