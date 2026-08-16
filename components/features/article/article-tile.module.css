@@ -8,6 +8,9 @@
   text-decoration: none;
 }
 
+/* 詳細ページの見出し（components/ui/heading.module.css）が、この 3 値を
+   1.25 倍したスケールで組んである。size / letter-spacing / line-height を
+   動かすときは向こうも一緒に動かす。 */
 .title {
   display: inline-block;
   font-family: var(--font-family-display);
