@@ -5,8 +5,8 @@
   "version": "1.9.119",
   "author": "Futoshi Iwashita <jaxx2104@gmail.com>",
   "dependencies": {
-    "@tanstack/react-router": "^1.170.25",
-    "@tanstack/react-start": "^1.168.42",
+    "@tanstack/react-router": "^1.170.32",
+    "@tanstack/react-start": "^1.168.49",
     "modern-normalize": "3.0.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
