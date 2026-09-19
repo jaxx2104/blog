@@ -12,18 +12,19 @@ tags:
   - agent
 ---
 
-[Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)は[TypeSafe AI](https://typesafe.ai/)が 2026-09-15 に早期アクセスで公開したモデルです。[Hacker News](https://news.ycombinator.com/item?id=49717558)で話題になっていて、Reddit でも[r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA/comments/1wihgum/i_literally_built_the_jev_architecture_one_year/)、[r/homeassistant](https://www.reddit.com/r/homeassistant/comments/1wjmqj0/upcoming_revolution_for_smart_home_control_with/)、[r/PiCodingAgent](https://www.reddit.com/r/PiCodingAgent/comments/1wjibh5/anyone_here_using_jev/)とスレッドが流れてきました。X には[既存の LLM が CPU なら、Jev はその GPU 版みたいなやつ](https://zenn.dev/mizchi/articles/jev-is-gpu-for-llms)や[TypeSafe の Jev を正しく驚く、それって LLM でできませんか？](https://zenn.dev/nwn/articles/824026c76116e0)も回ってきています。それで waitlist に登録し、招待が届いた日に触りました。
+[TypeSafe AI](https://typesafe.ai/)の[Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)を、自宅の NUC で動かしているエージェントの定期ジョブ 2 つに入れました。Jev は 2026-09-15 に早期アクセスで公開された、文章を返さないモデルです。
 
-自分はスクリプトから呼ぶ関数として使いたいので、そこを中心に見ます。
+[Hacker News](https://news.ycombinator.com/item?id=49717558)で話題になっていて、Reddit でも[r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA/comments/1wihgum/i_literally_built_the_jev_architecture_one_year/)、[r/homeassistant](https://www.reddit.com/r/homeassistant/comments/1wjmqj0/upcoming_revolution_for_smart_home_control_with/)、[r/PiCodingAgent](https://www.reddit.com/r/PiCodingAgent/comments/1wjibh5/anyone_here_using_jev/)とスレッドが流れてきました。X には Zenn の[mizchi さんの記事](https://zenn.dev/mizchi/articles/jev-is-gpu-for-llms)や[nwn さんの記事](https://zenn.dev/nwn/articles/824026c76116e0)も回ってきています。それで waitlist に登録し、招待が届いた日に触りました。
+
+自分はスクリプトから呼ぶ関数として使いたいので、そのあたりを中心に触ってみました。
 
 TL;DR:
 
 - 文章は返ってこない。返るのは yes/no の確率、選択肢、段階評価の 3 種類だけで、型は必ず守られる
 - 日本から 1 リクエスト 3 問で 481〜520ms。入力 392 トークンで、料金は $0.000016 ほど
-- 保証されるのは型まで。判断の正しさ、実行ごとの値、質問どうしの整合は保証されない
+- 保証されるのは型まで。判断の正しさ、実行ごとの値、質問どうしの整合は保証されないので、戻り値は信頼できない外部入力として扱っている
 - 購入メールの仕分けでは、エージェントの読む本数が 30 通中 14 通に減った。誤 skip は 0
 - changelog は Score の閾値で切ると 80 行中 57 行が残ったので、上位 15 件を取る方式に変えた
-- Jev の戻り値は、信頼できない外部入力として扱っている
 
 ## 何を渡して、何が返るか
 
@@ -200,7 +201,7 @@ questions = {
 | Score の精密さ | 段階の間の値を、精密な量として扱えない | 段階の判定や大小の比較にだけ使う |
 | 雑音への強さ | 無関係な情報の多い state では精度が落ちる | 渡す前に絞る |
 | 敵対的な入力への耐性 | state を敵対的とみなさない。埋め込まれた指示で答えが動く | 信頼できない入力への答えを最終判断にしない |
-| 質問どうしの整合 | 同じことを Noul と Choice で聞いても数字は揃わない | 1 つの判断は 1 つの聞き方に決め、恒等式はコードで守る |
+| 質問どうしの整合 | 同じことを Noul と Choice で聞いても数字は揃わない | 1 つの判断は 1 つの聞き方に決める。足して 1 になるはず、のような前提はコードで検算する |
 
 最後の行は、docs に実例が載っています。二重請求の問い合わせに「返金を求めているか」と「返金以外を求めているか」を Noul で聞くと、0.72 と 0.47 が返り、足すと 1.19 になります。Noul で決めた閾値を Choice に持ち込むな、とも書かれています。
 
@@ -284,7 +285,7 @@ def decide(kind: str, confidence: float, physical: float, args) -> str:
 
 既定値は read が confidence 0.8 以上かつ physical 0.7 以上、skip が confidence 0.9 以上です。スクリプトは 1 通ごとの`kind`、`kind_confidence`、`physical_goods`、`action`を JSON の配列で標準出力に出し、エージェントはそれを見て read と unsure だけを開きます。
 
-skip のほうを厳しくしているのは、間違えたときの損が違うからです。誤って read にしてもメールを 1 通余分に開くだけで、エージェントが本文を確かめてから記録するので実害はありません。誤って skip にすると、注文が 1 件 wiki に記録されず、それに気付く手段もありません。
+skip のほうを厳しくしているのは、間違えたときの損が違うからです。誤って read にしてもメールを 1 通余分に開くだけで、エージェントが本文を確かめてから記録するので実害はありません。誤って skip にすると注文が 1 件 wiki に記録されず、skip の一覧を自分で見直さない限り気付けません。
 
 実際のメール 30 通(直近 45 日分)に掛けた結果は、read 3、skip 16、unsure 11 でした。skip になった 16 通は自分で全部見て、誤って skip されたものが無いことを確かめました。エージェントが読むのは 30 通中 14 通になります。
 
@@ -339,7 +340,7 @@ Score の閾値で切ると、うまくいきませんでした。1.5 以上、�
 
 分布を見ると、使っていないものははっきり分かれていて、VS Code、Windows、Bedrock の行はすべて 0.1 未満でした。一方、使っている機能の行は 1.7〜2.6 に固まっていました。hooks も MCP も権限設定も日常的に使っているので、どの行も relevant と返ってくるのは当然でした。
 
-1.7〜2.6 の範囲の中でも、並び順には意味がありました。そこで閾値をやめ、バージョンごとに上位 15 件を取る形に変えています。並べ替えと件数のカウントはコードでやります。破壊的変更の Noul が 0.9 以上の行は、順位に関係なく残します。
+ただ、1.7〜2.6 の中の並び順は使えそうだったので、閾値をやめ、バージョンごとに上位 15 件を取る形に変えています。並べ替えと件数のカウントはコードでやります。破壊的変更の Noul が 0.9 以上の行は、順位に関係なく残します。
 
 エージェントが全文を読んで選んだ 12 項目と突き合わせると、Jev の順位で上位 15 に 7 件が入っていて、先頭の 2 件は一致、11 件目が入るのは 28 位でした。大きく外したのは AGENTS.md 対応の行で、43 位です。壊れた、直ったと書かれた行は score が高く、新機能の追加の行は低く出る傾向がありそうです。Must know の段階を「壊す、または黙って変える」と定義したのは自分なので、Jev の癖というより自分の聞き方の問題だと思います。
 
@@ -351,7 +352,7 @@ Claude Code の skill はスクリプトを呼べます。自分はこれまで�
 
 Jev を入れると、スクリプトの中に非決定な処理が入ります。自分のスクリプトでは、Jev は最初のほうに載せた`ask()`という関数 1 つです。
 
-見た目は dict を返す普通の関数で、型も決まっています。ただ中身は確率なので、同じ入力に同じ出力が返る前提のテストは書けません。これが良いことなのか悪いことなのか、書きながら考えていました。
+見た目は dict を返す普通の関数で、型も決まっています。ただ中身は確率なので、同じ入力に同じ出力が返る前提のテストは書けません。これが良いことなのか悪いことなのかは、書いていて考えてしまいました。
 
 良いと思ったのは、非決定な部分にコード上で名前と型を付けられることです。`kind_confidence >= 0.9`という条件も、`unsure`という行き先も、コードとしてレビューできます。プロンプトに「迷ったら本文を読んで」と書くより、検査しやすいと思います。
 
