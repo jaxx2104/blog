@@ -16,7 +16,7 @@ tags:
 
 [Hacker News](https://news.ycombinator.com/item?id=49717558)で話題になっていて、Reddit でも[r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA/comments/1wihgum/i_literally_built_the_jev_architecture_one_year/)、[r/homeassistant](https://www.reddit.com/r/homeassistant/comments/1wjmqj0/upcoming_revolution_for_smart_home_control_with/)、[r/PiCodingAgent](https://www.reddit.com/r/PiCodingAgent/comments/1wjibh5/anyone_here_using_jev/)とスレッドが流れてきました。X には Zenn の[mizchi さんの記事](https://zenn.dev/mizchi/articles/jev-is-gpu-for-llms)や[nwn さんの記事](https://zenn.dev/nwn/articles/824026c76116e0)も回ってきています。それで waitlist に登録し、招待が届いた日に触りました。
 
-自分はスクリプトから呼ぶ関数として使いたいので、この記事もそのあたりが中心です。
+自分はスクリプトから呼ぶ関数として使いたいので、この記事も、関数として呼ぶ側から見た話が中心です。
 
 TL;DR:
 
@@ -173,7 +173,7 @@ questions = {
 
 見て気付いた点をいくつか。
 
-- 文章がどこにもない。`choice`は自分が渡した選択肢のキーで、`score`は渡した段階の添字の上の値。パースも、JSON が壊れていたときのリトライも要らない
+- 文章がどこにもない。`choice`は自分が渡した選択肢のキーで、`score`は渡した段階の添字(ここでは 0〜2)の上の連続値。パースも、JSON が壊れていたときのリトライも要らない
 - `confidence`が付くのは Choice と Score だけ。Noul は 0〜1 の値そのものが答えで、[docs](https://docs.typesafe.ai/confidence)にも "Noul answers don't carry one" とある
 - `score`は、段階ごとの確率で重みを付けた平均。medium に 0.05、high に 0.95 なので 2 の少し手前になる。SDK で投げたときは 1.95、こちらは 1.94 で、実行ごとに少し動く
 - 3 問は並列に、互いを見ずに評価される。質問を足しても応答時間はほとんど変わらないと docs は書いている
@@ -186,7 +186,7 @@ questions = {
 
 ## 保証されること、されないこと
 
-自分が読んだ範囲では、安い、速い、型が壊れないという点はどの記事も評価していました。疑問が出ていたのは、hallucination ゼロが型の話でしかないことと、[公式ブログ](https://typesafe.ai/blog/introducing-system-one-models-and-jev)の 193.6 倍速い・444.6 倍安いという数字が条件の良い側の値であることの 2 点です。[The Register](https://www.theregister.com/ai-and-ml/2026/09/16/typesafe-ai-debuts-model-for-machines-that-plays-doom/5296711)は、自然言語を出さないモデルと LLM の hallucination 率を並べるのはフェアではないと書いていますし、日本語では[この記事](https://zenn.dev/amu_lab/articles/jev-system-one-guarantee-scope)が型保証と判断の正しさを分けて論じています。
+自分が読んだ範囲では、安い、速い、型が壊れないという点はどの記事も評価していました。疑問が出ていたのは、hallucination ゼロが型の話でしかないことと、[公式ブログ](https://typesafe.ai/blog/introducing-system-one-models-and-jev)の 193.6 倍速い・444.6 倍安いという数字が条件の良い側の値であることの 2 点です。[The Register](https://www.theregister.com/ai-and-ml/2026/09/16/typesafe-ai-debuts-model-for-machines-that-plays-doom/5296711)は、自然言語を出さないモデルと LLM の hallucination 率を並べるのはフェアではないと書いていますし、日本語では[amu_lab さんの記事](https://zenn.dev/amu_lab/articles/jev-system-one-guarantee-scope)が型保証と判断の正しさを分けて論じています。
 
 使ってみて、どれにも同意です。
 
@@ -205,13 +205,13 @@ questions = {
 
 このうち 3 つは、後半の 2 つのスクリプトでそのままやっています。渡す前に絞ること、数える処理をコードに置くこと、答えを最終判断にしないことです。
 
-最後の行は、docs に実例が載っています。二重請求の問い合わせに「返金を求めているか」と「返金以外を求めているか」を Noul で聞くと、0.72 と 0.47 が返り、足すと 1.19 になります。Noul で決めた閾値を Choice に持ち込むな、とも書かれています。
+表の最後の行(質問どうしの整合)は、docs に実例が載っています。二重請求の問い合わせに「返金を求めているか」と「返金以外を求めているか」を Noul で聞くと、0.72 と 0.47 が返り、足すと 1.19 になります。Noul で決めた閾値を Choice に持ち込むな、とも書かれています。
 
 表に無いものが 3 つあります。
 
-1 つは言語です。[models のページ](https://docs.typesafe.ai/models)には、学習の中心は英語で、CJK を含む他の言語は「扱えるが同等ではない。自分のコンテンツで試すこと」とあります。
+1 つ目は言語です。[models のページ](https://docs.typesafe.ai/models)には、学習の中心は英語で、CJK を含む他の言語は「扱えるが同等ではない。自分のコンテンツで試すこと」とあります。
 
-もう 1 つは、実行ごとの値です。先ほどの 1.95 と 1.94 の差です。同じ苦情文を`ask()`で続けて 8 回投げた結果は 1.94、1.95、1.95、1.94、1.95、1.94、1.93、1.95 でした。この差なら何も困りませんが、閾値の近くでは結果が変わります。[jev-lab](https://github.com/danielhirt/jev-lab)は同じ入力を 20 回繰り返し、境界例の値が 0.38〜0.52 の間で動いて、0.5 の閾値を 6 回またいだと報告しています。
+2 つ目は、実行ごとの値です。先ほどの 1.95 と 1.94 の差です。同じ苦情文を`ask()`で続けて 8 回投げた結果は 1.94、1.95、1.95、1.94、1.95、1.94、1.93、1.95 でした。この差なら何も困りませんが、閾値の近くでは結果が変わります。[jev-lab](https://github.com/danielhirt/jev-lab)は同じ入力を 20 回繰り返し、境界例の値が 0.38〜0.52 の間で動いて、0.5 の閾値を 6 回またいだと報告しています。
 
 3 つ目はモデルの版です。`jev-latest`と`jev-preview`はエイリアスで、今はどちらも`jev-1.13.0`を指しています。新しい版が出れば、こちらが何も変えなくても答えが変わります。docs は、閾値を調整したなら版を固定するよう勧めています。と言いつつ、自分の`ask()`の`MODEL`は今も`jev-latest`のままで、版を固定していません。固定するなら、ここを`jev-1.13.0`にします。
 
@@ -219,11 +219,11 @@ questions = {
 
 ## 2 か所に入れた
 
-入れたのは次の 2 つです。どちらもジョブの前段で Jev を呼ぶ、小さな Python スクリプトです。
+どちらもジョブの前段で Jev を呼ぶ、小さな Python スクリプトです。
 
 ### 購入メールの仕分け
 
-[購入履歴を wiki に取り込んでいる](/hermes-lifelog)週次のジョブは、検索に掛かったメールを最大 50 通、エージェントが全部開いて読んでいました。注文確認かどうかを知るためだけに LLM が 1 通ずつ本文を読み、ほとんどを捨てます。
+[購入履歴を wiki に取り込んでいる](/hermes-lifelog)週次のジョブは、検索に掛かったメールを最大 50 通、エージェントが全部開いて読んでいました。注文確認かどうかを知るためだけに LLM が 1 通ずつ本文を読み、ほとんどを捨てていました。
 
 この手前で、1 通につき 1 リクエスト、2 つの質問を投げます。メールの種類を聞く Choice と、「届く物理的な商品の注文確認か」を聞く Noul です。
 
@@ -360,6 +360,6 @@ Jev を入れると、スクリプトの中に非決定な処理が入ります�
 
 微妙なのは、意味の判断の仕様が instructions と criteria という英語の文字列に入ることです。コードともエージェント向けのプロンプトとも別に、管理するものが 1 つ増えました。挙動はこの文字列で決まりますが、型チェックや単体テストでは検証できず、ラベルを付けた実データで確かめるしかありません。発送通知の`physical_goods`が高く出ることも、Score の上側が固まることも、実データを流すまで分かりませんでした。
 
-今のところ、Jev の戻り値は信頼できない外部入力として扱うことにしています。unsure を置いて従来どおりエージェントに読ませているのも、Jev に聞けなかったら終了コード 3 を返して生ログを読ませているのも、そのためです。メール本文も changelog も第三者が書いたテキストなので、記録に残すかどうかの最終確認は、エージェントが本文を見て行います。
+unsure を置いて従来どおりエージェントに読ませているのも、Jev に聞けなかったら終了コード 3 を返して生ログを読ませているのも、戻り値を外部入力として扱っているからです。メール本文も changelog も第三者が書いたテキストなので、記録に残すかどうかの最終確認は、エージェントが本文を見て行います。
 
 2 つのジョブはこのまま回して、しばらく様子を見るつもりです。[mizchi さん](https://zenn.dev/mizchi/articles/jev-is-gpu-for-llms)も[nwn さん](https://zenn.dev/nwn/articles/824026c76116e0)も書いているとおり、同じ形の API は大手からも出てきそうで、そうなったら乗り換えるかもしれません。呼び出しは`ask()` 1 つなので、差し替えは難しくないはずです。
