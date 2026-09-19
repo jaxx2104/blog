@@ -12,7 +12,7 @@ tags:
   - agent
 ---
 
-[Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)は[TypeSafe AI](https://typesafe.ai/)が 2026-09-15 に早期アクセスで公開したモデルです。[Hacker News](https://news.ycombinator.com/item?id=49717558)と Reddit で話題になっていたので waitlist に登録し、招待が届いた日に触りました。
+[Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)は[TypeSafe AI](https://typesafe.ai/)が 2026-09-15 に早期アクセスで公開したモデルです。[Hacker News](https://news.ycombinator.com/item?id=49717558)で話題になっていて、Reddit でも[r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA/comments/1wihgum/i_literally_built_the_jev_architecture_one_year/)、[r/homeassistant](https://www.reddit.com/r/homeassistant/comments/1wjmqj0/upcoming_revolution_for_smart_home_control_with/)、[r/PiCodingAgent](https://www.reddit.com/r/PiCodingAgent/comments/1wjibh5/anyone_here_using_jev/)とスレッドが流れてきました。X には[既存の LLM が CPU なら、Jev はその GPU 版みたいなやつ](https://zenn.dev/mizchi/articles/jev-is-gpu-for-llms)や[TypeSafe の Jev を正しく驚く、それって LLM でできませんか？](https://zenn.dev/nwn/articles/824026c76116e0)も回ってきています。それで waitlist に登録し、招待が届いた日に触りました。
 
 自分はスクリプトから呼ぶ関数として使いたいので、そこを中心に見ます。
 
