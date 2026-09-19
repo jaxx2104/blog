@@ -12,11 +12,11 @@ tags:
   - agent
 ---
 
-[TypeSafe AI](https://typesafe.ai/)の[Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)を、自宅の NUC で動かしているエージェントの定期ジョブ 2 つに入れました。Jev は 2026-09-15 に早期アクセスで公開された、文章を返さないモデルです。
+[TypeSafe AI](https://typesafe.ai/)の[Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)を、[自宅の NUC で動かしているエージェント](/openclaw-to-hermes-agent)の定期ジョブ 2 つに入れました。Jev は 2026-09-15 に早期アクセスで公開された、文章を返さないモデルです。
 
 [Hacker News](https://news.ycombinator.com/item?id=49717558)で話題になっていて、Reddit でも[r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA/comments/1wihgum/i_literally_built_the_jev_architecture_one_year/)、[r/homeassistant](https://www.reddit.com/r/homeassistant/comments/1wjmqj0/upcoming_revolution_for_smart_home_control_with/)、[r/PiCodingAgent](https://www.reddit.com/r/PiCodingAgent/comments/1wjibh5/anyone_here_using_jev/)とスレッドが流れてきました。X には Zenn の[mizchi さんの記事](https://zenn.dev/mizchi/articles/jev-is-gpu-for-llms)や[nwn さんの記事](https://zenn.dev/nwn/articles/824026c76116e0)も回ってきています。それで waitlist に登録し、招待が届いた日に触りました。
 
-自分はスクリプトから呼ぶ関数として使いたいので、そのあたりを中心に触ってみました。
+自分はスクリプトから呼ぶ関数として使いたいので、この記事もそのあたりが中心です。
 
 TL;DR:
 
@@ -71,7 +71,7 @@ export TYPESAFE_API_KEY=...  # console で発行したキー
 uv run --with typesafe-sdk==0.5.7 smoke.py
 ```
 
-実行には[uv](https://docs.astral.sh/uv/)を使っています。[typesafe-sdk](https://pypi.org/project/typesafe-sdk/)は Python 3.10 以上が必要です。PyPI の最新は 2026-09-18 に出た 0.7.0 ですが、自分の uv は`exclude-newer = "7 days"`で公開から 7 日以内のパッケージを入れない設定にしているので、0.5.7 が入りました。上のコードを確かめたのもこの版です。出力はこうなります。
+実行には[uv](https://docs.astral.sh/uv/)を使っています。[typesafe-sdk](https://pypi.org/project/typesafe-sdk/)は Python 3.10 以上が必要です。PyPI の最新は 2026-09-18 に出た 0.7.0 です。ただ自分の uv は`exclude-newer = "7 days"`で公開から 7 日以内のパッケージを入れない設定にしていて、版を指定せずに入れると 0.5.7 が入りました。確かめたのがこの版なので、上のコマンドも 0.5.7 で固定しています。出力はこうなります。
 
 ```text
 model=jev-1.13.0 request_id=req_01a0b9103269771bb97a505ecbd25a88 latency=490ms
@@ -186,7 +186,7 @@ questions = {
 
 ## 保証されること、されないこと
 
-既存の記事をいくつか読んだ限り、安い、速い、型が壊れないという点はどこも評価していました。疑われていたのは、hallucination ゼロが型の話でしかないことと、[公式ブログ](https://typesafe.ai/blog/introducing-system-one-models-and-jev)の 193.6 倍速い・444.6 倍安いという数字が条件の良い側の値であることの 2 点です。[The Register](https://www.theregister.com/ai-and-ml/2026/09/16/typesafe-ai-debuts-model-for-machines-that-plays-doom/5296711)は、自然言語を出さないモデルと LLM の hallucination 率を並べるのはフェアではないと書いていますし、日本語では[この記事](https://zenn.dev/amu_lab/articles/jev-system-one-guarantee-scope)が型保証と判断の正しさを分けて論じています。
+自分が読んだ範囲では、安い、速い、型が壊れないという点はどの記事も評価していました。疑問が出ていたのは、hallucination ゼロが型の話でしかないことと、[公式ブログ](https://typesafe.ai/blog/introducing-system-one-models-and-jev)の 193.6 倍速い・444.6 倍安いという数字が条件の良い側の値であることの 2 点です。[The Register](https://www.theregister.com/ai-and-ml/2026/09/16/typesafe-ai-debuts-model-for-machines-that-plays-doom/5296711)は、自然言語を出さないモデルと LLM の hallucination 率を並べるのはフェアではないと書いていますし、日本語では[この記事](https://zenn.dev/amu_lab/articles/jev-system-one-guarantee-scope)が型保証と判断の正しさを分けて論じています。
 
 使ってみて、どれにも同意です。
 
@@ -203,13 +203,15 @@ questions = {
 | 敵対的な入力への耐性 | state を敵対的とみなさない。埋め込まれた指示で答えが動く | 信頼できない入力への答えを最終判断にしない |
 | 質問どうしの整合 | 同じことを Noul と Choice で聞いても数字は揃わない | 1 つの判断は 1 つの聞き方に決める。足して 1 になるはず、のような前提はコードで検算する |
 
+このうち 3 つは、後半の 2 つのスクリプトでそのままやっています。渡す前に絞ること、数える処理をコードに置くこと、答えを最終判断にしないことです。
+
 最後の行は、docs に実例が載っています。二重請求の問い合わせに「返金を求めているか」と「返金以外を求めているか」を Noul で聞くと、0.72 と 0.47 が返り、足すと 1.19 になります。Noul で決めた閾値を Choice に持ち込むな、とも書かれています。
 
 表に無いものが 3 つあります。
 
 1 つは言語です。[models のページ](https://docs.typesafe.ai/models)には、学習の中心は英語で、CJK を含む他の言語は「扱えるが同等ではない。自分のコンテンツで試すこと」とあります。
 
-もう 1 つは、実行ごとの値です。上の 2 つの出力を見比べると、同じ苦情文なのに urgency の`score`が 1.95 と 1.94 で違っています。`ask()`で続けて 8 回投げた結果は 1.94、1.95、1.95、1.94、1.95、1.94、1.93、1.95 でした。この差なら何も困りませんが、閾値の近くでは結果が変わります。[jev-lab](https://github.com/danielhirt/jev-lab)は同じ入力を 20 回繰り返し、境界例の値が 0.38〜0.52 の間で動いて、0.5 の閾値を 6 回またいだと報告しています。
+もう 1 つは、実行ごとの値です。先ほどの 1.95 と 1.94 の差です。同じ苦情文を`ask()`で続けて 8 回投げた結果は 1.94、1.95、1.95、1.94、1.95、1.94、1.93、1.95 でした。この差なら何も困りませんが、閾値の近くでは結果が変わります。[jev-lab](https://github.com/danielhirt/jev-lab)は同じ入力を 20 回繰り返し、境界例の値が 0.38〜0.52 の間で動いて、0.5 の閾値を 6 回またいだと報告しています。
 
 3 つ目はモデルの版です。`jev-latest`と`jev-preview`はエイリアスで、今はどちらも`jev-1.13.0`を指しています。新しい版が出れば、こちらが何も変えなくても答えが変わります。docs は、閾値を調整したなら版を固定するよう勧めています。と言いつつ、自分の`ask()`の`MODEL`は今も`jev-latest`のままで、版を固定していません。固定するなら、ここを`jev-1.13.0`にします。
 
@@ -217,7 +219,7 @@ questions = {
 
 ## 2 か所に入れた
 
-[自宅の NUC で動かしているエージェント](/openclaw-to-hermes-agent)の定期ジョブのうち、2 つの前段で Jev を呼ぶようにしました。どちらも Python の標準ライブラリだけで書いた小さなスクリプトです。
+入れたのは次の 2 つです。どちらもジョブの前段で Jev を呼ぶ、小さな Python スクリプトです。
 
 ### 購入メールの仕分け
 
@@ -313,7 +315,7 @@ READER = (
 )
 ```
 
-Score と Noul の instructions、関連度の段階はこう定義しました。話題の Choice は`hooks`、`mcp`、`breaking_change`、`platform_specific`など 10 択です。`breaking_change`が選ばれた行は、順位と関係なく残します。
+Score と Noul の instructions、関連度の段階はこう定義しました。話題の Choice は`hooks`、`mcp`、`breaking_change`、`platform_specific`など 10 択です。
 
 ```python
 RELEVANCE_INSTRUCTIONS = (
@@ -340,9 +342,9 @@ Score の閾値で切ると、うまくいきませんでした。1.5 以上、�
 
 分布を見ると、使っていないものははっきり分かれていて、VS Code、Windows、Bedrock の行はすべて 0.1 未満でした。一方、使っている機能の行は 1.7〜2.6 に固まっていました。hooks も MCP も権限設定も日常的に使っているので、どの行も relevant と返ってくるのは当然でした。
 
-ただ、1.7〜2.6 の中の並び順は使えそうだったので、閾値をやめ、バージョンごとに上位 15 件を取る形に変えています。並べ替えと件数のカウントはコードでやります。破壊的変更の Noul が 0.9 以上の行は、順位に関係なく残します。
+ただ、1.7〜2.6 の中の並び順は使えそうだったので、閾値をやめ、バージョンごとに上位 15 件を取る形に変えています。並べ替えと件数のカウントはコードでやります。話題の Choice が`breaking_change`になった行と、破壊的変更の Noul が 0.9 以上の行は、順位に関係なく残します。
 
-エージェントが全文を読んで選んだ 12 項目と突き合わせると、Jev の順位で上位 15 に 7 件が入っていて、先頭の 2 件は一致、11 件目が入るのは 28 位でした。大きく外したのは AGENTS.md 対応の行で、43 位です。壊れた、直ったと書かれた行は score が高く、新機能の追加の行は低く出る傾向がありそうです。Must know の段階を「壊す、または黙って変える」と定義したのは自分なので、Jev の癖というより自分の聞き方の問題だと思います。
+エージェントが全文を読んで選んだ 12 項目と突き合わせると、12 項目のうち 7 件が Jev の順位で上位 15 に入り、先頭の 2 件は一致していました。11 件を拾うには 28 位まで見る必要があり、最後の 1 件は AGENTS.md 対応の行で、43 位です。壊れた、直ったと書かれた行は score が高く、新機能の追加の行は低く出る傾向がありそうです。Must know の段階を「壊す、または黙って変える」と定義したのは自分なので、Jev の癖というより自分の聞き方の問題だと思います。
 
 出力は、選んだ行の全文と判定値、選ばなかった行のうち上位 12 件の 1 行要約、残りの件数です。サイズは生ログ 12KB に対して約 8KB。トークンの節約は小さく、役に立っているのは順位のほうです。
 
