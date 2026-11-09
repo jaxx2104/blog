@@ -49,6 +49,7 @@ export function lastModified(post: SeoPost): string {
 export function latestPostDate(posts: SeoPost[]): string {
   return posts.reduce((max, p) => {
     const t = lastModified(p)
+    // biome-ignore lint/complexity/useMathMinMax: t and max are ISO date strings; Math.max would coerce them to NaN
     return t > max ? t : max
   }, "")
 }
